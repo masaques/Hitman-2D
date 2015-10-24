@@ -14,6 +14,8 @@ import com.badlogic.gdx.math.Vector2;
  * y los npc. Implementa Movable.
  */
 public abstract class Character implements Movable, BulletListener {
+	protected static int IDS = 0;
+	protected int id ;
 	protected static final float DIRECTIONAL_EPSILON = 0.05f;
 	protected static final float NORMAL_SPEED = 60f;
 	protected static final float RUNNING_SPEED = 100f;
@@ -33,6 +35,8 @@ public abstract class Character implements Movable, BulletListener {
 		this.running = false;
 		this.healthPoints = 100f ;
 		this.isDead = false ;
+		this.id= IDS ;
+		IDS++ ;
 	}
 	/*
 	 * Devulelve si el personaje se esta moviendo.
@@ -199,5 +203,31 @@ public abstract class Character implements Movable, BulletListener {
 	
 	public boolean isDead() {
 		return this.isDead ;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
+	public int hashCode() {
+		return  this.id ;
+	}
+	
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false ;
+		}
+		else if (o == this) {
+			return true ;
+		}
+		else if (!(o instanceof Character)) {
+			return false ;
+		}
+		else {
+			Character aux = (Character)o ;
+			if (aux.getId()!=this.getId()) {
+				return false ;
+			}
+		}
+		return true ;
 	}
 }
