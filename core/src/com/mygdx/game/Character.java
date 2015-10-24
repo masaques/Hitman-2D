@@ -24,7 +24,6 @@ public abstract class Character implements Movable, BulletListener {
 	protected boolean running;
 	protected boolean isMoving = false;
 	protected float healthPoints ;
-	protected Inbox<Bullet> bulletInbox ;
 	protected boolean isDead ;
 	
 	public Character(Rectangle hitBox, LevelMap map){
@@ -33,7 +32,6 @@ public abstract class Character implements Movable, BulletListener {
 		this.hitBox = hitBox;
 		this.running = false;
 		this.healthPoints = 100f ;
-		this.bulletInbox = new Inbox<Bullet>() ;
 		this.isDead = false ;
 	}
 	/*
