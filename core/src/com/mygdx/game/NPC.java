@@ -5,8 +5,11 @@
 
 package com.mygdx.game;
 
+import java.util.*;
+import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.mygdx.game.Context;
 import com.mygdx.game.LevelMap;
 import com.mygdx.game.Path;
@@ -23,15 +26,32 @@ public abstract class NPC extends Character implements NoiseListener{
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
+	
+	//agrego desde acá
+	//private static final int CALM_BEHAVIOUR = 1;
+	//private static final int SUSPICIOUS_BEHAVIOUR = 2;
+	//private static final int ALERT_BEHAVIOUR = 3;
+	//private static final int CURRENT_BEHAVIOUR = 4;
+	//hasta acá
+	
 	protected  Path currentPath;
 	protected Step finalStep;
 	protected Step currentStep = null;
 	private PathFinder aStarPathFinder;
 	private PathFinder linearPathFinder;
+	
+	//Agregar desde acá
+	//No me deja hace Map<Integer,Strategy> porque se lo confunde con el Map de libgdx
+	//private HashMap<Integer,Strategy> strategies;
+	//hasta acá	
+	
+	//Sacar ...
 	private Strategy calmBehaviour;
 	private Strategy suspiciousBehaviour;
 	private Strategy alertBehaviour;
 	private Strategy currentBehaviour;
+	// ... hasta acá
+	
 	private Inbox<Noise> noiseInbox;
 	private Inbox<Vector2> visualInbox;
  	
@@ -40,6 +60,9 @@ public abstract class NPC extends Character implements NoiseListener{
 		super(hitBox, map);
 		noiseInbox = new Inbox<Noise>();
 		visualInbox = new Inbox<Vector2>();
+		//agregar desde		
+		//strategies = new HashMap<Integer, Strategy>();
+		//hasta acá
 	}
 	public void setAStarPathFinder(PathFinder pathFinder){
 		this.aStarPathFinder = pathFinder;
@@ -47,6 +70,8 @@ public abstract class NPC extends Character implements NoiseListener{
 	public void setLinearPathFinder(PathFinder pathFinder) {
 		this.linearPathFinder = pathFinder;
 	}
+	
+	//sacar desde acá...
 	public void setCalmBehaviour(Strategy calmBehaviour) {
 		this.calmBehaviour = calmBehaviour;
 	}
@@ -56,7 +81,22 @@ public abstract class NPC extends Character implements NoiseListener{
 	public void setAlertBehaviour (Strategy alertBehaviour) {
 		this.alertBehaviour = alertBehaviour;
 	}
+	//...hasta acá
 	
+	//agregar desde acá
+	/*
+	public void setBehaviour(int value,Strategy strategy){
+		if(value > CURRENT_BEHAVIOUR)
+			throw new NoSuchBehaviourException();
+		
+		if(strategies.containsKey(value))
+			strategies.remove(value);
+			
+		strategies.put(value, strategy);
+	}
+	*/
+	//hasta acá
+		
 	/*
 	 * Setea el camino para llegar a un punto en el mapa, si es posible.
 	 * @param position
