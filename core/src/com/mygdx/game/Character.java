@@ -198,4 +198,8 @@ public abstract class Character implements Movable, BulletListener {
 		}
 		this.setHealthPoints(dmg);
 	}
+	
+	public boolean isDead() {
+		return this.isDead ;
+	}
 }

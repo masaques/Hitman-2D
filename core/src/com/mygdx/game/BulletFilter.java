@@ -36,15 +36,15 @@ public class BulletFilter implements MessageFilter {
 			if (!(c.getPosition().dst(shot.getPosition()) > shot.getRange())){
 				if (c.getPosition().sub(shot.getPosition()).isCollinear(shot.getDirection())) {
 					if(!map.isValid(shot.getPosition(), c.getPosition())) {
-//						if (c.dealDamage(shot.getDamage())){
+						c.dealDamage(shot.getDamage()) ;
+						if (c.isDead()){
 							killed_set.add(l) ;
 						}
 					}
 				}
 			}
-			
 		}
 		return killed_set;
 	}
-
 }
+
