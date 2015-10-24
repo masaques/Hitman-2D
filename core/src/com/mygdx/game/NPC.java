@@ -20,7 +20,7 @@ import com.mygdx.game.Strategy;
  * puntos en el mapa.
  */
 public abstract class NPC extends Character implements NoiseListener{
-	private static final float VISUAL_RANGE = 5000f ;
+	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
 	protected  Path currentPath;
@@ -166,16 +166,8 @@ public abstract class NPC extends Character implements NoiseListener{
 		if (!map.isValid(goonPosition, playerPosition)) {
 			return false ;
 		}
-		float dirAngle = goonDirection.angle() ;
 		Vector2 relativeDirection = playerPosition.sub(goonPosition).nor() ;
-		float z = relativeDirection.angle();
-		if (dirAngle > 180f){
-			dirAngle = -180f + (dirAngle-180f) ;
-		}
-		if (z > 180f){
-			z = -180f + (z-180f) ;
-		}
-		if ( z>=dirAngle-VISUAL_ANGLE/2 && z <= dirAngle+VISUAL_ANGLE/2) {
+		if (Math.abs(relativeDirection.angle(goonDirection))<=VISUAL_ANGLE/2) {
 			return true ;
 		}
 		return false ;
