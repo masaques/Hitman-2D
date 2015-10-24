@@ -18,11 +18,11 @@ public class PatrolStrategy implements Strategy {
 	@Override
 	public ActionRequest behave(Context context) {
 		ActionRequest actionRequest = new ActionRequest();
-		if (!context.isMoving()) {
-			actionRequest.setRequest(ActionRequest.REQUEST_MOVETO);
-			actionRequest.setRunning(false);
-			actionRequest.setPosition(searchPositions.get());
-		}
+//		if (!context.isMoving()) {
+//			actionRequest.setRequest(ActionRequest.REQUEST_MOVETO);
+//			actionRequest.setRunning(false);
+//			actionRequest.setPosition(searchPositions.get());
+//		}
 		return actionRequest;
 	}
 

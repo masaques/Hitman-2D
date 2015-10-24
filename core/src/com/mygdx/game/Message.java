@@ -10,6 +10,6 @@ package com.mygdx.game;
  * la clase BulletMessage y DialogMessage que implementen message probablemente 
  * habra que detallarla mas.
  */
-public interface Message {
-
+public interface Message<L extends Listener> {
+	void notify(L l);
 }

@@ -19,7 +19,7 @@ import com.mygdx.game.Strategy;
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
  * puntos en el mapa.
  */
-public abstract class NPC extends Character{
+public abstract class NPC extends Character implements NoiseListener{
 	private static final float VISUAL_RANGE = 5000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
@@ -32,13 +32,14 @@ public abstract class NPC extends Character{
 	private Strategy suspiciousBehaviour;
 	private Strategy alertBehaviour;
 	private Strategy currentBehaviour;
-	private NoiseHandler noiseHandler;
-	private Context context;
+	private Inbox<Noise> noiseInbox;
+	private Inbox<Vector2> visualInbox;
+ 	
 	
 	public NPC (Rectangle hitBox, LevelMap map){
 		super(hitBox, map);
-		context = new Context();
-		this.noiseHandler = new NoiseHandler(this);
+		noiseInbox = new Inbox<Noise>();
+		visualInbox = new Inbox<Vector2> ();
 	}
 	public void setAStarPathFinder(PathFinder pathFinder){
 		this.aStarPathFinder = pathFinder;
@@ -88,16 +89,14 @@ public abstract class NPC extends Character{
 	
 	/*
 	 * Actualiza el estado del NPC
-	 * TODO hay una version mas nueva en el otro repositorio.
 	 */
 	@Override
 	public void update() {
-		Context context = createContext();
+		Context context = new Context(noiseInbox.get(),visualInbox.get());
 		selectBehaviour(context);
 		ActionRequest actionRequest = currentBehaviour.behave(context);
 		processActionRequest(actionRequest);
 		updatePosition();
-		context.flush();
 		super.update();	
 	}
 	
@@ -151,17 +150,6 @@ public abstract class NPC extends Character{
 		}
 	}
 	
-	/*
-	 * 
-	 */
-	public Context createContext() {
-		
-		context.setNpcPosition(getPosition());
-		context.add(noiseHandler.getInbox());
-		context.setMoving(isMoving);
-		return context;
-	}
-	
 	/**
 	 * Metodo para calcular si el jugador esta en el campo visual de este NPC
 	 * Utilizado por VisionHandler
@@ -203,6 +191,10 @@ public abstract class NPC extends Character{
 //	}
 //	
 	public void addPlayertoContext(Vector2 playerPosition) {
-		context.setPlayerPosition(playerPosition);
+		visualInbox.add(playerPosition);
+	}
+	
+	public void addNoise(Noise n){
+		noiseInbox.add(n);
 	}
 }

@@ -33,9 +33,9 @@ public class FollowStrategy implements Strategy {
 			lastPosition = context.getPlayerPosition();
 			done = false;
 		}
-		else if (lastPosition == null || lastPosition.epsilonEquals(context.getNpcPosition(), EPSILON)) {
-			done = true;
-		}
+//		else if (lastPosition == null || lastPosition.epsilonEquals(context.getNpcPosition(), EPSILON)) {
+//			done = true;
+//		}
 		return actionRequest;
 	}
 

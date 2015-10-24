@@ -30,8 +30,7 @@ public class GameManager {
 	CharacterView player_view;
 	Set<NPC> goon_set = new HashSet<NPC>();
 	Set<CharacterView> goon_view_set = new HashSet<CharacterView>();
-	MessageManager postOffice = MessageManager.getInstance();
-	NoiseFilter noiseFilter ;
+	NoiseManager postOffice = NoiseManager.getInstance();
 	VisionHandler visionHandler ;
 	
 	public GameManager(TiledMap tiled_map,int width,int height,int tile_width,int goons){
@@ -61,8 +60,6 @@ public class GameManager {
 		player_manager = new PlayerManager(player) ;
 		player_view.setPlayer(player) ;
 		linearPathFinder = new LinearPathFinder(map);
-		noiseFilter = new NoiseFilter();
-		postOffice.addFilter(noiseFilter, MessageManager.NOISE);
 		visionHandler = new VisionHandler(goon_set,player) ;
 	}
 	

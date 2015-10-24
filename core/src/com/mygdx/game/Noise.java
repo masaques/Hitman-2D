@@ -14,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 
-public class Noise implements Message{
+public class Noise implements Message<NoiseListener>, Comparable<Noise>{
 	private Vector2 source ;
 	private double effectiveRange ;
 	private boolean isShot ;
@@ -35,5 +35,24 @@ public class Noise implements Message{
 	
 	public boolean isShot() {
 		return isShot ;
+	}
+	
+	@Override
+	public void notify(NoiseListener l) {
+		if (l.getPosition().dst(l.getPosition()) <= getRange()) {
+			l.addNoise(this);
+		}
+	}
+	@Override
+	public int compareTo(Noise other){
+		if (this.getRange() > other.getRange()) {
+			return 1;
+		}
+		else if ( this.getRange() == other.getRange()) {
+			return 0;
+		}
+		else {
+			return -1;
+		}
 	}
 }
