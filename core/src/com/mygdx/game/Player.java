@@ -12,21 +12,25 @@ import com.badlogic.gdx.math.Vector2;
 /*
  * El personaje jugable. Extiende de Character.
  */
-public class Player extends Character {
+public class Player extends Character implements VisionSender {
 
 	
 	public Player(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map);
 	}
-
 	@Override
 	public void update() {
-		// TODO
+		// TODO El sendVision deberia estar aca
 		super.update();
 	}
 	
 	public void stopMoving() {
 		this.isMoving = false;
+	}
+	@Override
+	public void sendPosition(Vector2 position) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

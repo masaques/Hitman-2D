@@ -22,7 +22,7 @@ import com.mygdx.game.Strategy;
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
  * puntos en el mapa.
  */
-public abstract class NPC extends Character implements NoiseListener{
+public abstract class NPC extends Character implements NoiseListener, VisionListener {
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
@@ -228,5 +228,12 @@ public abstract class NPC extends Character implements NoiseListener{
 	
 	public void addNoise(Noise n){
 		noiseInbox.add(n);
+	}
+	
+	public float visualRange() {
+		return VISUAL_RANGE ;
+	}
+	public float visualAngle() {
+		return VISUAL_ANGLE ;
 	}
 }
