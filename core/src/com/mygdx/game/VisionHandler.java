@@ -22,7 +22,7 @@ public class VisionHandler {
 	public void handle() {
 		for (NPC npc : npc_set){
 			if(npc.canSee(player.getPosition())){
-				npc.addPlayertoContext(player.getPosition());
+				npc.addPlayer(player.getPosition());
 			}
 		}
 		

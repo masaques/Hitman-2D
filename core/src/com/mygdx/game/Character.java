@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
  * Clase abstracta para todos los personajes del juego, incluyendo el jugador 
  * y los npc. Implementa Movable.
  */
-public abstract class Character implements Movable {
+public abstract class Character implements Movable, BulletListener {
 	protected static final float DIRECTIONAL_EPSILON = 0.05f;
 	protected static final float NORMAL_SPEED = 60f;
 	protected static final float RUNNING_SPEED = 100f;
@@ -24,6 +24,8 @@ public abstract class Character implements Movable {
 	protected boolean running;
 	protected boolean isMoving = false;
 	protected float healthPoints ;
+	protected Inbox<Bullet> bulletInbox ;
+	protected boolean isDead ;
 	
 	public Character(Rectangle hitBox, LevelMap map){
 		this.direction = new Vector2();
@@ -31,6 +33,8 @@ public abstract class Character implements Movable {
 		this.hitBox = hitBox;
 		this.running = false;
 		this.healthPoints = 100f ;
+		this.bulletInbox = new Inbox<Bullet>() ;
+		this.isDead = false ;
 	}
 	/*
 	 * Devulelve si el personaje se esta moviendo.
@@ -188,11 +192,10 @@ public abstract class Character implements Movable {
 	 * @param dmg
 	 * @return true si, como resultado del daño, el Character muere. false si no
 	 */
-	public boolean dealDamage(float dmg) {
+	public void dealDamage(float dmg) {
 		if (dmg >= this.getHealthPoints()) {
-			return true ;
+			this.isDead = true ;
 		}
 		this.setHealthPoints(dmg);
-		return false ;
 	}
 }

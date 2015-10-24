@@ -9,10 +9,15 @@ import com.badlogic.gdx.math.Vector2;
  */
 
 
-public class Shot implements Message {
+public class Bullet implements Message<BulletListener> {
 	private Character source ;
 	private Vector2 position ;
 	private Vector2 direction ;
+	/**
+	 * Quizas no es lo mas prolijo, pero
+	 * por ahora soluciona el problema
+	 */
+	private LevelMap map ;
 	/**
 	 * Quizas esto podria ser una variable,
 	 * diferentes rangos representan diferentes armas.
@@ -23,7 +28,6 @@ public class Shot implements Message {
 	 * Idem anterior
 	 */
 	private static float DAMAGE = 50f ;
-	
 	/**
 	 * Quizas no deberia recibir source?
 	 * Lo hago por si queremos revisar cuestiones 
@@ -32,10 +36,11 @@ public class Shot implements Message {
 	 * @param position
 	 * @param direction
 	 */
-	public Shot(Character source, Vector2 position, Vector2 direction){
+	public Bullet(Character source, Vector2 position, Vector2 direction,LevelMap map){
 		this.source = source ;
 		this.position = position ;
 		this.direction = direction ;
+		this.map = map ;
 	}
 	
 	public Character getShooter(){
@@ -49,13 +54,21 @@ public class Shot implements Message {
 	public Vector2 getDirection() {
 		return direction ;
 	}
-	
 	public float getRange() {
 		return RANGE ;
 	}
-	
 	public float getDamage() {
 		return DAMAGE ;
+	}
+	@Override
+	public void notify(BulletListener l) {
+		if (l.getPosition().dst(this.getPosition())<=this.getRange()) {
+			if(l.getPosition().sub(this.getPosition()).nor().isCollinear(this.getDirection())){
+				if (map.isValid(this.getPosition(), l.getPosition())) {
+					l.dealDamage(this.getDamage());
+				}
+			}
+		}
 	}
 	
 }

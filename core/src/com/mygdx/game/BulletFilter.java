@@ -9,9 +9,10 @@ import java.util.Set;
  *
  */
 
-public class ShotFilter implements MessageFilter {
+@Deprecated
+public class BulletFilter implements MessageFilter {
 	private LevelMap map ;
-	public ShotFilter (LevelMap map) {
+	public BulletFilter (LevelMap map) {
 		this.map = map ;
 	}
 	/**
@@ -22,10 +23,10 @@ public class ShotFilter implements MessageFilter {
 	 */
 	@Override
 	public Set<Listener> filter(Message message, Set<Listener> listeners) {
-		if (message.getClass()!=Shot.class){
+		if (message.getClass()!=Bullet.class){
 			throw new WrongMessageException();
 		}
-		Shot shot = (Shot)message;
+		Bullet shot = (Bullet)message;
 		if (listeners == null){
 			throw new IllegalArgumentException() ;
 		}
@@ -35,7 +36,7 @@ public class ShotFilter implements MessageFilter {
 			if (!(c.getPosition().dst(shot.getPosition()) > shot.getRange())){
 				if (c.getPosition().sub(shot.getPosition()).isCollinear(shot.getDirection())) {
 					if(!map.isValid(shot.getPosition(), c.getPosition())) {
-						if (c.dealDamage(shot.getDamage())){
+//						if (c.dealDamage(shot.getDamage())){
 							killed_set.add(l) ;
 						}
 					}

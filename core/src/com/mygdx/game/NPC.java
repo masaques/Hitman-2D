@@ -39,7 +39,7 @@ public abstract class NPC extends Character implements NoiseListener{
 	public NPC (Rectangle hitBox, LevelMap map){
 		super(hitBox, map);
 		noiseInbox = new Inbox<Noise>();
-		visualInbox = new Inbox<Vector2> ();
+		visualInbox = new Inbox<Vector2>();
 	}
 	public void setAStarPathFinder(PathFinder pathFinder){
 		this.aStarPathFinder = pathFinder;
@@ -190,7 +190,7 @@ public abstract class NPC extends Character implements NoiseListener{
 //		context.add(n);
 //	}
 //	
-	public void addPlayertoContext(Vector2 playerPosition) {
+	public void addPlayer(Vector2 playerPosition) {
 		visualInbox.add(playerPosition);
 	}
 	
