@@ -1,5 +1,6 @@
 package screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -57,8 +58,12 @@ public class MainMenu implements Screen{
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
+		atlas = new TextureAtlas("");
+		skin = new Skin(atlas);
+						
+				
+		whiteFont = new BitmapFont(Gdx.files.internal("assets/white.fnt"),false);
+		blackFont = new BitmapFont(Gdx.files.internal("assets/black.fnt"),false);
 	}
 
 }
