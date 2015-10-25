@@ -9,6 +9,8 @@ public class ActionRequest {
 	private boolean running;
 	private int request;
 	private Vector2 position;
+	private Vector2 direction;
+	private boolean linear;
 	
 	public void setPosition(Vector2 position){
 		this.position = position;
@@ -27,6 +29,18 @@ public class ActionRequest {
 	}
 	public int getRequest() {
 		return request;
+	}
+	public void setDirection(Vector2 direction) {
+		this.direction = direction;
+	}
+	public Vector2 getDirection() {
+		return direction;
+	}
+	public boolean getLinear() {
+		return linear;
+	}
+	public void setLinear(boolean linear) {
+		this.linear = linear;
 	}
 	
 }

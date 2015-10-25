@@ -28,10 +28,8 @@ public abstract class NPC extends Character implements NoiseListener{
 	protected Step currentStep = null;
 	private PathFinder aStarPathFinder;
 	private PathFinder linearPathFinder;
-	private Strategy calmBehaviour;
-	private Strategy suspiciousBehaviour;
-	private Strategy alertBehaviour;
-	private Strategy currentBehaviour;
+	private long shootTimer;
+	private StateMachine stateMachine;
 	private Inbox<Noise> noiseInbox;
 	private Inbox<Vector2> visualInbox;
  	
@@ -40,21 +38,16 @@ public abstract class NPC extends Character implements NoiseListener{
 		super(hitBox, map);
 		noiseInbox = new Inbox<Noise>();
 		visualInbox = new Inbox<Vector2> ();
+		shootTimer = System.currentTimeMillis();
+	}
+	public void setStateMachine(StateMachine stateMachine){
+		this.stateMachine = stateMachine;
 	}
 	public void setAStarPathFinder(PathFinder pathFinder){
 		this.aStarPathFinder = pathFinder;
 	}
 	public void setLinearPathFinder(PathFinder pathFinder) {
 		this.linearPathFinder = pathFinder;
-	}
-	public void setCalmBehaviour(Strategy calmBehaviour) {
-		this.calmBehaviour = calmBehaviour;
-	}
-	public void setSuspiciousBehaviour (Strategy suspiciousBehaviour) {
-		this.suspiciousBehaviour = suspiciousBehaviour;
-	}
-	public void setAlertBehaviour (Strategy alertBehaviour) {
-		this.alertBehaviour = alertBehaviour;
 	}
 	
 	/*
@@ -65,7 +58,6 @@ public abstract class NPC extends Character implements NoiseListener{
 		if (finalStep != null && position.epsilonEquals(finalStep.getPosition(), EPSILON )){
 			return false;
 		}
-		
 		Vector2 currPosition = new Vector2();
 		currPosition = hitBox.getPosition(currPosition);
 		PathFinder pathFinder;
@@ -75,7 +67,6 @@ public abstract class NPC extends Character implements NoiseListener{
 		else {
 			pathFinder = aStarPathFinder;
 		}
-		
 		Path auxPath = pathFinder.findPath(this, currPosition, position);
 		if (auxPath != null && auxPath.hasNextStep()){
 			currentPath = auxPath;
@@ -92,9 +83,8 @@ public abstract class NPC extends Character implements NoiseListener{
 	 */
 	@Override
 	public void update() {
-		Context context = new Context(noiseInbox.get(),visualInbox.get());
-		selectBehaviour(context);
-		ActionRequest actionRequest = currentBehaviour.behave(context);
+		Context context = new Context(noiseInbox.get(),visualInbox.get(), isMoving, shootTimer);
+		ActionRequest actionRequest = stateMachine.updateMachine(context);
 		processActionRequest(actionRequest);
 		updatePosition();
 		super.update();	
@@ -105,7 +95,10 @@ public abstract class NPC extends Character implements NoiseListener{
 		case ActionRequest.REQUEST_NOTHING:
 			break;
 		case ActionRequest.REQUEST_MOVETO:
-			moveTo(actionRequest.getPosition(), actionRequest.getRunning());
+			moveTo(actionRequest.getPosition(), actionRequest.getLinear());
+			break;
+		case ActionRequest.REQUEST_SHOOT:
+			shoot(actionRequest.getPosition());
 			break;
 		default:
 			break;
@@ -135,20 +128,7 @@ public abstract class NPC extends Character implements NoiseListener{
 			move(currentStep.getPosition().sub(getPosition()));
 		}
 	}
-	/*
-	 * Decide que estrategia debe usar en este momento.
-	 */
-	private void selectBehaviour(Context context) {
-		if (context.playerIsVisible() || !alertBehaviour.done()) {
-			currentBehaviour = alertBehaviour;
-		}
-//		else if (context.getNoise() != null || !suspiciousBehaviour.done()) {
-//			currentBehaviour = suspiciousBehaviour;
-//		}
-		else {
-			currentBehaviour = calmBehaviour;
-		}
-	}
+	
 	
 	/**
 	 * Metodo para calcular si el jugador esta en el campo visual de este NPC
@@ -182,7 +162,7 @@ public abstract class NPC extends Character implements NoiseListener{
 	}
 	
 	/*
-	 * Anade un mensaje al contexsto. TODO en realidad, el NPC deberia mandar cualquier mensaje,
+	 * Anade un mensaje al contexto. TODO en realidad, el NPC deberia mandar cualquier mensaje,
 	 * sin importar si es un Noise o de cualquier otro tipo. El contexto deberia saber manejar
 	 * distintos tipos de mensajes. Por eso, deberia haber un unico metodo addToContext(Message m).
 	 */
@@ -196,5 +176,11 @@ public abstract class NPC extends Character implements NoiseListener{
 	
 	public void addNoise(Noise n){
 		noiseInbox.add(n);
+	}
+	public void shoot(Vector2 playerPosition) {
+		move(playerPosition);
+		isMoving = false;
+		shootTimer = System.currentTimeMillis() + 1000l;
+		System.out.println("BANG!!!");
 	}
 }
