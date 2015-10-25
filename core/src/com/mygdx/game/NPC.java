@@ -5,11 +5,8 @@
 
 package com.mygdx.game;
 
-import java.util.*;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.mygdx.game.Context;
 import com.mygdx.game.LevelMap;
 import com.mygdx.game.Path;
@@ -26,32 +23,13 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
-	
-	//agrego desde acá
-	//private static final int CALM_BEHAVIOUR = 1;
-	//private static final int SUSPICIOUS_BEHAVIOUR = 2;
-	//private static final int ALERT_BEHAVIOUR = 3;
-	//private static final int CURRENT_BEHAVIOUR = 4;
-	//hasta acá
-	
 	protected  Path currentPath;
 	protected Step finalStep;
 	protected Step currentStep = null;
 	private PathFinder aStarPathFinder;
 	private PathFinder linearPathFinder;
-	
-	//Agregar desde acá
-	//No me deja hace Map<Integer,Strategy> porque se lo confunde con el Map de libgdx
-	//private HashMap<Integer,Strategy> strategies;
-	//hasta acá	
-	
-	//Sacar ...
-	private Strategy calmBehaviour;
-	private Strategy suspiciousBehaviour;
-	private Strategy alertBehaviour;
-	private Strategy currentBehaviour;
-	// ... hasta acá
-	
+	private long shootTimer;
+	private StateMachine stateMachine;
 	private Inbox<Noise> noiseInbox;
 	private Inbox<Vector2> visualInbox;
  	
@@ -59,10 +37,11 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	public NPC (Rectangle hitBox, LevelMap map){
 		super(hitBox, map);
 		noiseInbox = new Inbox<Noise>();
-		visualInbox = new Inbox<Vector2>();
-		//agregar desde		
-		//strategies = new HashMap<Integer, Strategy>();
-		//hasta acá
+		visualInbox = new Inbox<Vector2> ();
+		shootTimer = System.currentTimeMillis();
+	}
+	public void setStateMachine(StateMachine stateMachine){
+		this.stateMachine = stateMachine;
 	}
 	public void setAStarPathFinder(PathFinder pathFinder){
 		this.aStarPathFinder = pathFinder;
@@ -70,33 +49,8 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	public void setLinearPathFinder(PathFinder pathFinder) {
 		this.linearPathFinder = pathFinder;
 	}
+	//...hasta acï¿½
 	
-	//sacar desde acá...
-	public void setCalmBehaviour(Strategy calmBehaviour) {
-		this.calmBehaviour = calmBehaviour;
-	}
-	public void setSuspiciousBehaviour (Strategy suspiciousBehaviour) {
-		this.suspiciousBehaviour = suspiciousBehaviour;
-	}
-	public void setAlertBehaviour (Strategy alertBehaviour) {
-		this.alertBehaviour = alertBehaviour;
-	}
-	//...hasta acá
-	
-	//agregar desde acá
-	/*
-	public void setBehaviour(int value,Strategy strategy){
-		if(value > CURRENT_BEHAVIOUR)
-			throw new NoSuchBehaviourException();
-		
-		if(strategies.containsKey(value))
-			strategies.remove(value);
-			
-		strategies.put(value, strategy);
-	}
-	*/
-	//hasta acá
-		
 	/*
 	 * Setea el camino para llegar a un punto en el mapa, si es posible.
 	 * @param position
@@ -105,7 +59,6 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		if (finalStep != null && position.epsilonEquals(finalStep.getPosition(), EPSILON )){
 			return false;
 		}
-		
 		Vector2 currPosition = new Vector2();
 		currPosition = hitBox.getPosition(currPosition);
 		PathFinder pathFinder;
@@ -115,7 +68,6 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		else {
 			pathFinder = aStarPathFinder;
 		}
-		
 		Path auxPath = pathFinder.findPath(this, currPosition, position);
 		if (auxPath != null && auxPath.hasNextStep()){
 			currentPath = auxPath;
@@ -132,9 +84,8 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	 */
 	@Override
 	public void update() {
-		Context context = new Context(noiseInbox.get(),visualInbox.get());
-		selectBehaviour(context);
-		ActionRequest actionRequest = currentBehaviour.behave(context);
+		Context context = new Context(noiseInbox.get(),visualInbox.get(), isMoving, shootTimer);
+		ActionRequest actionRequest = stateMachine.updateMachine(context);
 		processActionRequest(actionRequest);
 		updatePosition();
 		super.update();	
@@ -145,7 +96,10 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		case ActionRequest.REQUEST_NOTHING:
 			break;
 		case ActionRequest.REQUEST_MOVETO:
-			moveTo(actionRequest.getPosition(), actionRequest.getRunning());
+			moveTo(actionRequest.getPosition(), actionRequest.getLinear());
+			break;
+		case ActionRequest.REQUEST_SHOOT:
+			shoot(actionRequest.getPosition());
 			break;
 		default:
 			break;
@@ -175,20 +129,7 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 			move(currentStep.getPosition().sub(getPosition()));
 		}
 	}
-	/*
-	 * Decide que estrategia debe usar en este momento.
-	 */
-	private void selectBehaviour(Context context) {
-		if (context.playerIsVisible() || !alertBehaviour.done()) {
-			currentBehaviour = alertBehaviour;
-		}
-//		else if (context.getNoise() != null || !suspiciousBehaviour.done()) {
-//			currentBehaviour = suspiciousBehaviour;
-//		}
-		else {
-			currentBehaviour = calmBehaviour;
-		}
-	}
+	
 	
 	/**
 	 * Metodo para calcular si el jugador esta en el campo visual de este NPC
@@ -214,7 +155,7 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	}
 	
 	/*
-	 * Anade un mensaje al contexsto. TODO en realidad, el NPC deberia mandar cualquier mensaje,
+	 * Anade un mensaje al contexto. TODO en realidad, el NPC deberia mandar cualquier mensaje,
 	 * sin importar si es un Noise o de cualquier otro tipo. El contexto deberia saber manejar
 	 * distintos tipos de mensajes. Por eso, deberia haber un unico metodo addToContext(Message m).
 	 */
@@ -235,5 +176,11 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	}
 	public float visualAngle() {
 		return VISUAL_ANGLE ;
+	}
+	public void shoot(Vector2 playerPosition) {
+		move(playerPosition);
+		isMoving = false;
+		shootTimer = System.currentTimeMillis() + 1000l;
+		System.out.println("BANG!!!");
 	}
 }

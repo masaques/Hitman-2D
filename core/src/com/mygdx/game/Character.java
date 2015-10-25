@@ -75,7 +75,6 @@ public abstract class Character implements Movable, BulletListener {
 		}
 		this.direction.set(direction.nor());
 		this.isMoving = true;
-		
 		return true;
 	}
 	/*
@@ -189,10 +188,10 @@ public abstract class Character implements Movable, BulletListener {
 		this.healthPoints -= dmg ;
 	}
 	/**
-	 * Metodo para infligir daño en los 
+	 * Metodo para infligir daï¿½o en los 
 	 * Characters
 	 * @param dmg
-	 * @return true si, como resultado del daño, el Character muere. false si no
+	 * @return true si, como resultado del daï¿½o, el Character muere. false si no
 	 */
 	public void dealDamage(float dmg) {
 		if (dmg >= this.getHealthPoints()) {

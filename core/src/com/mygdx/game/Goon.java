@@ -6,14 +6,16 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 /*
  * Los Goon son npc con un comportamiento agresivo. 
  */
 public class Goon extends NPC {
 	
-	public Goon(Rectangle hitBox, LevelMap map){
+	public Goon(Rectangle hitBox, LevelMap map, RandArray<Vector2> searchPositions){
 		super(hitBox, map);
+		setStateMachine(new GoonStateMachine(searchPositions));
 	}
 
 }

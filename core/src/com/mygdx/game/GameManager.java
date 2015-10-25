@@ -41,16 +41,14 @@ public class GameManager {
 		randArray.add(new Vector2(700,700));
 		randArray.add(new Vector2(73,792));
 		randArray.add(new Vector2(817,48));
-		Strategy calm = new PatrolStrategy(randArray);
-		Strategy follow = new FollowStrategy();
+		
 		
 		for(int i=0; i< goons; i++){		
 			goon_view = new CharacterView("assets/hitman_walk.png", 18, 13, 15);
-			goon = new Goon(new Rectangle(40,40, 18,13),map);
+			goon = new Goon(new Rectangle(40,40, 18,13),map, randArray);
 			goon.setAStarPathFinder(path_finder);
 			goon.setLinearPathFinder(new LinearPathFinder(map));
-			goon.setCalmBehaviour(calm);
-			goon.setAlertBehaviour(follow);
+			
 			goon_view.setPlayer(goon);
 			goon_view_set.add(goon_view);
 			goon_set.add(goon);

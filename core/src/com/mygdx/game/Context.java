@@ -16,19 +16,23 @@ import com.badlogic.gdx.math.Vector2;
 public class Context {
 	private List<Noise> noiseList;
 	private List<Vector2> positionList;
+	private boolean isMoving;
+	private long shootTimer;
 	
-	public Context(List<Noise> noiseList, List<Vector2> positionList) {
+	public Context(List<Noise> noiseList, List<Vector2> positionList, boolean isMoving, long shootTimer) {
 		if (noiseList == null || positionList == null){
 			throw new IllegalArgumentException();
 		}
 		this.noiseList = noiseList;
 		this.positionList = positionList;
+		this.isMoving = isMoving;
+		this.shootTimer = shootTimer;
 	}
 	/*
 	 * Devuelve si el npc puede ver al jugador.
 	 */
 	public boolean playerIsVisible() {
-		return positionList.size() > 0;
+		return positionList.size() > 0 && positionList.get(0) != null;
 	}
 	/*
 	 * Devuelve el sonido mas fuerte, null si es vacio.
@@ -54,6 +58,12 @@ public class Context {
 			playerPosition = new Vector2(positionList.get(0));
 		}
 		return playerPosition;
+	}
+	public boolean isMoving() {
+		return isMoving;
+	}
+	public long shootTimer() {
+		return shootTimer;
 	}
 	
 }
