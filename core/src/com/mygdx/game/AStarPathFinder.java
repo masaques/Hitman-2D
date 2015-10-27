@@ -100,7 +100,6 @@ public class AStarPathFinder implements PathFinder {
 	    
 	    Node target = nodes[tx][ty];
 	    Vector2 stepPosition = new Vector2();
-	    path.prependStep(finalPosition);
 	    while (target != nodes[sx][sy]){
 	    	stepPosition = getStepCorrection(movable,target);
 	    	path.prependStep(stepPosition);

@@ -21,12 +21,15 @@ public class AlarmStateMachine implements StateMachine<NPC>, State<NPC> {
 	}
 	@Override
 	public ActionRequest<NPC> updateState(StateMachine<NPC> owner, Context context){
+		if (System.currentTimeMillis() < context.getSurpriseTimer()) {
+			return new StopRequest();
+		}
 		if (!context.playerIsVisible()){
 			owner.changeState(suspiciousStateMachine);
 			/*
 			 * Sospecha durante 10 segundos.
 			 */
-			suspiciousStateMachine.setTimer(5000);
+			suspiciousStateMachine.setTimer(10000);
 			changeState(initialState);
 			return new NullRequest<NPC>();
 		}

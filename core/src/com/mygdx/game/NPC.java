@@ -22,16 +22,23 @@ public abstract class NPC extends Character implements NoiseListener{
 	private static final float VISUAL_RANGE = 5000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
-	protected  Path currentPath;
-	protected Step finalStep;
-	protected Step currentStep = null;
+	private Path currentPath;
+	private Step finalStep;
+	private Step currentStep = null;
 	private PathFinder aStarPathFinder;
 	private PathFinder linearPathFinder;
 	private long shootTimer;
 	private NPCStateMachine stateMachine;
 	private Inbox<Noise> noiseInbox;
 	private Inbox<Vector2> visualInbox;
- 	
+	private long surpriseTimer;
+ 	public enum NpcState {
+ 		ALARM_SURPRISED,
+ 		SUSPICIOUS_SURPRISED,
+ 		DEAD,
+ 		DEFAULT
+ 	}
+ 	private NpcState currentState = NpcState.DEFAULT;
 	
 	public NPC (Rectangle hitBox, LevelMap map){
 		super(hitBox, map);
@@ -82,7 +89,15 @@ public abstract class NPC extends Character implements NoiseListener{
 	 */
 	@Override
 	public void update() {
-		Context context = new Context(noiseInbox.get(),visualInbox.get(), getPosition(),isMoving, shootTimer, getMap());
+		Context context = new Context(
+				noiseInbox.get(),
+				visualInbox.get(), 
+				getPosition(),
+				isMoving, 
+				shootTimer,
+				surpriseTimer,
+				getMap());
+		
 		ActionRequest<NPC> actionRequest = stateMachine.updateMachine(context);
 		actionRequest.execute(this);
 		updatePosition();
@@ -167,5 +182,20 @@ public abstract class NPC extends Character implements NoiseListener{
 		isMoving = false;
 		shootTimer = System.currentTimeMillis() + 1000l;
 		System.out.println("BANG!!!");
+	}
+	public long getSurpriseTimer() {
+		return surpriseTimer;
+	}
+	public void setSurpriseTimer(long duration) {
+		surpriseTimer = System.currentTimeMillis() + duration;
+	}
+	public NpcState getState() {
+		return currentState;
+	}
+	public void setState(NpcState state) {
+		this.currentState = state;
+	}
+	public void stop() {
+		isMoving = false;
 	}
 }

@@ -38,7 +38,7 @@ public abstract class Character implements Movable {
 	public boolean isMoving(){
 		return isMoving;
 	}
-	/*
+	/**
 	 * Devuelve la posicion del personaje como la posicion de su hit box.
 	 * Notese como funciona el metodo getPosition() de rectangle para
 	 * que devuelva un Vector2.

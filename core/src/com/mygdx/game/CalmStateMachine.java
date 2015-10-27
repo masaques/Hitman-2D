@@ -37,13 +37,13 @@ public class CalmStateMachine implements StateMachine<NPC>, State<NPC> {
 		if (context.playerIsVisible()) {
 			owner.changeState(alarmStateMachine);
 			changeState(initialState);
-			actionRequest = new NullRequest<NPC>();
+			actionRequest = new SurpriseRequest(500);
 		}
 		else if (context.canHear()){
 			owner.changeState(suspiciousStateMachine);
 			changeState(initialState);
 			suspiciousStateMachine.setTimer(10000l);
-			actionRequest = new NullRequest<NPC>();
+			actionRequest = new SurpriseRequest(500);
 		}
 		else {
 			actionRequest = updateMachine(context);

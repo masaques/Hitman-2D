@@ -18,6 +18,7 @@ public class Context {
 	private List<Vector2> positionList;
 	private boolean isMoving;
 	private long shootTimer;
+	private long surpriseTimer;
 	private LevelMap map;
 	private Vector2 npcPosition;
 	
@@ -25,7 +26,8 @@ public class Context {
 			List<Vector2> positionList,
 			Vector2 npcPosition,
 			boolean isMoving, 
-			long shootTimer, 
+			long shootTimer,
+			long surpriseTimer,
 			LevelMap map) {
 		
 		if (noiseList == null || positionList == null){
@@ -37,6 +39,7 @@ public class Context {
 		this.shootTimer = shootTimer;
 		this.map = map;
 		this.npcPosition = npcPosition;
+		this.surpriseTimer = surpriseTimer;
 	}
 	/*
 	 * Devuelve si el npc puede ver al jugador.
@@ -84,5 +87,7 @@ public class Context {
 	public LevelMap getMap() {
 		return map;
 	}
-	
+	public long getSurpriseTimer() {
+		return surpriseTimer;
+	}
 }
