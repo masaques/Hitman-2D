@@ -19,7 +19,7 @@ import com.mygdx.game.Strategy;
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
  * puntos en el mapa.
  */
-public abstract class NPC extends Character implements NoiseListener, VisionListener {
+public abstract class NPC extends Character implements NoiseListener, VisionListener , Aggressive {
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
@@ -177,10 +177,11 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	public float visualAngle() {
 		return VISUAL_ANGLE ;
 	}
-	public void shoot(Vector2 playerPosition) {
-		move(playerPosition);
-		isMoving = false;
-		shootTimer = System.currentTimeMillis() + 1000l;
-		System.out.println("BANG!!!");
+	
+	@Override
+	public void shoot(Vector2 to) {
+		Vector2 relative = to.sub(this.getPosition()).nor();
+		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative,map));
+		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
 	}
 }

@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * El personaje jugable. Extiende de {@link Character}.
  */
-public class Player extends Character implements VisionSender {
+public class Player extends Character implements VisionSender , Aggressive {
 
 	
 	public Player(Rectangle hitBox, LevelMap map) {
@@ -20,7 +20,7 @@ public class Player extends Character implements VisionSender {
 	}
 	@Override
 	public void update() {
-		// TODO El sendVision deberia estar aca
+		sendPosition() ;
 		super.update();
 	}
 	
@@ -28,9 +28,18 @@ public class Player extends Character implements VisionSender {
 		this.isMoving = false;
 	}
 	@Override
-	public void sendPosition(Vector2 position) {
-		// TODO Auto-generated method stub
-		
+	public void sendPosition() {
+		VisionManager.getInstance().dispatchMessage(new Vision(this,map));
 	}
+	/**
+	 * El parametro to aca deberia ser el input del mouse
+	 */
+	@Override
+	public void shoot(Vector2 to) {
+		Vector2 relative = to.sub(this.getPosition()).nor();
+		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative,map));
+		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
+	}
+	
 
 }

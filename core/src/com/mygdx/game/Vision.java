@@ -6,6 +6,12 @@ public class Vision implements Message<VisionListener> {
 	
 	private Player source ;
 	private LevelMap map ;
+	
+	public Vision(Player player, LevelMap map) {
+		this.source= player ;
+		this.map=map ;
+	}
+	
 	@Override
 	public void notify(VisionListener l) {
 		Vector2 goonDirection = l.getDirection() ;
