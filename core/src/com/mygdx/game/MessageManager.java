@@ -1,4 +1,4 @@
-/*
+/**
  *@author Tomas Raies
  *@date   17 de oct. de 2015
  */
@@ -9,49 +9,47 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-/*
- * Clase Singleton que maneja la distrubucion de los mensajes a sus respectivos
- * handlers.
+/**
+ *  <p>Clase <b>abstracta</b> que maneja la distribución de los mensajes a sus respectivos
+ * 	managers. Cada manager le corresponde un {@link Listener} <i>L</i> y un {@link Message} <i>M</i></p>
+ * 
  */
 public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 	private List<M> messageList;
 	private Set<L> listeners;
 
-	/*
+	/**
 	 * Esta implementada como un Singleton (solo exite una instancia de esta clase), asi que 
-	 * el constructor es privado. Usar getInstace en lugar de new.
+	 * el constructor es protected. Si obetener la instancia, usar getInstace en lugar de new.
 	 */
 	protected MessageManager() {
 		this.messageList = new ArrayList<M>();
 		this.listeners = new HashSet<L>();
 	}
-	/*
-	 * Agrega un listener a un  tipo de mensaje determinado. Si es el primer Listener de 
+	/**
+	 * Agrega un listener al Manager. Si es el primer Listener de 
 	 * su tipo lo crea.
 	 * @param listener
-	 * @param messageType
 	 */
 	public void addListener(L listener) {
 		listeners.add(listener);
 	}
-	/*
+	/**
 	 * Elimina un listener del set. si no existe no hace nada
 	 * @param listener
-	 * @param messageType
-	 */
+	*/
 	public void removeListener(Listener listener) {
 		listeners.remove(listener);
 	}
-	/*
-	 * Limpia el listenerMap.
+	/**
+	 * Limpia el listener Map.
 	 */
 	public void clearAllListeners() {
 		listeners.clear();
 	}
 	
-	/*
-	 * anade un post al buzon de entrada.
-	 * @Integer messageType
+	/**
+	 * Agrega un mensage a la lista de mensages.
 	 * @Message message
 	 */
 	public void dispatchMessage(M message) {
@@ -59,15 +57,24 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 	}
 	
 	
-	/*
-	 * Recorre cada post en el buzon y lo manda al handler que le corresponde.
+	/**
+	 * 	Recorre cada <b>Listener</b> y lo lo notifica según indique el mensaje.
+	 * 
+	 * 	@see Message
 	 */
 	public void update(){
 	
+		/*
+		 * Genera una lista auxiliar que es la que se recorrerá luego de limpiar la primera.
+		 * De esta manera, los mensajes nuevos agregados entrarán en la siguiente iteración
+		 * evitando loops.
+		 */
+		
 		List<M> handleList = new ArrayList<M>();
 		for (M m : messageList) {
 			handleList.add(m);
 		}
+		
 		messageList.removeAll(handleList);
 	
 		for (M h: handleList) {
@@ -78,9 +85,12 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 		}
 		
 	}
-	/*
+	
+	/**
 	 * Filtra el set de listeners. Por defecto devuelve el mismo set.
-	 * @param listenersSet
+	 * 
+	 * @param message Mensaje por el cual se filtra
+	 * @param listenersSet Set de Listener a filtrar
 	 */
 	private Set<L> filter(M message, Set<L> listenersSet) {
 		return listenersSet;

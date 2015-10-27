@@ -3,6 +3,10 @@ package com.mygdx.game;
 /**
  * Clase singleton para el manejo de la vision
  * @author masaques
+ * 
+ * @see MessageManager
+ * @see VisionListener
+ * @see Vision
  *
  */
 

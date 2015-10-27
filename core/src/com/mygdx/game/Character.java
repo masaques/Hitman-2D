@@ -9,10 +9,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-/*
- * Clase abstracta para todos los personajes del juego, incluyendo el jugador 
- * y los npc. Implementa Movable.
+/**
+ * <p>Clase abstracta para todos los personajes del juego, incluyendo el jugador 
+ * y los NPC. Implementa {@link Movable} y {@linkplain BulletListener}</p>.
+ * 
+ * @see Movable
+ * @see BulletListener
+ * @see Player
+ * @see NPC
+ * 
  */
+
+
 public abstract class Character implements Movable, BulletListener {
 	protected static int IDS = 0;
 	protected int id ;
@@ -38,23 +46,23 @@ public abstract class Character implements Movable, BulletListener {
 		this.id= IDS ;
 		IDS++ ;
 	}
-	/*
-	 * Devulelve si el personaje se esta moviendo.
+	/**
+	 *  Devulelve si el personaje se esta moviendo.
 	 */
 	public boolean isMoving(){
 		return isMoving;
 	}
-	/*
+	/**
 	 * Devuelve la posicion del personaje como la posicion de su hit box.
-	 * Notese como funciona el metodo getPosition() de rectangle para
-	 * que devuelva un Vector2.
+	 * 
+	 * @see #getPosition() com.badlogic.gdx.math.Rectangle.getPosition(Vector2 position)
 	 */
 	@Override
 	public Vector2 getPosition() {
 		return hitBox.getPosition(new Vector2());
 	}
 	
-	/*
+	/**
 	 * Devuelve la direccion a la que se esta moviendo el personaje. En 
 	 * una revision futura, conviene separar entre lookDirection y moveDirection.
 	 */
@@ -63,10 +71,11 @@ public abstract class Character implements Movable, BulletListener {
 		return new Vector2(direction);
 	}
 	
-	/*
+	/**
 	 * Setea direction. En una revision futura deberia setear moveDirection.
 	 * Running no se modifica.
-	 * @param direction
+	 * 
+	 * @param direction - Dirección de movimiento
 	 */
 	@Override
 	public boolean move(Vector2 direction) {
@@ -77,10 +86,11 @@ public abstract class Character implements Movable, BulletListener {
 		this.isMoving = true;
 		return true;
 	}
-	/*
+	/**
 	 * Idem anterior, pero modifica running por un nuevo valor.
-	 * @param direction
-	 * @param running
+	 * 
+	 * @param direction - Direccion de movimiento
+	 * @param running - Boleano si esta corriendo
 	 */
 	public boolean move(Vector2 direction, boolean running) {
 		move(direction);
@@ -88,26 +98,28 @@ public abstract class Character implements Movable, BulletListener {
 		return true;
 	}
 	
-	/*
+	/**
 	 * Devuelve el ancho del hit box.
+	 * 
+	 * @see com.badlogic.gdx.math.Rectangle
 	 */
 	@Override
 	public float getWidth() {
 		return hitBox.getWidth();
 	}
 	
-	/*
+	/**
 	 * Devuleve el alto del hit box.
+	 * 
+	 * @see com.badlogic.gdx.math.Rectangle
 	 */
 	@Override
 	public float getHeight() {
 		return hitBox.getHeight();
 	}
 	
-	/*
-	 * Update del personaje. Por ahora solo llama al metodo moveAlong.
-	 * En un futuro deberia llamar a todos los send de los mensajes que el 
-	 * personaje quiera mandar (bullets, noise, dialog, etc..)
+	/**
+	 * Update del personaje. 
 	 */
 	@Override
 	public void update(){
@@ -118,8 +130,8 @@ public abstract class Character implements Movable, BulletListener {
 		
 	}
 	
-	/*
-	 * Metodo privado que calcula la proxima posicion del Character segun su 
+	/**
+	 * Metodo privado que calcula la proxima posicion del {@link Character} segun su 
 	 * direccion y su rapidez. Deberia ser llamado por el update si el
 	 * boolean isMoving es true. Prueba tres direcciones posibles: derecho, 
 	 * y a lo largo del eje x e y si la primera es imposible. 
@@ -161,11 +173,12 @@ public abstract class Character implements Movable, BulletListener {
 		return;
 	}
 	
-	/*
+	/**
 	 * Metodo privado que calcula un Rectangle segun una direccion determinada, una 
 	 * posicion inicial y una velocidad. Usado por el metodo moveAlong.
-	 * @param direction
-	 * @param speed
+	 * 
+	 * @param direction - Direción del rectangulo
+	 * @param speed - velocidad del objeto
 	 */
 	
 	private Rectangle getDirectionalHitBox(Vector2 direction, float speed) {
@@ -188,10 +201,11 @@ public abstract class Character implements Movable, BulletListener {
 		this.healthPoints -= dmg ;
 	}
 	/**
-	 * Metodo para infligir da�o en los 
-	 * Characters
-	 * @param dmg
-	 * @return true si, como resultado del da�o, el Character muere. false si no
+	 * Metodo para infligir daño en los {@link Characters}
+	 * 
+	 * @param dmg - Daño a infligir
+	 * 
+	 * @return true si, como resultado del daño, el Character muere. false si no
 	 */
 	public void dealDamage(float dmg) {
 		if (dmg >= this.getHealthPoints()) {

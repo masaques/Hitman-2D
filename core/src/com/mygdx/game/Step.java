@@ -2,8 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-/*
- * Representa un paso. Utilizado por Path.
+/**
+ * Representa un paso. Utilizado por {@link Path}.
  */
 public class Step {
 	private Vector2 position;

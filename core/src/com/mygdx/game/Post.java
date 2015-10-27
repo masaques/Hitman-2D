@@ -9,6 +9,7 @@ package com.mygdx.game;
  * Representa un mensaje a resolver por la postOffice, segun su tipo y un tiempo
  * de espera determinado.
  */
+@Deprecated
 public class Post {
 	private Integer type;
 	private Timer timer;

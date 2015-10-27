@@ -5,7 +5,7 @@
 
 package com.mygdx.game;
 
-/*
+/**
  * Setea un timer con una duracion determinada. Sirve para meterle un delay a los mensajes.
  */
 public class Timer {

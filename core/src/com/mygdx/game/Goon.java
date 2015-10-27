@@ -8,8 +8,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-/*
- * Los Goon son npc con un comportamiento agresivo. 
+/**
+ * Los Goon son {@link NPC} con un comportamiento agresivo. 
  */
 public class Goon extends NPC {
 	

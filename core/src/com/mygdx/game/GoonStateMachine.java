@@ -4,6 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 
 import sun.util.resources.CalendarData;
 
+/**
+ * {@link NPCStateachine} agresiva. 
+ * 
+ */
 public class GoonStateMachine extends NPCStateMachine {
 	public GoonStateMachine(RandArray<Vector2> searchPositions) {
 		super();
