@@ -43,3 +43,15 @@ Para revertir un lio local:
  git checkout --ours --theirs *nombreDelArchivo* //para resolver conflictos mucho mas graves.Descarto los cambios de uno y dejo solo los que funciona
 
 git log -> todos los commits del branch en el que estoy
+
+#TODO List
+
+Implementar balas y disparos.
+Hacer tests.
+Arreglar el movimiento de los npc.
+Implementar el control de la direccion del jugador por el mouse.
+Arreglar la maquina de estado.
+Menues.
+Inicializacion de niveles.
+Implementar levelManager que inicialice y controle el juego.
+
