@@ -3,10 +3,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Vector2;
 
 
-public class PatrolState implements State {
-	private RandArray<Vector2> searchPositions;
+public class PatrolState implements State<NPC> {
+	private RandList<Vector2> searchPositions;
 	
-	public PatrolState(RandArray<Vector2> searchPositions) {
+	public PatrolState(RandList<Vector2> searchPositions) {
 		this.searchPositions = searchPositions;
 	}
 
@@ -16,15 +16,14 @@ public class PatrolState implements State {
 	 */
 	
 	@Override
-	public ActionRequest updateState(StateMachine owner, Context context) {
-		ActionRequest actionRequest = new ActionRequest();
+	public ActionRequest<NPC> updateState(StateMachine<NPC> owner, Context context) {
+		ActionRequest<NPC> actionRequest;
 		
 		if (!context.isMoving()) {
-			System.out.println("algo");
-			actionRequest.setRequest(ActionRequest.REQUEST_MOVETO);
-			actionRequest.setRunning(false);
-			actionRequest.setPosition(searchPositions.get());
-			actionRequest.setLinear(false);
+			actionRequest = new MoveRequest(searchPositions.get(0), false);
+		}
+		else {
+			actionRequest = new NullRequest<NPC>();
 		}
 		return actionRequest;
 	}

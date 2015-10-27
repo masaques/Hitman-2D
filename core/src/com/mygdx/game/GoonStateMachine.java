@@ -2,13 +2,16 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-import sun.util.resources.CalendarData;
-
 public class GoonStateMachine extends NPCStateMachine {
-	public GoonStateMachine(RandArray<Vector2> searchPositions) {
+	public GoonStateMachine(RandList<Vector2> searchPositions) {
 		super();
-		setAlarmState(new AlarmStateMachine(new FollowState()));
-		setSuspiciousState(new SuspiciousStateMachine(new PatrolState(searchPositions)));
-		setCalmState(new CalmStateMachine(new PatrolState(searchPositions)));
+		AlarmStateMachine alarmState = new AlarmStateMachine(new FollowState());
+		SuspiciousStateMachine suspiciousState = new SuspiciousStateMachine(new InspectState());
+		CalmStateMachine calmState = new CalmStateMachine(new PatrolState(searchPositions));
+		alarmState.set(suspiciousState);
+		suspiciousState.set(alarmState).set(calmState);
+		calmState.set(alarmState).set(suspiciousState);
+		changeState(calmState);
+		
 	}
 }

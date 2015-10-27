@@ -1,5 +1,5 @@
 package com.mygdx.game;
 
-public interface State {
-	ActionRequest updateState(StateMachine owner,Context context );
+public interface State<T> {
+	ActionRequest<T> updateState(StateMachine<T> owner,Context context );
 }

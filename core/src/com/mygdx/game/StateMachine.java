@@ -1,9 +1,7 @@
 package com.mygdx.game;
 
-public interface StateMachine {
-	public enum StateCode {
-		
-	};
-	public ActionRequest updateMachine(Context context);
-	public void changeState(int stateCode);
+public interface StateMachine<T> {
+	
+	public ActionRequest<T> updateMachine(Context context);
+	public void changeState(State<T> state);
 }

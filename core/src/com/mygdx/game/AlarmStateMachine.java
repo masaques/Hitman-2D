@@ -1,39 +1,41 @@
 package com.mygdx.game;
 
 
-public class AlarmStateMachine implements StateMachine, State {
-	protected static final int FOLLOW_STATE = 4;
-	protected static final int SHOOT_STATE = 5;
+public class AlarmStateMachine implements StateMachine<NPC>, State<NPC> {
+	private State<NPC> initialState;
+	private State<NPC> currentState;
+	private SuspiciousStateMachine suspiciousStateMachine;
 	
-	private State currentState;
-	
-	
-	public AlarmStateMachine(State initialState){
+	public AlarmStateMachine(State<NPC> initialState){
+		this.initialState = initialState;
 		this.currentState = initialState;
 	}
+	public AlarmStateMachine set(SuspiciousStateMachine suspiciousStateMachine) {
+		this.suspiciousStateMachine = suspiciousStateMachine;
+		return this;
+	}
+	
 	@Override
-	public ActionRequest updateMachine(Context context) {
+	public ActionRequest<NPC> updateMachine(Context context) {
 		return currentState.updateState(this, context);
 	}
 	@Override
-	public ActionRequest updateState(StateMachine owner, Context context){
+	public ActionRequest<NPC> updateState(StateMachine<NPC> owner, Context context){
 		if (!context.playerIsVisible()){
-			owner.changeState(NPCStateMachine.SUSPICIOUS_STATE);
-			return new ActionRequest();
+			owner.changeState(suspiciousStateMachine);
+			/*
+			 * Sospecha durante 10 segundos.
+			 */
+			suspiciousStateMachine.setTimer(5000);
+			changeState(initialState);
+			return new NullRequest<NPC>();
 		}
 		return updateMachine(context);
 	}
 	
 	@Override
-	public void changeState(int state){
-		switch(state) {
-		case FOLLOW_STATE:
-			currentState = new FollowState();
-			break;
-		case SHOOT_STATE:
-			currentState = new ShootState();
-			break;
-		}
+	public void changeState(State<NPC> state){
+		currentState = state;
 	}
 
 }

@@ -194,4 +194,7 @@ public abstract class Character implements Movable {
 		this.setHealthPoints(dmg);
 		return false ;
 	}
+	public LevelMap getMap() {
+		return map;
+	}
 }

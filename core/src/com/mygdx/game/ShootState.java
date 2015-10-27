@@ -1,16 +1,11 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.math.Vector2;
-
-public class ShootState implements State {
-
+public class ShootState implements State<NPC> {
 	@Override
-	public ActionRequest updateState(StateMachine owner, Context context) {
+	public ActionRequest<NPC> updateState(StateMachine<NPC> owner, Context context) {
 		
-		owner.changeState(AlarmStateMachine.FOLLOW_STATE);
-		ActionRequest actionRequest = new ActionRequest();
-		actionRequest.setRequest(ActionRequest.REQUEST_SHOOT);
-		actionRequest.setPosition(context.getPlayerPosition());
+		owner.changeState(new FollowState());
+		ActionRequest<NPC> actionRequest = new ShootRequest(context.getPlayerPosition());
 		return actionRequest;
 	}
 

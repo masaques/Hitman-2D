@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Goon extends NPC {
 	
-	public Goon(Rectangle hitBox, LevelMap map, RandArray<Vector2> searchPositions){
+	public Goon(Rectangle hitBox, LevelMap map, RandList<Vector2> searchPositions){
 		super(hitBox, map);
 		setStateMachine(new GoonStateMachine(searchPositions));
 	}

@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.List;
+
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Intersector;
@@ -114,8 +116,29 @@ public class LevelMap {
 		if (Intersector.intersectSegments(startPos, finalPos, vortexs[3], vortexs[0],null)) {
 			return true;
 		}
-		return false;
-		
+		return false;	
 	}
 	
+	public List<Vector2> findRandomValidPositions(Vector2 centerPosition, int tileRadius) {
+		List<Vector2> randList = new RandList<Vector2> ();
+		
+		int xp = (int)centerPosition.x / tileWidth;
+		int yp = (int)centerPosition.y / tileWidth;
+		
+		for (int i = xp - tileRadius; i < xp+tileRadius && i<getWidthInTiles(); i++) {
+			if (i < 0) {
+				continue;
+			}
+			for (int j = yp-tileRadius; j < yp + tileRadius && j<getHeightInTiles(); j++) {
+				if (j<0 ) {
+					continue;
+				}
+				if (modelMap[i][j] == null) {
+					randList.add(new Vector2(i * tileWidth, j * tileWidth));
+				}
+			}
+		}
+		
+		return randList;
+	}
 }

@@ -1,19 +1,17 @@
 package com.mygdx.game;
 
 
-public class FollowState implements State {
+public class FollowState implements State<NPC> {
 	
 	@Override
-	public ActionRequest updateState(StateMachine owner, Context context) {
-		ActionRequest actionRequest = new ActionRequest();
+	public ActionRequest<NPC> updateState(StateMachine<NPC> owner, Context context) {
+		ActionRequest<NPC> actionRequest ;
 		if (System.currentTimeMillis() >= context.shootTimer()) {
-			owner.changeState(AlarmStateMachine.SHOOT_STATE);
+			owner.changeState(new ShootState());
+			actionRequest = new NullRequest<NPC>();
 		}
 		else {
-			actionRequest.setRequest(ActionRequest.REQUEST_MOVETO);
-			actionRequest.setPosition(context.getPlayerPosition());
-			actionRequest.setRunning(true);
-			actionRequest.setLinear(true);
+			actionRequest = new MoveRequest(context.getPlayerPosition(),true);
 		}
 		return actionRequest;
 	}

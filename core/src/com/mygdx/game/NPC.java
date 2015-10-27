@@ -12,7 +12,6 @@ import com.mygdx.game.LevelMap;
 import com.mygdx.game.Path;
 import com.mygdx.game.PathFinder;
 import com.mygdx.game.Step;
-import com.mygdx.game.Strategy;
 
 /*
  * Personajes no controlados por el jugador. Debem implementar comportamientos diferentes
@@ -29,7 +28,7 @@ public abstract class NPC extends Character implements NoiseListener{
 	private PathFinder aStarPathFinder;
 	private PathFinder linearPathFinder;
 	private long shootTimer;
-	private StateMachine stateMachine;
+	private NPCStateMachine stateMachine;
 	private Inbox<Noise> noiseInbox;
 	private Inbox<Vector2> visualInbox;
  	
@@ -40,7 +39,7 @@ public abstract class NPC extends Character implements NoiseListener{
 		visualInbox = new Inbox<Vector2> ();
 		shootTimer = System.currentTimeMillis();
 	}
-	public void setStateMachine(StateMachine stateMachine){
+	public void setStateMachine(NPCStateMachine stateMachine){
 		this.stateMachine = stateMachine;
 	}
 	public void setAStarPathFinder(PathFinder pathFinder){
@@ -83,27 +82,13 @@ public abstract class NPC extends Character implements NoiseListener{
 	 */
 	@Override
 	public void update() {
-		Context context = new Context(noiseInbox.get(),visualInbox.get(), isMoving, shootTimer);
-		ActionRequest actionRequest = stateMachine.updateMachine(context);
-		processActionRequest(actionRequest);
+		Context context = new Context(noiseInbox.get(),visualInbox.get(), getPosition(),isMoving, shootTimer, getMap());
+		ActionRequest<NPC> actionRequest = stateMachine.updateMachine(context);
+		actionRequest.execute(this);
 		updatePosition();
 		super.update();	
 	}
 	
-	private void processActionRequest(ActionRequest actionRequest){
-		switch(actionRequest.getRequest()){
-		case ActionRequest.REQUEST_NOTHING:
-			break;
-		case ActionRequest.REQUEST_MOVETO:
-			moveTo(actionRequest.getPosition(), actionRequest.getLinear());
-			break;
-		case ActionRequest.REQUEST_SHOOT:
-			shoot(actionRequest.getPosition());
-			break;
-		default:
-			break;
-		}
-	}
 	private void updatePosition() {
 		if (!isMoving || currentPath == null){
 			isMoving = false;
