@@ -9,8 +9,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-/*
- * El personaje jugable. Extiende de Character.
+/**
+ * El personaje jugable. Extiende de {@link Character}.
  */
 public class Player extends Character implements VisionSender {
 

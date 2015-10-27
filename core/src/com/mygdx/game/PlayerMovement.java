@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 /**
- * Pequeña clase que devuelve ControlProcessor en getPlayerMovement()
+ * PequeÃ±a clase que devuelve ControlProcessor en getPlayerMovement()
  * para informarle a PlayerHandler lo que tiene que hacer
  * @author masaques
  *

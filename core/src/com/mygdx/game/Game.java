@@ -22,6 +22,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author traies
  * @author masaques
  */
+@Deprecated
 public class Game extends ApplicationAdapter {
 	Texture img;
 	TiledMap tiled_map;
