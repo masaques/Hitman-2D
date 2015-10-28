@@ -52,7 +52,7 @@ public class CharacterView {
 	 * Dibuja el sprite en pantalla.
 	 */
 	public void draw(){
-		if (character.isMoving){
+		if (character.isMoving()){
 			update() ;
 		}
 		currentFrame = walkAnimation.getKeyFrame(stateTime, true);

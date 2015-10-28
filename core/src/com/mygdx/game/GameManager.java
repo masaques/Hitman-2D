@@ -42,7 +42,6 @@ public class GameManager {
 		randArray.add(new Vector2(73,792));
 		randArray.add(new Vector2(817,48));
 		
-		
 		for(int i=0; i< goons; i++){		
 			goon_view = new CharacterView("assets/hitman_walk.png", 18, 13, 15);
 			goon = new Goon(new Rectangle(40,40, 18,13),map, randArray);
