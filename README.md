@@ -46,19 +46,24 @@ git log -> todos los commits del branch en el que estoy
 
 #TODO List
 
-Implementar balas y disparos.
+* Implementar balas y disparos.
 
-Hacer tests.
+* Hacer tests.
 
-Arreglar el movimiento de los npc.
+* Arreglar el movimiento de los npc.
 
-Implementar el control de la direccion del jugador por el mouse.
+* Implementar el control de la direccion del jugador por el mouse.
 
-Arreglar la maquina de estado.
+* Arreglar la maquina de estado.
 
-Menues.
+* Menues.
+  - Ya hice la clase MenuManager, que vendría a ser parte del Controller. La especificación está comentada en el .java
+  - Hay que implementar la clase MenuManagerView, que es puramente libgdx
+  - Implementar la función "pausa" durante el juego
 
-Inicializacion de niveles.
+* Guardar las jugadas
 
-Implementar levelManager que inicialice y controle el juego.
+* Inicializacion de niveles.
+
+* Implementar levelManager que inicialice y controle el juego.
 
