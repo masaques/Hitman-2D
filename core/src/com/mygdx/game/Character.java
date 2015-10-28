@@ -9,6 +9,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import serialization.CharacterInformation;
+
 /**
  * <p>Clase abstracta para todos los personajes del juego, incluyendo el jugador 
  * y los NPC. Implementa {@link Movable} y {@linkplain BulletListener}</p>.
@@ -22,19 +24,20 @@ import com.badlogic.gdx.math.Vector2;
 
 
 public abstract class Character implements Movable, BulletListener {
-	protected static int IDS = 0;
-	protected int id ;
-	protected static final float DIRECTIONAL_EPSILON = 0.05f;
-	protected static final float NORMAL_SPEED = 60f;
-	protected static final float RUNNING_SPEED = 100f;
-	protected Vector2 direction;
+	private static int IDS = 0;
+	private int id ;
+	private static final float DIRECTIONAL_EPSILON = 0.05f;
+	private static final float NORMAL_SPEED = 60f;
+	private static final float RUNNING_SPEED = 100f;
+	private Vector2 direction;
+	private boolean running;
+	private float healthPoints ;
+	private boolean isDead ;
 	protected Rectangle hitBox;
-	protected CharacterView model;
 	protected LevelMap map;
-	protected boolean running;
 	protected boolean isMoving = false;
-	protected float healthPoints ;
-	protected boolean isDead ;
+	
+	
 	
 	public Character(Rectangle hitBox, LevelMap map){
 		this.direction = new Vector2();
@@ -46,6 +49,20 @@ public abstract class Character implements Movable, BulletListener {
 		this.id= IDS ;
 		IDS++ ;
 	}
+	/**
+	 * Constructor alternativo usado al cargar la informacion desde un archivo
+	 * @param data La minima informacion requerida para cargar al character
+	 * @param map El mapa generado por quien carga el juego
+	 */
+	public Character(CharacterInformation data,LevelMap map) {
+		this.direction= data.getDirection();
+		this.hitBox= data.getHitbox();
+		this.healthPoints=data.getHealthPoints();
+		this.map=map;
+		this.id= IDS;
+		IDS++;
+	}
+	
 	/**
 	 *  Devulelve si el personaje se esta moviendo.
 	 */
@@ -242,5 +259,17 @@ public abstract class Character implements Movable, BulletListener {
 			}
 		}
 		return true ;
+	}
+	/**
+	 * Este metodo se usa para extraer de este Character 
+	 * la minima informacion necesaria para reinicializarlo
+	 * @return Una nueva instancia de CharacterInformation, usada para recargar la partida
+	 *  ,null si el character esta muerto
+	 */
+	public CharacterInformation dump() {
+		if (this.isDead()) {
+			return null;
+		}
+		return new CharacterInformation(this.getDirection(),this.hitBox,this.getHealthPoints()) ;
 	}
 }

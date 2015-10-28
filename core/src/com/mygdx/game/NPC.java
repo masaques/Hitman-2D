@@ -14,6 +14,8 @@ import com.mygdx.game.PathFinder;
 import com.mygdx.game.Step;
 import com.mygdx.game.Strategy;
 
+import serialization.NPCInformation;
+
 /*
  * Personajes no controlados por el jugador. Debem implementar comportamientos diferentes
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
@@ -22,10 +24,10 @@ import com.mygdx.game.Strategy;
 public abstract class NPC extends Character implements NoiseListener, VisionListener , Aggressive {
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
-	protected static final float EPSILON = 2f;
-	protected  Path currentPath;
-	protected Step finalStep;
-	protected Step currentStep = null;
+	private static final float EPSILON = 2f;
+	private Path currentPath;
+	private Step finalStep;
+	private Step currentStep = null;
 	private PathFinder aStarPathFinder;
 	private PathFinder linearPathFinder;
 	private long shootTimer;
@@ -40,6 +42,21 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		visualInbox = new Inbox<Vector2> ();
 		shootTimer = System.currentTimeMillis();
 	}
+	/**
+	 * Constructor alternativo usado al cargar la informacion desde un archivo
+	 * @param data La minima informacion requerida para cargar al NPC
+	 * @param map El mapa generado por quien carga el juego
+	 * @see Character
+	 */
+	public NPC (NPCInformation data,LevelMap map) {
+		super(data,map) ;
+		this.noiseInbox = new Inbox<Noise>() ;
+		this.noiseInbox.addAll(data.getNoiseList());
+		this.visualInbox = new Inbox<Vector2>() ;
+		this.visualInbox.addAll(data.getVisionList());
+	}
+	
+	
 	public void setStateMachine(StateMachine stateMachine){
 		this.stateMachine = stateMachine;
 	}
@@ -49,7 +66,6 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	public void setLinearPathFinder(PathFinder pathFinder) {
 		this.linearPathFinder = pathFinder;
 	}
-	//...hasta ac�
 	
 	/*
 	 * Setea el camino para llegar a un punto en el mapa, si es posible.
@@ -123,9 +139,6 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 			}
 		}
 		if (isMoving){
-			/*
-			 * Ineficiente? Probablemente, pero me soluciona la vida por ahora. (Tiene que hacer una raiz cuadrada por frame) 
-			 */
 			move(currentStep.getPosition().sub(getPosition()));
 		}
 	}
@@ -140,7 +153,7 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	
 	public boolean canSee(Vector2 playerPosition) {
 		Vector2 goonPosition = new Vector2((float)this.hitBox.x,(float)this.hitBox.y) ;
-		Vector2 goonDirection = this.direction ;
+		Vector2 goonDirection = this.getDirection() ;
 		if (playerPosition.dst2(goonPosition)> VISUAL_RANGE){
 			return false ;
 		}
@@ -154,15 +167,6 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		return false ;
 	}
 	
-	/*
-	 * Anade un mensaje al contexto. TODO en realidad, el NPC deberia mandar cualquier mensaje,
-	 * sin importar si es un Noise o de cualquier otro tipo. El contexto deberia saber manejar
-	 * distintos tipos de mensajes. Por eso, deberia haber un unico metodo addToContext(Message m).
-	 */
-//	public void addNoisetoContext(Noise n){
-//		context.add(n);
-//	}
-//	
 	public void addPlayer(Vector2 playerPosition) {
 		visualInbox.add(playerPosition);
 	}
@@ -183,5 +187,14 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		Vector2 relative = to.sub(this.getPosition()).nor();
 		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative,map));
 		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
+	}
+	
+	@Override
+	public NPCInformation dump() {
+		if (this.isDead()) {
+			return null ;
+		}
+		return new NPCInformation(this.getDirection(),this.hitBox,this.getHealthPoints(),
+				this.noiseInbox.get(),this.visualInbox.get()) ;
 	}
 }

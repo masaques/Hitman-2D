@@ -9,6 +9,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import serialization.CharacterInformation;
+
 /**
  * El personaje jugable. Extiende de {@link Character}.
  */
@@ -17,6 +19,15 @@ public class Player extends Character implements VisionSender , Aggressive {
 	
 	public Player(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map);
+	}
+	/**
+	 * Constructor alternativo usado al cargar la informacion desde un archivo
+	 * @param data
+	 * @param map
+	 * @see Character
+	 */
+	public Player(CharacterInformation data,LevelMap map) {
+		super(data,map);
 	}
 	@Override
 	public void update() {

@@ -20,5 +20,13 @@ public class Inbox<M> {
 		inboxList = new ArrayList<M>();
 		return aux;
 	}
+	/**
+	 * Este metodo esta aca para usarse durante el cargado de
+	 * una partida almacendada en un archivo
+	 * @param l Todo sonido que el NPC tenia registrado al momento de guardar
+	 */
+	public void addAll(List<M> l) {
+		this.inboxList=l;
+	}
 	
 }
