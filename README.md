@@ -62,11 +62,11 @@ git log -> todos los commits del branch en el que estoy
   - Implementar la función "pausa" durante el juego
 
 * Guardar las jugadas
-  -WIP, estoy viendo el tema de como guardar el mapa
+  - WIP, estoy viendo el tema de como guardar el mapa
 
 * Inicializacion de niveles.
-  -Se realizara junto al guardado de jugadas
+  - Se realizara junto al guardado de jugadas
 
 * Implementar levelManager que inicialice y controle el juego.
-  -Idem anterior
+  - Idem anterior
 
