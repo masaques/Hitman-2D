@@ -17,18 +17,8 @@ public class Context {
 	private List<Noise> noiseList;
 	private List<Vector2> positionList;
 	private boolean isMoving;
-	private long shootTimer;
-	private long surpriseTimer;
-	private LevelMap map;
-	private Vector2 npcPosition;
 	
-	public Context(List<Noise> noiseList, 
-			List<Vector2> positionList,
-			Vector2 npcPosition,
-			boolean isMoving, 
-			long shootTimer,
-			long surpriseTimer,
-			LevelMap map) {
+	public Context(List<Noise> noiseList, List<Vector2> positionList, boolean isMoving) {
 		
 		if (noiseList == null || positionList == null){
 			throw new IllegalArgumentException();
@@ -36,10 +26,6 @@ public class Context {
 		this.noiseList = noiseList;
 		this.positionList = positionList;
 		this.isMoving = isMoving;
-		this.shootTimer = shootTimer;
-		this.map = map;
-		this.npcPosition = npcPosition;
-		this.surpriseTimer = surpriseTimer;
 	}
 	/*
 	 * Devuelve si el npc puede ver al jugador.
@@ -75,19 +61,7 @@ public class Context {
 		}
 		return playerPosition;
 	}
-	public Vector2 getNpcPosition() {
-		return npcPosition;
-	}
 	public boolean isMoving() {
 		return isMoving;
-	}
-	public long shootTimer() {
-		return shootTimer;
-	}
-	public LevelMap getMap() {
-		return map;
-	}
-	public long getSurpriseTimer() {
-		return surpriseTimer;
 	}
 }

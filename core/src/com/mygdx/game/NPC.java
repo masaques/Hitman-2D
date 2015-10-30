@@ -5,6 +5,9 @@
 
 package com.mygdx.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Context;
@@ -18,7 +21,7 @@ import com.mygdx.game.Step;
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
  * puntos en el mapa.
  */
-public abstract class NPC extends Character implements NoiseListener{
+public abstract class NPC extends Character implements NoiseListener, Moody{
 	private static final float VISUAL_RANGE = 5000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
@@ -27,24 +30,15 @@ public abstract class NPC extends Character implements NoiseListener{
 	private Step currentStep = null;
 	private PathFinder aStarPathFinder;
 	private PathFinder linearPathFinder;
-	private long shootTimer;
 	private NPCStateMachine stateMachine;
-	private Inbox<Noise> noiseInbox;
-	private Inbox<Vector2> visualInbox;
-	private long surpriseTimer;
- 	public enum NpcState {
- 		ALARM_SURPRISED,
- 		SUSPICIOUS_SURPRISED,
- 		DEAD,
- 		DEFAULT
- 	}
- 	private NpcState currentState = NpcState.DEFAULT;
+	private List<Noise> noiseInbox;
+	private List<Vector2> visualInbox;
 	
 	public NPC (Rectangle hitBox, LevelMap map){
 		super(hitBox, map);
-		noiseInbox = new Inbox<Noise>();
-		visualInbox = new Inbox<Vector2> ();
-		shootTimer = System.currentTimeMillis();
+		noiseInbox = new ArrayList<Noise>();
+		visualInbox = new ArrayList<Vector2> ();
+		stateMachine = new NPCStateMachine(this);
 	}
 	public void setStateMachine(NPCStateMachine stateMachine){
 		this.stateMachine = stateMachine;
@@ -56,7 +50,7 @@ public abstract class NPC extends Character implements NoiseListener{
 		this.linearPathFinder = pathFinder;
 	}
 	
-	/*
+	/**
 	 * Setea el camino para llegar a un punto en el mapa, si es posible.
 	 * @param position
 	 */
@@ -84,22 +78,17 @@ public abstract class NPC extends Character implements NoiseListener{
 		return false;
 	}
 	
-	/*
+	/**
 	 * Actualiza el estado del NPC
 	 */
 	@Override
 	public void update() {
 		Context context = new Context(
-				noiseInbox.get(),
-				visualInbox.get(), 
-				getPosition(),
-				isMoving, 
-				shootTimer,
-				surpriseTimer,
-				getMap());
+				noiseInbox,
+				visualInbox, 
+				isMoving);
 		
-		ActionRequest<NPC> actionRequest = stateMachine.updateMachine(context);
-		actionRequest.execute(this);
+		stateMachine.updateMachine(context);
 		updatePosition();
 		super.update();	
 	}
@@ -161,15 +150,6 @@ public abstract class NPC extends Character implements NoiseListener{
 		return false ;
 	}
 	
-	/*
-	 * Anade un mensaje al contexto. TODO en realidad, el NPC deberia mandar cualquier mensaje,
-	 * sin importar si es un Noise o de cualquier otro tipo. El contexto deberia saber manejar
-	 * distintos tipos de mensajes. Por eso, deberia haber un unico metodo addToContext(Message m).
-	 */
-//	public void addNoisetoContext(Noise n){
-//		context.add(n);
-//	}
-//	
 	public void addPlayertoContext(Vector2 playerPosition) {
 		visualInbox.add(playerPosition);
 	}
@@ -177,25 +157,26 @@ public abstract class NPC extends Character implements NoiseListener{
 	public void addNoise(Noise n){
 		noiseInbox.add(n);
 	}
-	public void shoot(Vector2 playerPosition) {
-		move(playerPosition);
-		isMoving = false;
-		shootTimer = System.currentTimeMillis() + 1000l;
-		System.out.println("BANG!!!");
-	}
-	public long getSurpriseTimer() {
-		return surpriseTimer;
-	}
-	public void setSurpriseTimer(long duration) {
-		surpriseTimer = System.currentTimeMillis() + duration;
-	}
-	public NpcState getState() {
-		return currentState;
-	}
-	public void setState(NpcState state) {
-		this.currentState = state;
-	}
+	
+	/**
+	 * los siguientes metodos abstractos van a definir el comportamiento de los npc segun
+	 * su estado "animico" (NPC es Moody).
+	 */
+	@Override
 	public void stop() {
 		isMoving = false;
+	}
+	@Override
+	public abstract void alarm(Context context);
+	@Override
+	public abstract void suspicious(Context context);
+	@Override
+	public abstract void calm(Context context);
+	
+	public void refreshNoiseInbox() {
+		noiseInbox.clear();
+	}
+	public void refreshVisualInbox() {
+		visualInbox.clear();
 	}
 }
