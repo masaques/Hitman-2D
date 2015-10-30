@@ -5,6 +5,9 @@
 
 package com.mygdx.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Context;
@@ -12,7 +15,6 @@ import com.mygdx.game.LevelMap;
 import com.mygdx.game.Path;
 import com.mygdx.game.PathFinder;
 import com.mygdx.game.Step;
-import com.mygdx.game.Strategy;
 
 import serialization.NPCInformation;
 
@@ -21,26 +23,24 @@ import serialization.NPCInformation;
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
  * puntos en el mapa.
  */
-public abstract class NPC extends Character implements NoiseListener, VisionListener , Aggressive {
+public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener, Aggressive{
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
-	private static final float EPSILON = 2f;
+	protected static final float EPSILON = 2f;
 	private Path currentPath;
 	private Step finalStep;
 	private Step currentStep = null;
 	private PathFinder aStarPathFinder;
 	private PathFinder linearPathFinder;
-	private long shootTimer;
-	private StateMachine stateMachine;
-	private Inbox<Noise> noiseInbox;
-	private Inbox<Vector2> visualInbox;
- 	
+	private NPCStateMachine stateMachine;
+	private List<Noise> noiseInbox;
+	private List<Vector2> visualInbox;
 	
 	public NPC (Rectangle hitBox, LevelMap map){
 		super(hitBox, map);
-		noiseInbox = new Inbox<Noise>();
-		visualInbox = new Inbox<Vector2> ();
-		shootTimer = System.currentTimeMillis();
+		noiseInbox = new ArrayList<Noise>();
+		visualInbox = new ArrayList<Vector2> ();
+		stateMachine = new NPCStateMachine(this);
 	}
 	/**
 	 * Constructor alternativo usado al cargar la informacion desde un archivo
@@ -50,14 +50,14 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 	 */
 	public NPC (NPCInformation data,LevelMap map) {
 		super(data,map) ;
-		this.noiseInbox = new Inbox<Noise>() ;
+		this.noiseInbox = new ArrayList<Noise>() ;
 		this.noiseInbox.addAll(data.getNoiseList());
-		this.visualInbox = new Inbox<Vector2>() ;
+		this.visualInbox = new ArrayList<Vector2>() ;
 		this.visualInbox.addAll(data.getVisionList());
 	}
 	
 	
-	public void setStateMachine(StateMachine stateMachine){
+	public void setStateMachine(NPCStateMachine stateMachine){
 		this.stateMachine = stateMachine;
 	}
 	public void setAStarPathFinder(PathFinder pathFinder){
@@ -67,7 +67,7 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		this.linearPathFinder = pathFinder;
 	}
 	
-	/*
+	/**
 	 * Setea el camino para llegar a un punto en el mapa, si es posible.
 	 * @param position
 	 */
@@ -95,32 +95,21 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		return false;
 	}
 	
-	/*
+	/**
 	 * Actualiza el estado del NPC
 	 */
 	@Override
 	public void update() {
-		Context context = new Context(noiseInbox.get(),visualInbox.get(), isMoving, shootTimer);
-		ActionRequest actionRequest = stateMachine.updateMachine(context);
-		processActionRequest(actionRequest);
+		Context context = new Context(
+				noiseInbox,
+				visualInbox, 
+				isMoving);
+		
+		stateMachine.updateMachine(context);
 		updatePosition();
 		super.update();	
 	}
 	
-	private void processActionRequest(ActionRequest actionRequest){
-		switch(actionRequest.getRequest()){
-		case ActionRequest.REQUEST_NOTHING:
-			break;
-		case ActionRequest.REQUEST_MOVETO:
-			moveTo(actionRequest.getPosition(), actionRequest.getLinear());
-			break;
-		case ActionRequest.REQUEST_SHOOT:
-			shoot(actionRequest.getPosition());
-			break;
-		default:
-			break;
-		}
-	}
 	private void updatePosition() {
 		if (!isMoving || currentPath == null){
 			isMoving = false;
@@ -175,6 +164,15 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		noiseInbox.add(n);
 	}
 	
+	/**
+	 * los siguientes metodos abstractos van a definir el comportamiento de los npc segun
+	 * su estado "animico" (NPC es Moody).
+	 */
+	@Override
+	public void stop() {
+		isMoving = false;
+	
+	}
 	public float visualRange() {
 		return VISUAL_RANGE ;
 	}
@@ -194,7 +192,23 @@ public abstract class NPC extends Character implements NoiseListener, VisionList
 		if (this.isDead()) {
 			return null ;
 		}
+		/**
+		 * TODO arreglar esto
+		 */
 		return new NPCInformation(this.getDirection(),this.hitBox,this.getHealthPoints(),
-				this.noiseInbox.get(),this.visualInbox.get()) ;
+				this.noiseInbox,this.visualInbox) ;
+	}
+	@Override
+	public abstract void alarm(Context context);
+	@Override
+	public abstract void suspicious(Context context);
+	@Override
+	public abstract void calm(Context context);
+	
+	public void refreshNoiseInbox() {
+		noiseInbox.clear();
+	}
+	public void refreshVisualInbox() {
+		visualInbox.clear();
 	}
 }

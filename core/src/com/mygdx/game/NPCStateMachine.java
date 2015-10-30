@@ -1,43 +1,41 @@
 package com.mygdx.game;
 
-public abstract class NPCStateMachine implements StateMachine {
-	protected static final int ALARM_STATE = 0;
-	protected static final int SUSPICIOUS_STATE = 1;
-	protected static final int CALM_STATE = 2;
-	private State alarmStateMachine;
-	private State suspiciousStateMachine;
-	private State calmStateMachine;
-	private State currentState;
+public class NPCStateMachine implements StateMachine<Moody> {
 	
-	public void setAlarmState(State alarmState){
-		this.alarmStateMachine = alarmState;
+	private State<Moody> currentState;
+	private Moody owner;
+	/**
+	 * El constructor recibe como parametro el duenp de la maquina de estados.
+	 * Setea como parametro inicial CALM.
+	 * @param owner
+	 */
+	public NPCStateMachine(Moody owner) {
+		this.owner = owner;
+		this.currentState = NPCState.CALM;
 	}
-	public void setSuspiciousState(State suspiciousState){
-		this.suspiciousStateMachine = suspiciousState;
-	}
-	public void setCalmState(State calmState){
-		this.calmStateMachine = calmState;
-	}
-	
+	/**
+	 * Recibe un contexto y se lo pasa al estado actual.
+	 * @param context
+	 */
 	@Override
-	public ActionRequest updateMachine(Context context) {
-		if (currentState == null) {
-			currentState = calmStateMachine;
-		}
-		return currentState.updateState(this, context);
+	public void updateMachine(Context context) {
+		currentState.updateState(this, context);
 	}
+	/**
+	 * Cambia el estado de la maquina.
+	 * @param state
+	 */
 	@Override
-	public void changeState(int stateCode){
-		switch(stateCode){
-		case ALARM_STATE:
-			currentState = alarmStateMachine;
-			break;
-		case SUSPICIOUS_STATE:
-			currentState = suspiciousStateMachine;
-			break;
-		case CALM_STATE:
-			currentState = calmStateMachine;
-			break;
-		}
+	public void changeState(State<Moody> state){
+		currentState = state;
+	}
+	/**
+	 * Devuelve el duenio de la maquina. Lo van a pedir los estados 
+	 * para llamar a los metodos de Moody(calm suspicious y alarm)
+	 * @return
+	 */
+	@Override
+	public Moody getOwner() {
+		return owner;
 	}
 }

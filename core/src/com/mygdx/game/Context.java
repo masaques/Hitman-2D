@@ -17,16 +17,14 @@ public class Context {
 	private List<Noise> noiseList;
 	private List<Vector2> positionList;
 	private boolean isMoving;
-	private long shootTimer;
 	
-	public Context(List<Noise> noiseList, List<Vector2> positionList, boolean isMoving, long shootTimer) {
+	public Context(List<Noise> noiseList, List<Vector2> positionList, boolean isMoving) {
 		if (noiseList == null || positionList == null){
 			throw new IllegalArgumentException();
 		}
 		this.noiseList = noiseList;
 		this.positionList = positionList;
 		this.isMoving = isMoving;
-		this.shootTimer = shootTimer;
 	}
 	/**
 	 * Devuelve si el npc puede ver al jugador.
@@ -41,6 +39,9 @@ public class Context {
 		Collections.sort(noiseList);
 		Noise noise = noiseList.get(0);
 		return noise;
+	}
+	public boolean canHear() {
+		return noiseList.size() > 0;
 	}
 	/**
 	 * Agrega un sonido al contexto.
@@ -67,9 +68,5 @@ public class Context {
 		return isMoving;
 	}
 	
-	
-	public long shootTimer() {
-		return shootTimer;
-	}
 	
 }

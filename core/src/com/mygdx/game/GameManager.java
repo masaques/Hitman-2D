@@ -36,7 +36,7 @@ public class GameManager {
 	public GameManager(TiledMap tiled_map,int width,int height,int tile_width,int goons){
 		LevelMap map = new LevelMap(width,height, tile_width,tiled_map);
 		AStarPathFinder path_finder = new AStarPathFinder(map, MAX_SEARCH);
-		RandArray<Vector2> randArray = new RandArray<Vector2>();
+		RandList<Vector2> randArray = new RandList<Vector2>();
 		randArray.add(new Vector2(200, 150));
 		randArray.add(new Vector2(700,700));
 		randArray.add(new Vector2(73,792));
