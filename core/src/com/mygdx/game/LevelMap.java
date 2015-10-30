@@ -73,9 +73,11 @@ public class LevelMap {
 		}
 		return 1f;
 	}
-	/*
-	 * El metodo recorre todo el array del mapa a ver si encuentra un rectangulo
+	/**
+	 * El metodo que recorre el mapa a ver si encuentra un rectangulo
 	 * con el que el hitBox colisiona.
+	 * 
+	 * @param hitbox - Rectangulo al que se le va a chequear las colisiones
 	 */
 	public boolean isValid(Rectangle hitBox) {
 		for (int x = 0; x < widthInTiles; x++ ) {
@@ -87,8 +89,12 @@ public class LevelMap {
 		}
 		return true;
 	}
-	/*
-	 * Lo mismo que lo anterior para un segmento.
+	
+	/**
+	 * El metodo que recorre el mapa a ver si el segmento colisiona.
+	 * 
+	 * @param startPosition - Posicion inicial del vector
+	 * @param finalPosition - Posicion final del vector
 	 */
 	public boolean isValid(Vector2 startPosition, Vector2 finalPosition ) {
 		for (int x = 0; x < widthInTiles; x++ ) {

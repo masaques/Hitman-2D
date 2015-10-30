@@ -1,6 +1,11 @@
 package screens;
 
-
+/**
+ *  Screen del nivel principal donde se llevara a cabo el juego. Posee la información completa
+ *  del juego y se encarga del renderizado.
+ *  
+ *  @author jcaracciolo
+ */
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -23,7 +28,6 @@ public class LevelScreen implements Screen{
 
 	private HitmanGame game;
 	
-	Texture texture;
 	
 	private OrthographicCamera camera = new OrthographicCamera();
 	private Viewport gameport;

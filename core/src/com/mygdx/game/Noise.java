@@ -45,6 +45,7 @@ public class Noise implements Message<NoiseListener>, Comparable<Noise>{
 	}
 	@Override
 	public int compareTo(Noise other){
+		
 		if (this.getRange() > other.getRange()) {
 			return 1;
 		}
@@ -54,5 +55,6 @@ public class Noise implements Message<NoiseListener>, Comparable<Noise>{
 		else {
 			return -1;
 		}
+		
 	}
 }

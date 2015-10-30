@@ -16,13 +16,15 @@ import com.mygdx.game.Path;
 import com.mygdx.game.PathFinder;
 import com.mygdx.game.Step;
 
+import serialization.NPCInformation;
+
 /*
  * Personajes no controlados por el jugador. Debem implementar comportamientos diferentes
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
  * puntos en el mapa.
  */
-public abstract class NPC extends Character implements NoiseListener, Moody{
-	private static final float VISUAL_RANGE = 5000f ;
+public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener, Aggressive{
+	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	protected static final float EPSILON = 2f;
 	private Path currentPath;
@@ -40,6 +42,21 @@ public abstract class NPC extends Character implements NoiseListener, Moody{
 		visualInbox = new ArrayList<Vector2> ();
 		stateMachine = new NPCStateMachine(this);
 	}
+	/**
+	 * Constructor alternativo usado al cargar la informacion desde un archivo
+	 * @param data La minima informacion requerida para cargar al NPC
+	 * @param map El mapa generado por quien carga el juego
+	 * @see Character
+	 */
+	public NPC (NPCInformation data,LevelMap map) {
+		super(data,map) ;
+		this.noiseInbox = new ArrayList<Noise>() ;
+		this.noiseInbox.addAll(data.getNoiseList());
+		this.visualInbox = new ArrayList<Vector2>() ;
+		this.visualInbox.addAll(data.getVisionList());
+	}
+	
+	
 	public void setStateMachine(NPCStateMachine stateMachine){
 		this.stateMachine = stateMachine;
 	}
@@ -111,9 +128,6 @@ public abstract class NPC extends Character implements NoiseListener, Moody{
 			}
 		}
 		if (isMoving){
-			/*
-			 * Ineficiente? Probablemente, pero me soluciona la vida por ahora. (Tiene que hacer una raiz cuadrada por frame) 
-			 */
 			move(currentStep.getPosition().sub(getPosition()));
 		}
 	}
@@ -128,29 +142,21 @@ public abstract class NPC extends Character implements NoiseListener, Moody{
 	
 	public boolean canSee(Vector2 playerPosition) {
 		Vector2 goonPosition = new Vector2((float)this.hitBox.x,(float)this.hitBox.y) ;
-		Vector2 goonDirection = this.direction ;
+		Vector2 goonDirection = this.getDirection() ;
 		if (playerPosition.dst2(goonPosition)> VISUAL_RANGE){
 			return false ;
 		}
 		if (!map.isValid(goonPosition, playerPosition)) {
 			return false ;
 		}
-		float dirAngle = goonDirection.angle() ;
 		Vector2 relativeDirection = playerPosition.sub(goonPosition).nor() ;
-		float z = relativeDirection.angle();
-		if (dirAngle > 180f){
-			dirAngle = -180f + (dirAngle-180f) ;
-		}
-		if (z > 180f){
-			z = -180f + (z-180f) ;
-		}
-		if ( z>=dirAngle-VISUAL_ANGLE/2 && z <= dirAngle+VISUAL_ANGLE/2) {
+		if (Math.abs(relativeDirection.angle(goonDirection))<=VISUAL_ANGLE/2) {
 			return true ;
 		}
 		return false ;
 	}
 	
-	public void addPlayertoContext(Vector2 playerPosition) {
+	public void addPlayer(Vector2 playerPosition) {
 		visualInbox.add(playerPosition);
 	}
 	
@@ -165,6 +171,32 @@ public abstract class NPC extends Character implements NoiseListener, Moody{
 	@Override
 	public void stop() {
 		isMoving = false;
+	
+	}
+	public float visualRange() {
+		return VISUAL_RANGE ;
+	}
+	public float visualAngle() {
+		return VISUAL_ANGLE ;
+	}
+	
+	@Override
+	public void shoot(Vector2 to) {
+		Vector2 relative = to.sub(this.getPosition()).nor();
+		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative,map));
+		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
+	}
+	
+	@Override
+	public NPCInformation dump() {
+		if (this.isDead()) {
+			return null ;
+		}
+		/**
+		 * TODO arreglar esto
+		 */
+		return new NPCInformation(this.getDirection(),this.hitBox,this.getHealthPoints(),
+				this.noiseInbox,this.visualInbox) ;
 	}
 	@Override
 	public abstract void alarm(Context context);

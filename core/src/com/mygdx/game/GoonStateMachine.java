@@ -2,6 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * {@link NPCStateachine} agresiva. 
+ * 
+ */
 public class GoonStateMachine extends NPCStateMachine {
 	public GoonStateMachine(RandList<Vector2> searchPositions) {
 		super();

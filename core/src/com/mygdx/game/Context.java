@@ -1,4 +1,4 @@
-/*
+/**
  *@author Tomas Raies
  *@date   17 de oct. de 2015
  */
@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
-/*
+/**
  * Maneja el contexto sobre el cual los Behaviours de los npc deciden sus
  * acciones, incluyendo informacion como sonidos y la posicion del jugador.
  */
@@ -19,7 +19,6 @@ public class Context {
 	private boolean isMoving;
 	
 	public Context(List<Noise> noiseList, List<Vector2> positionList, boolean isMoving) {
-		
 		if (noiseList == null || positionList == null){
 			throw new IllegalArgumentException();
 		}
@@ -27,13 +26,13 @@ public class Context {
 		this.positionList = positionList;
 		this.isMoving = isMoving;
 	}
-	/*
+	/**
 	 * Devuelve si el npc puede ver al jugador.
 	 */
 	public boolean playerIsVisible() {
 		return positionList.size() > 0 && positionList.get(0) != null;
 	}
-	/*
+	/**
 	 * Devuelve el sonido mas fuerte, null si es vacio.
 	 */
 	public Noise getNoise() {
@@ -44,8 +43,10 @@ public class Context {
 	public boolean canHear() {
 		return noiseList.size() > 0;
 	}
-	/*
+	/**
 	 * Agrega un sonido al contexto.
+	 * 
+	 * @param noise - {@link Noise} a agregar
 	 */
 	public void add(Noise noise) {
 		noiseList.add(noise);
@@ -61,7 +62,11 @@ public class Context {
 		}
 		return playerPosition;
 	}
+	
+	
 	public boolean isMoving() {
 		return isMoving;
 	}
+	
+	
 }

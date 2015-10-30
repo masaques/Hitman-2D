@@ -5,8 +5,8 @@ import java.util.Collections;
 
 import com.badlogic.gdx.math.Vector2;
 
-/*
- * Pathfinder que usa el algoritmo de A*. Implementa PathFinder
+/**
+ * Pathfinder que usa el algoritmo de A*. Implementa {@link PathFinder}
  * @author traies
  */
 
@@ -16,6 +16,13 @@ public class AStarPathFinder implements PathFinder {
 	private Node[][] nodes;
 	private LevelMap map;
 	private int maxSearchDistance;
+	
+	/**
+	 * @param map - {@link LevelMap} que incluye las paredes
+	 * @param maxSearchDistance - Distancia máxima a buscar
+	 * <p></p>
+	 * @see LevelMap
+	 */
 	
 	public AStarPathFinder(LevelMap map, int maxSearchDistance){
 		this.map = map;
@@ -29,6 +36,14 @@ public class AStarPathFinder implements PathFinder {
 		
 	}
 	
+	/**
+	 * 
+	 * @param movable - Objeto a mover a través del {@link Path}
+	 * @param startPosition - Posición inicial
+	 * @param finalPosition - Posición final
+	 * 
+	 * @return {@link Path}
+	 */
 	@Override
 	public Path findPath(Movable movable, Vector2 startPosition, Vector2 finalPosition) {
 		
@@ -100,6 +115,7 @@ public class AStarPathFinder implements PathFinder {
 	    
 	    Node target = nodes[tx][ty];
 	    Vector2 stepPosition = new Vector2();
+	    
 	    while (target != nodes[sx][sy]){
 	    	stepPosition = getStepCorrection(movable,target);
 	    	path.prependStep(stepPosition);
@@ -108,9 +124,12 @@ public class AStarPathFinder implements PathFinder {
 	    return path;  
 	}
 	
-	/*
-	 * Metodo privado que sirve para corregir la posicion de los nodos. Necesita una 
-	 * referencia al objeto que se quiere mover.
+	/**
+	 *  Metodo privado que sirve para corregir la posición de los nodos. Necesita una 
+	 *  referencia al objeto que se quiere mover.
+	 *  
+	 *  @param movable - Objeto a mover
+	 *  @param node - Nodo a corregir
 	 */
 	
 	private Vector2 getStepCorrection(Movable movable, Node node) {
@@ -119,11 +138,20 @@ public class AStarPathFinder implements PathFinder {
 		float yPosition = node.getY() * tileWidth + tileWidth / 2f - movable.getHeight() / 2; 
 		return new Vector2( xPosition, yPosition );
 	}
+	
+	/**
+	 * Método que calcula la distancia entre 2 puntos.
+	 * 
+	 * 	@param x - x origen
+	 * 	@param y - y origen
+	 * 	@param xp - x destino
+	 * 	@param yp - y destino
+	*/
 	private int manhattanDistance(int x, int y, int xp, int yp){
 		return Math.abs(xp - x) + Math.abs(yp -y);
-//		return 0;
 	}
-	/*
+	
+	/**
 	 * Limpia los nodos para que no genere conflictos con la ejecucion pasada.
 	 * Conviene eliminar el metodo en una futura revision y que el algoritmo mismo
 	 * los vaya eliminando a medida que no los necesita mas, para no tener que recorrer
@@ -136,9 +164,9 @@ public class AStarPathFinder implements PathFinder {
 			}
 		}
 	}
-	/*
-	 * Clase privada. Modela los nodos posibles que representan el mapa navegable. El compareTo
-	 * funciona con el costo.
+	/**
+	 * 	Clase privada. Modela los nodos posibles que representan el mapa navegable. El compareTo
+	 * 	funciona con el costo.
 	 */
 	private class Node implements Comparable <Node>{
 		private int x;

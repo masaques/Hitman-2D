@@ -9,24 +9,48 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-/*
- * El personaje jugable. Extiende de Character.
+import serialization.CharacterInformation;
+
+/**
+ * El personaje jugable. Extiende de {@link Character}.
  */
-public class Player extends Character {
+public class Player extends Character implements VisionSender , Aggressive {
 
 	
 	public Player(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map);
 	}
-
+	/**
+	 * Constructor alternativo usado al cargar la informacion desde un archivo
+	 * @param data
+	 * @param map
+	 * @see Character
+	 */
+	public Player(CharacterInformation data,LevelMap map) {
+		super(data,map);
+	}
 	@Override
 	public void update() {
-		// TODO
+		sendPosition() ;
 		super.update();
 	}
 	
 	public void stopMoving() {
 		this.isMoving = false;
 	}
+	@Override
+	public void sendPosition() {
+		VisionManager.getInstance().dispatchMessage(new Vision(this,map));
+	}
+	/**
+	 * El parametro to aca deberia ser el input del mouse
+	 */
+	@Override
+	public void shoot(Vector2 to) {
+		Vector2 relative = to.sub(this.getPosition()).nor();
+		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative,map));
+		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
+	}
+	
 
 }

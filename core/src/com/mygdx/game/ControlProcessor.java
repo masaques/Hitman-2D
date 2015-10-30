@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * La vieja clase ControlHandler, que ahora se ocupa mas puramente 
  * de cuestiones vinculadas con el input
+ * 
  * @author traies
  * @author masaques
  *
@@ -58,6 +59,7 @@ public class ControlProcessor implements InputProcessor {
 	}
 	/**
 	 * Devuelve la posicion en la que se hizo click
+	 * 
 	 * @return null si no se hizo click
 	 */
 	public Vector2 getMouseClick(){
@@ -69,7 +71,9 @@ public class ControlProcessor implements InputProcessor {
 		return ans ;
 	}
 	
-	
+	/**
+	 * Realiza acción segun el Key que este levantado
+	 */
 	@Override
     public boolean keyUp(int keycode) {
 		if(keycode == Input.Keys.SHIFT_LEFT)
@@ -84,7 +88,10 @@ public class ControlProcessor implements InputProcessor {
             move_down = false;
         return false;
     }
-	
+
+	/**
+	 * Realiza acción segun el Key que este apretado
+	 */
 	@Override
     public boolean keyDown(int keycode) {
     	if(keycode == Input.Keys.SHIFT_LEFT)

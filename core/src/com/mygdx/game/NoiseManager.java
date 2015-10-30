@@ -2,8 +2,7 @@
 package com.mygdx.game;
 
 /**
- * WIP
- * Control system for emitted noises
+ * Clase singleton para el manejo de los sonidos
  * @author masaques
  * @author traies
  *

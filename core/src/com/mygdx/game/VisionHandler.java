@@ -6,10 +6,11 @@ import java.util.Set;
  * Maneja los metodos de vision de cada uno de los goons
  * Si algun goon ve al jugador, este agrega a su contexto la
  * posicion del mismo
+ * 
  * @author masaques
- *
+ * 
  */
-
+@Deprecated
 public class VisionHandler {
 
 	private Set<NPC> npc_set ;
@@ -22,7 +23,7 @@ public class VisionHandler {
 	public void handle() {
 		for (NPC npc : npc_set){
 			if(npc.canSee(player.getPosition())){
-				npc.addPlayertoContext(player.getPosition());
+				npc.addPlayer(player.getPosition());
 			}
 		}
 		

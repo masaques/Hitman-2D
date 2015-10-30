@@ -1,15 +1,18 @@
-/*
+/**
  *@author Tomas Raies
  *@date   17 de oct. de 2015
  */
 
 package com.mygdx.game;
 
-/*
- * TODO Interfaz para los mensajes. Por ahora es vacia, pero cuando hagamos
- * la clase BulletMessage y DialogMessage que implementen message probablemente 
- * habra que detallarla mas.
+/**
+ * Interfaz para los mensajes. Los mensages tienen la habilidad de avisar su ensaje a un listener
  */
+
 public interface Message<L extends Listener> {
-	void notify(L l);
+	/**
+	 * Avisa a un {@link Listener} sobre el mensaje.
+	 * @param listener
+	 */
+	void notify(L listener);
 }
