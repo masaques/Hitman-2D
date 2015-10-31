@@ -299,4 +299,7 @@ public abstract class Character implements Movable, BulletListener {
 	public LevelMap getMap() {
 		return map;
 	}
+	public Rectangle getHitBox() {
+		return this.hitBox;
+	}
 }

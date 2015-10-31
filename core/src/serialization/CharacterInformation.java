@@ -4,7 +4,13 @@ import java.io.Serializable;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-
+/**
+ * Clase que contiene la informacion basica necesaria de
+ * un Character
+ * @author masaques
+ * @see Character
+ * @see Player
+ */
 public class CharacterInformation implements Serializable {
 	private static final long serialVersionUID = 4224959980047912353L;
 	private Vector2 direction;

@@ -139,7 +139,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	 * @param playerPosition
 	 * @return true si el jugador es visible, false si no
 	 */
-	
+	@Deprecated
 	public boolean canSee(Vector2 playerPosition) {
 		Vector2 goonPosition  = getCenter() ;
 		Vector2 goonDirection = getLookDirection() ;
