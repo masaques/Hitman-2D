@@ -9,9 +9,9 @@ public class SearchBehaviour implements Behaviour<NPC> {
 	
 	public SearchBehaviour(Vector2 npcPosition, LevelMap map) {
 		/*
-		 * Busca posiciones validas en un radio de 4 tiles.
+		 * Busca posiciones validas en un radio de 2 tiles.
 		 */
-		searchPositions = map.findRandomValidPositions(npcPosition, 4);
+		searchPositions = map.findRandomValidPositions(npcPosition, 2);
 	}
 	
 	@Override

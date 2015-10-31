@@ -7,6 +7,7 @@ public class FollowBehaviour implements Behaviour<NPC> {
 	public void behave(NPC npc, Context context) {
 		npc.moveTo(context.getPlayerPosition(), true);
 		npc.refreshVisualInbox();
+		npc.refreshNoiseInbox();
 	}
 
 }

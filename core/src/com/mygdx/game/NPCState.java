@@ -88,7 +88,11 @@ public enum NPCState implements State<Moody> {
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
 			stateMachine.getOwner().surprised(context);
-			if (stateMachine.getStateTimer() > SURPRISE_WAIT) {
+			if (context.playerIsVisible()) {
+				stateMachine.changeState(ALARM_SURPRISE);
+				stateMachine.getOwner().setState(ALARM);
+			}
+			else if (stateMachine.getStateTimer() > SURPRISE_WAIT) {
 				stateMachine.changeState(SUSPICIOUS);
 			}
 		}

@@ -42,7 +42,7 @@ public class GameManager {
 		randArray.add(new Vector2(817,48));
 		VisionManager visionManager = VisionManager.getInstance();
 		NoiseManager  noiseManager  = NoiseManager.getInstance();
-		for(int i=0; i< goons; i++){		
+		for(int i=0; i< 1; i++){		
 			goon_view = new NPCView("assets/hitman_walk.png", 18, 13, 15);
 			goon = new Goon(new Rectangle(40,40, 18,13),map, randArray);
 			goon.setAStarPathFinder(aStarPathFinder);

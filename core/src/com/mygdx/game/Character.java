@@ -26,7 +26,7 @@ import serialization.CharacterInformation;
 public abstract class Character implements Movable, BulletListener {
 	private static int IDS = 0;
 	private int id ;
-	private static final float DIRECTIONAL_EPSILON = 0.1f;
+	private static final float DIRECTIONAL_EPSILON = .05f;
 	private static final float NORMAL_SPEED = 60f;
 	private static final float RUNNING_SPEED = 100f;
 	private Vector2 moveDirection;
@@ -198,18 +198,22 @@ public abstract class Character implements Movable, BulletListener {
 			if (moveDirection.x!= 0 && Math.abs(moveDirection.x) <  DIRECTIONAL_EPSILON) {
 				moveDirection = new Vector2(1f * Math.signum(moveDirection.y), moveDirection.y).nor();
 			}
-			currHitBox = getDirectionalHitBox(new Vector2(moveDirection.x,0).nor(), speed);
+			
+			currHitBox = getDirectionalHitBox(new Vector2(Math.signum(moveDirection.x),0), speed);
 			if (!map.isValid(currHitBox) || moveDirection.x == 0f){
 				if (moveDirection.y!= 0 && Math.abs(moveDirection.y) < DIRECTIONAL_EPSILON) {
-					moveDirection = new Vector2(moveDirection.x, 1f * Math.signum(moveDirection.y)).nor();
+					moveDirection = new Vector2(moveDirection.x, Math.signum(moveDirection.y)).nor();
 				}
-				currHitBox = getDirectionalHitBox(new Vector2(0,moveDirection.y).nor(), speed);
+				currHitBox = getDirectionalHitBox(new Vector2(0,Math.signum(moveDirection.y)), speed);
 				if (!map.isValid(currHitBox) || moveDirection.y == 0f){
+					
 				    isMoving = false;
 					return;
 				}
 			}
 		}
+		move(moveDirection);
+		System.out.println(hitBox.getPosition(new Vector2()));
 		hitBox.set(currHitBox);
 		return;
 	}
