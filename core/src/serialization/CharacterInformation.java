@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
  * @see Character
  * @see Player
  */
-public class CharacterInformation implements Serializable {
+public class CharacterInformation implements Serializable, Information {
 	private static final long serialVersionUID = 4224959980047912353L;
 	private Vector2 direction;
 	private Rectangle hitBox;

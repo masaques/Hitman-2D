@@ -12,10 +12,9 @@ public class PlayerManager {
 	private ControlProcessor control;
 	private Player player;
 	
-	public PlayerManager(Player player){
+	public PlayerManager(Player player,ControlProcessor control){
 		this.player = player ;
-		control = new ControlProcessor() ;
-		Gdx.input.setInputProcessor(control);
+		this.control = control ;
 	}
 	
 	public void manage() {

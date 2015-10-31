@@ -9,6 +9,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import serialization.NPCInformation;
+
 /**
  * Los Goon son {@link NPC} con un comportamiento agresivo. 
  */
@@ -31,7 +33,13 @@ public class Goon extends NPC {
 		shootBehaviour   = new ShootBehaviour();
 		inspectBehaviour = new InspectBehaviour();
 	}
-	
+	public Goon(NPCInformation info,LevelMap map,RandList<Vector2> searchPositions) {
+		super(info, map) ;
+		patrolBehaviour  = new PatrolBehaviour(searchPositions);
+		followBehaviour  = new FollowBehaviour();
+		shootBehaviour   = new ShootBehaviour();
+		inspectBehaviour = new InspectBehaviour();
+	}
 	@Override
 	public void alarm(Context context) {
 		searchBehaviour = null;

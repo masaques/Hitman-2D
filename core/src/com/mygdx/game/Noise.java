@@ -2,6 +2,8 @@
 
 package com.mygdx.game;
 
+import java.io.Serializable;
+
 import com.badlogic.gdx.math.Vector2;
 /**
  * WIP
@@ -14,7 +16,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 
-public class Noise implements Message<NoiseListener>, Comparable<Noise>{
+public class Noise implements Message<NoiseListener>, Comparable<Noise>, Serializable{
 	private Vector2 source ;
 	private double effectiveRange ;
 	private boolean isShot ;

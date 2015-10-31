@@ -15,7 +15,7 @@ import com.mygdx.game.Step;
  * @author masaques
  * @see NPC
  */
-public class NPCInformation extends CharacterInformation implements Serializable {
+public class NPCInformation extends CharacterInformation implements Serializable, Information {
 
 	private Path currentPath;
 	private Step finalStep;
