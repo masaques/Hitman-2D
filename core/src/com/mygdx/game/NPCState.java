@@ -1,5 +1,4 @@
 package com.mygdx.game;
-import com.badlogic.gdx.Gdx;
 
 /**
  * La idea de este enum es que represente los distintos estados de la maquina de estados,
@@ -22,7 +21,8 @@ public enum NPCState implements State<Moody> {
 				stateMachine.getOwner().alarm(context);
 			}
 			else {
-				stateMachine.changeState(SUSPICIOUS);
+				stateMachine.changeState(SUSPICIOUS_SURPRISE);
+				stateMachine.getOwner().setState(SUSPICIOUS);
 			}
 		}
 	},
@@ -34,21 +34,20 @@ public enum NPCState implements State<Moody> {
 	 * 
 	 */
 	SUSPICIOUS() {
-		private float suspiciousTimer = 0f;
+		private static final float SUSPICIOUS_TIME = 10;
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
-			suspiciousTimer += Gdx.graphics.getDeltaTime();
 			if (context.playerIsVisible()) {
 				stateMachine.changeState(ALARM);
-				suspiciousTimer = 0f;
+				stateMachine.getOwner().setState(ALARM);
 			}
-			else if (!context.canHear() && suspiciousTimer > 10000 && !context.isMoving()) {
+			else if (!context.canHear() && stateMachine.getStateTimer() > SUSPICIOUS_TIME && !context.isMoving()) {
 				stateMachine.changeState(CALM);
-				suspiciousTimer = 0f;
+				stateMachine.getOwner().setState(CALM);
 			}
 			else {
 				if (context.canHear()) {
-					suspiciousTimer = 0f;
+					stateMachine.changeState(SUSPICIOUS);
 				}
 				stateMachine.getOwner().suspicious(context);
 			}
@@ -58,14 +57,15 @@ public enum NPCState implements State<Moody> {
 	CALM() {
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
-			System.out.println("algo");
 			if (context.playerIsVisible()) {
 				stateMachine.changeState(ALARM_SURPRISE);
 				stateMachine.getOwner().stop();
+				stateMachine.getOwner().setState(ALARM);
 			}
 			else if (context.canHear()) {
 				stateMachine.changeState(SUSPICIOUS_SURPRISE);
 				stateMachine.getOwner().stop();
+				stateMachine.getOwner().setState(SUSPICIOUS);
 			}
 			else {
 				stateMachine.getOwner().calm(context);
@@ -75,25 +75,21 @@ public enum NPCState implements State<Moody> {
 	
 	ALARM_SURPRISE() {
 		private static final float SURPRISE_WAIT = 2;
-		private float surpriseTimer = 0f;
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
-			surpriseTimer += Gdx.graphics.getDeltaTime();
-			if (surpriseTimer > SURPRISE_WAIT) {
+			stateMachine.getOwner().surprised(context);
+			if (stateMachine.getStateTimer() > SURPRISE_WAIT) {
 				stateMachine.changeState(ALARM);
-				surpriseTimer = 0f;
 			}
 		}
 	},
 	SUSPICIOUS_SURPRISE() {
-		private static final float SURPRISE_WAIT = 3000;
-		private float surpriseTimer = 0f;
+		private static final float SURPRISE_WAIT = 3;
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
-			surpriseTimer += Gdx.graphics.getDeltaTime();
-			if (surpriseTimer > SURPRISE_WAIT) {
+			stateMachine.getOwner().surprised(context);
+			if (stateMachine.getStateTimer() > SURPRISE_WAIT) {
 				stateMachine.changeState(SUSPICIOUS);
-				surpriseTimer = 0f;
 			}
 		}
 	}

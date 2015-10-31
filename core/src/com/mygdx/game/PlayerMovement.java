@@ -14,14 +14,20 @@ public class PlayerMovement {
 	 */
 	private boolean running ;
 	private Vector2 direction ;
-	public PlayerMovement (Vector2 direction,boolean running) {
+	private Vector2 lookDirection;
+	
+	public PlayerMovement (Vector2 direction,boolean running, Vector2 lookDirection) {
 		this.running = running ;
 		this.direction = direction ;
+		this.lookDirection = lookDirection;
 	}
 	public boolean isRunning(){
 		return this.running;
 	}
 	public Vector2 getDirection(){
 		return this.direction;
+	}
+	public Vector2 getLookDirection(){
+		return lookDirection;
 	}
 }

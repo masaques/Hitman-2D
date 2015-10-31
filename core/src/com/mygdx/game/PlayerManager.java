@@ -11,13 +11,11 @@ import com.badlogic.gdx.math.Vector2;
 public class PlayerManager {
 	private ControlProcessor control;
 	private Player player;
-	private NoiseManager postOffice ;
 	
 	public PlayerManager(Player player){
 		this.player = player ;
 		control = new ControlProcessor() ;
 		Gdx.input.setInputProcessor(control);
-		postOffice = NoiseManager.getInstance() ;
 	}
 	
 	public void manage() {
@@ -30,10 +28,6 @@ public class PlayerManager {
 		else {
 			player.stopMoving();
 		}
-		Vector2 noisePosition = control.getMouseClick() ;
-		if (noisePosition!=null){
-			Noise message = new Noise(noisePosition,100, true);
-			postOffice.dispatchMessage(message);
-		}
+		player.look(movement.getLookDirection());
 	}
 }

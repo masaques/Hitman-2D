@@ -11,10 +11,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * Implementacion del View de los Character segun el patron MVC.
  * Dibuja en pantalla el sprite del personaje.
  */
-public class CharacterView {
-	Character character;
+public abstract class CharacterView<T extends Character> {
+	T character;
 	SpriteBatch batch;
-	Texture texture;
 	TextureRegion[] walkFrames;
 	Sprite sprite;
 	Animation walkAnimation;
@@ -28,11 +27,15 @@ public class CharacterView {
 	 * @param spriteLength - Largo de cada frame
 	 * @param animation_length - Cantidad de fotogramas en la animacion
 	 */
-	public CharacterView(String sprite_path,int sprite_width,int spriteLength, int animation_length){
+	public CharacterView(String sprite_path,
+			int sprite_width,
+			int spriteLength, 
+			int animation_length){
 		
-		batch = new SpriteBatch();
-		texture = new Texture(Gdx.files.internal(sprite_path));
-		TextureRegion[][] tmp = TextureRegion.split(texture, sprite_width, spriteLength);
+		batch   = new SpriteBatch();
+		Texture spriteTexture = new Texture(Gdx.files.internal(sprite_path));
+		
+		TextureRegion[][] tmp = TextureRegion.split(spriteTexture, sprite_width, spriteLength);
 		walkFrames = new TextureRegion[animation_length];
 		for(int i=0; i<animation_length;i++){
 			walkFrames[i] = tmp[0][i];
@@ -45,7 +48,7 @@ public class CharacterView {
 	 * que represente al controller del player segun el patron MVC.
 	 * @param character - {@link Character} a referenciar
 	 */
-	public void setPlayer(Character character){
+	public void setPlayer(T character){
 		this.character = character;
 	}
 	/**
@@ -53,11 +56,11 @@ public class CharacterView {
 	 */
 	public void draw(){
 		if (character.isMoving()){
-			update() ;
+			update();
 		}
 		currentFrame = walkAnimation.getKeyFrame(stateTime, true);
 		batch.begin();
-		float rotation = character.getDirection().angle() + 90f;
+		float rotation = character.getLookDirection().angle() + 90f;
 		batch.draw(currentFrame, character.getPosition().x, character.getPosition().y, 9f, 6.5f,18f,13f, 1f,1f, rotation);
 		batch.end();
 	}

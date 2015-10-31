@@ -52,7 +52,10 @@ public class ControlProcessor implements InputProcessor {
 	}
 	
 	public PlayerMovement getPlayerMovement() {
-		PlayerMovement ans = new PlayerMovement(new Vector2(x,y).nor(),move_run) ;
+		PlayerMovement ans = new PlayerMovement(
+				new Vector2(x,y).nor(),
+				move_run,
+				new Vector2(mouse_x, mouse_y));
 		this.x = 0f;
 		this.y = 0f;
 		return ans ;
@@ -78,13 +81,13 @@ public class ControlProcessor implements InputProcessor {
     public boolean keyUp(int keycode) {
 		if(keycode == Input.Keys.SHIFT_LEFT)
     		move_run = false;
-    	if(keycode == Input.Keys.LEFT)
+    	if(keycode == Input.Keys.A)
     		move_left = false;
-        if(keycode == Input.Keys.RIGHT)
+        if(keycode == Input.Keys.D)
         	move_right = false;
-        if(keycode == Input.Keys.UP)
+        if(keycode == Input.Keys.W)
         	move_up = false;
-        if(keycode == Input.Keys.DOWN)
+        if(keycode == Input.Keys.S)
             move_down = false;
         return false;
     }
@@ -96,13 +99,13 @@ public class ControlProcessor implements InputProcessor {
     public boolean keyDown(int keycode) {
     	if(keycode == Input.Keys.SHIFT_LEFT)
     		move_run = true;
-    	if(keycode == Input.Keys.LEFT)
+    	if(keycode == Input.Keys.A)
     		move_left = true;
-        if(keycode == Input.Keys.RIGHT)
+        if(keycode == Input.Keys.D)
         	move_right = true;
-        if(keycode == Input.Keys.UP)
+        if(keycode == Input.Keys.W)
         	move_up = true;
-        if(keycode == Input.Keys.DOWN)
+        if(keycode == Input.Keys.S)
             move_down = true;
         return false;
     }
@@ -122,8 +125,6 @@ public class ControlProcessor implements InputProcessor {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
     	mouse_click = true;
-    	mouse_x = screenX;
-    	mouse_y = 864-screenY;
         return false;
     	
     }
@@ -135,7 +136,8 @@ public class ControlProcessor implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-    	
+    	mouse_x = screenX;
+    	mouse_y = 864-screenY;
         return false;
     }
 

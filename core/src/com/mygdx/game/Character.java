@@ -26,11 +26,12 @@ import serialization.CharacterInformation;
 public abstract class Character implements Movable, BulletListener {
 	private static int IDS = 0;
 	private int id ;
-	private static final float DIRECTIONAL_EPSILON = 0.05f;
+	private static final float DIRECTIONAL_EPSILON = 0.1f;
 	private static final float NORMAL_SPEED = 60f;
 	private static final float RUNNING_SPEED = 100f;
-	private Vector2 direction;
-	private boolean running;
+	private Vector2 moveDirection;
+	private Vector2 lookDirection;
+	private boolean isRunning;
 	private float healthPoints ;
 	private boolean isDead ;
 	protected Rectangle hitBox;
@@ -40,10 +41,11 @@ public abstract class Character implements Movable, BulletListener {
 	
 	
 	public Character(Rectangle hitBox, LevelMap map){
-		this.direction = new Vector2();
+		this.moveDirection = new Vector2();
+		this.lookDirection = new Vector2();
 		this.map = map;
 		this.hitBox = hitBox;
-		this.running = false;
+		this.isRunning = false;
 		this.healthPoints = 100f ;
 		this.isDead = false ;
 		this.id= IDS ;
@@ -55,7 +57,8 @@ public abstract class Character implements Movable, BulletListener {
 	 * @param map El mapa generado por quien carga el juego
 	 */
 	public Character(CharacterInformation data,LevelMap map) {
-		this.direction= data.getDirection();
+		this.lookDirection= data.getDirection();
+		this.moveDirection= data.getDirection();
 		this.hitBox= data.getHitbox();
 		this.healthPoints=data.getHealthPoints();
 		this.map=map;
@@ -70,6 +73,12 @@ public abstract class Character implements Movable, BulletListener {
 		return isMoving;
 	}
 	/**
+	 * Devuelve si el personaje esta corriendo
+	 */
+	public boolean isRunning() {
+		return isRunning;
+	}
+	/**
 	 * Devuelve la posicion del personaje como la posicion de su hit box.
 	 * 
 	 * @see #getPosition() com.badlogic.gdx.math.Rectangle.getPosition(Vector2 position)
@@ -78,16 +87,28 @@ public abstract class Character implements Movable, BulletListener {
 	public Vector2 getPosition() {
 		return hitBox.getPosition(new Vector2());
 	}
+	public Vector2 getCenter() {
+		return hitBox.getCenter(new Vector2());
+	}
+	
 	
 	/**
 	 * Devuelve la direccion a la que se esta moviendo el personaje. En 
 	 * una revision futura, conviene separar entre lookDirection y moveDirection.
 	 */
 	@Override
-	public Vector2 getDirection() {
-		return new Vector2(direction);
+	public Vector2 getMoveDirection() {
+		return new Vector2(moveDirection);
 	}
-	
+	/**
+	 * Devuelve la direccion a la que el character esta
+	 * mirando.
+	 * @return
+	 */
+	@Override
+	public Vector2 getLookDirection() {
+		return new Vector2(lookDirection);
+	}
 	/**
 	 * Setea direction. En una revision futura deberia setear moveDirection.
 	 * Running no se modifica.
@@ -99,7 +120,7 @@ public abstract class Character implements Movable, BulletListener {
 		if (direction.isZero()){
 			return false;
 		}
-		this.direction.set(direction.nor());
+		this.moveDirection.set(direction.nor());
 		this.isMoving = true;
 		return true;
 	}
@@ -111,10 +132,13 @@ public abstract class Character implements Movable, BulletListener {
 	 */
 	public boolean move(Vector2 direction, boolean running) {
 		move(direction);
-		this.running = running;
+		this.isRunning = running;
 		return true;
 	}
-	
+	public boolean look(Vector2 position) {
+		this.lookDirection.set(position.sub(getPosition()));
+		return true;
+	}
 	/**
 	 * Devuelve el ancho del hit box.
 	 * 
@@ -156,13 +180,13 @@ public abstract class Character implements Movable, BulletListener {
 	
 	private void moveAlong(){
 		float speed;
-		if (running){
+		if (isRunning){
 			speed = RUNNING_SPEED;
 		}
 		else {
 			speed = NORMAL_SPEED;
 		}
-		Rectangle currHitBox = getDirectionalHitBox(direction, speed);
+		Rectangle currHitBox = getDirectionalHitBox(moveDirection, speed);
 		
 		if (!map.isValid(currHitBox)) {
 			/*
@@ -171,16 +195,16 @@ public abstract class Character implements Movable, BulletListener {
 			 * sobre todo en el caso de las esquinas. Mas abajo hay un if analogo para la
 			 * coorenada y.
 			 */
-			if (direction.x!= 0 && Math.abs(direction.x) <  DIRECTIONAL_EPSILON) {
-				direction = new Vector2(1f * Math.signum(direction.y), direction.y).nor();
+			if (moveDirection.x!= 0 && Math.abs(moveDirection.x) <  DIRECTIONAL_EPSILON) {
+				moveDirection = new Vector2(1f * Math.signum(moveDirection.y), moveDirection.y).nor();
 			}
-			currHitBox = getDirectionalHitBox(new Vector2(direction.x,0).nor(), speed);
-			if (!map.isValid(currHitBox) || direction.x == 0f){
-				if (direction.y!= 0 && Math.abs(direction.y) < DIRECTIONAL_EPSILON) {
-					direction = new Vector2(direction.x, 1f * Math.signum(direction.y)).nor();
+			currHitBox = getDirectionalHitBox(new Vector2(moveDirection.x,0).nor(), speed);
+			if (!map.isValid(currHitBox) || moveDirection.x == 0f){
+				if (moveDirection.y!= 0 && Math.abs(moveDirection.y) < DIRECTIONAL_EPSILON) {
+					moveDirection = new Vector2(moveDirection.x, 1f * Math.signum(moveDirection.y)).nor();
 				}
-				currHitBox = getDirectionalHitBox(new Vector2(0,direction.y).nor(), speed);
-				if (!map.isValid(currHitBox) || direction.y == 0f){
+				currHitBox = getDirectionalHitBox(new Vector2(0,moveDirection.y).nor(), speed);
+				if (!map.isValid(currHitBox) || moveDirection.y == 0f){
 				    isMoving = false;
 					return;
 				}
@@ -270,7 +294,7 @@ public abstract class Character implements Movable, BulletListener {
 		if (this.isDead()) {
 			return null;
 		}
-		return new CharacterInformation(this.getDirection(),this.hitBox,this.getHealthPoints()) ;
+		return new CharacterInformation(this.getMoveDirection(),this.hitBox,this.getHealthPoints()) ;
 	}
 	public LevelMap getMap() {
 		return map;

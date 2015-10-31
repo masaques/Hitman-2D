@@ -58,7 +58,7 @@ public class Context {
 			playerPosition = null;
 		}
 		else {
-			playerPosition = new Vector2(positionList.get(0));
+			playerPosition = new Vector2(positionList.get(positionList.size() - 1));
 		}
 		return playerPosition;
 	}

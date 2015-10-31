@@ -14,17 +14,18 @@ public class Vision implements Message<VisionListener> {
 	
 	@Override
 	public void notify(VisionListener l) {
-		Vector2 goonDirection = l.getDirection() ;
-		Vector2 goonPosition = l.getPosition() ;
-		if (source.getPosition().dst2(goonPosition)> l.visualRange()){
+		Vector2 goonDirection = l.getMoveDirection() ;
+		Vector2 goonCenter = l.getCenter() ;
+		if (l.visualRange() > 0 && source.getCenter().dst2(goonCenter)> l.visualRange()){
 			return ;
 		}
-		if (!map.isValid(goonPosition, source.getPosition())) {
+		if (!map.isValid(goonCenter, source.getCenter())) {
 			return ;
 		}
-		Vector2 relativeDirection = source.getPosition().sub(goonPosition).nor() ;
-		if (Math.abs(relativeDirection.angle(goonDirection))<=l.visualAngle()/2){
-			l.addPlayer(l.getPosition());
+		Vector2 relativeDirection = source.getCenter().sub(goonCenter).nor() ;
+		float visualAngle = l.visualAngle();
+		if (visualAngle == 0 || Math.abs(relativeDirection.angle(goonDirection))<=visualAngle/2){
+			l.addPlayer(source.getPosition());
 		}
 	}
 

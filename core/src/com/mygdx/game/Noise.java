@@ -39,7 +39,7 @@ public class Noise implements Message<NoiseListener>, Comparable<Noise>{
 	
 	@Override
 	public void notify(NoiseListener l) {
-		if (l.getPosition().dst(l.getPosition()) <= getRange()) {
+		if (l.getPosition().dst(source) <= getRange()) {
 			l.addNoise(this);
 		}
 	}

@@ -35,12 +35,14 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	private NPCStateMachine stateMachine;
 	private List<Noise> noiseInbox;
 	private List<Vector2> visualInbox;
+	private NPCState currentState;
 	
 	public NPC (Rectangle hitBox, LevelMap map){
 		super(hitBox, map);
-		noiseInbox = new ArrayList<Noise>();
-		visualInbox = new ArrayList<Vector2> ();
+		noiseInbox   = new ArrayList<Noise>();
+		visualInbox  = new ArrayList<Vector2> ();
 		stateMachine = new NPCStateMachine(this);
+		currentState = NPCState.CALM;
 	}
 	/**
 	 * Constructor alternativo usado al cargar la informacion desde un archivo
@@ -56,10 +58,6 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		this.visualInbox.addAll(data.getVisionList());
 	}
 	
-	
-	public void setStateMachine(NPCStateMachine stateMachine){
-		this.stateMachine = stateMachine;
-	}
 	public void setAStarPathFinder(PathFinder pathFinder){
 		this.aStarPathFinder = pathFinder;
 	}
@@ -89,6 +87,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 			currentPath = auxPath;
 			currentStep = currentPath.nextStep();
 			move(currentStep.getPosition().sub(getPosition()));
+			look(currentStep.getPosition());
 			isMoving = true;
 			return true;
 		}
@@ -129,6 +128,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		}
 		if (isMoving){
 			move(currentStep.getPosition().sub(getPosition()));
+			look(currentStep.getPosition());
 		}
 	}
 	
@@ -141,8 +141,8 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	 */
 	
 	public boolean canSee(Vector2 playerPosition) {
-		Vector2 goonPosition = new Vector2((float)this.hitBox.x,(float)this.hitBox.y) ;
-		Vector2 goonDirection = this.getDirection() ;
+		Vector2 goonPosition  = getCenter() ;
+		Vector2 goonDirection = getLookDirection() ;
 		if (playerPosition.dst2(goonPosition)> VISUAL_RANGE){
 			return false ;
 		}
@@ -173,11 +173,27 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		isMoving = false;
 	
 	}
+	
 	public float visualRange() {
-		return VISUAL_RANGE ;
+		float visualRange;
+		if (currentState == NPCState.ALARM){
+			visualRange =  -1f;
+		}
+		else {
+			visualRange = VISUAL_RANGE;
+		}
+		return visualRange ;
 	}
+	
 	public float visualAngle() {
-		return VISUAL_ANGLE ;
+		float visualAngle;
+		if (currentState == NPCState.ALARM) {
+			visualAngle = 0f;
+		}
+		else {
+			visualAngle = VISUAL_ANGLE;
+		}
+		return visualAngle ;
 	}
 	
 	@Override
@@ -192,10 +208,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		if (this.isDead()) {
 			return null ;
 		}
-		/**
-		 * TODO arreglar esto
-		 */
-		return new NPCInformation(this.getDirection(),this.hitBox,this.getHealthPoints(),
+		return new NPCInformation(this.getMoveDirection(),this.hitBox,this.getHealthPoints(),
 				this.noiseInbox,this.visualInbox) ;
 	}
 	@Override
@@ -205,10 +218,37 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	@Override
 	public abstract void calm(Context context);
 	
+	@Override
+	public void surprised(Context context) {
+		if (context.playerIsVisible()) {
+			moveTo(context.getPlayerPosition(), true);
+			stop();
+		}
+	}
 	public void refreshNoiseInbox() {
 		noiseInbox.clear();
 	}
 	public void refreshVisualInbox() {
 		visualInbox.clear();
+	}
+	/**
+	 * Devuelve el estado actual del npc (util para el characterView)
+	 * @return
+	 */
+	@Override
+	public NPCState getState() {
+		return currentState;
+	}
+	/**
+	 * TODO ver si esto se puede omitir
+	 * Este setter del estado sirve para ahorrarme pedirle al stateMachine el estado actual.
+	 * La state machine no conoce el tipo NPCState, y por lo tanto no podria pedirle el estado actual
+	 * manteniendo el tipo que necesito para saber diferenciar los estados (alarm, susp, calm) en el 
+	 * characterView.
+	 * @param state
+	 */
+	@Override
+	public void setState(NPCState state) {
+		currentState = state;
 	}
 }

@@ -1,9 +1,12 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+
 public class NPCStateMachine implements StateMachine<Moody> {
 	
 	private State<Moody> currentState;
 	private Moody owner;
+	private float stateTimer = 0f;
 	/**
 	 * El constructor recibe como parametro el duenp de la maquina de estados.
 	 * Setea como parametro inicial CALM.
@@ -19,6 +22,7 @@ public class NPCStateMachine implements StateMachine<Moody> {
 	 */
 	@Override
 	public void updateMachine(Context context) {
+		stateTimer += Gdx.graphics.getDeltaTime();
 		currentState.updateState(this, context);
 	}
 	/**
@@ -28,6 +32,7 @@ public class NPCStateMachine implements StateMachine<Moody> {
 	@Override
 	public void changeState(State<Moody> state){
 		currentState = state;
+		stateTimer = 0f;
 	}
 	/**
 	 * Devuelve el duenio de la maquina. Lo van a pedir los estados 
@@ -37,5 +42,13 @@ public class NPCStateMachine implements StateMachine<Moody> {
 	@Override
 	public Moody getOwner() {
 		return owner;
+	}
+	/**
+	 * Devuelve el tiempo transcurrido desde el ultimo cambio de estado.
+	 * @return
+	 */
+	@Override
+	public float getStateTimer() {
+		return stateTimer;
 	}
 }

@@ -15,7 +15,7 @@ import serialization.CharacterInformation;
  * El personaje jugable. Extiende de {@link Character}.
  */
 public class Player extends Character implements VisionSender , Aggressive {
-
+	private static final double RUNNING_NOISE_RANGE = 200;
 	
 	public Player(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map);
@@ -41,6 +41,9 @@ public class Player extends Character implements VisionSender , Aggressive {
 	@Override
 	public void sendPosition() {
 		VisionManager.getInstance().dispatchMessage(new Vision(this,map));
+		if (isMoving() && isRunning()) {
+			NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(), RUNNING_NOISE_RANGE, false));
+		}
 	}
 	/**
 	 * El parametro to aca deberia ser el input del mouse

@@ -17,7 +17,9 @@ public class PatrolBehaviour implements Behaviour<NPC> {
 	
 	@Override
 	public void behave(NPC npc, Context context) {
-		npc.moveTo(patrolPositions.get(0), false);
+		if (!npc.isMoving()) {
+			npc.moveTo(patrolPositions.get(0), false);
+		}
 	}
 
 }
