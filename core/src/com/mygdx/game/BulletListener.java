@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public interface BulletListener extends Listener {
 	public Vector2 getPosition() ;
-	public Vector2 getDirection() ;
+	public Vector2 getMoveDirection() ;
 	
 	/**
 	 * <p> Método que aplica daño al objeto</p>
