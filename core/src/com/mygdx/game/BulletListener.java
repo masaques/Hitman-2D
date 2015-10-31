@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 
@@ -11,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public interface BulletListener extends Listener {
 	public Vector2 getPosition() ;
+	public Rectangle getHitBox() ;
 	public Vector2 getMoveDirection() ;
 	
 	/**

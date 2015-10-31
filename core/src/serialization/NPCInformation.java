@@ -9,7 +9,12 @@ import com.mygdx.game.Noise;
 import com.mygdx.game.Path;
 import com.mygdx.game.Step;
 
-
+/**
+ * Clase que agrega valores a CharacterInformation,
+ * necesaria para los NPC
+ * @author masaques
+ * @see NPC
+ */
 public class NPCInformation extends CharacterInformation implements Serializable {
 
 	private Path currentPath;
@@ -27,13 +32,20 @@ public class NPCInformation extends CharacterInformation implements Serializable
 		this.noiseList= noiseList;
 		this.visionList = visionList;
 	}
-	
+	public Path getCurrentPath() {
+		return currentPath;
+	}
+	public Step getFinalStep() {
+		return finalStep;
+	}
+	public Step getCurrentStep() {
+		return currentStep;
+	}
 	public List<Noise> getNoiseList() {
-		return noiseList ;
+		return noiseList;
 	}
 	public List<Vector2> getVisionList() {
 		return visionList;
 	}
-	
 
 }
