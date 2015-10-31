@@ -190,6 +190,9 @@ public abstract class Character implements Movable, BulletListener {
 		
 		if (!map.isValid(currHitBox)) {
 			/*
+			 * TODO voy a reimplementar todo esto porque no me convence
+			 * 
+			 * 
 			 * Este if sirve para que los personajes no se queden trabados si la coordenada
 			 * x del movimiento es muy chica y hay un obstaculo que no les permite continuar,
 			 * sobre todo en el caso de las esquinas. Mas abajo hay un if analogo para la
@@ -213,7 +216,6 @@ public abstract class Character implements Movable, BulletListener {
 			}
 		}
 		move(moveDirection);
-		System.out.println(hitBox.getPosition(new Vector2()));
 		hitBox.set(currHitBox);
 		return;
 	}
