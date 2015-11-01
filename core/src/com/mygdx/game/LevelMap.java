@@ -147,4 +147,26 @@ public class LevelMap {
 		
 		return randList;
 	}
+	
+	public Rectangle avoidanceDetection(Rectangle hitBox, Vector2 ahead, Vector2 ahead2) {
+		Rectangle maxObstacle = null;
+		float maxDistance = 0f;
+		Vector2 position = hitBox.getCenter(new Vector2());
+		for (int i=0; i < getWidthInTiles(); i++) {
+			for (int j=0; j < getHeightInTiles(); j++) {
+				Rectangle obstacle = modelMap[i][j];
+				if (obstacle == null){
+					continue;
+				}
+				if (obstacle.overlaps(hitBox) || obstacle.contains(ahead) || obstacle.contains(ahead2)){
+					float distance = obstacle.getCenter(new Vector2()).dst(position);
+					if (maxDistance < distance ) {
+						maxDistance = distance;
+						maxObstacle = obstacle;
+					}
+				}
+			}
+		}
+		return maxObstacle;
+	}
 }

@@ -8,6 +8,7 @@ package com.mygdx.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Context;
@@ -26,6 +27,7 @@ import serialization.NPCInformation;
 public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener, Aggressive{
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
+	
 	protected static final float EPSILON = 2f;
 	private Path currentPath;
 	private Step finalStep;
@@ -74,7 +76,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 			return false;
 		}
 		Vector2 currPosition = new Vector2();
-		currPosition = hitBox.getPosition(currPosition);
+		currPosition = getHitBox().getCenter(currPosition);
 		PathFinder pathFinder;
 		if (linear) {
 			pathFinder = linearPathFinder;
@@ -208,7 +210,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		if (this.isDead()) {
 			return null ;
 		}
-		return new NPCInformation(this.getMoveDirection(),this.hitBox,this.getHealthPoints(),
+		return new NPCInformation(this.getMoveDirection(),getHitBox(),this.getHealthPoints(),
 				this.noiseInbox,this.visualInbox) ;
 	}
 	@Override
@@ -250,5 +252,28 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	@Override
 	public void setState(NPCState state) {
 		currentState = state;
+	}
+	
+	@Override
+	protected void moveAlong() {
+		Rectangle boundingHitBox = new Rectangle(getHitBox());
+		boundingHitBox.setWidth(boundingHitBox.width * 1.1f);
+		boundingHitBox.setHeight(boundingHitBox.height * 1.1f);
+		float maxforce = 2f;
+		Vector2 position = boundingHitBox.getCenter(new Vector2());
+		Vector2 velocity = new Vector2(getMoveDirection());
+		Vector2 ahead  = new Vector2(position)
+				.add(new Vector2(velocity).nor().scl(5f));
+		Vector2 ahead2 = new Vector2(position).add(new Vector2(velocity).nor().scl(2.5f));
+		Rectangle obstacle = map.avoidanceDetection(boundingHitBox, ahead, ahead2);
+		Vector2 avoidanceForce = new Vector2();
+		if (obstacle != null) {
+			avoidanceForce = new Vector2(ahead).sub(obstacle.getCenter(new Vector2())).nor().scl(maxforce);
+		}
+		Vector2 steering = new Vector2();
+		steering.add(avoidanceForce);
+		move(velocity.add(steering));
+		super.moveAlong();
+		return;
 	}
 }

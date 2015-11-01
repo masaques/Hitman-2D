@@ -28,13 +28,14 @@ public abstract class Character implements Movable, BulletListener {
 	private int id ;
 	private static final float DIRECTIONAL_EPSILON = .05f;
 	private static final float NORMAL_SPEED = 60f;
-	private static final float RUNNING_SPEED = 100f;
+	private static final float RUNNING_SPEED = 80f;
 	private Vector2 moveDirection;
 	private Vector2 lookDirection;
+	private Vector2 seekForce;
 	private boolean isRunning;
 	private float healthPoints ;
 	private boolean isDead ;
-	protected Rectangle hitBox;
+	private Rectangle hitBox;
 	protected LevelMap map;
 	protected boolean isMoving = false;
 	
@@ -43,6 +44,7 @@ public abstract class Character implements Movable, BulletListener {
 	public Character(Rectangle hitBox, LevelMap map){
 		this.moveDirection = new Vector2();
 		this.lookDirection = new Vector2();
+		this.seekForce 	   = new Vector2();
 		this.map = map;
 		this.hitBox = hitBox;
 		this.isRunning = false;
@@ -120,8 +122,8 @@ public abstract class Character implements Movable, BulletListener {
 		if (direction.isZero()){
 			return false;
 		}
-		this.moveDirection.set(direction.nor());
-		this.isMoving = true;
+		moveDirection.set(direction).nor();
+		isMoving = true;
 		return true;
 	}
 	/**
@@ -178,64 +180,18 @@ public abstract class Character implements Movable, BulletListener {
 	 * y a lo largo del eje x e y si la primera es imposible. 
 	 */
 	
-	private void moveAlong(){
+	protected void moveAlong() {
 		float speed;
-		if (isRunning){
+		if (isRunning()){
 			speed = RUNNING_SPEED;
 		}
 		else {
 			speed = NORMAL_SPEED;
 		}
-		Rectangle currHitBox = getDirectionalHitBox(moveDirection, speed);
-		
-		if (!map.isValid(currHitBox)) {
-			/*
-			 * TODO voy a reimplementar todo esto porque no me convence
-			 * 
-			 * 
-			 * Este if sirve para que los personajes no se queden trabados si la coordenada
-			 * x del movimiento es muy chica y hay un obstaculo que no les permite continuar,
-			 * sobre todo en el caso de las esquinas. Mas abajo hay un if analogo para la
-			 * coorenada y.
-			 */
-			if (moveDirection.x!= 0 && Math.abs(moveDirection.x) <  DIRECTIONAL_EPSILON) {
-				moveDirection = new Vector2(1f * Math.signum(moveDirection.y), moveDirection.y).nor();
-			}
-			
-			currHitBox = getDirectionalHitBox(new Vector2(Math.signum(moveDirection.x),0), speed);
-			if (!map.isValid(currHitBox) || moveDirection.x == 0f){
-				if (moveDirection.y!= 0 && Math.abs(moveDirection.y) < DIRECTIONAL_EPSILON) {
-					moveDirection = new Vector2(moveDirection.x, Math.signum(moveDirection.y)).nor();
-				}
-				currHitBox = getDirectionalHitBox(new Vector2(0,Math.signum(moveDirection.y)), speed);
-				if (!map.isValid(currHitBox) || moveDirection.y == 0f){
-					
-				    isMoving = false;
-					return;
-				}
-			}
-		}
-		move(moveDirection);
-		hitBox.set(currHitBox);
+		Vector2 position = hitBox.getCenter(new Vector2());
+		Vector2 velocity = moveDirection.nor().scl(speed);
+		hitBox.setCenter(position.add(velocity.scl(Gdx.graphics.getDeltaTime())));
 		return;
-	}
-	
-	/**
-	 * Metodo privado que calcula un Rectangle segun una direccion determinada, una 
-	 * posicion inicial y una velocidad. Usado por el metodo moveAlong.
-	 * 
-	 * @param direction - Direción del rectangulo
-	 * @param speed - velocidad del objeto
-	 */
-	
-	private Rectangle getDirectionalHitBox(Vector2 direction, float speed) {
-		Vector2 position = this.hitBox.getPosition(new Vector2());
-		Vector2 velocity = new Vector2(direction).scl(speed);
-		Vector2 movement = velocity.scl(Gdx.graphics.getDeltaTime());
-		position.add(movement);
-		Rectangle currHitBox = new Rectangle(hitBox);
-		currHitBox.setPosition(position); 
-		return currHitBox;
 	}
 	
 	public float getHealthPoints() {
