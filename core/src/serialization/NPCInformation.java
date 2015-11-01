@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Noise;
-import com.mygdx.game.Path;
-import com.mygdx.game.Step;
+import com.mygdx.game.model.character.Path;
+import com.mygdx.game.model.character.Step;
+import com.mygdx.game.model.message.Noise;
 
 /**
  * Clase que agrega valores a CharacterInformation,

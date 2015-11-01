@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.model.character.NPC;
+import com.mygdx.game.model.character.NPCState;
 
 public class NPCView extends CharacterView<NPC> {
 	Texture exclamation;

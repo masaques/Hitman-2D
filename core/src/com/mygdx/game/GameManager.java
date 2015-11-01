@@ -11,6 +11,14 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.model.character.AStarPathFinder;
+import com.mygdx.game.model.character.Goon;
+import com.mygdx.game.model.character.LinearPathFinder;
+import com.mygdx.game.model.character.NPC;
+import com.mygdx.game.model.character.Player;
+import com.mygdx.game.model.message.NoiseManager;
+import com.mygdx.game.model.message.VisionManager;
+import com.mygdx.game.model.util.RandList;
 
 import serialization.Dumpeable;
 import serialization.GameInformation;

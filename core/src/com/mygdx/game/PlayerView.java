@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.mygdx.game.model.character.Player;
+
 public class PlayerView extends CharacterView<Player> {
 
 	public PlayerView(String sprite_path, int sprite_width, int spriteLength, int animation_length) {
