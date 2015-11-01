@@ -35,6 +35,7 @@ public class ControlProcessor implements InputProcessor {
 	private int mouse_x;
 	private int mouse_y;
 	private boolean mouse_click;
+	private boolean request_save ;
 	
 	public void update(){
 		if (move_left)
@@ -107,8 +108,15 @@ public class ControlProcessor implements InputProcessor {
         	move_up = true;
         if(keycode == Input.Keys.S)
             move_down = true;
+        if (keycode == Input.Keys.O)
+        	request_save = true ;
         return false;
     }
+	public boolean requestSave() {
+		boolean tmp = request_save ;
+		request_save = false ;
+		return tmp ;
+	}
 	
     @Override
     public boolean keyTyped(char character) {

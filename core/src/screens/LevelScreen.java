@@ -1,5 +1,7 @@
 package screens;
 
+import java.io.IOException;
+
 /**
  *  Screen del nivel principal donde se llevara a cabo el juego. Posee la información completa
  *  del juego y se encarga del renderizado.
@@ -24,6 +26,8 @@ import com.mygdx.game.ControlProcessor;
 import com.mygdx.game.GameManager;
 import com.mygdx.game.HitmanGame;
 
+import serialization.GameSerializer;
+
 public class LevelScreen implements Screen{
 
 	private HitmanGame game;
@@ -40,22 +44,23 @@ public class LevelScreen implements Screen{
 	
 	FPSLogger fps_logger =new FPSLogger();
 	
-	GameManager game_handler;
+	GameManager gameManager;
 	 
 	public LevelScreen(HitmanGame game){
 		this.game = game;
-			gameport = new FitViewport(864, 864,camera);
-		
-		map= new TmxMapLoader().load("assets/test5.tmx");
-		renderer = new OrthogonalTiledMapRenderer(map);
-		
-		game_handler = new GameManager(map,864,864,32,20);
-		
-		
-		
+		gameport = new FitViewport(864, 864,camera);
+		gameManager = new GameManager(864,864,32,20);
+//		try {
+//			gameManager = GameSerializer.create("prueba") ;
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
 		camera.position.set(gameport.getWorldWidth()/2,gameport.getWorldHeight()/2,0);
-	
-		
 	}
 	
 	public void update(float dt){
@@ -75,14 +80,14 @@ public class LevelScreen implements Screen{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		game_handler.updateModel();
+		gameManager.updateModel();
 		game.batch.setProjectionMatrix(camera.combined);
 	
 		camera.update();
         renderer.setView(camera);
         renderer.render();
-        game_handler.updateModel();
-        game_handler.updateView();
+        gameManager.updateModel();
+        gameManager.updateView();
 		
 		
 	}

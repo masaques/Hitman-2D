@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import serialization.CharacterInformation;
+import serialization.Dumpeable;
 
 /**
  * <p>Clase abstracta para todos los personajes del juego, incluyendo el jugador 
@@ -23,7 +24,7 @@ import serialization.CharacterInformation;
  */
 
 
-public abstract class Character implements Movable, BulletListener {
+public abstract class Character implements Movable, BulletListener,Dumpeable {
 	private static int IDS = 0;
 	private int id ;
 	private static final float DIRECTIONAL_EPSILON = .05f;

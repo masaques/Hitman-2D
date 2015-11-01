@@ -58,6 +58,8 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		this.noiseInbox.addAll(data.getNoiseList());
 		this.visualInbox = new ArrayList<Vector2>() ;
 		this.visualInbox.addAll(data.getVisionList());
+		stateMachine = new NPCStateMachine(this);
+		currentState = NPCState.CALM;
 	}
 	
 	public void setAStarPathFinder(PathFinder pathFinder){
