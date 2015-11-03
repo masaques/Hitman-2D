@@ -1,6 +1,7 @@
 package serialization;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
@@ -27,9 +28,9 @@ public class NPCInformation extends CharacterInformation implements Serializable
 	
 	
 	public NPCInformation(Vector2 direction, Rectangle hitBox, float hp, 
-						  List<Noise> noiseList, List<Vector2> visionList) {
+						  List<Noise> noiseInbox, List<Vector2> visionList) {
 		super(direction, hitBox, hp);
-		this.noiseList= noiseList;
+		this.noiseList= noiseInbox;
 		this.visionList = visionList;
 	}
 	public Path getCurrentPath() {

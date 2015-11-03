@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.character.Character;
 
 /**
@@ -13,13 +14,24 @@ import com.mygdx.game.model.character.Character;
  * Dibuja en pantalla el sprite del personaje.
  */
 public abstract class CharacterView<T extends Character> {
-	T character;
-	SpriteBatch batch;
+
+	
+	private Vector2 lookDirection;
+	private Vector2 position;
+	private float healthPoints;
+	private boolean isRunning;
+	
+	
+	
+	public SpriteBatch batch;
 	TextureRegion[] walkFrames;
 	Sprite sprite;
 	Animation walkAnimation;
 	TextureRegion currentFrame;
 	float stateTime;
+	
+	int sprite_width;
+	int spriteLength;
 	
 	/**
 	 * 
@@ -43,26 +55,23 @@ public abstract class CharacterView<T extends Character> {
 		}
 		walkAnimation = new Animation(0.025f,walkFrames);
 		stateTime = 0f;
+		
+		this.sprite_width = sprite_width;
+		this.spriteLength = spriteLength;
 	}
-	/**
-	 * Setea una referencia al personaje. En una revision futura, deberia setear a un CharacterController,
-	 * que represente al controller del player segun el patron MVC.
-	 * @param character - {@link Character} a referenciar
-	 */
-	public void setPlayer(T character){
-		this.character = character;
-	}
+	
+
 	/**
 	 * Dibuja el sprite en pantalla.
 	 */
 	public void draw(){
-		if (character.isMoving()){
-			update();
-		}
+		
+		update();
+		
 		currentFrame = walkAnimation.getKeyFrame(stateTime, true);
 		batch.begin();
-		float rotation = character.getLookDirection().angle() + 90f;
-		batch.draw(currentFrame, character.getPosition().x, character.getPosition().y, 9f, 6.5f,18f,13f, 1f,1f, rotation);
+		float rotation = lookDirection.angle() + 90f;
+		batch.draw(currentFrame, position.x, position.y, 9f, 6.5f,18f,13f, 1f,1f, rotation);
 		batch.end();
 	}
 	/**
@@ -71,4 +80,39 @@ public abstract class CharacterView<T extends Character> {
 	public void update(){
 		 stateTime += Gdx.graphics.getDeltaTime();
 	}
+	
+	public void updateInfo(Vector2 position, Vector2 lookDirection,float hp,boolean isRunning) {
+		this.position = position;
+		this.lookDirection = lookDirection;
+		this.healthPoints= hp;
+		this.isRunning = isRunning;	
+	}
+	
+
+	public Vector2 getLookDirection() {
+		return lookDirection;
+	}
+	
+	public Vector2 getPosition() {
+		return position;
+	}
+	
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	public float getHealthPoints() {
+		return healthPoints ;
+	}
+
+
+	public float getWidth() {
+		return sprite_width;
+	}
+
+
+	public float getHeight() {
+		return sprite.getHeight();
+	}
+	
 }

@@ -2,12 +2,15 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.character.NPC;
 import com.mygdx.game.model.character.NPCState;
 
 public class NPCView extends CharacterView<NPC> {
 	Texture exclamation;
 	Texture interrogation;
+	
+	private NPCState currentState;
 	
 	public NPCView(String sprite_path, int sprite_width, int spriteLength, int animation_length) {
 		super(sprite_path, sprite_width, spriteLength, animation_length);
@@ -18,15 +21,22 @@ public class NPCView extends CharacterView<NPC> {
 	@Override
 	public void draw(){
 		super.draw();
-		float balloonPositionX = character.getPosition().x + character.getWidth() / 2 - 5f;
-		float balloonPositionY = character.getPosition().y + character.getHeight();
+		float balloonPositionX = getPosition().x + getWidth() / 2 - 5f;
+		float balloonPositionY = getPosition().y + getHeight();
 		batch.begin();
-		if (character.getState() == NPCState.ALARM) {
+		if (currentState == NPCState.ALARM) {
 			batch.draw(exclamation, balloonPositionX, balloonPositionY );
 		}
-		else if (character.getState() == NPCState.SUSPICIOUS) {
+		else if (currentState == NPCState.SUSPICIOUS) {
 			batch.draw(interrogation, balloonPositionX, balloonPositionY );
 		}
 		batch.end();
 	}
+	
+	public void updateState(NPCState npcState){
+		currentState = npcState;
+	}
+	
+	
+	
 }
