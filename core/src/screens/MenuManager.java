@@ -2,11 +2,9 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
 
 public class MenuManager {
-
+	
 	/*
 	 * Esta clase es la que se encarga de controlar lo que el usuario
 	 * elegirá cuando inicie el Juego.
@@ -25,7 +23,7 @@ public class MenuManager {
 	private String playerName = "";
 	//Iniciamos la pantalla en Fullscreen!!!
 	private MenuChoose screenResolutionState = MenuChoose.FullScreen;
-	private final int MAXPLAYERNAME = 10;
+	//private final int MAXPLAYERNAME = 10;
 	private MenuChoose choose = MenuChoose.Main; //te dice donde estas parado o a donde tenes que ir, en su defecto
 	
 	public MenuManager(){
@@ -42,6 +40,10 @@ public class MenuManager {
 	public void reset(){
 		choose = MenuChoose.Main;
 		playerName = "";
+	}
+		
+	public MenuChoose getChoose() {
+		return choose;
 	}
 	
 	public void goBack(){
@@ -159,4 +161,5 @@ public class MenuManager {
 		}
 	}
 	
+
 }
