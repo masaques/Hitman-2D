@@ -3,6 +3,7 @@
 package com.mygdx.game.model.message;
 
 import java.io.Serializable;
+import com.mygdx.game.model.message.NoiseListener;
 
 import com.badlogic.gdx.math.Vector2;
 /**
