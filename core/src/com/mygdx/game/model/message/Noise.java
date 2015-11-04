@@ -42,6 +42,10 @@ public class Noise implements Message<NoiseListener>, Comparable<Noise>, Seriali
 	
 	@Override
 	public void notify(NoiseListener l) {
+		if (this.isShot) {
+			l.addNoise(this);
+			return ;
+		}
 		if (l.getPosition().dst(source) <= getRange()) {
 			l.addNoise(this);
 		}
