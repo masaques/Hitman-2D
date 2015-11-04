@@ -21,11 +21,12 @@ public class Noise implements Message<NoiseListener>, Comparable<Noise>, Seriali
 	private Vector2 source ;
 	private double effectiveRange ;
 	private boolean isShot ;
+	private NoiseType type ;
 	
-	public Noise(Vector2 source,double effectiveRange, boolean isShot) {
+	public Noise(Vector2 source,double effectiveRange, NoiseType type) {
 		this.source=source ;
 		this.effectiveRange = effectiveRange ;
-		this.isShot= isShot ;
+		this.type = type ;
 	}
 	
 	public Vector2 getPosition(){
@@ -36,8 +37,8 @@ public class Noise implements Message<NoiseListener>, Comparable<Noise>, Seriali
 		return this.effectiveRange;
 	}
 	
-	public boolean isShot() {
-		return isShot ;
+	public NoiseType getType() {
+		return type ;
 	}
 	
 	@Override

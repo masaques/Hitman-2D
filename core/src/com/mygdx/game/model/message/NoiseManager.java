@@ -1,6 +1,8 @@
 
 package com.mygdx.game.model.message;
 
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+
 /**
  * Clase singleton para el manejo de los sonidos
  * @author masaques

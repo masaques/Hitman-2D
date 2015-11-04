@@ -17,6 +17,7 @@ import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseListener;
 import com.mygdx.game.model.message.NoiseManager;
+import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.model.message.VisionListener;
 import com.mygdx.game.model.message.VisionManager;
 
@@ -207,7 +208,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	public void shoot(Vector2 to) {
 		Vector2 relative = to.sub(this.getPosition()).nor();
 		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative));
-		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
+		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,NoiseType.SHOOT));
 	}
 	
 	@Override

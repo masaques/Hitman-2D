@@ -62,7 +62,7 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 	 * 
 	 * 	@see Message
 	 */
-	public void update(){
+	public List<M> update(){
 	
 		for (M h: messageList) {
 			Set<L> recievers = filter(h,new HashSet<L>(listeners));
@@ -70,8 +70,9 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 				h.notify(l);
 			}
 		}
+		List<M> aux = new ArrayList<M>(messageList) ;
 		messageList.clear();
-		
+		return aux ;
 	}
 	
 	/**

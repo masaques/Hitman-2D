@@ -13,6 +13,7 @@ import com.mygdx.game.model.message.Bullet;
 import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseManager;
+import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.model.message.Vision;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.message.VisionSender;
@@ -54,7 +55,7 @@ public class Player extends Character implements VisionSender {
 	public void sendPosition() {
 		VisionManager.getInstance().dispatchMessage(new Vision(this,map));
 		if (isMoving() && isRunning()) {
-			NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(), RUNNING_NOISE_RANGE, false));
+			NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(), RUNNING_NOISE_RANGE, NoiseType.RUN));
 		}
 	}
 	/**
@@ -63,7 +64,7 @@ public class Player extends Character implements VisionSender {
 	
 	public void shoot() {
 		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getCenter(),getLookDirection()));
-		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
+		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,NoiseType.SHOOT));
 	}
 	@Override
 	protected void moveAlong(){
