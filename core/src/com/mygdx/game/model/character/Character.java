@@ -42,7 +42,7 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 	private Rectangle hitBox;
 	protected LevelMap map;
 	protected boolean isMoving = false;
-	
+	private boolean isHurt = false;
 	
 	
 	public Character(Rectangle hitBox, LevelMap map){
@@ -83,6 +83,18 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 	 */
 	public boolean isRunning() {
 		return isRunning;
+	}
+	/*
+	 * Devuelve si el personaje esta herido.
+	 */
+	public boolean isHurt() {
+		return isHurt;
+	}
+	/*
+	 * Setea si el personaje esta herido.
+	 */
+	public void setHurt(boolean isHurt) {
+		this.isHurt = isHurt;
 	}
 	/**
 	 * Devuelve la posicion del personaje como la posicion de su hit box.
@@ -142,7 +154,7 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 		return true;
 	}
 	public boolean look(Vector2 position) {
-		this.lookDirection.set(position.sub(getPosition()));
+		this.lookDirection.set(position.sub(getCenter()));
 		return true;
 	}
 	/**
@@ -170,6 +182,7 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 	 */
 	@Override
 	public void update(){
+		
 		if (isMoving) {
 			moveAlong();
 		}
@@ -218,6 +231,7 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 		if (dmg >= this.getHealthPoints()) {
 			this.isDead = true ;
 		}
+		setHurt(true);
 		this.setHealthPoints(dmg);
 	}
 	
@@ -268,4 +282,6 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 	public Rectangle getHitBox() {
 		return this.hitBox;
 	}
+	
+	public abstract void die();
 }

@@ -16,6 +16,7 @@ import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
 import com.mygdx.game.model.character.NPC;
 import com.mygdx.game.model.character.Player;
+import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
@@ -45,10 +46,12 @@ public class GameManager implements Dumpeable {
 	private PlayerManager player_manager ;
 	private Set<NPC> goon_set = new HashSet<NPC>();
 	private Set<CharacterView<NPC>> goon_view_set = new HashSet<CharacterView<NPC>>();
-	private CharacterView<Player> player_view;
+	
 	private TiledMap tiled_map ;
 	private ControlProcessor control ;
 	private String mapPath = "assets/test5.tmx";
+	private BulletController bulletController = new BulletController();
+	private List<NPCController> npcController = new ArrayList<NPCController>();
 	
 	public GameManager(int width,int height,int tile_width,int goons){
 		control = new ControlProcessor() ;
@@ -62,24 +65,29 @@ public class GameManager implements Dumpeable {
 		randArray.add(new Vector2(700,700));
 		randArray.add(new Vector2(73,792));
 		randArray.add(new Vector2(817,48));
-		VisionManager visionManager = VisionManager.getInstance();
-		NoiseManager  noiseManager  = NoiseManager.getInstance();
+		
 		for(int i=0; i< goons; i++){		
-			NPCView goon_view = new NPCView("assets/hitman_walk.png", 18, 13, 15);
+			NPCView goon_view = new NPCView("assets/hitman_walk.png",
+					"assets/goon_sprite_hurt.png",
+					"assets/goon_sprite_dead.png",
+					18, 13, 15);
+			
 			goon = new Goon(new Rectangle(40,40, 18,13),map, randArray);
 			goon.setAStarPathFinder(aStarPathFinder);
 			goon.setLinearPathFinder(linearPathFinder);
-			visionManager.addListener(goon);
-			noiseManager.addListener(goon);
-			goon_view.setPlayer(goon);
-			goon_view_set.add(goon_view);
-			goon_set.add(goon);
+			NPCController controller = new NPCController(goon, goon_view);
+			npcController.add(controller);
 		}
-		player_view = new PlayerView("assets/hitman_walk.png", 18, 13, 15);
+		
+		PlayerView player_view = new PlayerView("assets/hitman_walk.png",
+				"assets/goon_sprite_hurt.png",
+				"assets/goon_sprite_dead.png",
+				 18, 13, 15);
 		player = new Player(new Rectangle(50,50,18,13),map);
-		player_manager = new PlayerManager(player,control) ;
-		player_view.setPlayer(player) ;
+		player_manager = new PlayerManager(player,control, player_view) ;
+		
 		linearPathFinder = new LinearPathFinder(map);
+		BulletManager.getInstance().setMap(map);
 	}
 	
 	public GameManager (GameInformation g) {
@@ -97,21 +105,26 @@ public class GameManager implements Dumpeable {
 		VisionManager visionManager = VisionManager.getInstance();
 		NoiseManager  noiseManager  = NoiseManager.getInstance();
 		for (NPCInformation info : g.getGoonInfo()) {
-			NPCView goon_view = new NPCView("assets/hitman_walk.png", 18, 13, 15);
+			NPCView goon_view = new NPCView("assets/hitman_walk.png",
+					"assets/goon_sprite_hurt.png",
+					"assets/goon_sprite_dead.png",
+					18, 13, 15);
 			goon = new Goon(info,map,randArray) ;
 			goon.setAStarPathFinder(aStarPathFinder);
 			goon.setLinearPathFinder(linearPathFinder);
 			visionManager.addListener(goon);
 			noiseManager.addListener(goon);
-			goon_view.setPlayer(goon);
-			goon_view_set.add(goon_view);
-			goon_set.add(goon);
+		
 		}
-		player_view = new PlayerView("assets/hitman_walk.png", 18, 13, 15);
+		PlayerView player_view = new PlayerView("assets/hitman_walk.png",
+				"assets/goon_sprite_hurt.png",
+				"assets/goon_sprite_dead.png",
+				 18, 13, 15);
 		player = new Player(g.getPlayerInfo(),map);
-		player_manager = new PlayerManager(player,control) ;
-		player_view.setPlayer(player) ;
+		player_manager = new PlayerManager(player,control, player_view) ;
+		
 		linearPathFinder = new LinearPathFinder(map);
+		BulletManager.getInstance().setMap(map);
 	}
 	
 	public TiledMap getTiledMap() {
@@ -120,7 +133,7 @@ public class GameManager implements Dumpeable {
 	
 	
 	
-	public void updateModel(){
+	public void update(){
 		if(control.requestSave()) {
 			try {
 				GameSerializer.save(this,"prueba");
@@ -128,21 +141,16 @@ public class GameManager implements Dumpeable {
 				e.printStackTrace();
 			}
 		}
-		player_manager.manage();
 		player.update();
 		VisionManager.getInstance().update();
 		NoiseManager.getInstance().update();
-		for (NPC g : goon_set){
-			g.update();
+		bulletController.manage();
+		for (NPCController g : npcController){
+			g.control();
 		}
+		player_manager.control();
 	}
 	
-	public void updateView() {
-		player_view.draw();
-        for (CharacterView<NPC> gm:goon_view_set){
-        	gm.draw();
-		}
-	}
 	@Override
 	public GameInformation dump() {
 		List<NPCInformation> goonInfo = new ArrayList<NPCInformation>();

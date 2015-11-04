@@ -2,7 +2,6 @@ package com.mygdx.game.model.message;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.model.character.behaviour.BulletManager;
 
 
 /**

@@ -64,25 +64,13 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 	 */
 	public void update(){
 	
-		/*
-		 * Genera una lista auxiliar que es la que se recorrerá luego de limpiar la primera.
-		 * De esta manera, los mensajes nuevos agregados entrarán en la siguiente iteración
-		 * evitando loops.
-		 */
-		
-		List<M> handleList = new ArrayList<M>();
-		for (M m : messageList) {
-			handleList.add(m);
-		}
-		
-		messageList.removeAll(handleList);
-	
-		for (M h: handleList) {
+		for (M h: messageList) {
 			Set<L> recievers = filter(h,new HashSet<L>(listeners));
 			for (L l: recievers) {
 				h.notify(l);
 			}
 		}
+		messageList.clear();
 		
 	}
 	
@@ -92,7 +80,7 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 	 * @param message Mensaje por el cual se filtra
 	 * @param listenersSet Set de Listener a filtrar
 	 */
-	private Set<L> filter(M message, Set<L> listenersSet) {
+	protected Set<L> filter(M message, Set<L> listenersSet) {
 		return listenersSet;
 	}
 }

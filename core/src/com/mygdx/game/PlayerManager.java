@@ -9,25 +9,40 @@ import com.mygdx.game.model.character.Player;
  * @author masaques
  *
  */
-public class PlayerManager {
+public class PlayerManager extends CharacterController<Player, PlayerView> {
 	private ControlProcessor control;
-	private Player player;
 	
-	public PlayerManager(Player player,ControlProcessor control){
-		this.player = player ;
+	public PlayerManager(Player player,ControlProcessor control, PlayerView playerView){
+		super(player, playerView);
 		this.control = control ;
 	}
 	
-	public void manage() {
-		control.update();
-		PlayerMovement movement ;
-		movement = control.getPlayerMovement();
-		if (movement.getDirection().x != 0 || movement.getDirection().y != 0) {
-			player.move(movement.getDirection().nor(),movement.isRunning()) ;
+	public void control() {
+		updateModel();
+		updateView();
+	}
+	
+	public void updateView() {
+		super.updateView();
+	}
+	public void updateModel() {
+		if (!isDead()){
+			control.update();
+			PlayerMovement movement ;
+			movement = control.getPlayerMovement();
+			if (movement.getDirection().x != 0 || movement.getDirection().y != 0) {
+				getModel().move(movement.getDirection().nor(),movement.isRunning()) ;
+			}
+			else {
+				getModel().stopMoving();
+			}
+			
+			getModel().look(movement.getLookDirection());
+			
+			if (movement.isShooting()) {
+				getModel().shoot();
+			}
 		}
-		else {
-			player.stopMoving();
-		}
-		player.look(movement.getLookDirection());
+		super.updateModel();
 	}
 }

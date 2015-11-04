@@ -22,6 +22,7 @@ public enum NPCState implements State<Moody> {
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
 			if (context.playerIsVisible() || context.isMoving()){
 				stateMachine.getOwner().alarm(context);
+				
 			}
 			else {
 				stateMachine.changeState(SUSPICIOUS_SURPRISE);

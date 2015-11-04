@@ -3,9 +3,7 @@ package com.mygdx.game.model.message;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.LevelMap;
 import com.mygdx.game.model.character.Character;
-import com.mygdx.game.model.character.behaviour.BulletManager;
 
 /**
  * Clase que simula un disparo 
@@ -23,11 +21,7 @@ public class Bullet implements Message<BulletListener> {
 	private Character source ;
 	private Vector2 position ;
 	private Vector2 direction ;
-	/*
-	 * 
-	 * por ahora soluciona el problema
-	 */
-	private LevelMap map ;
+
 	/*
 	 * Quizas esto podria ser una variable,
 	 * diferentes rangos representan diferentes armas.
@@ -47,11 +41,10 @@ public class Bullet implements Message<BulletListener> {
 	 * @param direction - Dirección de trayectoria
 	 * @param map - Mapa del juego
 	 */
-	public Bullet(Character source, Vector2 position, Vector2 direction,LevelMap map){
+	public Bullet(Character source, Vector2 position, Vector2 direction){
 		this.source = source ;
 		this.position = position ;
 		this.direction = direction ;
-		this.map = map ;
 	}
 	
 	public Character getShooter(){
@@ -79,13 +72,8 @@ public class Bullet implements Message<BulletListener> {
 	 */
 	@Override
 	public void notify(BulletListener l) {
-		if (l.getPosition().dst(this.getPosition())<=this.getRange()) {
-			if(map.isValid(this.getPosition(), l.getPosition())){
-				if (this.intersects(l.getHitBox())) {
-					l.dealDamage(this.getDamage());
-				}
-			}
-		}
+		l.dealDamage(getDamage());
+		
 	}
 	/**
 	 * Metodo privado que verifica en cada uno de los segmentos del
@@ -94,20 +82,33 @@ public class Bullet implements Message<BulletListener> {
 	 * @param hitBox
 	 * @return true si lo intersecta, false si no
 	 */
-	private boolean intersects(Rectangle hitBox) {
-		Vector2 startPoint = new Vector2(hitBox.x,hitBox.y) ;
+	public Vector2 intersects(Rectangle hitBox) {
+		Vector2 p1 = new Vector2(hitBox.x,hitBox.y) ;
+		Vector2 p2 = new Vector2(hitBox.x + hitBox.width, hitBox.y);
+		Vector2 p3 = new Vector2(hitBox.x + hitBox.width, hitBox.y + hitBox.height);
+		Vector2 p4 = new Vector2(hitBox.x, hitBox.y + hitBox.height);
 		Segment[] segments = new Segment[4] ;
-		segments[0] = new Segment(startPoint,new Vector2(startPoint.x+hitBox.width,startPoint.y)) ;
-		segments[1] = new Segment(startPoint,new Vector2(startPoint.x,startPoint.y+hitBox.width)) ;
-		segments[2] = new Segment(segments[0].q,new Vector2(segments[0].q.x,segments[0].q.y+hitBox.height)) ;
-		segments[3] = new Segment(segments[1].q,new Vector2(segments[1].q.x,segments[1].q.y+hitBox.width)) ;
+		segments[0] = new Segment(p1,p2) ;
+		segments[1] = new Segment(p2,p3) ;
+		segments[2] = new Segment(p3,p4) ;
+		segments[3] = new Segment(p4,p1) ;
+		
+		
+		Vector2 nearestCollision = new Vector2();
+		float minDistance = RANGE;
+		Vector2 pos2 = new Vector2(this.position).add(new Vector2(this.direction).scl(RANGE));
+		Vector2 pos1 = new Vector2(this.position);
 		for (Segment s : segments) {
-			if(Intersector.intersectSegments(s.p, s.q,this.position,
-					new Vector2(this.position).add(new Vector2(this.direction).scl(RANGE)), new Vector2())) {
-				return true ;
+			Vector2 collision = new Vector2();
+			if(Intersector.intersectSegments(s.p, s.q,pos1,pos2, collision)) {
+				float distance = position.dst(collision);
+				if (distance < minDistance) {
+					nearestCollision = collision;
+					minDistance = distance;
+				}
 			}
 		}
-		return false ;
+		return nearestCollision;
 		
 	}
 	
@@ -116,8 +117,8 @@ public class Bullet implements Message<BulletListener> {
 		protected Vector2 q ;
 		
 		protected Segment(Vector2 p, Vector2 q)  {
-			this.p = q  ;
-			this.p = q ;
+			this.p = new Vector2(p)  ;
+			this.q = new Vector2(q) ;
 		}
 	}
 }

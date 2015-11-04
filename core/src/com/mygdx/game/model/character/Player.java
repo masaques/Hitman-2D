@@ -9,8 +9,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.LevelMap;
-import com.mygdx.game.model.character.behaviour.BulletManager;
 import com.mygdx.game.model.message.Bullet;
+import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.Vision;
@@ -22,13 +22,14 @@ import serialization.CharacterInformation;
 /**
  * El personaje jugable. Extiende de {@link Character}.
  */
-public class Player extends Character implements VisionSender , Aggressive {
+public class Player extends Character implements VisionSender {
 	private static final double RUNNING_NOISE_RANGE = 200;
 	private static final float NORMAL_SPEED = 60f;
 	private static final float RUNNING_SPEED = 100f;
 	
 	public Player(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map);
+		BulletManager.getInstance().addListener(this);
 	}
 	/**
 	 * Constructor alternativo usado al cargar la informacion desde un archivo
@@ -38,6 +39,7 @@ public class Player extends Character implements VisionSender , Aggressive {
 	 */
 	public Player(CharacterInformation data,LevelMap map) {
 		super(data,map);
+		BulletManager.getInstance().addListener(this);
 	}
 	@Override
 	public void update() {
@@ -58,10 +60,9 @@ public class Player extends Character implements VisionSender , Aggressive {
 	/**
 	 * El parametro to aca deberia ser el input del mouse
 	 */
-	@Override
-	public void shoot(Vector2 to) {
-		Vector2 relative = to.sub(this.getPosition()).nor();
-		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative,map));
+	
+	public void shoot() {
+		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getCenter(),getLookDirection()));
 		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
 	}
 	@Override
@@ -106,5 +107,9 @@ public class Player extends Character implements VisionSender , Aggressive {
 		currHitBox.setCenter(position); 
 		return currHitBox;
 	}
-
+	
+	@Override
+	public void die() {
+		BulletManager.getInstance().removeListener(this);
+	}
 }

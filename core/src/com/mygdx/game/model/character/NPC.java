@@ -12,12 +12,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.LevelMap;
-import com.mygdx.game.model.character.behaviour.BulletManager;
 import com.mygdx.game.model.message.Bullet;
+import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseListener;
 import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionListener;
+import com.mygdx.game.model.message.VisionManager;
 
 import serialization.NPCInformation;
 
@@ -123,7 +124,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 			return;
 		}
 	
-		if (currentStep == null || currentStep.getPosition().epsilonEquals(getPosition(), EPSILON)){
+		if (currentStep == null || currentStep.getPosition().epsilonEquals(getCenter(), EPSILON)){
 			if (currentPath.hasNextStep()){
 				currentStep = currentPath.nextStep();
 			}
@@ -133,7 +134,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 			}
 		}
 		if (isMoving){
-			move(currentStep.getPosition().sub(getPosition()));
+			move(currentStep.getPosition().sub(getCenter()));
 			look(currentStep.getPosition());
 		}
 	}
@@ -205,7 +206,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	@Override
 	public void shoot(Vector2 to) {
 		Vector2 relative = to.sub(this.getPosition()).nor();
-		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative,map));
+		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative));
 		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,true));
 	}
 	
@@ -279,5 +280,12 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		move(velocity.add(steering));
 		super.moveAlong();
 		return;
+	}
+	
+	@Override
+	public void die() {
+		VisionManager.getInstance().removeListener(this);
+		BulletManager.getInstance().removeListener(this);
+		NoiseManager.getInstance().removeListener(this);
 	}
 }

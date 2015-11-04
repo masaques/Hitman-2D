@@ -27,7 +27,7 @@ public class Vision implements Message<VisionListener> {
 		Vector2 relativeDirection = source.getCenter().sub(goonCenter).nor() ;
 		float visualAngle = l.visualAngle();
 		if (visualAngle == 0 || Math.abs(relativeDirection.angle(goonDirection))<=visualAngle/2){
-			l.addPlayer(source.getPosition());
+			l.addPlayer(source.getCenter());
 		}
 	}
 

@@ -16,10 +16,13 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.ControlProcessor;
@@ -43,7 +46,7 @@ public class LevelScreen implements Screen{
 	ControlProcessor input;
 	
 	FPSLogger fps_logger =new FPSLogger();
-	
+	ShapeRenderer shapeRenderer;
 	GameManager gameManager;
 	 
 	public LevelScreen(HitmanGame game){
@@ -61,6 +64,8 @@ public class LevelScreen implements Screen{
 //		}
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
 		camera.position.set(gameport.getWorldWidth()/2,gameport.getWorldHeight()/2,0);
+		shapeRenderer = new ShapeRenderer();
+		
 	}
 	
 	public void update(float dt){
@@ -77,17 +82,17 @@ public class LevelScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		fps_logger.log();
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		gameManager.updateModel();
+		
+		gameManager.update();
 		game.batch.setProjectionMatrix(camera.combined);
-	
+		
+		
 		camera.update();
         renderer.setView(camera);
         renderer.render();
-        gameManager.updateModel();
-        gameManager.updateView();
+       
+        gameManager.update();
 		
 		
 	}

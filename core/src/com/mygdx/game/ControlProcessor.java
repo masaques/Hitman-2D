@@ -56,7 +56,9 @@ public class ControlProcessor implements InputProcessor {
 		PlayerMovement ans = new PlayerMovement(
 				new Vector2(x,y).nor(),
 				move_run,
-				new Vector2(mouse_x, mouse_y));
+				new Vector2(mouse_x, mouse_y),
+				mouse_click);
+		this.mouse_click = false;
 		this.x = 0f;
 		this.y = 0f;
 		return ans ;
@@ -126,13 +128,12 @@ public class ControlProcessor implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-    	
+    	mouse_click = true;
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-    	mouse_click = true;
         return false;
     	
     }

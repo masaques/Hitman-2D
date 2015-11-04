@@ -136,8 +136,9 @@ public class AStarPathFinder implements PathFinder {
 	
 	private Vector2 getStepCorrection(Movable movable, Node node) {
 		float tileWidth = map.getTileWidth();
-		float xPosition = node.getX() * tileWidth + tileWidth / 2f - movable.getWidth() / 2;
-		float yPosition = node.getY() * tileWidth + tileWidth / 2f - movable.getHeight() / 2; 
+		float xPosition = node.getX() * tileWidth + tileWidth / 2f ;
+		float yPosition = node.getY() * tileWidth + tileWidth / 2f ; 
+		
 		return new Vector2( xPosition, yPosition );
 	}
 	

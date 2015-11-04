@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.model.message.Bullet;
 import com.mygdx.game.model.util.RandList;
 
 public class LevelMap {
@@ -170,4 +171,45 @@ public class LevelMap {
 		}
 		return maxObstacle;
 	}
+	
+	public Vector2 getBulletCollision(Bullet bullet) {
+		
+		float minDistance = bullet.getRange();
+		Vector2 collision = new Vector2();
+		for (int i=0 ; i < getWidthInTiles(); i++){
+			for (int j=0; j < getHeightInTiles(); j++) {
+				if (modelMap[i][j] == null) {
+					continue;
+				}
+				
+				Vector2 intersection = bullet.intersects(modelMap[i][j]);
+				float distance = intersection.dst(bullet.getPosition());
+				if (!intersection.isZero() && distance < minDistance){
+					minDistance = distance;
+					collision = intersection;
+				}
+			}
+		}
+		return collision;
+		
+	}
+	
+//	private Polygon getPolygon(Rectangle rect){
+//		float[] vertices  = new float[8];
+//		float height = rect.getHeight();
+//		float width  = rect.getWidth();
+//		Vector2 rectPosition = rect.getPosition(new Vector2());
+//		vertices[0] = 0;
+//		vertices[1] = 0;
+//		vertices[2] = width;
+//		vertices[3] = 0;
+//		vertices[4] = width;
+//		vertices[5] = height;
+//		vertices[6] = 0;
+//		vertices[7] = height;
+//		
+//		Polygon rectPolygon = new Polygon(vertices);
+//		rectPolygon.setPosition(rect.getPosition(new Vector2()), y);
+//		return rectPolygon;
+//	}
 }

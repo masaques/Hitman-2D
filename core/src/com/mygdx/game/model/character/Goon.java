@@ -15,6 +15,10 @@ import com.mygdx.game.model.character.behaviour.InspectBehaviour;
 import com.mygdx.game.model.character.behaviour.PatrolBehaviour;
 import com.mygdx.game.model.character.behaviour.SearchBehaviour;
 import com.mygdx.game.model.character.behaviour.ShootBehaviour;
+import com.mygdx.game.model.message.Bullet;
+import com.mygdx.game.model.message.BulletManager;
+import com.mygdx.game.model.message.NoiseManager;
+import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
 
 import serialization.NPCInformation;
@@ -40,6 +44,10 @@ public class Goon extends NPC {
 		followBehaviour  = new FollowBehaviour();
 		shootBehaviour   = new ShootBehaviour();
 		inspectBehaviour = new InspectBehaviour();
+		
+		VisionManager.getInstance().addListener(this);
+		NoiseManager.getInstance().addListener(this);
+		BulletManager.getInstance().addListener(this);
 	}
 	public Goon(NPCInformation info,LevelMap map,RandList<Vector2> searchPositions) {
 		super(info, map) ;
@@ -53,9 +61,8 @@ public class Goon extends NPC {
 		searchBehaviour = null;
 		if (context.playerIsVisible()){
 			if (shootTimer > SHOOTING_DELAY) {
-				System.out.println("BANG!!!");
 				resetShootTimer();
-//				shootBehaviour.behave(this, context);
+				shoot(context.getPlayerPosition());
 			}
 			else {
 				followBehaviour.behave(this, context);
@@ -87,5 +94,9 @@ public class Goon extends NPC {
 	}
 	public void resetShootTimer() {
 		shootTimer = 0f;
+	}
+	
+	public void shoot() {
+		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getCenter(),getLookDirection()));
 	}
 }
