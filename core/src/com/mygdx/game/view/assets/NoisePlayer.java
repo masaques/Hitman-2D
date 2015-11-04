@@ -19,7 +19,6 @@ public class NoisePlayer {
 	private Sound blast = Gdx.audio.newSound(Gdx.files.internal("assets/blast.mp3"));
 	private Sound step = Gdx.audio.newSound(Gdx.files.internal("assets/step.mp3"));
 	
-	
 	public void addNoises(List<Noise> list){
 		this.noiseList=list ;
 	}

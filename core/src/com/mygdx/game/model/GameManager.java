@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.controller.BulletController;
 import com.mygdx.game.controller.ControlProcessor;
 import com.mygdx.game.controller.NPCController;
+import com.mygdx.game.controller.NoiseController;
 import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
@@ -58,6 +59,7 @@ public class GameManager implements Dumpeable {
 	private String mapPath = "assets/test5.tmx";
 	private BulletController bulletController = new BulletController();
 	private List<NPCController> npcController = new ArrayList<NPCController>();
+	private NoiseController noiseController = new NoiseController() ;
 	
 	public GameManager(int width,int height,int tile_width,int goons){
 		control = new ControlProcessor() ;
@@ -149,7 +151,8 @@ public class GameManager implements Dumpeable {
 		}
 		player.update();
 		VisionManager.getInstance().update();
-		NoiseManager.getInstance().update();
+//		NoiseManager.getInstance().update();
+		noiseController.manage();
 		bulletController.manage();
 		for (NPCController g : npcController){
 			g.control();

@@ -43,7 +43,7 @@ public class Noise implements Message<NoiseListener>, Comparable<Noise>, Seriali
 	
 	@Override
 	public void notify(NoiseListener l) {
-		if (this.isShot) {
+		if (NoiseType.SHOOT == type) {
 			l.addNoise(this);
 			return ;
 		}

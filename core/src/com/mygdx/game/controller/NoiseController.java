@@ -27,11 +27,11 @@ public class NoiseController {
 		updateView();
 	}
 	
-	public void updateModel(){
+	private void updateModel(){
 		toPlay = manager.update();
 	}
 	
-	public void updateView(){
+	private void updateView(){
 		player.addNoises(toPlay);
 		player.playNoises();
 	}
