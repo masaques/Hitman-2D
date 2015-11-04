@@ -78,7 +78,7 @@ public enum NPCState implements State<Moody> {
 	},
 	
 	ALARM_SURPRISE() {
-		private static final float SURPRISE_WAIT = 2;
+		private static final float SURPRISE_WAIT = 1f;
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
 			stateMachine.getOwner().surprised(context);
@@ -88,7 +88,7 @@ public enum NPCState implements State<Moody> {
 		}
 	},
 	SUSPICIOUS_SURPRISE() {
-		private static final float SURPRISE_WAIT = 3;
+		private static final float SURPRISE_WAIT = 1;
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
 			stateMachine.getOwner().surprised(context);
