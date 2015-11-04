@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.FlyingBullet;
-import com.mygdx.game.LevelMap;
+import com.mygdx.game.controller.FlyingBullet;
+import com.mygdx.game.model.LevelMap;
 /**
  * <p>Clase <b>Singleton</b> que extiende de <b>MessageManager</b>
  * para el manejo de las balas y los <b>BulletListener</b>.</p>

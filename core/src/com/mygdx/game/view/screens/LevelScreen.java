@@ -1,4 +1,4 @@
-package screens;
+package com.mygdx.game.view.screens;
 
 import java.io.IOException;
 
@@ -25,9 +25,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.ControlProcessor;
-import com.mygdx.game.GameManager;
-import com.mygdx.game.HitmanGame;
+import com.mygdx.game.controller.ControlProcessor;
+import com.mygdx.game.model.GameManager;
+import com.mygdx.game.model.HitmanGame;
 
 import serialization.GameSerializer;
 

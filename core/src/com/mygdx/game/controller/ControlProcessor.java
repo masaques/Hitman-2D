@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.model.PlayerMovement;
 /**
  * La vieja clase ControlHandler, que ahora se ocupa mas puramente 
  * de cuestiones vinculadas con el input

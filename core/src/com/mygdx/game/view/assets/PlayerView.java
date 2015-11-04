@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.view.assets;
 
 import com.mygdx.game.model.character.Player;
 

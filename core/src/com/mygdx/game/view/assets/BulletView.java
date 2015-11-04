@@ -1,10 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.view.assets;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.mygdx.game.controller.FlyingBullet;
 
 public class BulletView {
 	private List<FlyingBullet> bullets;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.LevelMap;
+import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.util.Movable;
 
 /**

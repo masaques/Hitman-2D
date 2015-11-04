@@ -1,14 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.model;
 
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-//import com.badlogic.gdx.maps.tiled.TiledMap;
-//import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
-
-import screens.LevelScreen;
+import com.mygdx.game.view.screens.LevelScreen;
 
 /**
  * <p> Clase del juego, {@link Game} es un {link ApplicationListener} (clase que se encarga del renderizado
@@ -31,7 +28,7 @@ public class HitmanGame extends Game{
 	public void create() {
 		batch = new SpriteBatch();
 		
-		setScreen(new screens.LevelScreen(this));
+		setScreen(new com.mygdx.game.view.screens.LevelScreen(this));
 		
 	}
 	

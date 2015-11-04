@@ -11,7 +11,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.LevelMap;
+import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.message.Bullet;
 import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;

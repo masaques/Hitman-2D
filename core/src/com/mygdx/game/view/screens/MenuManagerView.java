@@ -1,4 +1,4 @@
-package screens;
+package com.mygdx.game.view.screens;
 
 public class MenuManagerView {
 

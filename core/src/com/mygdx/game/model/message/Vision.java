@@ -1,7 +1,7 @@
 package com.mygdx.game.model.message;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.LevelMap;
+import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.character.Player;
 
 public class Vision implements Message<VisionListener> {

@@ -3,7 +3,7 @@ package com.mygdx.game.model.character.behaviour;
 import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.LevelMap;
+import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.character.Context;
 import com.mygdx.game.model.character.NPC;
 

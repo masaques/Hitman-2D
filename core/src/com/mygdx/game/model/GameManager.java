@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +11,9 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.controller.BulletController;
+import com.mygdx.game.controller.ControlProcessor;
+import com.mygdx.game.controller.NPCController;
 import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
@@ -20,6 +23,9 @@ import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
+import com.mygdx.game.view.assets.CharacterView;
+import com.mygdx.game.view.assets.NPCView;
+import com.mygdx.game.view.assets.PlayerView;
 
 import serialization.Dumpeable;
 import serialization.GameInformation;

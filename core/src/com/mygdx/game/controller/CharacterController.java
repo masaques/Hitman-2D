@@ -1,5 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.controller;
 import com.mygdx.game.model.character.Character;
+import com.mygdx.game.view.assets.CharacterView;
 
 public abstract class CharacterController <M extends Character, V extends CharacterView<M>> {
 	private M model;

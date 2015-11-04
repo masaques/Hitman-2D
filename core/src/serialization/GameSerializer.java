@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import com.mygdx.game.GameManager;
+import com.mygdx.game.model.GameManager;
 
 
 public final class GameSerializer {

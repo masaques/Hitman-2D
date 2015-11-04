@@ -1,6 +1,7 @@
-package com.mygdx.game;
+package com.mygdx.game.controller;
 
 import com.mygdx.game.model.character.NPC;
+import com.mygdx.game.view.assets.NPCView;
 
 public class NPCController extends CharacterController<NPC,NPCView> {
 	

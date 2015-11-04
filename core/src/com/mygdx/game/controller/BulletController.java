@@ -1,8 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.controller;
 
 import java.util.List;
 
 import com.mygdx.game.model.message.BulletManager;
+import com.mygdx.game.view.assets.BulletView;
 
 public class BulletController {
 	private BulletManager bulletManager;
