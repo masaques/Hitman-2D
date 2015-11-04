@@ -17,12 +17,17 @@ import com.mygdx.game.model.message.NoiseType;
 public class NoisePlayer {
 	List<Noise> noiseList ;
 	private Sound blast = Gdx.audio.newSound(Gdx.files.internal("assets/blast.mp3"));
-	private Sound step = Gdx.audio.newSound(Gdx.files.internal("assets/step.mp3"));
+	private Sound run = Gdx.audio.newSound(Gdx.files.internal("assets/run.mp3"));
+	private Sound walk = Gdx.audio.newSound(Gdx.files.internal("assets/walk.mp3"));
+	private float time =0;
+	private float lastRun ;
+	private float lastWalk ;
+	
+	
 	
 	public void addNoises(List<Noise> list){
 		this.noiseList=list ;
 	}
-	
 	public void playNoises() {
 		for (Noise n: noiseList) {
 			NoiseType type = n.getType();
@@ -31,9 +36,19 @@ public class NoisePlayer {
 					blast.play() ;
 					break;
 				case RUN:
-					step.play() ;
+					if(time-lastRun >=1f ){
+						run.play() ;
+						lastRun = time ;
+					}
+					break ;
+				case WALK:
+					if(time-lastWalk >=1f ){
+						walk.play() ;
+						lastWalk = time ;
+					} 
+					break ;
 			}	
 		}
+		time += Gdx.graphics.getDeltaTime() ;
 	}
-	
 }

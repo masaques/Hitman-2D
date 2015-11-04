@@ -8,5 +8,5 @@ package com.mygdx.game.model.message;
  */
 
 public enum NoiseType {
-	SHOOT , RUN ;
+	SHOOT , RUN , WALK ;
 }

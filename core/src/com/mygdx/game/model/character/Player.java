@@ -56,6 +56,8 @@ public class Player extends Character implements VisionSender {
 		VisionManager.getInstance().dispatchMessage(new Vision(this,map));
 		if (isMoving() && isRunning()) {
 			NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(), RUNNING_NOISE_RANGE, NoiseType.RUN));
+		} else if (isMoving()) {
+			NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),0,NoiseType.WALK));
 		}
 	}
 	/**
