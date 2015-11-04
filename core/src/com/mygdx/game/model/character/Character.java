@@ -65,7 +65,7 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 	public Character(CharacterInformation data,LevelMap map) {
 		this.lookDirection= data.getDirection();
 		this.moveDirection= data.getDirection();
-		this.hitBox= data.getHitBox();
+		this.hitBox= data.getHitbox();
 		this.healthPoints=data.getHealthPoints();
 		this.map=map;
 		this.id= IDS;

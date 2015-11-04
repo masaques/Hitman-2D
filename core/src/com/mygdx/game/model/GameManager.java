@@ -28,7 +28,7 @@ import com.mygdx.game.view.assets.NPCView;
 import com.mygdx.game.view.assets.PlayerView;
 
 import serialization.Dumpeable;
-import serialization.Level;
+import serialization.GameInformation;
 import serialization.Information;
 import serialization.NPCInformation;
 import serialization.CharacterInformation;
@@ -96,7 +96,7 @@ public class GameManager implements Dumpeable {
 		BulletManager.getInstance().setMap(map);
 	}
 	
-	public GameManager (Level g) {
+	public GameManager (GameInformation g) {
 		control = new ControlProcessor() ;
 		Gdx.input.setInputProcessor(control);
 		tiled_map= new TmxMapLoader().load(g.getMap());
@@ -158,14 +158,14 @@ public class GameManager implements Dumpeable {
 	}
 	
 	@Override
-	public Level dump() {
+	public GameInformation dump() {
 		List<NPCInformation> goonInfo = new ArrayList<NPCInformation>();
 		CharacterInformation playerInfo ;
 		for (NPC g: goon_set) {
 			goonInfo.add(g.dump());
 		}
 		playerInfo= player.dump();
-		return new Level(goonInfo,playerInfo,mapPath) ;
+		return new GameInformation(goonInfo,playerInfo,mapPath) ;
 	}
 
 }
