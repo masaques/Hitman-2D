@@ -26,6 +26,7 @@ public class BulletManager extends MessageManager<BulletListener, Bullet> {
 	private static final BulletManager INSTANCE = new BulletManager();
 	private List<FlyingBullet> flyingBullets;
 	private LevelMap map;
+	
 	/**
 	 *  Esta implementada como un Singleton (solo exite una instancia de esta clase), asi que 
 	 *  el constructor es protected. Si obetener la instancia, usar getInstace en lugar de new.
@@ -53,7 +54,13 @@ public class BulletManager extends MessageManager<BulletListener, Bullet> {
 		if (collision == null) {
 			throw new IllegalBulletException();
 		}
-		set.remove(bullet.getShooter());
+		Set<BulletListener> removeSet = new HashSet<BulletListener>();
+		for(BulletListener l : set) {
+			if (l.getTeam() == bullet.getTeam()) {
+				removeSet.add(l);
+			}
+		}
+		set.removeAll(removeSet);
 		float maxRange = bullet.getPosition().dst(collision);
 		BulletListener reciever = null;
 		for (BulletListener l:set) {

@@ -28,7 +28,7 @@ import serialization.NPCInformation;
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
  * puntos en el mapa.
  */
-public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener, Aggressive{
+public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener{
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
 	
@@ -44,7 +44,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	private NPCState currentState;
 	
 	public NPC (Rectangle hitBox, LevelMap map){
-		super(hitBox, map);
+		super(hitBox, map, Team.ENEMY);
 		noiseInbox   = new ArrayList<Noise>();
 		visualInbox  = new ArrayList<Vector2> ();
 		stateMachine = new NPCStateMachine(this);
@@ -204,12 +204,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		return visualAngle ;
 	}
 	
-	@Override
-	public void shoot(Vector2 to) {
-		Vector2 relative = to.sub(this.getPosition()).nor();
-		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getPosition(),relative));
-		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,NoiseType.SHOOT));
-	}
+	
 	
 	@Override
 	public NPCInformation dump() {

@@ -26,7 +26,7 @@ import serialization.NPCInformation;
 /**
  * Los Goon son {@link NPC} con un comportamiento agresivo. 
  */
-public class Goon extends NPC {
+public class Goon extends NPC implements Aggressive{
 	/**
 	 * Delay entre los disparos del arma.
 	 */
@@ -62,7 +62,7 @@ public class Goon extends NPC {
 		if (context.playerIsVisible()){
 			if (shootTimer > SHOOTING_DELAY) {
 				resetShootTimer();
-				shoot(context.getPlayerPosition());
+				shoot();
 			}
 			else {
 				followBehaviour.behave(this, context);
@@ -97,6 +97,6 @@ public class Goon extends NPC {
 	}
 	
 	public void shoot() {
-		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getCenter(),getLookDirection()));
+		BulletManager.getInstance().dispatchMessage(new Bullet(this.getTeam(),this.getCenter(),getLookDirection()));
 	}
 }

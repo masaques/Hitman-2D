@@ -10,9 +10,8 @@ import com.mygdx.game.view.assets.CharacterView;
  * @param <M>
  * @param <V>
  */
-public abstract class CharacterController <M extends Character, V extends CharacterView<M>> {
-	private M model;
-	private V view;
+public abstract class CharacterController <M extends Character, V extends CharacterView<M>> extends Controller<M,V> {
+	
 	private boolean isDead;
 	
 	/**
@@ -20,63 +19,46 @@ public abstract class CharacterController <M extends Character, V extends Charac
 	 * @param model
 	 * @param view
 	 */
-	public CharacterController(M model,V view) {
-		this.model = model;
-		this.view = view;
-	}
-	/**
-	 * Llama al actualiza el modelo y al view. 
-	 */
-	public void control() {
-		updateModel();
-		updateView();
+	public CharacterController(M character, V characterView) {
+		super(character, characterView);
 	}
 	
 	/**
 	 * Actualiza el modelo. Si el personaje esta muerto no hace nada.
 	 */
+	@Override
 	public void updateModel() {
 		if (!isDead){
-			model.update();
+			getModel().update();
 		}
 	}
 	/**
 	 * Actualiza la view. Si el personaje esta muerto no lo actualiza, pero
 	 * aun asi llama al draw.
 	 */
+	@Override
 	public void updateView() {
+		V characterView = getView();
 		if (!isDead){
-			view.setPosition(model.getPosition());
-			view.setLookDirection(model.getLookDirection());
-			view.setRunning(view.isRunning());
-			view.setMoving(model.isMoving());
-			if (model.isHurt()){
-				view.setHit();
-				model.setHurt(false);
+			M character = getModel();
+			characterView.setPosition(character.getPosition());
+			characterView.setLookDirection(character.getLookDirection());
+			characterView.setRunning(characterView.isRunning());
+			characterView.setMoving(character.isMoving());
+			if (character.isHurt()){
+				characterView.setHit();
+				character.setHurt(false);
 			}
-			if (model.isDead()) {
-				view.setDead();
-				model.die();
-				model = null;
+			if (character.isDead()) {
+				characterView.setDead();
+				character.die();
+				character = null;
 				isDead = true;
 			}
 		}
-		view.draw();
+		characterView.draw();
 	}
-	/**
-	 * TODO este metodo debe ser protected. Mover el metodo dump de character a aca.
-	 * @return
-	 */
-	public M getModel(){
-		return model;
-	}
-	/**
-	 * TODO este metodo debe ser protected.
-	 * @return
-	 */
-	public V getView(){
-		return view;
-	}
+	
 	/**
 	 * Devuelve si el jugador esta muerto.
 	 * @return

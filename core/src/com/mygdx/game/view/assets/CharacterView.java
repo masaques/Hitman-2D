@@ -13,7 +13,7 @@ import com.mygdx.game.model.character.Character;
  * Implementacion del View de los Character segun el patron MVC.
  * Dibuja en pantalla el sprite del personaje.
  */
-public abstract class CharacterView<T extends Character> {
+public abstract class CharacterView<T extends Character> implements View{
 
 	private static final float HIT_DURATION = 1f;
 	private Vector2 lookDirection;

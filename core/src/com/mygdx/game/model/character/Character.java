@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.message.BulletListener;
 import com.mygdx.game.model.util.Movable;
-
+import com.mygdx.game.model.Model;
 import serialization.CharacterInformation;
 import serialization.Dumpeable;
 
@@ -27,7 +27,7 @@ import serialization.Dumpeable;
  */
 
 
-public abstract class Character implements Movable, BulletListener,Dumpeable {
+public abstract class Character implements Movable, BulletListener,Dumpeable,Model {
 	private static int IDS = 0;
 	private int id ;
 	private static final float DIRECTIONAL_EPSILON = .05f;
@@ -43,9 +43,10 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 	protected LevelMap map;
 	protected boolean isMoving = false;
 	private boolean isHurt = false;
+	private Team team ;
 	
 	
-	public Character(Rectangle hitBox, LevelMap map){
+	public Character(Rectangle hitBox, LevelMap map, Team team){
 		this.moveDirection = new Vector2();
 		this.lookDirection = new Vector2();
 		this.seekForce 	   = new Vector2();
@@ -54,6 +55,7 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 		this.isRunning = false;
 		this.healthPoints = 100f ;
 		this.isDead = false ;
+		this.team = team ;
 		this.id= IDS ;
 		IDS++ ;
 	}
@@ -84,13 +86,13 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 	public boolean isRunning() {
 		return isRunning;
 	}
-	/*
+	/**
 	 * Devuelve si el personaje esta herido.
 	 */
 	public boolean isHurt() {
 		return isHurt;
 	}
-	/*
+	/**
 	 * Setea si el personaje esta herido.
 	 */
 	public void setHurt(boolean isHurt) {
@@ -105,11 +107,14 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 	public Vector2 getPosition() {
 		return hitBox.getPosition(new Vector2());
 	}
+	/**
+	 * Devuelve la posicion del centro de su hitbox.
+	 * @return
+	 */
 	public Vector2 getCenter() {
 		return hitBox.getCenter(new Vector2());
 	}
-	
-	
+		
 	/**
 	 * Devuelve la direccion a la que se esta moviendo el personaje. En 
 	 * una revision futura, conviene separar entre lookDirection y moveDirection.
@@ -153,6 +158,12 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 		this.isRunning = running;
 		return true;
 	}
+	/**
+	 * //TODO deberia hacer un lookWhereYouAreGoing
+	 * 
+	 * @param position
+	 * @return
+	 */
 	public boolean look(Vector2 position) {
 		this.lookDirection.set(position.sub(getCenter()));
 		return true;
@@ -210,10 +221,17 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 		hitBox.setCenter(position.add(velocity.scl(Gdx.graphics.getDeltaTime())));
 		return;
 	}
-	
+	/**
+	 * Devuelve los puntos de vida.
+	 * @return
+	 */
 	public float getHealthPoints() {
 		return this.healthPoints ;
 	}
+	/**
+	 * Setea los puntos de vida.
+	 * @param dmg
+	 */
 	private void setHealthPoints(float dmg){
 		if (dmg >= this.healthPoints){
 			this.healthPoints = 0 ;
@@ -235,17 +253,32 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 		this.setHealthPoints(dmg);
 	}
 	
+	/**
+	 * Devuelve si el jugador esta muerto.
+	 * @return
+	 */
 	public boolean isDead() {
 		return this.isDead ;
 	}
 	
+	/**
+	 * Devuelve el id.
+	 * @return
+	 */
 	public int getId() {
 		return this.id;
 	}
+	
+	/**
+	 * hashCode.
+	 */
 	public int hashCode() {
 		return  this.id ;
 	}
 	
+	/**
+	 * equals.
+	 */
 	public boolean equals(Object o) {
 		if (o == null) {
 			return false ;
@@ -276,12 +309,32 @@ public abstract class Character implements Movable, BulletListener,Dumpeable {
 		}
 		return new CharacterInformation(this.getMoveDirection(),this.hitBox,this.getHealthPoints()) ;
 	}
+	
+	/**
+	 * Devuelve el mapa.
+	 * @return
+	 */
 	public LevelMap getMap() {
 		return map;
 	}
+	/**
+	 * Devuelve el hitBox.
+	 */
 	public Rectangle getHitBox() {
 		return this.hitBox;
 	}
 	
+	/**
+	 * Metodo a llamar
+	 * 
+	 */
 	public abstract void die();
+	/**
+	 * Devuelve el equipo al que pertenece el character.
+	 * @return
+	 */
+	public Team getTeam() {
+		return team;
+	}
+	
 }

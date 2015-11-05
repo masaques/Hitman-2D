@@ -15,6 +15,7 @@ import com.mygdx.game.controller.BulletController;
 import com.mygdx.game.controller.ControlProcessor;
 import com.mygdx.game.controller.NPCController;
 import com.mygdx.game.controller.NoiseController;
+import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
@@ -49,8 +50,7 @@ public class GameManager implements Dumpeable {
 	protected static final int MAX_SEARCH = 100 ;
 	private LevelMap map ;
 	private Goon goon;
-	private Player player;
-	private PlayerManager player_manager ;
+	private PlayerController player_manager ;
 	private Set<NPC> goon_set = new HashSet<NPC>();
 	private Set<CharacterView<NPC>> goon_view_set = new HashSet<CharacterView<NPC>>();
 	
@@ -91,14 +91,16 @@ public class GameManager implements Dumpeable {
 				"assets/goon_sprite_hurt.png",
 				"assets/goon_sprite_dead.png",
 				 18, 13, 15);
-		player = new Player(new Rectangle(50,50,18,13),map);
-		player_manager = new PlayerManager(player,control, player_view) ;
+		Player player = new Player(new Rectangle(50,50,18,13),map);
+		player_manager = new PlayerController(player,control, player_view) ;
 		
 		linearPathFinder = new LinearPathFinder(map);
 		BulletManager.getInstance().setMap(map);
 	}
 	
 	public GameManager (GameInformation g) {
+		
+		
 		control = new ControlProcessor() ;
 		Gdx.input.setInputProcessor(control);
 		tiled_map= new TmxMapLoader().load(g.getMap());
@@ -128,8 +130,8 @@ public class GameManager implements Dumpeable {
 				"assets/goon_sprite_hurt.png",
 				"assets/goon_sprite_dead.png",
 				 18, 13, 15);
-		player = new Player(g.getPlayerInfo(),map);
-		player_manager = new PlayerManager(player,control, player_view) ;
+		Player player = new Player(g.getPlayerInfo(),map);
+		player_manager = new PlayerController(player,control, player_view) ;
 		
 		linearPathFinder = new LinearPathFinder(map);
 		BulletManager.getInstance().setMap(map);
@@ -149,13 +151,14 @@ public class GameManager implements Dumpeable {
 				e.printStackTrace();
 			}
 		}
-		player.update();
+		
 		VisionManager.getInstance().update();
 //		NoiseManager.getInstance().update();
 		noiseController.manage();
 		bulletController.manage();
 		for (NPCController g : npcController){
-			g.control();
+			g.updateModel();
+			g.updateView();
 		}
 		player_manager.control();
 	}
@@ -167,8 +170,12 @@ public class GameManager implements Dumpeable {
 		for (NPC g: goon_set) {
 			goonInfo.add(g.dump());
 		}
+		/**
+		Player player = player_manager.getModel();
 		playerInfo= player.dump();
-		return new GameInformation(goonInfo,playerInfo,mapPath) ;
+		*/
+		//return new GameInformation(goonInfo,playerInfo,mapPath) ;
+		return null;
 	}
 
 }

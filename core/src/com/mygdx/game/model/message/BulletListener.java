@@ -2,6 +2,7 @@ package com.mygdx.game.model.message;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.model.character.Team;
 
 
 /**
@@ -21,4 +22,6 @@ public interface BulletListener extends Listener {
 	 * @param dmg - Cantidad de daño a recibir
 	 */
 	public void dealDamage(float dmg) ;
+	
+	public Team getTeam();
 }

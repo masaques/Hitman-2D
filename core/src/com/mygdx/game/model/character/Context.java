@@ -53,6 +53,10 @@ public class Context {
 		noiseList.add(noise);
 	}
 	
+	/**
+	 * Devuelve la posicion del jugador visto.
+	 * @return
+	 */
 	public Vector2 getPlayerPosition() {
 		Vector2 playerPosition;
 		if (positionList.size() <= 0) {
@@ -64,7 +68,10 @@ public class Context {
 		return playerPosition;
 	}
 	
-	
+	/**
+	 * Devuelve si el jugador se esta moviendo. 
+	 * @return
+	 */
 	public boolean isMoving() {
 		return isMoving;
 	}

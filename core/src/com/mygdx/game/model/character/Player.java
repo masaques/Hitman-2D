@@ -29,7 +29,7 @@ public class Player extends Character implements VisionSender {
 	private static final float RUNNING_SPEED = 100f;
 	
 	public Player(Rectangle hitBox, LevelMap map) {
-		super(hitBox, map);
+		super(hitBox, map, Team.PLAYER);
 		BulletManager.getInstance().addListener(this);
 	}
 	/**
@@ -65,7 +65,7 @@ public class Player extends Character implements VisionSender {
 	 */
 	
 	public void shoot() {
-		BulletManager.getInstance().dispatchMessage(new Bullet(this,this.getCenter(),getLookDirection()));
+		BulletManager.getInstance().dispatchMessage(new Bullet(this.getTeam(),this.getCenter(),getLookDirection()));
 		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,NoiseType.SHOOT));
 	}
 	@Override

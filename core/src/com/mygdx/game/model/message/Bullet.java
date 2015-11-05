@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.character.Character;
+import com.mygdx.game.model.character.Team;
 
 /**
  * Clase que simula un disparo 
@@ -18,9 +19,9 @@ import com.mygdx.game.model.character.Character;
 
 
 public class Bullet implements Message<BulletListener> {
-	private Character source ;
 	private Vector2 position ;
 	private Vector2 direction ;
+	private Team team;
 
 	/*
 	 * Quizas esto podria ser una variable,
@@ -41,15 +42,12 @@ public class Bullet implements Message<BulletListener> {
 	 * @param direction - Dirección de trayectoria
 	 * @param map - Mapa del juego
 	 */
-	public Bullet(Character source, Vector2 position, Vector2 direction){
-		this.source = source ;
+	public Bullet(Team team, Vector2 position, Vector2 direction){
 		this.position = position ;
 		this.direction = direction ;
+		this.team = team;
 	}
-	
-	public Character getShooter(){
-		return source ;
-	}
+
 	
 	public Vector2 getPosition(){
 		return position ;
@@ -112,6 +110,11 @@ public class Bullet implements Message<BulletListener> {
 		
 	}
 	
+	public Team getTeam() {
+		return team;
+	}
+	
+	
 	private class Segment {
 		protected Vector2 p ;
 		protected Vector2 q ;
@@ -121,4 +124,6 @@ public class Bullet implements Message<BulletListener> {
 			this.q = new Vector2(q) ;
 		}
 	}
+	
+	
 }

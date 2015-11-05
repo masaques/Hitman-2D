@@ -13,5 +13,5 @@ public interface Aggressive {
 	 * y un Noise a NoiseManager
 	 * @param to La posicion a la que se desea disparar
 	 */
-	public void shoot(Vector2 to) ;
+	public void shoot() ;
 }
