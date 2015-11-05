@@ -2,10 +2,12 @@ package com.mygdx.game.model;
 
 
 import com.badlogic.gdx.Game;
+
 import com.badlogic.gdx.Gdx;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.view.screens.LevelScreen;
+
+import com.mygdx.game.view.screens.menu.view.MenuUI;
 
 /**
  * <p> Clase del juego, {@link Game} es un {link ApplicationListener} (clase que se encarga del renderizado
@@ -28,7 +30,7 @@ public class HitmanGame extends Game{
 	public void create() {
 		batch = new SpriteBatch();
 		
-		setScreen(new com.mygdx.game.view.screens.LevelScreen(this));
+		setScreen(new MenuUI(this));
 		
 	}
 	
