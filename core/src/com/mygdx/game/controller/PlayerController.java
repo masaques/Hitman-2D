@@ -38,8 +38,9 @@ public class PlayerController extends CharacterController<Player, PlayerView> {
 			else {
 				getModel().stopMoving();
 			}
-			
-			getModel().look(movement.getLookDirection());
+			Vector2 lookDirection = movement.getLookDirection();
+			lookDirection.sub(getModel().getCenter());
+			getModel().look(lookDirection);
 			
 			if (movement.isShooting()) {
 				getModel().shoot();

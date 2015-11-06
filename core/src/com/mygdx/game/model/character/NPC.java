@@ -31,7 +31,7 @@ import serialization.NPCInformation;
 public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener{
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
-	
+	private static final float ANGULAR_VELOCITY = 10F;
 	protected static final float EPSILON = 2f;
 	private Path currentPath;
 	private Step finalStep;
@@ -95,7 +95,6 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 			currentPath = auxPath;
 			currentStep = currentPath.nextStep();
 			move(currentStep.getPosition().sub(getPosition()));
-			look(currentStep.getPosition());
 			isMoving = true;
 			return true;
 		}
@@ -136,7 +135,6 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		}
 		if (isMoving){
 			move(currentStep.getPosition().sub(getCenter()));
-			look(currentStep.getPosition());
 		}
 	}
 	
@@ -275,6 +273,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		steering.add(avoidanceForce);
 		move(velocity.add(steering));
 		super.moveAlong();
+		lookWhereYouAreGoing();
 		return;
 	}
 	
@@ -283,5 +282,25 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		VisionManager.getInstance().removeListener(this);
 		BulletManager.getInstance().removeListener(this);
 		NoiseManager.getInstance().removeListener(this);
+	}
+	
+	/**
+	 * Actualiza la direccion a la que mira el personaje hacia la direccion del movimiento,
+	 * con cierta velocidad angular.
+	 */
+	public void lookWhereYouAreGoing() {
+		Vector2 moveDirection = getMoveDirection();
+		Vector2 lookDirection = getLookDirection();
+		
+		if (lookDirection.isZero()) {
+			look(moveDirection);
+		}
+		else if (!lookDirection.equals(moveDirection)) {
+			float angle = lookDirection.angle(moveDirection);
+			angle = (angle/360f) * ANGULAR_VELOCITY;
+			lookDirection.rotate(angle);
+			look(lookDirection);
+		}
+		
 	}
 }

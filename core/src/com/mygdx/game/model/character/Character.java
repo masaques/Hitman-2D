@@ -164,8 +164,8 @@ public abstract class Character implements Movable, BulletListener,Dumpeable,Mod
 	 * @param position
 	 * @return
 	 */
-	public boolean look(Vector2 position) {
-		this.lookDirection.set(position.sub(getCenter()));
+	public boolean look(Vector2 direction) {
+		this.lookDirection.set(direction).nor();
 		return true;
 	}
 	/**
