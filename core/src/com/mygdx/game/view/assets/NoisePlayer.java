@@ -16,7 +16,7 @@ import com.mygdx.game.model.message.NoiseType;
 
 public class NoisePlayer {
 	List<NoiseType> noiseList ;
-	private Sound blast = Gdx.audio.newSound(Gdx.files.internal("assets/blast.mp3"));
+	private Sound blast = Gdx.audio.newSound(Gdx.files.internal("assets/tie.mp3"));
 	private Sound run = Gdx.audio.newSound(Gdx.files.internal("assets/run.mp3"));
 	private Sound walk = Gdx.audio.newSound(Gdx.files.internal("assets/walk.mp3"));
 	private float time =0;
