@@ -1,9 +1,10 @@
 package com.mygdx.game.view.screens.menu.view;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class HitmanButton implements MenuClickable{
+public class HitmanButton extends Actor implements MenuClickable{
 
 	TextButton button;
 	

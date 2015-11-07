@@ -4,12 +4,12 @@ package com.mygdx.game.model;
 import com.badlogic.gdx.Game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.view.screens.menu.view.HitmanButton;
 import com.mygdx.game.view.screens.menu.view.HitmanSkin;
@@ -34,6 +34,7 @@ public class HitmanGame extends Game{
 	public SpriteBatch batch;
 	public MenuUI menuui;
 	public Stage stage;
+	public Skin skin;
 	
 	public HitmanGame(){
 		super();
@@ -44,16 +45,30 @@ public class HitmanGame extends Game{
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		HitmanSkin hitmanSkin = new HitmanSkin();
-		//Lo que esta a partir de aca tendria que estar en otro lado
+				
 		HitmanButton btnPlay = new HitmanButton("Play",hitmanSkin);
 		btnPlay.setOnClickListener(new ClickListener(){
 			
 			public void clicked(InputEvent event, float x, float y){
-				Gdx.graphics.setDisplayMode(800,600,false);
+				Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width,Gdx.graphics.getDesktopDisplayMode().height,true);
 			}
 			
 		});
+		
+		
+		TextButton text = new TextButton("NEW",hitmanSkin.getButtonSkin());
+		text.addListener(new ClickListener(){
 			
+			public void clicked(InputEvent event, float x, float y){
+				Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width,Gdx.graphics.getDesktopDisplayMode().height,true);
+			}
+			
+		});
+		
+		
+		stage.addActor(text);
+		stage.addActor(btnPlay);
+		
 		
 	}
 	
