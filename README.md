@@ -46,15 +46,7 @@ git log -> todos los commits del branch en el que estoy
 
 #TODO List
 
-* Implementar balas y disparos.
-
 * Hacer tests.
-
-* Arreglar el movimiento de los npc.
-
-* Implementar el control de la direccion del jugador por el mouse.
-
-* Arreglar la maquina de estado.
 
 * Menues.
   - Ya hice la clase MenuManager, que vendría a ser parte del Controller. La especificación está comentada en el .java
@@ -64,9 +56,4 @@ git log -> todos los commits del branch en el que estoy
 * Guardar las jugadas
   - WIP, estoy viendo el tema de como guardar el mapa
 
-* Inicializacion de niveles.
-  - Se realizara junto al guardado de jugadas
-
-* Implementar levelManager que inicialice y controle el juego.
-  - Idem anterior
 
