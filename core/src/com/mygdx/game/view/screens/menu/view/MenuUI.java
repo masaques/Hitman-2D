@@ -1,84 +1,51 @@
 package com.mygdx.game.view.screens.menu.view;
 
-
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.model.HitmanGame;
-import com.mygdx.game.view.screens.menu.core.MenuData;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class MenuUI implements Screen {
+public class MenuUI implements Screen{
+
+	private Stage stage;
 	
-	public HitmanGame game;
-	
-	public MenuUI(HitmanGame game){
-		this.game = game;
+	public MenuUI(){
+		//public Stage (Viewport viewport, Batch batch);
+		//Tanto el viewport como el batch los saco de levelscreen
+		stage=new Stage();
 	}
 	
+	public static void drawOnScreen(){
+		HitmanSkin skin = new HitmanSkin();
 		
-	public void drawMenu(SpriteBatch batch, MenuChoose type){
-		//MenuChoose type = MenuManager.getInstance().getChoose();
-		switch(type){
-			case Main:
-					showMain(batch);
-				break;
-			case Help:
-					showHelp(batch);
-				break;
-			case HighScore:
-					showTable(batch);
-				break;
-			case ChangeResolution:
-				showChangeResolution(batch);
-				break;
-		default:
-			break;				
-		}
+		HitmanButton start = new HitmanButton("Start",skin);
+				
+		start.setOnClickListener(new ClickListener(){
+			
+			public void clicked(InputEvent event, float x, float y){
+				Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width,Gdx.graphics.getDesktopDisplayMode().width,true);
+			}
+			
+		});
+		
 	}
 	
-	private static void showMain(SpriteBatch batch){
-		//ResolutionManager.fullScreen(true);
-		MenuData.m.play();
-		MenuData.m.setLooping(true);
-		MenuData.TITLE_FONT.draw(batch, "H I T M A N", MenuData.WIDTH*3/8 , MenuData.HEIGHT*7/8);
-		MenuData.FONT.draw(batch, "1- Nuevo",  MenuData.WIDTH/8, MenuData.HEIGHT*5/8);
-		MenuData.FONT.draw(batch, "2- Configuraciones", MenuData.WIDTH/8, MenuData.HEIGHT*4/8);
-		MenuData.FONT.draw(batch, "3- Ayuda",  MenuData.WIDTH/8, MenuData.HEIGHT*3/8);
-		MenuData.FONT.draw(batch, "4- Screens",  MenuData.WIDTH/8, MenuData.HEIGHT*2/8);
-		MenuData.FONT.draw(batch, "Esc - Salir",  MenuData.WIDTH/8, MenuData.HEIGHT*1/8);
-	}
-	
-	private static void showHelp(SpriteBatch batch){
-		MenuData.TITLE_FONT.draw(batch, "Ayuda", MenuData.WIDTH*3/8 , MenuData.HEIGHT*7/8);
-		MenuData.FONT.draw(batch, "Esc - Salir",  MenuData.WIDTH/8, MenuData.HEIGHT*1/8);
-		//ARMAR LA AYUDA EN BASE A LOS MOVIMIENTOS EN TECLADOS
-	}
-	
-	private static void showTable(SpriteBatch batch){
-		MenuData.TITLE_FONT.draw(batch, "Puntajes", MenuData.WIDTH*3/8 , MenuData.HEIGHT*7/8);
-		MenuData.FONT.draw(batch, "Esc - Salir", MenuData.WIDTH/8, MenuData.HEIGHT*1/8);		
-	}
-	
-	private static void showChangeResolution(SpriteBatch batch){
-		MenuData.TITLE_FONT.draw(batch, "Resolucion", MenuData.WIDTH*3/8 , MenuData.HEIGHT*7/8);
-		MenuData.FONT.draw(batch, "Esc - Salir", MenuData.WIDTH/8, MenuData.HEIGHT*1/8);
-		MenuData.FONT.draw(batch,"1- 16:9", MenuData.WIDTH/8,MenuData.HEIGHT*5/8);
-		MenuData.FONT.draw(batch,"2- 16:10",MenuData.WIDTH/8,MenuData.HEIGHT*4/8);
-		MenuData.FONT.draw(batch,"3- 4:3", MenuData.WIDTH/8,MenuData.HEIGHT*3/8);
-	}
-
 	
 	@Override
 	public void show() {
-		//drawMenu(game.batch);		
+		
 	}
 
 	@Override
 	public void render(float delta) {
-		//drawMenu(game.batch);
+		stage.act();
+		stage.draw();
 	}
 
 	@Override
 	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
 		
 	}
 

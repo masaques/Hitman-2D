@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mygdx.game.view.screens.menu.view.MenuManager;
+import com.mygdx.game.view.screens.menu.view.MenuUI;
 
 /**
  * <p> Clase del juego, {@link Game} es un {link ApplicationListener} (clase que se encarga del renderizado
@@ -26,16 +26,16 @@ import com.mygdx.game.view.screens.menu.view.MenuManager;
 public class HitmanGame extends Game{
 
 	public SpriteBatch batch;
-	public MenuManager menu;
+	public MenuUI menuui;
 	
 	public HitmanGame(){
 		super();
-		menu = new MenuManager(this);
+		menuui = new MenuUI();
 	}
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		setScreen(menu.setScreen());
+		setScreen(menuui);
 	}
 	
 	public void render () {
@@ -44,7 +44,7 @@ public class HitmanGame extends Game{
 		TextureRegion backgroundRegion = new TextureRegion(background, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch.draw(backgroundRegion, 0, 0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		
-		menu.setScreen().render(Gdx.graphics.getDeltaTime());
+		menuui.render(1f);
 		
 		batch.end();
 	}
