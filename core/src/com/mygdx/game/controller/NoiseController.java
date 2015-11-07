@@ -1,9 +1,11 @@
 package com.mygdx.game.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseManager;
+import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.view.assets.NoisePlayer;
 /**
  * Clase que controla los sonidos de la partida
@@ -14,7 +16,7 @@ import com.mygdx.game.view.assets.NoisePlayer;
 public class NoiseController {
 	private NoiseManager manager ;
 	private NoisePlayer player ;
-	private List<Noise> toPlay ;
+	private List<Noise> noiseList ;
 	
 	
 	public NoiseController(){
@@ -28,12 +30,20 @@ public class NoiseController {
 	}
 	
 	private void updateModel(){
-		toPlay = manager.update();
+		noiseList = manager.update();
 	}
 	
 	private void updateView(){
-		player.addNoises(toPlay);
+		player.addNoises(toPlay(noiseList));
 		player.playNoises();
+	}
+	
+	private List<NoiseType> toPlay(List<Noise> list) {
+		List<NoiseType> types = new ArrayList<NoiseType>() ;
+		for (Noise n : list) {
+			types.add(n.getType()) ;
+		}
+		return types ;
 	}
 	
 }

@@ -15,7 +15,7 @@ import com.mygdx.game.model.message.NoiseType;
  */
 
 public class NoisePlayer {
-	List<Noise> noiseList ;
+	List<NoiseType> noiseList ;
 	private Sound blast = Gdx.audio.newSound(Gdx.files.internal("assets/blast.mp3"));
 	private Sound run = Gdx.audio.newSound(Gdx.files.internal("assets/run.mp3"));
 	private Sound walk = Gdx.audio.newSound(Gdx.files.internal("assets/walk.mp3"));
@@ -25,13 +25,12 @@ public class NoisePlayer {
 	
 	
 	
-	public void addNoises(List<Noise> list){
+	public void addNoises(List<NoiseType> list){
 		this.noiseList=list ;
 	}
 	public void playNoises() {
-		for (Noise n: noiseList) {
-			NoiseType type = n.getType();
-			switch (type){
+		for (NoiseType n: noiseList) {
+			switch (n){
 				case SHOOT:
 					blast.play() ;
 					break;

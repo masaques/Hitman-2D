@@ -17,7 +17,9 @@ import com.mygdx.game.model.character.behaviour.SearchBehaviour;
 import com.mygdx.game.model.character.behaviour.ShootBehaviour;
 import com.mygdx.game.model.message.Bullet;
 import com.mygdx.game.model.message.BulletManager;
+import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseManager;
+import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
 
@@ -106,6 +108,7 @@ public class Goon extends NPC implements Aggressive{
 		isShooting = true;
 		Bullet bullet = new Bullet(getTeam(),getCenter(),getLookDirection());
 		BulletManager.getInstance().dispatchMessage(bullet);
+		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,NoiseType.SHOOT));
 	}
 	
 	@Override
