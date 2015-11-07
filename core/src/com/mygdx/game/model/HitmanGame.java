@@ -1,6 +1,8 @@
 package com.mygdx.game.model;
 
 
+import javax.xml.bind.JAXBException;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 //import com.badlogic.gdx.graphics.Texture;
@@ -28,7 +30,12 @@ public class HitmanGame extends Game{
 	public void create() {
 		batch = new SpriteBatch();
 		
-		setScreen(new com.mygdx.game.view.screens.LevelScreen(this));
+		try {
+			setScreen(new com.mygdx.game.view.screens.LevelScreen(this));
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

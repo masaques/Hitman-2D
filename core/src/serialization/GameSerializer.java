@@ -13,12 +13,13 @@ import com.mygdx.game.model.GameManager;
 
 public final class GameSerializer {
 
+	// TODO
 	public static GameManager create(String path) throws IOException, ClassNotFoundException{
 		ObjectInputStream file = new ObjectInputStream(
 				 				 new BufferedInputStream(
 				 				 new FileInputStream(path)));
 		GameInformation game = (GameInformation)file.readObject();
-		return new GameManager(game);
+		return null;
 	}
 	
 	public static void save(GameManager manager, String path) throws IOException{

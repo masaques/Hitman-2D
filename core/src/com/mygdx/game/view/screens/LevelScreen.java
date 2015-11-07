@@ -2,6 +2,8 @@ package com.mygdx.game.view.screens;
 
 import java.io.IOException;
 
+import javax.xml.bind.JAXBException;
+
 /**
  *  Screen del nivel principal donde se llevara a cabo el juego. Posee la información completa
  *  del juego y se encarga del renderizado.
@@ -49,7 +51,7 @@ public class LevelScreen implements Screen{
 	ShapeRenderer shapeRenderer;
 	GameManager gameManager;
 	 
-	public LevelScreen(HitmanGame game){
+	public LevelScreen(HitmanGame game) throws JAXBException{
 		this.game = game;
 		gameport = new FitViewport(864, 864,camera);
 		gameManager = new GameManager(864,864,32,20);

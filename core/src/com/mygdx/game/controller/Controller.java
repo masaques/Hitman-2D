@@ -1,5 +1,6 @@
 package com.mygdx.game.controller;
 
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.Model;
 import com.mygdx.game.view.assets.View;
 /**
@@ -51,5 +52,8 @@ public abstract class Controller<M extends Model, V extends View> {
 		return view;
 	}
 	
+	public Vector2 position() {
+		return model.getPosition();
+	}
 	
 }

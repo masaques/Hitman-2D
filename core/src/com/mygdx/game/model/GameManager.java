@@ -1,10 +1,15 @@
 package com.mygdx.game.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,7 +42,9 @@ import com.mygdx.game.view.assets.PlayerView;
 import serialization.Dumpeable;
 import serialization.GameInformation;
 import serialization.Information;
+import serialization.Level;
 import serialization.NPCInformation;
+import serialization.Position;
 import serialization.CharacterInformation;
 import serialization.GameSerializer;
 
@@ -58,7 +65,7 @@ public class GameManager implements Dumpeable {
 	 */
 	private static final float FRAME_DURATION = 0.05f;
 	private LevelMap map ;
-	private PlayerController player_manager ;
+	private PlayerController playerController ;
 	
 	
 	
@@ -69,7 +76,7 @@ public class GameManager implements Dumpeable {
 	private List<NPCController> npcController = new ArrayList<NPCController>();
 	private NoiseController noiseController = new NoiseController() ;
 	
-	public GameManager(int width,int height,int tile_width,int goons){
+	public GameManager(int width,int height,int tile_width,int goons) throws JAXBException{
 		control = new ControlProcessor() ;
 		Gdx.input.setInputProcessor(control);
 		tiled_map= new TmxMapLoader().load(mapPath);
@@ -92,7 +99,7 @@ public class GameManager implements Dumpeable {
 		TextureRegion interrogationTextureRegion = new TextureRegion(interrogationTexture);
 		Texture exclamationTexture = new Texture(Gdx.files.internal("assets/sprite_exclamation.png"));
 		TextureRegion exclamationTextureRegion = new TextureRegion(exclamationTexture);
-		for(int i=0; i< 1; i++){
+		for(int i=0; i< 3; i++){
 			
 			
 			NPCView goon_view = new NPCView(
@@ -130,56 +137,39 @@ public class GameManager implements Dumpeable {
 				playerDeadTextureRegion
 				);
 		Player player = new Player(new Rectangle(50,50,18,13),map);
-		player_manager = new PlayerController(player,control, player_view) ;
+		playerController = new PlayerController(player,control, player_view) ;
 		
 		linearPathFinder = new LinearPathFinder(map);
 		BulletManager.getInstance().setMap(map);
+
+		
+		/**
+		 * Todo este bloque comentado sirve para probar el 
+		 * marshalling de los datos creados arriba a un XML que representa al
+		 * nivel al inicializarse
+		 */
+		
+		
+//		List<Vector2> goonPositions = new ArrayList<Vector2>() ;
+//		Position playerPosition = new Position(playerController.position());
+//		
+//		for(NPCController c : npcController) {
+//			goonPositions.add(c.position()) ;
+//		}
+//		
+//		Level l = new Level (mapPath,Position.vectorToPosition(goonPositions),playerPosition) ;
+//		JAXBContext context = JAXBContext.newInstance(Level.class) ;
+//		Marshaller marshaller = context.createMarshaller();
+//		marshaller.marshal(l, new File("test.xml"));
+		
+		
+		
 	}
 	
-	public GameManager (GameInformation g) {
-//		
-//		
-//		control = new ControlProcessor() ;
-//		Gdx.input.setInputProcessor(control);
-//		tiled_map= new TmxMapLoader().load(g.getMap());
-//		LevelMap map = new LevelMap(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),32,tiled_map);
-//		AStarPathFinder  aStarPathFinder  = new AStarPathFinder(map, MAX_SEARCH);
-//		LinearPathFinder linearPathFinder = new LinearPathFinder(map);
-//		RandList<Vector2> randArray = new RandList<Vector2>();
-//		randArray.add(new Vector2(200, 150));
-//		randArray.add(new Vector2(700,700));
-//		randArray.add(new Vector2(73,792));
-//		randArray.add(new Vector2(817,48));
-//		VisionManager visionManager = VisionManager.getInstance();
-//		NoiseManager  noiseManager  = NoiseManager.getInstance();
-//		for (NPCInformation info : g.getGoonInfo()) {
-//			NPCView goon_view = new NPCView("assets/hitman_walk.png",
-//					"assets/goon_sprite_hurt.png",
-//					"assets/goon_sprite_dead.png",
-//					18, 13, 15);
-//			goon = new Goon(info,map,randArray) ;
-//			goon.setAStarPathFinder(aStarPathFinder);
-//			goon.setLinearPathFinder(linearPathFinder);
-//			visionManager.addListener(goon);
-//			noiseManager.addListener(goon);
-//		
-//		}
-//		PlayerView player_view = new PlayerView("assets/hitman_walk.png",
-//				"assets/goon_sprite_hurt.png",
-//				"assets/goon_sprite_dead.png",
-//				 18, 13, 15);
-//		Player player = new Player(g.getPlayerInfo(),map);
-//		player_manager = new PlayerController(player,control, player_view) ;
-//		
-//		linearPathFinder = new LinearPathFinder(map);
-//		BulletManager.getInstance().setMap(map);
-	}
 	
 	public TiledMap getTiledMap() {
 		return tiled_map;
 	}
-	
-	
 	
 	public void update(){
 		if(control.requestSave()) {
@@ -191,28 +181,17 @@ public class GameManager implements Dumpeable {
 		}
 		
 		VisionManager.getInstance().update();
-//		NoiseManager.getInstance().update();
 		noiseController.manage();
 		bulletController.manage();
 		for (NPCController g : npcController){
 			g.updateModel();
 			g.updateView();
 		}
-		player_manager.control();
+		playerController.control();
 	}
 	
 	@Override
 	public GameInformation dump() {
-		List<NPCInformation> goonInfo = new ArrayList<NPCInformation>();
-		CharacterInformation playerInfo ;
-//		for (NPC g: goon_set) {
-//			goonInfo.add(g.dump());
-//		}
-		/**
-		Player player = player_manager.getModel();
-		playerInfo= player.dump();
-		*/
-		//return new GameInformation(goonInfo,playerInfo,mapPath) ;
 		return null;
 	}
 	
