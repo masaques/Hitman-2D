@@ -41,7 +41,7 @@ public abstract class CharacterController <M extends Character, V extends Charac
 		V characterView = getView();
 		if (!isDead){
 			M character = getModel();
-			characterView.setPosition(character.getPosition());
+			characterView.setPosition(character.getCenter());
 			characterView.setLookDirection(character.getLookDirection());
 			characterView.setRunning(characterView.isRunning());
 			characterView.setMoving(character.isMoving());
@@ -50,7 +50,7 @@ public abstract class CharacterController <M extends Character, V extends Charac
 				character.setHurt(false);
 			}
 			if (character.isDead()) {
-				characterView.setDead();
+				characterView.die();
 				character.die();
 				character = null;
 				isDead = true;

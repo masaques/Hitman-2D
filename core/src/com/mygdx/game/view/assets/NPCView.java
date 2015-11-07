@@ -2,29 +2,39 @@ package com.mygdx.game.view.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.character.NPC;
 import com.mygdx.game.model.character.NPCState;
 
 public class NPCView extends CharacterView<NPC> {
-	Texture exclamation;
-	Texture interrogation;
+	TextureRegion exclamation;
+	TextureRegion interrogation;
 	
 	private NPCState currentState;
 	
-	public NPCView(String sprite_path, String hurt_sprite_path, 
-			String deadSpritePath,
-			int sprite_width, int spriteLength, int animation_length) {
-		super(sprite_path, hurt_sprite_path, deadSpritePath, sprite_width, spriteLength, animation_length);
-		exclamation    = new Texture(Gdx.files.internal("assets/sprite_exclamation.png"));
-		interrogation = new Texture(Gdx.files.internal("assets/sprite_interrogation.png"));
+	public NPCView(
+			SpriteBatch batch,
+			Animation walkAnimation,
+			Animation hurtAnimation,
+			Animation shootWalkAnimation,
+			Animation shootHurtAnimation,
+			TextureRegion deadTextureRegion,
+			TextureRegion exclamationTextureRegion,
+			TextureRegion interrogationTextureRegion
+			) {
+		super(batch, walkAnimation,hurtAnimation,shootWalkAnimation,shootHurtAnimation,deadTextureRegion);
+		exclamation    = exclamationTextureRegion;
+		interrogation  = interrogationTextureRegion;
 	}
 	
 	@Override
 	public void draw(){
 		super.draw();
 		if (!isDead()){
-			float balloonPositionX = getPosition().x + getWidth() / 2 - 5f;
+			float balloonPositionX = getPosition().x - 5f;
 			float balloonPositionY = getPosition().y + getHeight();
 			batch.begin();
 			if (currentState == NPCState.ALARM) {

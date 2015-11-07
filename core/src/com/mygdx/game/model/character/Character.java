@@ -30,12 +30,10 @@ import serialization.Dumpeable;
 public abstract class Character implements Movable, BulletListener,Dumpeable,Model {
 	private static int IDS = 0;
 	private int id ;
-	private static final float DIRECTIONAL_EPSILON = .05f;
 	private static final float NORMAL_SPEED = 60f;
 	private static final float RUNNING_SPEED = 80f;
 	private Vector2 moveDirection;
 	private Vector2 lookDirection;
-	private Vector2 seekForce;
 	private boolean isRunning;
 	private float healthPoints ;
 	private boolean isDead ;
@@ -49,7 +47,6 @@ public abstract class Character implements Movable, BulletListener,Dumpeable,Mod
 	public Character(Rectangle hitBox, LevelMap map, Team team){
 		this.moveDirection = new Vector2();
 		this.lookDirection = new Vector2();
-		this.seekForce 	   = new Vector2();
 		this.map = map;
 		this.hitBox = hitBox;
 		this.isRunning = false;
@@ -209,6 +206,17 @@ public abstract class Character implements Movable, BulletListener,Dumpeable,Mod
 	 */
 	
 	protected void moveAlong() {
+		Vector2 velocity = getVelocity();
+		Vector2 position = hitBox.getCenter(new Vector2());
+		
+		hitBox.setCenter(position.add(velocity.scl(Gdx.graphics.getDeltaTime())));
+		return;
+	}
+	
+	/**
+	 * Devuelve el vector velocidad.
+	 */
+	protected Vector2 getVelocity() {
 		float speed;
 		if (isRunning()){
 			speed = RUNNING_SPEED;
@@ -216,10 +224,9 @@ public abstract class Character implements Movable, BulletListener,Dumpeable,Mod
 		else {
 			speed = NORMAL_SPEED;
 		}
-		Vector2 position = hitBox.getCenter(new Vector2());
-		Vector2 velocity = moveDirection.nor().scl(speed);
-		hitBox.setCenter(position.add(velocity.scl(Gdx.graphics.getDeltaTime())));
-		return;
+		Vector2 velocity = new Vector2();
+		velocity.set(moveDirection).nor().scl(speed);
+		return velocity;
 	}
 	/**
 	 * Devuelve los puntos de vida.
@@ -321,11 +328,17 @@ public abstract class Character implements Movable, BulletListener,Dumpeable,Mod
 	 * Devuelve el hitBox.
 	 */
 	public Rectangle getHitBox() {
-		return this.hitBox;
+		return new Rectangle(hitBox);
+	}
+	/**
+	 * Setea el hitBox.
+	 */
+	protected void setHitBox(Rectangle hitBox) {
+		this.hitBox.set(hitBox);
 	}
 	
 	/**
-	 * Metodo a llamar
+	 * Metodo a llamar cuando un character muere. Se debe encargar de deslistarse de los MessageManager.
 	 * 
 	 */
 	public abstract void die();
@@ -336,5 +349,11 @@ public abstract class Character implements Movable, BulletListener,Dumpeable,Mod
 	public Team getTeam() {
 		return team;
 	}
+	
+	/**
+	 * Devuelve si el jugador esta disparando.
+	 * @return
+	 */
+	public abstract boolean isShooting();
 	
 }

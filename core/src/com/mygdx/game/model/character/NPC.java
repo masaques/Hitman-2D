@@ -12,12 +12,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.LevelMap;
-import com.mygdx.game.model.message.Bullet;
 import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseListener;
 import com.mygdx.game.model.message.NoiseManager;
-import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.model.message.VisionListener;
 import com.mygdx.game.model.message.VisionManager;
 
@@ -31,7 +29,6 @@ import serialization.NPCInformation;
 public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener{
 	private static final float VISUAL_RANGE = 9000f ;
 	private static final float VISUAL_ANGLE = 100f ;
-	private static final float ANGULAR_VELOCITY = 10F;
 	protected static final float EPSILON = 2f;
 	private Path currentPath;
 	private Step finalStep;
@@ -255,15 +252,18 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	
 	@Override
 	protected void moveAlong() {
-		Rectangle boundingHitBox = new Rectangle(getHitBox());
-		boundingHitBox.setWidth(boundingHitBox.width * 1.1f);
-		boundingHitBox.setHeight(boundingHitBox.height * 1.1f);
+		Rectangle hitBox = getHitBox();
+		Vector2 position = hitBox.getCenter(new Vector2());
+		Rectangle boundingHitBox = new Rectangle();
+		boundingHitBox.setWidth(hitBox.getWidth() * 1.2f);
+		boundingHitBox.setHeight(hitBox.getHeight() * 1.2f);
+		boundingHitBox.setCenter(position);
 		float maxforce = 2f;
-		Vector2 position = boundingHitBox.getCenter(new Vector2());
-		Vector2 velocity = new Vector2(getMoveDirection());
-		Vector2 ahead  = new Vector2(position)
-				.add(new Vector2(velocity).nor().scl(5f));
-		Vector2 ahead2 = new Vector2(position).add(new Vector2(velocity).nor().scl(2.5f));
+		float deltaTime = Gdx.graphics.getDeltaTime();
+		Vector2 velocity  = getVelocity().scl(deltaTime);
+		Vector2 velocity2 = getVelocity().scl(deltaTime).scl(.5f);
+		Vector2 ahead  = new Vector2(position).add(velocity);
+		Vector2 ahead2 = new Vector2(position).add(velocity2);
 		Rectangle obstacle = map.avoidanceDetection(boundingHitBox, ahead, ahead2);
 		Vector2 avoidanceForce = new Vector2();
 		if (obstacle != null) {
@@ -271,12 +271,15 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		}
 		Vector2 steering = new Vector2();
 		steering.add(avoidanceForce);
-		move(velocity.add(steering));
+		move(velocity.nor().add(steering));
 		super.moveAlong();
 		lookWhereYouAreGoing();
 		return;
 	}
 	
+	/**
+	 * Este metodo se debe llamar cuando el npc muere, para desuscribirse de sus MessageManager.
+	 */
 	@Override
 	public void die() {
 		VisionManager.getInstance().removeListener(this);
@@ -297,7 +300,8 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		}
 		else if (!lookDirection.equals(moveDirection)) {
 			float angle = lookDirection.angle(moveDirection);
-			angle = (angle/360f) * ANGULAR_VELOCITY;
+			Vector2 velocity = getVelocity();
+			angle = (angle/360f) * velocity.len();
 			lookDirection.rotate(angle);
 			look(lookDirection);
 		}

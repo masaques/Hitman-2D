@@ -33,10 +33,14 @@ public class Goon extends NPC implements Aggressive{
 	private static final float SHOOTING_DELAY = 3f;
 	private Behaviour<NPC> patrolBehaviour;
 	private Behaviour<NPC> followBehaviour;
+	/**
+	 * TODO Deprecated?
+	 */
 	private Behaviour<NPC> shootBehaviour;
 	private Behaviour<NPC> searchBehaviour;
 	private Behaviour<NPC> inspectBehaviour;
 	private float shootTimer = 0f;
+	private boolean isShooting;
 	
 	public Goon(Rectangle hitBox, LevelMap map, RandList<Vector2> searchPositions){
 		super(hitBox, map);
@@ -90,13 +94,22 @@ public class Goon extends NPC implements Aggressive{
 	@Override
 	public void update(){
 		shootTimer += Gdx.graphics.getDeltaTime();
+		isShooting = false;
 		super.update();
 	}
 	public void resetShootTimer() {
 		shootTimer = 0f;
 	}
 	
+	@Override
 	public void shoot() {
-		BulletManager.getInstance().dispatchMessage(new Bullet(this.getTeam(),this.getCenter(),getLookDirection()));
+		isShooting = true;
+		Bullet bullet = new Bullet(getTeam(),getCenter(),getLookDirection());
+		BulletManager.getInstance().dispatchMessage(bullet);
+	}
+	
+	@Override
+	public boolean isShooting() {
+		return isShooting;
 	}
 }

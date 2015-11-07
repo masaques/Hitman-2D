@@ -15,26 +15,24 @@ import com.mygdx.game.model.character.Character;
  */
 public abstract class CharacterView<T extends Character> implements View{
 
-	private static final float HIT_DURATION = 1f;
+	private static final float SHOOT_DURATION = 1f;
 	private Vector2 lookDirection;
 	private Vector2 position;
-	private float healthPoints;
-	private boolean isRunning;
-	private boolean isMoving;
-	private float hitTimer;
 	public SpriteBatch batch;
-	private Animation normalWalkAnimation;
+	private Animation walkAnimation;
 	private Animation hurtWalkAnimation;
+	private Animation shootWalkAnimation;
+	private Animation shootHurtAnimation;
 	private TextureRegion currentFrame;
 	private TextureRegion deadSpriteFrame;
 	private float stateTime;
-	
-	private int spriteWidth;
-	private int spriteHeight;
-	private int offsetX;
-	private int offsetY;
-	private boolean isDead = false;
-	
+	private float healthPoints;
+	private float shootTimer;
+	private boolean isShooting;
+	private boolean isDead;
+	private boolean isRunning;
+	private boolean isMoving;
+	private boolean isHurt;
 	/**
 	 * 
 	 * @param sprite_path - Path de la textura a mostrar
@@ -42,40 +40,21 @@ public abstract class CharacterView<T extends Character> implements View{
 	 * @param spriteLength - Largo de cada frame
 	 * @param animation_length - Cantidad de fotogramas en la animacion
 	 */
-	public CharacterView(String normalSpritePath,
-			String hurtSpritePath,
-			//String shootingSpritePath,	TODO
-			String deadSpritePath,
-			int spriteWidth,
-			int spriteHeight, 
-			int animation_length){
+	public CharacterView(
+			SpriteBatch batch,
+			Animation walkAnimation,
+			Animation hurtAnimation,
+			Animation shootWalkAnimation,
+			Animation shootHurtAnimation,
+			TextureRegion deadTextureRegion
+			){
 		
-		batch   = new SpriteBatch();
-		Texture normalSpriteTexture = new Texture(Gdx.files.internal(normalSpritePath));
-		
-		TextureRegion[][] tmp = TextureRegion.split(normalSpriteTexture, spriteWidth, spriteHeight);
-		
-		TextureRegion[] normalWalkFrames = new TextureRegion[animation_length];
-		for(int i=0; i<animation_length;i++){
-			normalWalkFrames[i] = tmp[0][i];
-		}
-		normalWalkAnimation = new Animation(0.025f,normalWalkFrames);
-		stateTime = 0f;
-		
-		Texture hurtSpriteTexture = new Texture(Gdx.files.internal(hurtSpritePath));
-		
-		TextureRegion[][] tmp2 = TextureRegion.split(hurtSpriteTexture, spriteWidth, spriteHeight);
-		
-		TextureRegion[] hurtWalkFrames = new TextureRegion[animation_length];
-		for(int i=0; i<animation_length;i++){
-			hurtWalkFrames[i] = tmp2[0][i];
-		}
-		hurtWalkAnimation = new Animation(0.025f,hurtWalkFrames);
-		
-		Texture deadSpriteTexture = new Texture(Gdx.files.internal(deadSpritePath));
-		deadSpriteFrame = new TextureRegion(deadSpriteTexture);
-		this.spriteWidth = spriteWidth;
-		this.spriteHeight = spriteHeight;
+		this.batch   = batch;
+		this.walkAnimation = walkAnimation;
+		this.hurtWalkAnimation  = hurtAnimation;
+		this.shootWalkAnimation = shootWalkAnimation;
+		this.shootHurtAnimation = shootHurtAnimation;
+		this.deadSpriteFrame = deadTextureRegion;
 		this.lookDirection = new Vector2();
 		this.position = new Vector2();
 	}
@@ -89,19 +68,38 @@ public abstract class CharacterView<T extends Character> implements View{
 			if (isMoving){
 				updateAnimation();
 			}
-			if (hitTimer >=0) {
-				hitTimer -= Gdx.graphics.getDeltaTime();
-				currentFrame = hurtWalkAnimation.getKeyFrame(stateTime, true);
+			if (isShooting && shootTimer >= SHOOT_DURATION){
+				shootTimer = 0;
+				isShooting = false;
+			}
+			else if(isShooting) {
+				shootTimer += Gdx.graphics.getDeltaTime();
+			}
+			if (isHurt) {
+				if (isShooting) {
+					currentFrame = shootHurtAnimation.getKeyFrame(stateTime, true);
+				}
+				else {
+					currentFrame = hurtWalkAnimation.getKeyFrame(stateTime, true);
+				}
+				
 			}
 			else {
-				currentFrame = normalWalkAnimation.getKeyFrame(stateTime, true);
+				if (isShooting) {
+					currentFrame = shootWalkAnimation.getKeyFrame(stateTime, true);
+					System.out.println(isShooting);
+				}
+				else {
+					currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+				}
+				
 			}
 		}
 		batch.begin();
 		float rotation = lookDirection.angle() + 90f;
 		int width = currentFrame.getRegionWidth();
 		int height = currentFrame.getRegionHeight();
-		batch.draw(currentFrame, position.x, position.y, width / 2, height / 2,width,height, 1f,1f, rotation);
+		batch.draw(currentFrame, position.x - width/2, position.y - height /2, width / 2, height / 2,width,height, 1f,1f, rotation);
 		batch.end();
 	}
 	/**
@@ -145,25 +143,32 @@ public abstract class CharacterView<T extends Character> implements View{
 	}
 
 	public void setHit() {
-		this.hitTimer = HIT_DURATION;
-	}
-	public float getWidth() {
-		return spriteWidth;
+		this.isHurt = true;
 	}
 	
 	public void setLookDirection(Vector2 direction) {
 		this.lookDirection.set(direction);
 	}
 
-	public float getHeight() {
-		return spriteHeight;
-	}
 	
-	public void setDead() {
+	public void die() {
 		isDead = true;
 		currentFrame = deadSpriteFrame;
 	}
 	public boolean isDead() {
 		return isDead;
+	}
+	
+	public int getWidth() {
+		return currentFrame.getRegionWidth();
+	}
+	
+	public int getHeight() {
+		return currentFrame.getRegionHeight();
+	}
+	public void setShooting(boolean isShooting) {
+		
+		shootTimer = 0f;
+		this.isShooting = isShooting;
 	}
 }

@@ -13,6 +13,7 @@ import com.mygdx.game.view.assets.PlayerView;
  */
 public class PlayerController extends CharacterController<Player, PlayerView> {
 	private ControlProcessor control;
+	private boolean isShooting;
 	
 	public PlayerController(Player player,ControlProcessor control, PlayerView playerView){
 		super(player, playerView);
@@ -25,6 +26,14 @@ public class PlayerController extends CharacterController<Player, PlayerView> {
 	}
 	
 	public void updateView() {
+		if (!isDead()) {
+			if (isShooting){
+				getView().setShooting(isShooting);
+				isShooting = false;
+			}
+			
+			
+		}
 		super.updateView();
 	}
 	public void updateModel() {
@@ -41,11 +50,12 @@ public class PlayerController extends CharacterController<Player, PlayerView> {
 			Vector2 lookDirection = movement.getLookDirection();
 			lookDirection.sub(getModel().getCenter());
 			getModel().look(lookDirection);
-			
 			if (movement.isShooting()) {
 				getModel().shoot();
+				isShooting = true;
 			}
 		}
 		super.updateModel();
+		
 	}
 }

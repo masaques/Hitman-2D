@@ -27,6 +27,7 @@ public class Player extends Character implements VisionSender {
 	private static final double RUNNING_NOISE_RANGE = 200;
 	private static final float NORMAL_SPEED = 60f;
 	private static final float RUNNING_SPEED = 100f;
+	private boolean isShooting;
 	
 	public Player(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map, Team.PLAYER);
@@ -89,7 +90,7 @@ public class Player extends Character implements VisionSender {
 				}
 			}
 		}
-		getHitBox().set(currHitBox);
+		setHitBox(currHitBox);
 		return;
 	}
 	
@@ -114,5 +115,10 @@ public class Player extends Character implements VisionSender {
 	@Override
 	public void die() {
 		BulletManager.getInstance().removeListener(this);
+	}
+	
+	@Override
+	public boolean isShooting(){
+		return false;
 	}
 }

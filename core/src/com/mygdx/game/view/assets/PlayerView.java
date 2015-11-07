@@ -1,12 +1,20 @@
 package com.mygdx.game.view.assets;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.model.character.Player;
 
 public class PlayerView extends CharacterView<Player> {
 
-	public PlayerView(String normal_sprite_path,String hurt_sprite_path,
-			String deadSpritePath,int sprite_width, int spriteLength, int animation_length) {
-		super(normal_sprite_path, hurt_sprite_path,deadSpritePath, sprite_width, spriteLength, animation_length);
+	public PlayerView(
+			SpriteBatch batch,
+			Animation walkAnimation,
+			Animation hurtAnimation,
+			Animation shootWalkAnimation,
+			Animation shootHurtAnimation,
+			TextureRegion deadTextureRegion) {
+		super(batch, walkAnimation,hurtAnimation,shootWalkAnimation,shootHurtAnimation,deadTextureRegion);
 		// TODO Auto-generated constructor stub
 	}
 

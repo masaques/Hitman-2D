@@ -10,7 +10,7 @@ import com.mygdx.game.controller.FlyingBullet;
 public class BulletView {
 	private List<FlyingBullet> bullets;
 	private ShapeRenderer bulletRenderer;
-	private static final float BULLET_DURATION = .5f;
+	private static final float BULLET_DURATION = .05f;
 	
 	public BulletView() {
 		bulletRenderer = new ShapeRenderer();
