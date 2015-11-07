@@ -1,36 +1,50 @@
 package com.mygdx.game.view.screens.menu.view;
 
-import com.badlogic.gdx.Gdx;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import java.util.*;
 
 public class MenuUI implements Screen{
-
-	private Stage stage;
 	
-	public MenuUI(){
-		//public Stage (Viewport viewport, Batch batch);
-		//Tanto el viewport como el batch los saco de levelscreen
-		stage=new Stage();
+	private static List<TextButton> hitmanButtons;
+	
+	public MenuUI(HitmanSkin hitmanSkin){
+		hitmanButtons = new ArrayList<TextButton>();
+		initialize(hitmanSkin);
 	}
 	
-	public static void drawOnScreen(){
-		HitmanSkin skin = new HitmanSkin();
+	void initialize(HitmanSkin hitmanSkin){
+		TextButton newGame = new TextButton("New Game",hitmanSkin.getButtonSkin());
+		TextButton resolution = new TextButton("Resolution",hitmanSkin.getButtonSkin());
 		
-		HitmanButton start = new HitmanButton("Start",skin);
-				
-		start.setOnClickListener(new ClickListener(){
-			
+		newGame.addListener(new ClickListener(){
 			public void clicked(InputEvent event, float x, float y){
-				Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width,Gdx.graphics.getDesktopDisplayMode().width,true);
+				System.out.println("HOLA");
 			}
 			
 		});
+		newGame.setPosition(864/2, 864*0.25f);
+
 		
+		resolution.addListener(new ClickListener(){
+			public void clicked(InputEvent event, float x, float y){
+				System.out.println("HOLA 2");
+			}
+			
+		});
+		resolution.setPosition(864/2, 864*0.75f);
+		
+		hitmanButtons.add(newGame);
+		hitmanButtons.add(resolution);		
 	}
 	
+	public List<TextButton> getMenuButtons(){
+		return hitmanButtons;
+	}
 	
 	@Override
 	public void show() {
@@ -39,8 +53,7 @@ public class MenuUI implements Screen{
 
 	@Override
 	public void render(float delta) {
-		stage.act();
-		stage.draw();
+
 	}
 
 	@Override
