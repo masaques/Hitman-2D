@@ -34,6 +34,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.controller.ControlProcessor;
 import com.mygdx.game.model.GameManager;
 import com.mygdx.game.model.HitmanGame;
+import com.mygdx.game.model.IllegalPositionException;
 
 import serialization.GameSerializer;
 
@@ -65,7 +66,12 @@ public class LevelScreen implements Screen{
 		
 		this.game = game;
 		gameport = new FitViewport(864, 864,camera);
-		gameManager = new GameManager(864,864,32,l);
+		try {
+			gameManager = new GameManager(864,864,32,l);
+		} catch (IllegalPositionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
 		camera.position.set(gameport.getWorldWidth()/2,gameport.getWorldHeight()/2,0);
 		shapeRenderer = new ShapeRenderer();

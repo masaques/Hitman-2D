@@ -61,11 +61,7 @@ import serialization.GameSerializer;
 public class GameManager implements Dumpeable {
 	
 	protected static final int MAX_SEARCH = 100 ;
-	/**
-	 * Duracion de un frame en la animacion (en segundos).
-	 */
 	private String path ;
-	private LevelMap map ;
 	private TiledMap tiled_map ;
 	private ControlProcessor control ;
 	private BulletController bulletController = new BulletController();
@@ -73,7 +69,7 @@ public class GameManager implements Dumpeable {
 	private List<NPCController> npcController = new ArrayList<NPCController>();
 	private NoiseController noiseController = new NoiseController() ;
 	
-	public GameManager(int width,int height,int tile_width, Level level) {
+	public GameManager(int width,int height,int tile_width, Level level) throws IllegalPositionException {
 		this.path=level.getPath();
 		control = new ControlProcessor() ;
 		Gdx.input.setInputProcessor(control);
@@ -89,6 +85,10 @@ public class GameManager implements Dumpeable {
 		SpriteBatch batch = new SpriteBatch();
 		
 		for(Vector2 v : level.goonPositions()){
+			if (!map.isValid(new Rectangle(v.x,v.y,18,13))) {
+				throw new IllegalPositionException() ;
+			}
+			
 			NPCView goon_view = new NPCView(
 					batch,
 					LogicAssets.walkAnimation,
@@ -106,7 +106,9 @@ public class GameManager implements Dumpeable {
 			NPCController controller = new GoonController(goon, goon_view);
 			npcController.add(controller);
 		}
-		
+		if (!map.isValid(new Rectangle(level.getPlayer().x,level.getPlayer().y,18,13))) {
+			throw new IllegalPositionException() ;
+		}
 		PlayerView player_view = new PlayerView(
 				batch,
 				LogicAssets.playerWalkAnimation,
@@ -126,15 +128,7 @@ public class GameManager implements Dumpeable {
 		return tiled_map;
 	}
 	
-	public void update(){
-		if(control.requestSave()) {
-			try {
-				GameSerializer.save(this,"prueba");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
+	public void update(){		
 		VisionManager.getInstance().update();
 		noiseController.manage();
 		bulletController.manage();
