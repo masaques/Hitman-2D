@@ -4,10 +4,11 @@ package com.mygdx.game.model;
 import com.badlogic.gdx.Game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import com.mygdx.game.view.screens.menu.view.MenuUI;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.game.view.screens.menu.view.MenuManager;
 
 /**
  * <p> Clase del juego, {@link Game} es un {link ApplicationListener} (clase que se encarga del renderizado
@@ -25,17 +26,27 @@ import com.mygdx.game.view.screens.menu.view.MenuUI;
 public class HitmanGame extends Game{
 
 	public SpriteBatch batch;
+	public MenuManager menu;
 	
+	public HitmanGame(){
+		super();
+		menu = new MenuManager(this);
+	}
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		
-		setScreen(new MenuUI(this));
-		
+		setScreen(menu.setScreen());
 	}
 	
 	public void render () {
-		super.render();
+		batch.begin();
+		Texture background = new Texture(Gdx.files.internal("assets/background.png"));
+		TextureRegion backgroundRegion = new TextureRegion(background, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		batch.draw(backgroundRegion, 0, 0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		
+		menu.setScreen().render(Gdx.graphics.getDeltaTime());
+		
+		batch.end();
 	}
 
 

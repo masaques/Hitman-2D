@@ -2,41 +2,21 @@ package com.mygdx.game.view.screens.menu.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.mygdx.game.model.HitmanGame;
 
 public class MenuManager {
 	
-	/*
-	 * Esta clase es la que se encarga de controlar lo que el usuario
-	 * elegir� cuando inicie el Juego.
-	 * Contar� con 5 opciones.
-	 * -1- NEW -> Inicio de una partida nueva
-	 * -2- RESUME -> Abre una partida almacenada
-	 * -3- AYUDA -> Muestra como se juega. Esto es meramente informativo
-	 * -4- RESOLUTION -> Puede cambiar la resolucion del juego.
-	 * -5- SCORE -> Muestra una tabla con los puntajes obtenidos
-	 * 
-	 * A su vez, estar� la clase MenuManagerView que es la que se encarga de 
-	 * mostrarle al usuario todas las opciones
-	 */
-	
-	private static MenuManager self;
 	private String playerName = "";
-	//Iniciamos la pantalla en Fullscreen!!!
-	private MenuChoose screenResolutionState = MenuChoose.FullScreen;
-	//private final int MAXPLAYERNAME = 10;
-	private MenuChoose choose = MenuChoose.Main; //te dice donde estas parado o a donde tenes que ir, en su defecto
+	private MenuChoose choose = MenuChoose.Main; 
+	HitmanGame game;
+	MenuUI menuUi;
 	
-	public MenuManager(){
-		
+	public MenuManager(HitmanGame game){
+			this.game = game;
+			menuUi = new MenuUI(game);
+			//MenuUI.getInstance();
 	}
-	
-	public static MenuManager getInstance(){
-		if (self==null){
-			self=new MenuManager();
-		}
-		return self;
-	}
-	
+
 	public void reset(){
 		choose = MenuChoose.Main;
 		playerName = "";
@@ -83,6 +63,7 @@ public class MenuManager {
 		default:
 			break;
 		}
+		menuUi.drawMenu(game.batch, choose);
 	}
 	
 	public String getPlayerName() {
@@ -99,9 +80,9 @@ public class MenuManager {
 				choose = MenuChoose.New;
 				break;
 			case ChangeResolution:
-				screenResolutionState=MenuChoose.NormalScreen;
 				break;
 			case HighScore:
+				//elije 4:3
 			case Help:
 				//tampoco tengo que hacer nada
 				break;
@@ -116,10 +97,10 @@ public class MenuManager {
 			choose = MenuChoose.Help;
 			break;
 		case ChangeResolution:
-			screenResolutionState=MenuChoose.WideScreen;
 			//cambiar la resolucion a la segunda opcion
 			break;
 		case HighScore:
+			//elije 16:9
 		case Help:
 			//tampoco tengo que hacer nada
 			break;
@@ -134,7 +115,7 @@ public class MenuManager {
 			choose = MenuChoose.ChangeResolution;
 			break;
 		case ChangeResolution:
-			screenResolutionState=MenuChoose.FullScreen;
+			//elije fullscreen
 			//cambiar la resolucion a la tercera opcion
 			break;
 		case HighScore:
@@ -161,5 +142,8 @@ public class MenuManager {
 		}
 	}
 	
+	public MenuUI setScreen(){
+		return menuUi;
+	}
 
 }

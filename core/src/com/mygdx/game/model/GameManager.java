@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -44,6 +45,7 @@ import serialization.GameSerializer;
  * @author masaques
  * @author traies
  */
+
 public class GameManager implements Dumpeable {
 	
 	protected static final int MAX_SEARCH = 100 ;

@@ -15,7 +15,6 @@ public class ResolutionManager {
 	private static final int wideScreenHeight = 9;
 	private static final int normalScreenWidth = 4;
 	private static final int normalScreenHeight = 3;
-	
 	private static final int myWindowWidth = Gdx.graphics.getWidth();
 	private static final int myWindowHeight = Gdx.graphics.getHeight();
 	
@@ -31,11 +30,11 @@ public class ResolutionManager {
 	}
 	
 		
-	public void fullScreen(boolean fullscreen){
-		Gdx.graphics.setDisplayMode(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), fullscreen);
+	public static void fullScreen(boolean fullscreen){
+		Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 	}
 	
-	//Hacer un calculo matem�tico para eso!!!
+	//Hacer un calculo  para eso!!!
 	public void wideScreen(){
 		Gdx.graphics.setDisplayMode(0,0,false);
 	}

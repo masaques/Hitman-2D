@@ -50,6 +50,8 @@ public class LevelScreen implements Screen{
 	GameManager gameManager;
 	 
 	public LevelScreen(HitmanGame game){
+		Gdx.input.getInputProcessor();
+		
 		this.game = game;
 		gameport = new FitViewport(864, 864,camera);
 		gameManager = new GameManager(864,864,32,20);
