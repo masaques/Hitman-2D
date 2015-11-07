@@ -26,9 +26,19 @@ public class Position {
 		this.x=pos.x;
 		this.y=pos.y;
 	}
+	
 	public Vector2 getVector2() {
 		return new Vector2(x,y) ;
 	}
+	
+	public float getX() {
+		return x ;
+	}
+	
+	public float getY() {
+		return y ;
+	}
+	
 	/**
 	 * Metodo de clase para convertir listas de Vector2 a listas de Position,
 	 * necesaria para el uso del entorno JAXB
@@ -39,6 +49,19 @@ public class Position {
 		List<Position> ans = new ArrayList<Position>() ;
 		for (Vector2 v : vectors) {
 			ans.add(new Position(v)) ;
+		}
+		return ans ;
+	}
+	/**
+	 * Metodo que convierte una lista de Position dada a una lista de
+	 * Vector2
+	 * @param positions : La lista de Position a convertir
+	 * @return La lista convertida a lista de Vector2
+	 */
+	public static List<Vector2> positionToVector(List<Position> positions) {
+		List<Vector2> ans  = new ArrayList<Vector2>() ;
+		for (Position p : positions) {
+			ans.add(new Vector2(p.getX(),p.getY())) ;
 		}
 		return ans ;
 	}

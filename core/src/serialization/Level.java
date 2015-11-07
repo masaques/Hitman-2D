@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * Clase usada por el JAXBContext para marshalling
  * y unmarshalling de los datos necesarios a un archivo XML
@@ -35,6 +37,18 @@ public class Level {
 		this.playerPosition=playerPosition ;
 	}
 	public Level() {
-		
 	}
+	
+	public String getPath() {
+		return mapPath ;
+	}
+	
+	public List<Vector2> goonPositions() {
+		return Position.positionToVector(goonPositions) ;
+	}
+	
+	public Vector2 getPlayer() {
+		return new Vector2(playerPosition.getX(),playerPosition.getY()) ;
+	}
+	
 }
