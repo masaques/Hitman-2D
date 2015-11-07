@@ -64,6 +64,7 @@ public class GameManager implements Dumpeable {
 	/**
 	 * Duracion de un frame en la animacion (en segundos).
 	 */
+	private String path ;
 	private LevelMap map ;
 	private TiledMap tiled_map ;
 	private ControlProcessor control ;
@@ -72,7 +73,8 @@ public class GameManager implements Dumpeable {
 	private List<NPCController> npcController = new ArrayList<NPCController>();
 	private NoiseController noiseController = new NoiseController() ;
 	
-	public GameManager(int width,int height,int tile_width, String path) throws JAXBException{
+	public GameManager(int width,int height,int tile_width, Level level) {
+		this.path=level.getPath();
 		control = new ControlProcessor() ;
 		Gdx.input.setInputProcessor(control);
 		tiled_map= new TmxMapLoader().load(path);
@@ -86,7 +88,7 @@ public class GameManager implements Dumpeable {
 		randArray.add(new Vector2(817,48));
 		SpriteBatch batch = new SpriteBatch();
 		
-		for(int i=0; i< 3; i++){
+		for(Vector2 v : level.goonPositions()){
 			NPCView goon_view = new NPCView(
 					batch,
 					LogicAssets.walkAnimation,
@@ -98,7 +100,7 @@ public class GameManager implements Dumpeable {
 					LogicAssets.interrogationTextureRegion
 					);
 			
-			Goon goon = new Goon(new Rectangle(40,40, 18,13),map, randArray);
+			Goon goon = new Goon(new Rectangle(v.x,v.y, 18,13),map, randArray);
 			goon.setAStarPathFinder(aStarPathFinder);
 			goon.setLinearPathFinder(linearPathFinder);
 			NPCController controller = new GoonController(goon, goon_view);
@@ -113,37 +115,12 @@ public class GameManager implements Dumpeable {
 				LogicAssets.playerHurtShootAnimation,
 				LogicAssets.playerDeadTextureRegion
 				);
-		Player player = new Player(new Rectangle(50,50,18,13),map);
+		Player player = new Player(new Rectangle(level.getPlayer().x,level.getPlayer().y,18,13),map);
 		playerController = new PlayerController(player,control, player_view) ;
 		
 		linearPathFinder = new LinearPathFinder(map);
 		BulletManager.getInstance().setMap(map);
-
-		
-		/**
-		 * Todo este bloque comentado sirve para probar el 
-		 * marshalling de los datos creados arriba a un XML que representa al
-		 * nivel al inicializarse
-		 */
-		
-		
-//		List<Vector2> goonPositions = new ArrayList<Vector2>() ;
-//		Position playerPosition = new Position(playerController.position());
-//		
-//		for(NPCController c : npcController) {
-//			goonPositions.add(c.position()) ;
-//		}
-//		
-//		Level l = new Level (mapPath,Position.vectorToPosition(goonPositions),playerPosition) ;
-//		JAXBContext context = JAXBContext.newInstance(Level.class) ;
-//		Marshaller marshaller = context.createMarshaller();
-//		marshaller.marshal(l, new File("test.xml"));
 	}
-	
-	public GameManager (int width, int height, int tileWidth, Level level) {
-		
-	}
-	
 	
 	public TiledMap getTiledMap() {
 		return tiled_map;
@@ -166,6 +143,23 @@ public class GameManager implements Dumpeable {
 			g.updateView();
 		}
 		playerController.control();
+	}
+	
+	/**
+	 * Metodo para probar el marshalling de la partida a un xml
+	 * De usarse, guarda la posicion de todos los goons y del jugador 
+	 * @throws JAXBException
+	 */
+	public void marshal(String to) throws JAXBException {
+		List<Vector2> goonPositions = new ArrayList<Vector2>() ;
+		Position playerPosition = new Position(playerController.position());
+		for(NPCController c : npcController) {
+			goonPositions.add(c.position()) ;
+		}
+		Level l = new Level (path,Position.vectorToPosition(goonPositions),playerPosition) ;
+		JAXBContext context = JAXBContext.newInstance(Level.class) ;
+		Marshaller marshaller = context.createMarshaller();
+		marshaller.marshal(l, new File(to));
 	}
 	
 	@Override

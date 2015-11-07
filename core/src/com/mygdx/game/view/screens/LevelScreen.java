@@ -1,8 +1,12 @@
 package com.mygdx.game.view.screens;
 
+import java.io.File;
 import java.io.IOException;
+import serialization.Level;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *  Screen del nivel principal donde se llevara a cabo el juego. Posee la información completa
@@ -52,13 +56,19 @@ public class LevelScreen implements Screen{
 	GameManager gameManager;
 	 
 	public LevelScreen(HitmanGame game) throws JAXBException{
+		/**
+		 * Carga el nivel desde archivo
+		 */
+		JAXBContext context = JAXBContext.newInstance(Level.class) ;
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+		Level l = (Level)unmarshaller.unmarshal(new File("assets/Level0.xml")) ;
+		
 		this.game = game;
 		gameport = new FitViewport(864, 864,camera);
-		gameManager = new GameManager(864,864,32,"assets/test5.tmx");
+		gameManager = new GameManager(864,864,32,l);
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
 		camera.position.set(gameport.getWorldWidth()/2,gameport.getWorldHeight()/2,0);
 		shapeRenderer = new ShapeRenderer();
-		
 	}
 	
 	public void update(float dt){

@@ -27,6 +27,10 @@ public class Position {
 		this.y=pos.y;
 	}
 	
+	public Position() {
+		
+	}
+	
 	public Vector2 getVector2() {
 		return new Vector2(x,y) ;
 	}
