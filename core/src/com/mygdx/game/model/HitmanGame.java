@@ -8,6 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.view.screens.menu.view.HitmanButton;
+import com.mygdx.game.view.screens.menu.view.HitmanSkin;
 import com.mygdx.game.view.screens.menu.view.MenuUI;
 
 /**
@@ -16,6 +21,7 @@ import com.mygdx.game.view.screens.menu.view.MenuUI;
  * </p>
  * 
  * @author jcaracciolo
+ * @author kcortesrodrigue
  * 
  * @see com.badlogic.gdx.Game
  * @see com.badlogic.gdx.ApplicationListener
@@ -27,26 +33,39 @@ public class HitmanGame extends Game{
 
 	public SpriteBatch batch;
 	public MenuUI menuui;
+	public Stage stage;
 	
 	public HitmanGame(){
 		super();
-		menuui = new MenuUI();
 	}
+	
 	@Override
 	public void create() {
-		batch = new SpriteBatch();
-		setScreen(menuui);
+		stage = new Stage();
+		Gdx.input.setInputProcessor(stage);
+		HitmanSkin hitmanSkin = new HitmanSkin();
+		//Lo que esta a partir de aca tendria que estar en otro lado
+		HitmanButton btnPlay = new HitmanButton("Play",hitmanSkin);
+		btnPlay.setOnClickListener(new ClickListener(){
+			
+			public void clicked(InputEvent event, float x, float y){
+				Gdx.graphics.setDisplayMode(800,600,false);
+			}
+			
+		});
+			
+		
 	}
 	
 	public void render () {
-		batch.begin();
-		Texture background = new Texture(Gdx.files.internal("assets/background.png"));
-		TextureRegion backgroundRegion = new TextureRegion(background, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		batch.draw(backgroundRegion, 0, 0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		super.render();
+		//batch.begin();
+		//Texture background = new Texture(Gdx.files.internal("assets/background.png"));
+		//TextureRegion backgroundRegion = new TextureRegion(background, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		//batch.draw(backgroundRegion, 0, 0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		stage.draw();
 		
-		menuui.render(1f);
-		
-		batch.end();
+		//batch.end();
 	}
 
 
