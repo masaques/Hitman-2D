@@ -36,6 +36,7 @@ import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
 import com.mygdx.game.view.assets.CharacterView;
+import com.mygdx.game.view.assets.LogicAssets;
 import com.mygdx.game.view.assets.NPCView;
 import com.mygdx.game.view.assets.PlayerView;
 
@@ -63,23 +64,18 @@ public class GameManager implements Dumpeable {
 	/**
 	 * Duracion de un frame en la animacion (en segundos).
 	 */
-	private static final float FRAME_DURATION = 0.05f;
 	private LevelMap map ;
-	private PlayerController playerController ;
-	
-	
-	
 	private TiledMap tiled_map ;
 	private ControlProcessor control ;
-	private String mapPath = "assets/test5.tmx";
 	private BulletController bulletController = new BulletController();
+	private PlayerController playerController ;
 	private List<NPCController> npcController = new ArrayList<NPCController>();
 	private NoiseController noiseController = new NoiseController() ;
 	
-	public GameManager(int width,int height,int tile_width,int goons) throws JAXBException{
+	public GameManager(int width,int height,int tile_width, String path) throws JAXBException{
 		control = new ControlProcessor() ;
 		Gdx.input.setInputProcessor(control);
-		tiled_map= new TmxMapLoader().load(mapPath);
+		tiled_map= new TmxMapLoader().load(path);
 		LevelMap map = new LevelMap(width,height, tile_width,tiled_map);
 		AStarPathFinder  aStarPathFinder  = new AStarPathFinder(map, MAX_SEARCH);
 		LinearPathFinder linearPathFinder = new LinearPathFinder(map);
@@ -89,28 +85,17 @@ public class GameManager implements Dumpeable {
 		randArray.add(new Vector2(73,792));
 		randArray.add(new Vector2(817,48));
 		SpriteBatch batch = new SpriteBatch();
-		Animation walkAnimation = makeAnimation("assets/goon_straight_walk.png", 18,13,15, FRAME_DURATION);
-		Animation hurtWalkAnimation = makeAnimation("assets/goon_hit.png", 18,13,15, FRAME_DURATION);
-		Animation shootAnimation = makeAnimation("assets/goon_shooting_walk.png", 18,20,15,FRAME_DURATION);
-		Animation hurtShootAnimation = makeAnimation("assets/goon_shooting_hit.png",18, 20,15,FRAME_DURATION);
-		Texture deadTexture = new Texture(Gdx.files.internal("assets/goon_dead.png"));
-		TextureRegion deadTextureRegion = new TextureRegion(deadTexture);
-		Texture interrogationTexture = new Texture(Gdx.files.internal("assets/sprite_interrogation.png"));
-		TextureRegion interrogationTextureRegion = new TextureRegion(interrogationTexture);
-		Texture exclamationTexture = new Texture(Gdx.files.internal("assets/sprite_exclamation.png"));
-		TextureRegion exclamationTextureRegion = new TextureRegion(exclamationTexture);
+		
 		for(int i=0; i< 3; i++){
-			
-			
 			NPCView goon_view = new NPCView(
 					batch,
-					walkAnimation,
-					hurtWalkAnimation,
-					shootAnimation,
-					hurtShootAnimation,
-					deadTextureRegion,
-					exclamationTextureRegion,
-					interrogationTextureRegion
+					LogicAssets.walkAnimation,
+					LogicAssets.hurtWalkAnimation,
+					LogicAssets.shootAnimation,
+					LogicAssets.hurtShootAnimation,
+					LogicAssets.deadTextureRegion,
+					LogicAssets.exclamationTextureRegion,
+					LogicAssets.interrogationTextureRegion
 					);
 			
 			Goon goon = new Goon(new Rectangle(40,40, 18,13),map, randArray);
@@ -120,21 +105,13 @@ public class GameManager implements Dumpeable {
 			npcController.add(controller);
 		}
 		
-		Animation playerWalkAnimation         = makeAnimation("assets/hitman_straight_walk.png", 18,13,15, FRAME_DURATION);
-		Animation playerHurtWalkAnimation     = makeAnimation("assets/hitman_hit.png", 18,13,15, FRAME_DURATION);
-		Animation playerShootAnimation        = makeAnimation("assets/hitman_shooting_walk.png", 18,20,15,FRAME_DURATION);
-		Animation playerHurtShootAnimation    = makeAnimation("assets/hitman_shooting_hit.png",  18,20,15,FRAME_DURATION);
-		Texture playerDeadTexture             = new Texture(Gdx.files.internal("assets/hitman_dead.png"));
-		TextureRegion playerDeadTextureRegion = new TextureRegion(playerDeadTexture);
-		
-		
 		PlayerView player_view = new PlayerView(
 				batch,
-				playerWalkAnimation,
-				playerHurtWalkAnimation,
-				playerShootAnimation,
-				playerHurtShootAnimation,
-				playerDeadTextureRegion
+				LogicAssets.playerWalkAnimation,
+				LogicAssets.playerHurtWalkAnimation,
+				LogicAssets.playerShootAnimation,
+				LogicAssets.playerHurtShootAnimation,
+				LogicAssets.playerDeadTextureRegion
 				);
 		Player player = new Player(new Rectangle(50,50,18,13),map);
 		playerController = new PlayerController(player,control, player_view) ;
@@ -161,8 +138,9 @@ public class GameManager implements Dumpeable {
 //		JAXBContext context = JAXBContext.newInstance(Level.class) ;
 //		Marshaller marshaller = context.createMarshaller();
 //		marshaller.marshal(l, new File("test.xml"));
-		
-		
+	}
+	
+	public GameManager (int width, int height, int tileWidth, Level level) {
 		
 	}
 	
@@ -194,25 +172,4 @@ public class GameManager implements Dumpeable {
 	public GameInformation dump() {
 		return null;
 	}
-	
-	/**
-	 * Crea una animacion a partir de un path, las dimensiones del sprite y la cantidad de frames.
-	 * @param path
-	 * @param spriteWidth
-	 * @param spriteHeight
-	 * @return
-	 */
-	public Animation makeAnimation(String path, int spriteWidth, int spriteHeight, int length, float frameDuration) {
-		
-		Texture normalSpriteTexture = new Texture(Gdx.files.internal(path));
-		TextureRegion[][] tmp = TextureRegion.split(normalSpriteTexture, spriteWidth, spriteHeight);
-		TextureRegion[] normalWalkFrames = new TextureRegion[length];
-		for(int i=0; i<length;i++){
-			normalWalkFrames[i] = tmp[0][i];
-		}
-		return new Animation(frameDuration,normalWalkFrames);
-	}
-	
-	
-
 }

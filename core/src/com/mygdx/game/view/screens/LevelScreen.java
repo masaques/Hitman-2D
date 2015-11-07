@@ -54,16 +54,7 @@ public class LevelScreen implements Screen{
 	public LevelScreen(HitmanGame game) throws JAXBException{
 		this.game = game;
 		gameport = new FitViewport(864, 864,camera);
-		gameManager = new GameManager(864,864,32,20);
-//		try {
-//			gameManager = GameSerializer.create("prueba") ;
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		gameManager = new GameManager(864,864,32,"assets/test5.tmx");
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
 		camera.position.set(gameport.getWorldWidth()/2,gameport.getWorldHeight()/2,0);
 		shapeRenderer = new ShapeRenderer();
