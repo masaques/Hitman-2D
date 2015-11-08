@@ -3,6 +3,7 @@ package com.mygdx.game.model;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,12 +22,15 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.controller.BulletController;
+import com.mygdx.game.controller.CharacterController;
+import com.mygdx.game.controller.CivilianController;
 import com.mygdx.game.controller.ControlProcessor;
 import com.mygdx.game.controller.GoonController;
 import com.mygdx.game.controller.NPCController;
 import com.mygdx.game.controller.NoiseController;
 import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.character.AStarPathFinder;
+import com.mygdx.game.model.character.Civilian;
 import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
 import com.mygdx.game.model.character.NPC;
@@ -36,6 +40,8 @@ import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
 import com.mygdx.game.view.assets.CharacterView;
+import com.mygdx.game.view.assets.CivilianView;
+import com.mygdx.game.view.assets.GoonView;
 import com.mygdx.game.view.assets.LogicAssets;
 import com.mygdx.game.view.assets.NPCView;
 import com.mygdx.game.view.assets.PlayerView;
@@ -65,8 +71,8 @@ public class GameManager implements Dumpeable {
 	private TiledMap tiled_map ;
 	private ControlProcessor control ;
 	private BulletController bulletController = new BulletController();
-	private PlayerController playerController ;
-	private List<NPCController> npcController = new ArrayList<NPCController>();
+	private PlayerController playerController;
+	private List<CharacterController<?,?>> characterControllerList = new ArrayList<CharacterController<?,?>>();
 	private NoiseController noiseController = new NoiseController() ;
 	
 	public GameManager(int width,int height,int tile_width, Level level) throws IllegalPositionException {
@@ -77,7 +83,7 @@ public class GameManager implements Dumpeable {
 		LevelMap map = new LevelMap(width,height, tile_width,tiled_map);
 		AStarPathFinder  aStarPathFinder  = new AStarPathFinder(map, MAX_SEARCH);
 		LinearPathFinder linearPathFinder = new LinearPathFinder(map);
-		RandList<Vector2> randArray = new RandList<Vector2>();
+		List<Vector2> randArray = new RandList<Vector2>();
 		randArray.add(new Vector2(200, 150));
 		randArray.add(new Vector2(700,700));
 		randArray.add(new Vector2(73,792));
@@ -89,7 +95,7 @@ public class GameManager implements Dumpeable {
 				throw new IllegalPositionException() ;
 			}
 			
-			NPCView goon_view = new NPCView(
+			GoonView goon_view = new GoonView(
 					batch,
 					LogicAssets.walkAnimation,
 					LogicAssets.hurtWalkAnimation,
@@ -103,8 +109,8 @@ public class GameManager implements Dumpeable {
 			Goon goon = new Goon(new Rectangle(v.x,v.y, 18,13),map, randArray);
 			goon.setAStarPathFinder(aStarPathFinder);
 			goon.setLinearPathFinder(linearPathFinder);
-			NPCController controller = new GoonController(goon, goon_view);
-			npcController.add(controller);
+			GoonController controller = new GoonController(goon, goon_view);
+			characterControllerList.add(controller);
 		}
 		if (!map.isValid(new Rectangle(level.getPlayer().x,level.getPlayer().y,18,13))) {
 			throw new IllegalPositionException() ;
@@ -119,9 +125,25 @@ public class GameManager implements Dumpeable {
 				);
 		Player player = new Player(new Rectangle(level.getPlayer().x,level.getPlayer().y,18,13),map);
 		playerController = new PlayerController(player,control, player_view) ;
-		
+		characterControllerList.add(playerController);
 		linearPathFinder = new LinearPathFinder(map);
 		BulletManager.getInstance().setMap(map);
+		
+		CivilianView civilianView = new CivilianView(
+				batch,
+				LogicAssets.civilianWalkAnimation,
+				LogicAssets.civilainHurtWalkAnimation,
+				LogicAssets.civilianDeadTextureRegion,
+				LogicAssets.exclamationTextureRegion,
+				LogicAssets.interrogationTextureRegion
+				);
+		Civilian civilian = new Civilian(new Rectangle(50f,50f, 18,13),map, randArray, randArray);
+		civilian.setAStarPathFinder(aStarPathFinder);
+		civilian.setLinearPathFinder(linearPathFinder);
+		CivilianController civController = new CivilianController(civilian, civilianView);
+		characterControllerList.add(civController);
+		
+		
 	}
 	
 	public TiledMap getTiledMap() {
@@ -132,11 +154,12 @@ public class GameManager implements Dumpeable {
 		VisionManager.getInstance().update();
 		noiseController.manage();
 		bulletController.manage();
-		for (NPCController g : npcController){
+		Collections.sort(characterControllerList);
+		
+		for (CharacterController<?,?> g : characterControllerList){
 			g.updateModel();
 			g.updateView();
 		}
-		playerController.control();
 	}
 	
 	/**
@@ -147,7 +170,7 @@ public class GameManager implements Dumpeable {
 	public void marshal(String to) throws JAXBException {
 		List<Vector2> goonPositions = new ArrayList<Vector2>() ;
 		Position playerPosition = new Position(playerController.position());
-		for(NPCController c : npcController) {
+		for(CharacterController<?,?> c : characterControllerList) {
 			goonPositions.add(c.position()) ;
 		}
 		Level l = new Level (path,Position.vectorToPosition(goonPositions),playerPosition) ;

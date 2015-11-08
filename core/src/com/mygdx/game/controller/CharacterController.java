@@ -10,7 +10,9 @@ import com.mygdx.game.view.assets.CharacterView;
  * @param <M>
  * @param <V>
  */
-public abstract class CharacterController <M extends Character, V extends CharacterView<M>> extends Controller<M,V> {
+public abstract class CharacterController <M extends Character, V extends CharacterView<M>> 
+										extends Controller<M,V> 
+										implements Comparable<CharacterController<M,V>> {
 	
 	private boolean isDead;
 	
@@ -65,5 +67,21 @@ public abstract class CharacterController <M extends Character, V extends Charac
 	 */
 	protected boolean isDead() {
 		return isDead;
+	}
+	
+	/**
+	 * Se comparan los characterController segun si estan muertos o no
+	 */
+	@Override 
+	public int compareTo(CharacterController<M,V> other) {
+		if (this.isDead() && other.isDead()) {
+			return 0;
+		}
+		else if (this.isDead()){
+			return -1;
+		}
+		else {
+			return 1;
+		}
 	}
 }

@@ -46,6 +46,10 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		visualInbox  = new ArrayList<Vector2> ();
 		stateMachine = new NPCStateMachine(this);
 		currentState = NPCState.CALM;
+		
+		VisionManager.getInstance().addListener(this);
+		NoiseManager.getInstance().addListener(this);
+		BulletManager.getInstance().addListener(this);
 	}
 	/**
 	 * Constructor alternativo usado al cargar la informacion desde un archivo

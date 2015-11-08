@@ -7,13 +7,13 @@ import com.mygdx.game.view.assets.NPCView;
  * @author traies
  *
  */
-public abstract class NPCController extends CharacterController<NPC,NPCView> {
+public abstract class NPCController<M extends NPC, V extends NPCView<M>> extends CharacterController<M,V> {
 	/**
 	 * Recibe el npc (model) y el npcVie (view)
 	 * @param npc
 	 * @param npcView
 	 */
-	public NPCController(NPC npc, NPCView npcView) {
+	public NPCController(M npc, V npcView) {
 		super(npc,npcView);
 	}
 	

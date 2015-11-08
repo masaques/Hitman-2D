@@ -1,15 +1,12 @@
 package com.mygdx.game.view.assets;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.character.NPC;
 import com.mygdx.game.model.character.NPCState;
 
-public class NPCView extends CharacterView<NPC> {
+public abstract class NPCView<M extends NPC> extends CharacterView<M> {
 	TextureRegion exclamation;
 	TextureRegion interrogation;
 	
@@ -19,13 +16,11 @@ public class NPCView extends CharacterView<NPC> {
 			SpriteBatch batch,
 			Animation walkAnimation,
 			Animation hurtAnimation,
-			Animation shootWalkAnimation,
-			Animation shootHurtAnimation,
 			TextureRegion deadTextureRegion,
 			TextureRegion exclamationTextureRegion,
 			TextureRegion interrogationTextureRegion
 			) {
-		super(batch, walkAnimation,hurtAnimation,shootWalkAnimation,shootHurtAnimation,deadTextureRegion);
+		super(batch, walkAnimation,hurtAnimation,deadTextureRegion);
 		exclamation    = exclamationTextureRegion;
 		interrogation  = interrogationTextureRegion;
 	}
@@ -33,6 +28,9 @@ public class NPCView extends CharacterView<NPC> {
 	@Override
 	public void draw(){
 		super.draw();
+		drawBallon();
+	}
+	public void drawBallon() {
 		if (!isDead()){
 			float balloonPositionX = getPosition().x - 5f;
 			float balloonPositionY = getPosition().y + getHeight();
@@ -46,6 +44,7 @@ public class NPCView extends CharacterView<NPC> {
 			batch.end();
 		}
 	}
+	
 	
 	public void updateState(NPCState npcState){
 		currentState = npcState;

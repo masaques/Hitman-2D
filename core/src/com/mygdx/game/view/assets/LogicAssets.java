@@ -38,6 +38,12 @@ public class LogicAssets {
 	public static final TextureRegion playerDeadTextureRegion = 
 			new TextureRegion(playerDeadTexture);
 	
+	public static final Animation civilianWalkAnimation = makeAnimation("assets/civilian_straight_walk.png", 18,13,15, FRAME_DURATION);
+	public static final Animation civilainHurtWalkAnimation = makeAnimation("assets/civilian_hit.png", 18,13,15, FRAME_DURATION);
+	public static final Texture civilianDeadTexture = new Texture(Gdx.files.internal("assets/civilian_dead.png"));
+	public static final TextureRegion civilianDeadTextureRegion = new TextureRegion(civilianDeadTexture);
+
+
 	/**
 	 * Crea una animacion a partir de un path, las dimensiones del sprite y la cantidad de frames.
 	 * @param path

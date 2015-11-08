@@ -5,6 +5,8 @@
 
 package com.mygdx.game.model.character;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -44,16 +46,14 @@ public class Goon extends NPC implements Aggressive{
 	private float shootTimer = 0f;
 	private boolean isShooting;
 	
-	public Goon(Rectangle hitBox, LevelMap map, RandList<Vector2> searchPositions){
+	public Goon(Rectangle hitBox, LevelMap map, List<Vector2> searchPositions){
 		super(hitBox, map);
 		patrolBehaviour  = new PatrolBehaviour(searchPositions);
 		followBehaviour  = new FollowBehaviour();
 		shootBehaviour   = new ShootBehaviour();
 		inspectBehaviour = new InspectBehaviour();
 		
-		VisionManager.getInstance().addListener(this);
-		NoiseManager.getInstance().addListener(this);
-		BulletManager.getInstance().addListener(this);
+		
 	}
 	public Goon(NPCInformation info,LevelMap map,RandList<Vector2> searchPositions) {
 		super(info, map) ;
@@ -64,7 +64,6 @@ public class Goon extends NPC implements Aggressive{
 	}
 	@Override
 	public void alarm(Context context) {
-		searchBehaviour = null;
 		if (context.playerIsVisible()){
 			if (shootTimer > SHOOTING_DELAY) {
 				resetShootTimer();
@@ -91,10 +90,13 @@ public class Goon extends NPC implements Aggressive{
 	@Override
 	public void calm(Context context) {
 		patrolBehaviour.behave(this, context);
-		searchBehaviour = null;
+		
 	}
 	@Override
 	public void update(){
+		if (getState() != NPCState.SUSPICIOUS) {
+			searchBehaviour = null;
+		}
 		shootTimer += Gdx.graphics.getDeltaTime();
 		isShooting = false;
 		super.update();

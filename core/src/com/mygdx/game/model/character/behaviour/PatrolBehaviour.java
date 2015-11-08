@@ -1,15 +1,16 @@
 package com.mygdx.game.model.character.behaviour;
 
+import java.util.List;
+
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.character.Context;
 import com.mygdx.game.model.character.NPC;
-import com.mygdx.game.model.util.RandList;
 
 
 public class PatrolBehaviour implements Behaviour<NPC> {
-	private RandList<Vector2> patrolPositions;
+	private List<Vector2> patrolPositions;
 	
-	public PatrolBehaviour(RandList<Vector2> patrolPositions) {
+	public PatrolBehaviour(List<Vector2> patrolPositions) {
 		this.patrolPositions = patrolPositions;
 	}
 
