@@ -1,13 +1,9 @@
 package com.mygdx.game.model;
 
-
 import com.badlogic.gdx.Game;
-
 import com.badlogic.gdx.Gdx;
-//import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.view.screens.menu.view.HitmanSkin;
 import com.mygdx.game.view.screens.menu.view.MenuUI;
@@ -29,9 +25,7 @@ import com.mygdx.game.view.screens.menu.view.MenuUI;
 public class HitmanGame extends Game{
 
 	public SpriteBatch batch;
-	public MenuUI menuui;
 	public Stage stage;
-	public Skin skin;
 	
 	public HitmanGame(){
 		super();
@@ -43,6 +37,7 @@ public class HitmanGame extends Game{
 		Gdx.input.setInputProcessor(stage);
 		HitmanSkin hitmanSkin = new HitmanSkin();
 		
+		//MenuData.TITLE_FONT.draw(batch, "H I T M A N", 0, 0);
 		MenuUI menu = new MenuUI(hitmanSkin);
 		
 		for(TextButton each : menu.getMenuButtons() ){
