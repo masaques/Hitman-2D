@@ -128,21 +128,24 @@ public class GameManager implements Dumpeable {
 		characterControllerList.add(playerController);
 		linearPathFinder = new LinearPathFinder(map);
 		BulletManager.getInstance().setMap(map);
-		
-		CivilianView civilianView = new CivilianView(
-				batch,
-				LogicAssets.civilianWalkAnimation,
-				LogicAssets.civilainHurtWalkAnimation,
-				LogicAssets.civilianDeadTextureRegion,
-				LogicAssets.exclamationTextureRegion,
-				LogicAssets.interrogationTextureRegion
+		for (Vector2 v : level.civilPositions()) {
+			if (!map.isValid(new Rectangle(v.x,v.y,18,13))) {
+				throw new IllegalPositionException() ;
+			}
+			CivilianView civilianView = new CivilianView(
+					batch,
+					LogicAssets.civilianWalkAnimation,
+					LogicAssets.civilainHurtWalkAnimation,
+					LogicAssets.civilianDeadTextureRegion,
+					LogicAssets.exclamationTextureRegion,
+					LogicAssets.interrogationTextureRegion
 				);
-		Civilian civilian = new Civilian(new Rectangle(50f,50f, 18,13),map, randArray, randArray);
-		civilian.setAStarPathFinder(aStarPathFinder);
-		civilian.setLinearPathFinder(linearPathFinder);
-		CivilianController civController = new CivilianController(civilian, civilianView);
-		characterControllerList.add(civController);
-		
+			Civilian civilian = new Civilian(new Rectangle(v.x,v.y, 18,13),map, randArray, randArray);
+			civilian.setAStarPathFinder(aStarPathFinder);
+			civilian.setLinearPathFinder(linearPathFinder);
+			CivilianController civController = new CivilianController(civilian, civilianView);
+			characterControllerList.add(civController);
+		}
 		
 	}
 	
@@ -169,11 +172,18 @@ public class GameManager implements Dumpeable {
 	 */
 	public void marshal(String to) throws JAXBException {
 		List<Vector2> goonPositions = new ArrayList<Vector2>() ;
+		List<Vector2> civilPositions = new ArrayList<Vector2>() ;
 		Position playerPosition = new Position(playerController.position());
 		for(CharacterController<?,?> c : characterControllerList) {
-			goonPositions.add(c.position()) ;
+			if (c  instanceof GoonController) {
+				goonPositions.add(c.position()) ;
+			} 
+			else if (c instanceof CivilianController) {
+				civilPositions.add(c.position()) ;
+			}
 		}
-		Level l = new Level (path,Position.vectorToPosition(goonPositions),playerPosition) ;
+		Level l = new Level (path,Position.vectorToPosition(goonPositions),Position.vectorToPosition(civilPositions),
+				playerPosition) ;
 		JAXBContext context = JAXBContext.newInstance(Level.class) ;
 		Marshaller marshaller = context.createMarshaller();
 		marshaller.marshal(l, new File(to));
