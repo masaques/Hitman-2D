@@ -22,7 +22,6 @@ public class Civilian extends NPC {
 	public Civilian(Rectangle hitBox, LevelMap map, List<Vector2> patrolPositions, List<Vector2> safePositions) {
 		super(hitBox, map);
 		patrolBehaviour  = new PatrolBehaviour(patrolPositions);
-		System.out.println(patrolBehaviour);
 		fleeBehaviour    = new FleeBehaviour(safePositions);
 		inspectBehaviour = new InspectBehaviour();
 		// TODO Auto-generated constructor stub
@@ -34,6 +33,7 @@ public class Civilian extends NPC {
 		if (context.playerIsVisible()) {
 			fleeBehaviour.behave(this, context);
 		}
+		refreshNoiseInbox();
 
 	}
 
