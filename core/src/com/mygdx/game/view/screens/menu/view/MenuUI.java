@@ -11,6 +11,9 @@ import java.util.*;
 public class MenuUI implements Screen{
 	
 	private static List<TextButton> hitmanButtons;
+	private static final int defaultHeight = 864;
+	private static final int defaultWidth = 864;
+	
 	
 	public MenuUI(HitmanSkin hitmanSkin){
 		MenuData.m.play();
@@ -27,10 +30,12 @@ public class MenuUI implements Screen{
 		TextButton help = new TextButton("Help",hitmanSkin.getButtonSkin());
 		TextButton table = new TextButton("Highscore",hitmanSkin.getButtonSkin());
 		
-		//TextButton opt1 = new TextButton("4:3",hitmanSkin.getButtonSkin());
-		//TextButton opt2 = new TextButton("16:10",hitmanSkin.getButtonSkin());
+		TextButton opt1 = new TextButton("4:3",hitmanSkin.getButtonSkin());
+		TextButton opt2 = new TextButton("16:10",hitmanSkin.getButtonSkin());
 		TextButton opt3 = new TextButton("Fullscreen",hitmanSkin.getButtonSkin());
 		
+		opt1.setVisible(false);
+		opt2.setVisible(false);		
 		opt3.setVisible(false);
 		
 		newGame.addListener(new ClickListener(){
@@ -44,9 +49,15 @@ public class MenuUI implements Screen{
 		
 		resolution.addListener(new ClickListener(){
 			public void clicked(InputEvent event, float x, float y){
+				opt1.setVisible(true);
+				opt2.setVisible(true);
 				opt3.setVisible(true);
+				opt1.addListener(ResolutionListener.option1());
+				opt2.addListener(ResolutionListener.option2());				
 				opt3.addListener(ResolutionListener.option3());
-				opt3.setPosition(864/2+1.1f*hitmanSkin.getSkinWidth()/2, 864*3/8);
+				opt1.setPosition(defaultWidth/2+1.1f*hitmanSkin.getSkinWidth()/2, defaultHeight*0);
+				opt2.setPosition(defaultWidth/2+1.1f*hitmanSkin.getSkinWidth()/2, defaultHeight*4/8);				
+				opt3.setPosition(defaultWidth/2+1.1f*hitmanSkin.getSkinWidth()/2, defaultHeight*3/8);
 			}			
 		});
 		resolution.setPosition(864/2-hitmanSkin.getSkinWidth()/2, 864*3/8);
@@ -79,7 +90,14 @@ public class MenuUI implements Screen{
 	public List<TextButton> getMenuButtons(){
 		return hitmanButtons;
 	}
+
+	public static int getDefaultheight() {
+		return defaultHeight;
+	}
 	
+	public static int getDefaultwidth() {
+		return defaultWidth;
+	}
 
 	@Override
 	public void show() {

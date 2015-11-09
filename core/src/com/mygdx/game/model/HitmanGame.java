@@ -35,6 +35,7 @@ public class HitmanGame extends Game{
 	public void create() {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
+		
 		HitmanSkin hitmanSkin = new HitmanSkin();
 		
 		//MenuData.FONT.draw(batch, "probando", 5, 5);

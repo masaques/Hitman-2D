@@ -6,6 +6,25 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class ResolutionListener {
 
+	public static ClickListener option1(){
+		ClickListener cl = new ClickListener(){
+			public void clicked(InputEvent event, float x, float y){
+				Gdx.graphics.setDisplayMode(MenuUI.getDefaultwidth(),MenuUI.getDefaultheight(),false);
+			}
+		};	
+		return cl;
+	}
+	
+	public static ClickListener option2(){
+		ClickListener cl = new ClickListener(){
+			public void clicked(InputEvent event, float x, float y){
+				Gdx.graphics.setDisplayMode(MenuUI.getDefaultwidth()*5/3,MenuUI.getDefaultheight(),false);
+			}
+		};	
+		return cl;
+	}
+	
+	
 	public static ClickListener option3(){
 		ClickListener cl = new ClickListener(){
 			public void clicked(InputEvent event, float x, float y){
@@ -15,8 +34,7 @@ public class ResolutionListener {
 			              true
 						);
 			}
-		};
-		
+		};	
 		return cl;
 	}
 	
