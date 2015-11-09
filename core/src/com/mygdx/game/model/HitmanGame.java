@@ -35,9 +35,6 @@ public class HitmanGame extends Game{
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		
-		
-		
 		setScreen(new MenuUI(this));
 		
 	
