@@ -38,9 +38,10 @@ public class HitmanGame extends Game{
 		
 		HitmanSkin hitmanSkin = new HitmanSkin();
 		
+		MenuUI menu = new MenuUI(hitmanSkin,this);
 		//MenuData.FONT.draw(batch, "probando", 5, 5);
 		//MenuData.TITLE_FONT.draw(batch, "H I T M A N", 0, 0);
-		MenuUI menu = new MenuUI(hitmanSkin);
+		this.setScreen(menu);
 		
 		for(TextButton each : menu.getMenuButtons() ){
 			stage.addActor(each);
@@ -49,7 +50,7 @@ public class HitmanGame extends Game{
 	}
 	
 	public void render () {
-		super.render();
+		//super.render();
 		//batch.begin();
 		//Texture background = new Texture(Gdx.files.internal("assets/background.png"));
 		//TextureRegion backgroundRegion = new TextureRegion(background, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

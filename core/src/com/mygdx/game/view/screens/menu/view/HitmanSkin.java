@@ -17,7 +17,6 @@ public class HitmanSkin{
 	public HitmanSkin() {
 		BitmapFont font = new BitmapFont();
 		skin = new Skin();
-		//Gdx.files.absolute("assets/arcade.fnt");
 		skin.add("default", font);
 				
 		Pixmap pixmap = new Pixmap(ancho,alto, Pixmap.Format.RGBA4444); 
