@@ -4,6 +4,7 @@ import javax.xml.bind.JAXBException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -21,17 +22,24 @@ public class InGameMenu implements Screen {
 	public InGameMenu(HitmanGame game,LevelScreen screen) {
 		this.game = game ;
 		this.screen = screen ;
-		skin = new HitmanSkin() ;
 	}
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
+		// Audio.playMusic(true);
+
+		skin = new HitmanSkin();
+
 	}
 
 	@Override
-	public void render(float delta) {		
+	public void render(float delta) {
+		Gdx.gl.glClearColor(0.09f, 0.28f, 0.2f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		stage.act(delta);
+		stage.draw();
+
 	}
 
 	@Override
