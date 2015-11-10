@@ -13,7 +13,6 @@ import com.mygdx.game.model.message.Vision;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.message.VisionSender;
 
-import serialization.CharacterInformation;
 
 /**
  * El personaje jugable. Extiende de {@link Character}.
@@ -26,17 +25,6 @@ public class Player extends Character implements VisionSender {
 		BulletManager.getInstance().addListener(this);
 	}
 
-	/**
-	 * Constructor alternativo usado al cargar la informacion desde un archivo
-	 * 
-	 * @param data
-	 * @param map
-	 * @see Character
-	 */
-	public Player(CharacterInformation data, LevelMap map) {
-		super(data, map);
-		BulletManager.getInstance().addListener(this);
-	}
 
 	@Override
 	public void update() {

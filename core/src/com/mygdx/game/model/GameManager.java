@@ -33,16 +33,13 @@ import com.mygdx.game.model.character.Player;
 import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
+import com.mygdx.game.serialization.Level;
+import com.mygdx.game.serialization.Position;
 import com.mygdx.game.view.assets.BulletView;
 import com.mygdx.game.view.assets.CivilianView;
 import com.mygdx.game.view.assets.GoonView;
 import com.mygdx.game.view.assets.LogicAssets;
 import com.mygdx.game.view.assets.PlayerView;
-
-import serialization.Dumpeable;
-import serialization.GameInformation;
-import serialization.Level;
-import serialization.Position;
 
 /**
  * Esta clase es una modularizacion del contenido previo de Game Es quien
@@ -50,7 +47,7 @@ import serialization.Position;
  * para administrarlos Se ocupa de actualizar el modelo y, luego, de actualizar
  * la vista, tal como dice MVC
  */
-public class GameManager implements Dumpeable {
+public class GameManager  {
 
 	protected static final int MAX_SEARCH = 100;
 	private String path;
@@ -160,10 +157,5 @@ public class GameManager implements Dumpeable {
 		JAXBContext context = JAXBContext.newInstance(Level.class);
 		Marshaller marshaller = context.createMarshaller();
 		marshaller.marshal(l, new File(to));
-	}
-
-	@Override
-	public GameInformation dump() {
-		return null;
 	}
 }

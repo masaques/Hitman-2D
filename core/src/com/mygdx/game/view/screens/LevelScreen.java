@@ -1,7 +1,6 @@
 package com.mygdx.game.view.screens;
 
 import java.io.File;
-import serialization.Level;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -25,6 +24,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.model.GameManager;
 import com.mygdx.game.model.IllegalPositionException;
+import com.mygdx.game.serialization.Level;
 
 public class LevelScreen implements Screen {
 

@@ -8,8 +8,6 @@ import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.message.BulletListener;
 import com.mygdx.game.model.util.Movable;
 import com.mygdx.game.model.Model;
-import serialization.CharacterInformation;
-import serialization.Dumpeable;
 
 /**
  * <p>
@@ -25,7 +23,7 @@ import serialization.Dumpeable;
  * 
  */
 
-public abstract class Character implements Movable, BulletListener, Dumpeable, Model {
+public abstract class Character implements Movable, BulletListener,  Model {
 	private static int IDS = 0;
 	private int id;
 	protected static final float NORMAL_SPEED = 120f;
@@ -51,24 +49,6 @@ public abstract class Character implements Movable, BulletListener, Dumpeable, M
 		this.healthPoints = 100f;
 		this.isDead = false;
 		this.team = team;
-		this.id = IDS;
-		IDS++;
-	}
-
-	/**
-	 * Constructor alternativo usado al cargar la informacion desde un archivo
-	 * 
-	 * @param data
-	 *            La minima informacion requerida para cargar al character
-	 * @param map
-	 *            El mapa generado por quien carga el juego
-	 */
-	public Character(CharacterInformation data, LevelMap map) {
-		this.lookDirection = data.getDirection();
-		this.moveDirection = data.getDirection();
-		this.hitBox = data.getHitbox();
-		this.healthPoints = data.getHealthPoints();
-		this.map = map;
 		this.id = IDS;
 		IDS++;
 	}
@@ -326,19 +306,6 @@ public abstract class Character implements Movable, BulletListener, Dumpeable, M
 		return true;
 	}
 
-	/**
-	 * Este metodo se usa para extraer de este Character la minima informacion
-	 * necesaria para reinicializarlo
-	 * 
-	 * @return Una nueva instancia de CharacterInformation, usada para recargar
-	 *         la partida ,null si el character esta muerto
-	 */
-	public CharacterInformation dump() {
-		if (this.isDead()) {
-			return null;
-		}
-		return new CharacterInformation(this.getMoveDirection(), this.hitBox, this.getHealthPoints());
-	}
 
 	/**
 	 * Devuelve el mapa.

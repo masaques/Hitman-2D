@@ -22,9 +22,6 @@ import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.model.util.RandList;
-
-import serialization.NPCInformation;
-
 /**
  * Los Goon son {@link NPC} con un comportamiento agresivo.
  */
@@ -50,13 +47,6 @@ public class Goon extends NPC implements Aggressive {
 		followBehaviour = new FollowBehaviour();
 		inspectBehaviour = new InspectBehaviour();
 
-	}
-
-	public Goon(NPCInformation info, LevelMap map, RandList<Vector2> searchPositions) {
-		super(info, map);
-		patrolBehaviour = new PatrolBehaviour(searchPositions);
-		followBehaviour = new FollowBehaviour();
-		inspectBehaviour = new InspectBehaviour();
 	}
 
 	@Override

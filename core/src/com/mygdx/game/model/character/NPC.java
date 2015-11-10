@@ -14,8 +14,6 @@ import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionListener;
 import com.mygdx.game.model.message.VisionManager;
 
-import serialization.NPCInformation;
-
 /*
  * Personajes no controlados por el jugador. Debem implementar comportamientos diferentes
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
@@ -47,25 +45,6 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		BulletManager.getInstance().addListener(this);
 	}
 
-	/**
-	 * Constructor alternativo usado al cargar la informacion desde un archivo
-	 * 
-	 * @param data
-	 *            La minima informacion requerida para cargar al NPC
-	 * @param map
-	 *            El mapa generado por quien carga el juego
-	 * @see Character
-	 */
-	public NPC(NPCInformation data, LevelMap map) {
-		super(data, map);
-
-		this.noiseInbox = new ArrayList<Noise>();
-		this.noiseInbox.addAll(data.getNoiseList());
-		this.visualInbox = new ArrayList<Vector2>();
-		this.visualInbox.addAll(data.getVisionList());
-		stateMachine = new NPCStateMachine(this);
-		currentState = NPCState.CALM;
-	}
 
 	public void setAStarPathFinder(PathFinder pathFinder) {
 		this.aStarPathFinder = pathFinder;
@@ -198,14 +177,6 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		return visualAngle;
 	}
 
-	@Override
-	public NPCInformation dump() {
-		if (this.isDead()) {
-			return null;
-		}
-		return new NPCInformation(this.getMoveDirection(), getHitBox(), this.getHealthPoints(), this.noiseInbox,
-				this.visualInbox);
-	}
 
 	@Override
 	public abstract void alarm(Context context);
