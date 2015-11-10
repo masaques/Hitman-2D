@@ -1,23 +1,19 @@
 package com.mygdx.game.model;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
@@ -28,34 +24,25 @@ import com.mygdx.game.controller.CharacterController;
 import com.mygdx.game.controller.CivilianController;
 import com.mygdx.game.controller.ControlProcessor;
 import com.mygdx.game.controller.GoonController;
-import com.mygdx.game.controller.NPCController;
 import com.mygdx.game.controller.NoiseController;
 import com.mygdx.game.controller.PlayerController;
 import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Civilian;
 import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
-import com.mygdx.game.model.character.NPC;
 import com.mygdx.game.model.character.Player;
 import com.mygdx.game.model.message.BulletManager;
-import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
-import com.mygdx.game.view.assets.CharacterView;
 import com.mygdx.game.view.assets.CivilianView;
 import com.mygdx.game.view.assets.GoonView;
 import com.mygdx.game.view.assets.LogicAssets;
-import com.mygdx.game.view.assets.NPCView;
 import com.mygdx.game.view.assets.PlayerView;
 
 import serialization.Dumpeable;
 import serialization.GameInformation;
-import serialization.Information;
 import serialization.Level;
-import serialization.NPCInformation;
 import serialization.Position;
-import serialization.CharacterInformation;
-import serialization.GameSerializer;
 
 /**
  * Esta clase es una modularizacion del contenido previo de Game

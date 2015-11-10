@@ -1,8 +1,3 @@
-/*
- *@author Tomas Raies
- *@date   13 de oct. de 2015
- */
-
 package com.mygdx.game.model.character;
 
 import java.util.ArrayList;
@@ -59,6 +54,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	 */
 	public NPC (NPCInformation data,LevelMap map) {
 		super(data,map) ;
+		
 		this.noiseInbox = new ArrayList<Noise>() ;
 		this.noiseInbox.addAll(data.getNoiseList());
 		this.visualInbox = new ArrayList<Vector2>() ;

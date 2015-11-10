@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.message.Noise;
+
 /**
  * Maneja el contexto sobre el cual los Behaviours de los npc deciden sus
  * acciones, incluyendo informacion como sonidos y la posicion del jugador.

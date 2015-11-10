@@ -1,6 +1,6 @@
 package com.mygdx.game.model.character;
 
-import com.badlogic.gdx.math.Vector2;
+
 /**
  * Interface que implementan los Characters agresivos
  * @author masaques

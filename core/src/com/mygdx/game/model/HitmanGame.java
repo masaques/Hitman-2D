@@ -1,17 +1,11 @@
 package com.mygdx.game.model;
 
 
-import javax.xml.bind.JAXBException;
-import com.mygdx.game.view.screens.LevelScreen;
-import com.mygdx.game.view.screens.menu.view.HitmanSkin;
+
 import com.mygdx.game.view.screens.menu.view.MenuUI;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-//import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 
 /**

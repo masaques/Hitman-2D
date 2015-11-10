@@ -7,22 +7,24 @@ import com.mygdx.game.model.message.NoiseListener;
 
 import com.badlogic.gdx.math.Vector2;
 /**
- * WIP
- * This class represents all noises emitted by the player and NPCs
- * Every time a player shoots or starts running must emit a noise
- * TODO : Must add proper behavior in Character-related classes
- * TODO : Shoots must have a distinctive property, causing greater disturbance in NPCs
- * @author masaques
- * @author traies
- *
+ * Esta clase representa todos los sonidos emitidos por el jugador y los NPCs
+ * Cada disparo, o el jugador corriendo, deben emitir un sonido.
+ * Los sonidos poseen una fuente, un rango de alcance y un tipo.
+ * 
+ * @see NoiseListener
+ * @see NoiseController
  */
 
 public class Noise implements Message<NoiseListener>, Comparable<Noise>, Serializable{
 	private Vector2 source ;
 	private double effectiveRange ;
-	private boolean isShot ;
 	private NoiseType type ;
 	
+	/**
+	 * @param source - Posición fuente del sonido
+	 * @param effectiveRange - Rango de escucha
+	 * @param type - tipo de sonido
+	 */
 	public Noise(Vector2 source,double effectiveRange, NoiseType type) {
 		this.source=source ;
 		this.effectiveRange = effectiveRange ;

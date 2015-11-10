@@ -32,6 +32,7 @@ public abstract class Character implements Movable, BulletListener,Dumpeable,Mod
 	private Vector2 lookDirection;
 	private boolean isRunning;
 	private float healthPoints ;
+	
 	private boolean isDead ;
 	private Rectangle hitBox;
 	protected LevelMap map;

@@ -2,9 +2,9 @@ package com.mygdx.game.view.assets;
 
 import java.util.List;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseType;
 
 /**

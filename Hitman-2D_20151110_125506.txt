@@ -1,0 +1,9 @@
+ERROR - 12:55:06: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 12:55:09: Convert Hitman-2D
+ERROR - 12:55:09: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 12:55:15: Convert Hitman-2D
+ERROR - 12:55:15: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 12:55:25: Convert Hitman-2D
+ERROR - 12:55:25: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 12:57:38: Convert Hitman-2D-core
+ERROR - 12:57:38: java.net.MalformedURLException: unknown protocol: pathmap
