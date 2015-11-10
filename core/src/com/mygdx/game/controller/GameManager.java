@@ -3,7 +3,10 @@ package com.mygdx.game.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -48,6 +51,13 @@ public class GameManager  {
 	private List<CharacterController<?, ?>> characterControllerList = new ArrayList<CharacterController<?, ?>>();
 	private NoiseController noiseController = new NoiseController();
 	private GameState  state ;
+	
+	/**
+	 * Dos valores para comparar contra los valores de quienes
+	 * hayan muerto en la iteracion actual
+	 */
+	private Set<Integer> civilianIDs = new HashSet<Integer>() ;
+	private Integer targetID ;
 
 	public GameManager(int width, int height, int tile_width, Viewport viewport, Level level, SpriteBatch batch)
 			throws IllegalPositionException {
@@ -102,8 +112,11 @@ public class GameManager  {
 			civilian.setLinearPathFinder(linearPathFinder);
 			CivilianController civController = new CivilianController(civilian, civilianView);
 			characterControllerList.add(civController);
+			civilianIDs.add(civilian.getId()) ;
 		}
-
+		/**
+		 * targetID=target.getID();
+		 */
 		BulletManager bulletManager = BulletManager.getInstance();
 		BulletView bulletView = new BulletView(viewport.getCamera());
 		bulletController = new BulletController(bulletManager, bulletView);
@@ -123,6 +136,13 @@ public class GameManager  {
 		for (CharacterController<?, ?> c : characterControllerList) {
 			c.updateModel();
 			c.updateView();
+			if (c.isDead()) {
+				if (civilianIDs.contains(c.getModel().getId())) {
+					state= GameState.DEFEAT ;
+				} else if (targetID == c.getModel().getId()) {
+					state= GameState.WIN ;
+				}
+			}
 		}
 	}
 
