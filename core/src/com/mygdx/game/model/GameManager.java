@@ -63,8 +63,6 @@ import serialization.GameSerializer;
  * handlers para administrarlos
  * Se ocupa de actualizar el modelo y, luego, de actualizar la vista, tal como
  * dice MVC
- * @author masaques
- * @author traies
  */
 public class GameManager implements Dumpeable {
 	
@@ -161,9 +159,9 @@ public class GameManager implements Dumpeable {
 		bulletController.manage();
 		Collections.sort(characterControllerList);
 		
-		for (CharacterController<?,?> g : characterControllerList){
-			g.updateModel();
-			g.updateView();
+		for (CharacterController<?,?> c : characterControllerList){
+			c.updateModel();
+			c.updateView();
 		}
 	}
 	

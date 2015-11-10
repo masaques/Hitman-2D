@@ -9,7 +9,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.message.Bullet;
 import com.mygdx.game.model.util.RandList;
-
+/**
+ * 	Representa el mapa del modelo, es usado para chequear las colisiones.
+ *  Se inicializa a partir de un {@link TileMap} en la cual en el Layer 1 se encuentran las paredes.
+ *  
+ *  @see TiledMap
+ */
 public class LevelMap {
 	
 	private int width;
@@ -38,9 +43,9 @@ public class LevelMap {
 				}
 			}
 		}
-		
-		//level_array[5][10] = true;
 	}
+	
+	
 	public int getTileWidth(){
 		return tileWidth;
 	}
@@ -54,7 +59,11 @@ public class LevelMap {
 		return heightInTiles;
 	}
 
-	
+	/**
+	 * Revisa que un posición no se encuentre adentro de una pared
+	 * 
+	 * @param position - Posición a chequear
+	 */
 	public boolean blocked( Vector2 position) {
 		float x,y;
 		x = position.x;
@@ -194,22 +203,5 @@ public class LevelMap {
 		
 	}
 	
-//	private Polygon getPolygon(Rectangle rect){
-//		float[] vertices  = new float[8];
-//		float height = rect.getHeight();
-//		float width  = rect.getWidth();
-//		Vector2 rectPosition = rect.getPosition(new Vector2());
-//		vertices[0] = 0;
-//		vertices[1] = 0;
-//		vertices[2] = width;
-//		vertices[3] = 0;
-//		vertices[4] = width;
-//		vertices[5] = height;
-//		vertices[6] = 0;
-//		vertices[7] = height;
-//		
-//		Polygon rectPolygon = new Polygon(vertices);
-//		rectPolygon.setPosition(rect.getPosition(new Vector2()), y);
-//		return rectPolygon;
-//	}
+
 }

@@ -19,6 +19,11 @@ import com.mygdx.game.view.screens.LevelScreen;
 
 import java.util.*;
 
+/**
+ *  {@link Screen} que se encarga del Menu
+ * 
+ *
+ */
 public class MenuUI implements Screen{
 	
 	private static List<TextButton> hitmanButtons;
@@ -137,8 +142,6 @@ public class MenuUI implements Screen{
 	    stage.act(delta);
 	    stage.draw();
 
-	    game.batch.begin();
-	    game.batch.end();
 	}
 
 	

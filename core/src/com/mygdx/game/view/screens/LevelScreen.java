@@ -59,7 +59,7 @@ public class LevelScreen implements Screen{
 		 */
 		JAXBContext context = JAXBContext.newInstance(Level.class) ;
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		Level l = (Level)unmarshaller.unmarshal(new File("assets/Level1.xml")) ;
+		Level l = (Level)unmarshaller.unmarshal(new File("assets/Level0.xml")) ;
 		
 		this.game = game;
 		
@@ -98,7 +98,7 @@ public class LevelScreen implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		gameManager.update();
-		game.batch.setProjectionMatrix(camera.combined);
+		game.getBatch().setProjectionMatrix(camera.combined);
         renderer.setView(camera);
         renderer.render();
         gameManager.update();

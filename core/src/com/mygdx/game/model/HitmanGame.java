@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
  * y ejecucion de libgdx)  que delega el trabajo a una {@link Screen} mediante el metodo <i>setScreen</i>.
  * </p>
  * 
- * @author jcaracciolo
  * 
  * @see com.badlogic.gdx.Game
  * @see com.badlogic.gdx.ApplicationListener
@@ -29,8 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class HitmanGame extends Game{
 
-	public SpriteBatch batch;
-	public Stage stage;
+	private SpriteBatch batch;
 	
 	@Override
 	public void create() {
@@ -40,7 +38,9 @@ public class HitmanGame extends Game{
 	
 	}
 	
-	
+	public SpriteBatch getBatch(){
+		return batch;
+	}
 
 	public void render () {
 		super.render();

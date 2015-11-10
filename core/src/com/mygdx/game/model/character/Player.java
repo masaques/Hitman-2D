@@ -1,8 +1,3 @@
-/*
- *@author Tomas Raies
- *@date   13 de oct. de 2015
- */
-
 package com.mygdx.game.model.character;
 
 import com.badlogic.gdx.Gdx;
@@ -52,6 +47,7 @@ public class Player extends Character implements VisionSender {
 	public void stopMoving() {
 		this.isMoving = false;
 	}
+	
 	@Override
 	public void sendPosition() {
 		VisionManager.getInstance().dispatchMessage(new Vision(this,map));
@@ -69,6 +65,7 @@ public class Player extends Character implements VisionSender {
 		BulletManager.getInstance().dispatchMessage(new Bullet(this.getTeam(),this.getCenter(),getLookDirection()));
 		NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(),100,NoiseType.SHOOT));
 	}
+	
 	@Override
 	protected void moveAlong(){
 		float speed;

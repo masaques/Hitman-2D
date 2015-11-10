@@ -2,16 +2,13 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.math.Vector2;
 /**
- * Pequeña clase que devuelve ControlProcessor en getPlayerMovement()
+ * Pequeña clase que devuelve ControlProcessor en {@link com.mygdx.game.controller.ControlProcessor#getPlayerMovement() getPlayerMovement}
  * para informarle a PlayerHandler lo que tiene que hacer
- * @author masaques
- *
+ * 
+ * @see Player
+ * @see ControlPocessor
  */
 public class PlayerMovement {
-	/**
-	 * TODO Deberian haber mas estados, tales como ver si se emitio un sonido
-	 * o un disparo, etc
-	 */
 	private boolean running ;
 	private Vector2 direction ;
 	private Vector2 lookDirection;

@@ -1,15 +1,17 @@
 package com.mygdx.game.controller;
 
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.PlayerMovement;
 import com.mygdx.game.model.character.Player;
 import com.mygdx.game.view.assets.PlayerView;
+
+
 /**
  * Clase que recibe datos del ControlProcessor acerca de lo que hizo el jugador y,
  * en base a esto, actualiza el modelo.
- * @author masaques
  *
+ * @see CharacterController
  */
 public class PlayerController extends CharacterController<Player, PlayerView> {
 	private ControlProcessor control;
