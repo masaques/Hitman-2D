@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="22" height="22" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="27" height="27" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="piso" tilewidth="32" tileheight="32">
   <image source="../../../../test/core/assets/black_white.png" width="320" height="200"/>
  </tileset>
- <layer name="Capa de patrones 2" width="22" height="22">
+ <layer name="Capa de patrones 2" width="27" height="27">
   <data encoding="base64" compression="zlib">
-   eJxjY2BgYBvFo3gUj+JRPIpH8YBiAAWFC1k=
+   eJztzaERADAIBLBXsP/GXaBIDhMRnUpSC/pj43G5XC6Xy+W6umDyAOacEgw=
   </data>
  </layer>
- <layer name="Capa de patrones 3" width="22" height="22">
+ <layer name="Capa de patrones 3" width="27" height="27">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQRRgfYxPCpQVePy1xiAD59g9FcfHZQEr7YzCEnLvHZTU330iM9DLS55IQDNj6pcUnIn+TEPTFguJqLSx+leQubucTYS6k5g91cWoUDsebSAgMALW4AkA==
+   eJztlUkKACAMA+v/P+1dGrsaFCz0oiUjMegQkUHstbS13cw6jzQ9ulEWmn+BhbiIXbkvTcfKgDcvu/NUPIyyPNWVDSaL6eHJ98Xyo/JuZO7ms2ytzN+RZUX3T3mING5nMT2ssKK5YuYwU5/Vx2L1BJkAAMg=
   </data>
  </layer>
 </map>

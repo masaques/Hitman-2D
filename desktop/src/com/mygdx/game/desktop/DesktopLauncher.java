@@ -12,7 +12,8 @@ public class DesktopLauncher {
 		config.width = 864;
 		config.height = 864;
 		config.vSyncEnabled = true;
-		config.resizable = false ;
+		config.useHDPI = true;
+		config.resizable = true ;
 		new LwjglApplication(new HitmanGame(), config);
 	}
 }
