@@ -22,8 +22,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.model.GameManager;
-import com.mygdx.game.model.IllegalPositionException;
+import com.mygdx.game.controller.GameManager;
+import com.mygdx.game.controller.IllegalPositionException;
 import com.mygdx.game.serialization.Level;
 
 public class LevelScreen implements Screen {

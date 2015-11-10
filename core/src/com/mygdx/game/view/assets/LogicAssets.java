@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * 
  * @author traies
  * @author masaques
- * @see com.mygdx.game.model.GameManager
+ * @see com.mygdx.game.controller.GameManager
  */
 public class LogicAssets {
 

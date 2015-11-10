@@ -1,5 +1,5 @@
 
-package com.mygdx.game.model;
+package com.mygdx.game.controller;
 
 import com.mygdx.game.view.screens.menu.view.MenuUI;
 import com.badlogic.gdx.Game;

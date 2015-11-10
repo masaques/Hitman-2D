@@ -1,16 +1,12 @@
-package com.mygdx.game.model;
+package com.mygdx.game.controller;
 
 import java.io.File;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -18,13 +14,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.controller.BulletController;
-import com.mygdx.game.controller.CharacterController;
-import com.mygdx.game.controller.CivilianController;
-import com.mygdx.game.controller.ControlProcessor;
-import com.mygdx.game.controller.GoonController;
-import com.mygdx.game.controller.NoiseController;
-import com.mygdx.game.controller.PlayerController;
+import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Civilian;
 import com.mygdx.game.model.character.Goon;
@@ -57,6 +47,7 @@ public class GameManager  {
 	private PlayerController playerController;
 	private List<CharacterController<?, ?>> characterControllerList = new ArrayList<CharacterController<?, ?>>();
 	private NoiseController noiseController = new NoiseController();
+	private GameState  state ;
 
 	public GameManager(int width, int height, int tile_width, Viewport viewport, Level level, SpriteBatch batch)
 			throws IllegalPositionException {
@@ -116,7 +107,7 @@ public class GameManager  {
 		BulletManager bulletManager = BulletManager.getInstance();
 		BulletView bulletView = new BulletView(viewport.getCamera());
 		bulletController = new BulletController(bulletManager, bulletView);
-
+		this.state = GameState.PLAY ;
 	}
 
 	public TiledMap getTiledMap() {
@@ -157,5 +148,9 @@ public class GameManager  {
 		JAXBContext context = JAXBContext.newInstance(Level.class);
 		Marshaller marshaller = context.createMarshaller();
 		marshaller.marshal(l, new File(to));
+	}
+	
+	public GameState getState() {
+		return state ;
 	}
 }

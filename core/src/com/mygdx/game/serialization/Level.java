@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Vector2;
  * 
  * @author masaques
  * @see Position
- * @see com.mygdx.game.model.GameManager
+ * @see com.mygdx.game.controller.GameManager
  *
  */
 
