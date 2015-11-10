@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.model.HitmanGame;
 import com.mygdx.game.view.screens.LevelScreen;
 
@@ -29,6 +32,7 @@ public class MenuUI implements Screen{
 	
 	public void create () {
 	    stage = new Stage();
+	    
 	}
 	
 	
@@ -54,6 +58,9 @@ public class MenuUI implements Screen{
 		 if (stage == null)
 		        stage = new Stage();
 		    stage.clear();
+		    stage.getViewport().update(width, height);
+		
+		
 		    
 		    Gdx.input.setInputProcessor(stage);
 		    
@@ -69,19 +76,14 @@ public class MenuUI implements Screen{
 				try {
 					game.setScreen(new LevelScreen(game));
 				} catch (JAXBException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 				
 			}
 		});
+		newGame.setPosition(stage.getViewport().getWorldWidth()/2-hitmanSkin.getSkinWidth()/2,stage.getViewport().getWorldHeight()*4/8);
 		
-		
-		
-		
-		newGame.setPosition(864/2-hitmanSkin.getSkinWidth()/2, 864*4/8);
-		newGame.setBounds(864/2-hitmanSkin.getSkinWidth()/2, 864*4/8,hitmanSkin.getSkinWidth(),hitmanSkin.getSkinHeight());
 		
 		help.addListener(new ClickListener(){
 			public void clicked(InputEvent event, float x, float y){
@@ -90,8 +92,8 @@ public class MenuUI implements Screen{
 			}
 			
 		});
-		help.setPosition(864/2-hitmanSkin.getSkinWidth()/2, 864*3/8);
-		
+		help.setPosition(stage.getViewport().getWorldWidth()/2-hitmanSkin.getSkinWidth()/2,stage.getViewport().getWorldHeight()*3/8);
+			
 		
 		table.addListener(new ClickListener(){
 			public void clicked(InputEvent event, float x, float y){
@@ -99,8 +101,7 @@ public class MenuUI implements Screen{
 			}
 			
 		});
-		
-		table.setPosition(864/2-hitmanSkin.getSkinWidth()/2, 864*2/8);
+		table.setPosition(stage.getViewport().getWorldWidth()/2-hitmanSkin.getSkinWidth()/2,stage.getViewport().getWorldHeight()*2/8);
 				
 		
 		stage.addActor(newGame);

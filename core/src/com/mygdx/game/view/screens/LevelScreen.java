@@ -67,10 +67,12 @@ public class LevelScreen implements Screen{
 		
 		camera = new OrthographicCamera();
 		gameport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),camera);
+		
+		
 		try {
 			gameManager = new GameManager(864,864,32,gameport,l);
 		} catch (IllegalPositionException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
