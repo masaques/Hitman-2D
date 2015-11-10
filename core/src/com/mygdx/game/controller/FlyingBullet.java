@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * Clase auxiliar del controller que almacena las balas "volando" en el juego.
  * Guarda el origen, el destino y la duracion que lleva en el aire.
+ * 
  * @author traies
  *
  */
@@ -13,9 +14,10 @@ public class FlyingBullet {
 	private Vector2 origin;
 	private Vector2 end;
 	private float timer;
-	
+
 	/**
 	 * Recibe la posicion de origen y la posicion de la interseccion.
+	 * 
 	 * @param origin
 	 * @param end
 	 */
@@ -23,30 +25,35 @@ public class FlyingBullet {
 		this.origin = new Vector2(origin);
 		this.end = new Vector2(end);
 	}
+
 	/**
 	 * Actualiza el tiempo que lleva en el aire.
 	 */
 	public void update() {
 		timer += Gdx.graphics.getDeltaTime();
 	}
+
 	/**
 	 * Devuelve el tiempo que lleva en el "aire".
+	 * 
 	 * @return
 	 */
 	public float getTimer() {
 		return timer;
 	}
-	
+
 	/**
 	 * Devuelve el origen de la bala.
+	 * 
 	 * @return
 	 */
 	public Vector2 getOrigin() {
 		return new Vector2(origin);
 	}
-	
+
 	/**
 	 * Devuelve el destino de la bala.
+	 * 
 	 * @return
 	 */
 	public Vector2 getEnd() {

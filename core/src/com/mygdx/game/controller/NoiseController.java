@@ -7,26 +7,26 @@ import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.view.assets.NoisePlayer;
+
 /**
- * Clase que controla los sonidos de la partida
- * y los cede a NoisePlayer para que los reproduzca
+ * Clase que controla los sonidos de la partida y los cede a NoisePlayer para
+ * que los reproduzca
+ * 
  * @author masaques
  *
  */
 public class NoiseController {
-	private NoiseManager manager ;
-	private NoisePlayer player ;
-	private List<Noise> noiseList ;
-	
-	
-	public NoiseController(){
-		this.manager = NoiseManager.getInstance() ;
-		this.player = new NoisePlayer() ;
+	private NoiseManager manager;
+	private NoisePlayer player;
+	private List<Noise> noiseList;
+
+	public NoiseController() {
+		this.manager = NoiseManager.getInstance();
+		this.player = new NoisePlayer();
 	}
 	
-	
-	
 	public void updateModel(){
+
 		noiseList = manager.update();
 	}
 	
@@ -34,13 +34,13 @@ public class NoiseController {
 		player.addNoises(toPlay(noiseList));
 		player.playNoises();
 	}
-	
+
 	private List<NoiseType> toPlay(List<Noise> list) {
-		List<NoiseType> types = new ArrayList<NoiseType>() ;
+		List<NoiseType> types = new ArrayList<NoiseType>();
 		for (Noise n : list) {
-			types.add(n.getType()) ;
+			types.add(n.getType());
 		}
-		return types ;
+		return types;
 	}
-	
+
 }

@@ -14,21 +14,23 @@ public class Context {
 	private List<Noise> noiseList;
 	private List<Vector2> positionList;
 	private boolean isMoving;
-	
+
 	public Context(List<Noise> noiseList, List<Vector2> positionList, boolean isMoving) {
-		if (noiseList == null || positionList == null){
+		if (noiseList == null || positionList == null) {
 			throw new IllegalArgumentException();
 		}
 		this.noiseList = noiseList;
 		this.positionList = positionList;
 		this.isMoving = isMoving;
 	}
+
 	/**
 	 * Devuelve si el npc puede ver al jugador.
 	 */
 	public boolean playerIsVisible() {
 		return positionList.size() > 0 && positionList.get(0) != null;
 	}
+
 	/**
 	 * Devuelve el sonido mas fuerte, null si es vacio.
 	 */
@@ -37,40 +39,43 @@ public class Context {
 		Noise noise = noiseList.get(0);
 		return noise;
 	}
+
 	public boolean canHear() {
 		return noiseList.size() > 0;
 	}
+
 	/**
 	 * Agrega un sonido al contexto.
 	 * 
-	 * @param noise - {@link Noise} a agregar
+	 * @param noise
+	 *            - {@link Noise} a agregar
 	 */
 	public void add(Noise noise) {
 		noiseList.add(noise);
 	}
-	
+
 	/**
 	 * Devuelve la posicion del jugador visto.
+	 * 
 	 * @return
 	 */
 	public Vector2 getPlayerPosition() {
 		Vector2 playerPosition;
 		if (positionList.size() <= 0) {
 			playerPosition = null;
-		}
-		else {
+		} else {
 			playerPosition = new Vector2(positionList.get(positionList.size() - 1));
 		}
 		return playerPosition;
 	}
-	
+
 	/**
-	 * Devuelve si el jugador se esta moviendo. 
+	 * Devuelve si el jugador se esta moviendo.
+	 * 
 	 * @return
 	 */
 	public boolean isMoving() {
 		return isMoving;
 	}
-	
-	
+
 }

@@ -6,8 +6,8 @@
 package com.mygdx.game.model;
 
 /**
- * Excepcion que deberian tirar los handlers si los mensajes que reciben no son los que
- * pueden manejar
+ * Excepcion que deberian tirar los handlers si los mensajes que reciben no son
+ * los que pueden manejar
  */
 public class WrongMessageException extends RuntimeException {
 

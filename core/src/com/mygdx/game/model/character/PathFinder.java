@@ -8,5 +8,5 @@ import com.mygdx.game.model.util.Movable;
  * linearPathFinder.
  */
 public interface PathFinder {
-	public Path findPath(Movable movable ,Vector2 startPosition, Vector2 finalPosition);
+	public Path findPath(Movable movable, Vector2 startPosition, Vector2 finalPosition);
 }

@@ -11,21 +11,21 @@ import com.mygdx.game.model.character.behaviour.InspectBehaviour;
 import com.mygdx.game.model.character.behaviour.PatrolBehaviour;
 
 public class Civilian extends NPC {
-	
+
 	private Behaviour<NPC> fleeBehaviour;
 	/**
 	 * TODO Deprecated?
 	 */
 	private Behaviour<NPC> patrolBehaviour;
 	private Behaviour<NPC> inspectBehaviour;
-	
+
 	public Civilian(Rectangle hitBox, LevelMap map, List<Vector2> patrolPositions, List<Vector2> safePositions) {
 		super(hitBox, map);
-		patrolBehaviour  = new PatrolBehaviour(patrolPositions);
-		fleeBehaviour    = new FleeBehaviour(safePositions);
+		patrolBehaviour = new PatrolBehaviour(patrolPositions);
+		fleeBehaviour = new FleeBehaviour(safePositions);
 		inspectBehaviour = new InspectBehaviour();
 	}
-	
+
 	@Override
 	public void alarm(Context context) {
 		if (context.playerIsVisible()) {
@@ -53,9 +53,9 @@ public class Civilian extends NPC {
 	public boolean isShooting() {
 		return false;
 	}
-	
+
 	@Override
-	public void update(){
+	public void update() {
 		super.update();
 	}
 
