@@ -61,6 +61,7 @@ public class GameManager  {
 	private Set<Integer> civilianIDs = new HashSet<Integer>() ;
 	private Integer targetID ;
 	private TargetController targetController;
+	private List<Vector2> randArray = new RandList<Vector2>();
 
 	public GameManager(int width, int height, int tile_width, Viewport viewport, Level level, SpriteBatch batch)
 			throws IllegalPositionException {
@@ -71,7 +72,6 @@ public class GameManager  {
 		LevelMap map = new LevelMap(width, height, tile_width, tiled_map);
 		AStarPathFinder aStarPathFinder = new AStarPathFinder(map, MAX_SEARCH);
 		LinearPathFinder linearPathFinder = new LinearPathFinder(map);
-		List<Vector2> randArray = new RandList<Vector2>();
 		randArray.add(new Vector2(200, 150));
 		randArray.add(new Vector2(700, 700));
 		randArray.add(new Vector2(73, 792));
@@ -103,6 +103,7 @@ public class GameManager  {
 		characterControllerList.add(playerController);
 		linearPathFinder = new LinearPathFinder(map);
 		BulletManager.getInstance().setMap(map);
+		
 		for (Vector2 v : level.civilPositions()) {
 			if (!map.isValid(new Rectangle(v.x, v.y, 18, 13))) {
 				throw new IllegalPositionException();
@@ -110,17 +111,15 @@ public class GameManager  {
 			CivilianView civilianView = new CivilianView(batch, LogicAssets.civilianWalkAnimation,
 					LogicAssets.civilainHurtWalkAnimation, LogicAssets.civilianDeadTextureRegion,
 					LogicAssets.exclamationTextureRegion, LogicAssets.interrogationTextureRegion);
-			Civilian civilian = new Civilian(new Rectangle(v.x, v.y, 18, 13), map, randArray, randArray);
+			Civilian civilian = new Civilian(new Rectangle(v.x, v.y, 18, 13), map, level.safePositions(), level.safePositions());
 			civilian.setAStarPathFinder(aStarPathFinder);
 			civilian.setLinearPathFinder(linearPathFinder);
 			CivilianController civController = new CivilianController(civilian, civilianView);
 			characterControllerList.add(civController);
 			civilianIDs.add(civilian.getId()) ;
 		}
-		/**
-		 * targetID=target.getID();
-		 */
-		Target target = new Target(new Rectangle(200,150, 18,13),map,randArray);
+		Vector2 tp = level.getTarget();
+		Target target = new Target(new Rectangle(tp.x,tp.y, 18,13),map,randArray);
 		target.setAStarPathFinder(aStarPathFinder);
 		target.setLinearPathFinder(linearPathFinder);
 		TargetView targetView = new TargetView(
@@ -133,7 +132,7 @@ public class GameManager  {
 				LogicAssets.exclamationTextureRegion,
 				LogicAssets.interrogationTextureRegion
 				);
-		TargetController targetController = new TargetController(target, targetView);
+		targetController = new TargetController(target, targetView);
 		characterControllerList.add(targetController);
 		targetID = target.getId() ;
 		BulletManager bulletManager = BulletManager.getInstance();
@@ -180,6 +179,7 @@ public class GameManager  {
 		List<Vector2> goonPositions = new ArrayList<Vector2>();
 		List<Vector2> civilPositions = new ArrayList<Vector2>();
 		Position playerPosition = new Position(playerController.position());
+		Position targetPosition = new Position(targetController.position()) ;
 		for (CharacterController<?, ?> c : characterControllerList) {
 			if (c instanceof GoonController) {
 				goonPositions.add(c.position());
@@ -188,7 +188,7 @@ public class GameManager  {
 			}
 		}
 		Level l = new Level(path, Position.vectorToPosition(goonPositions), Position.vectorToPosition(civilPositions),
-				playerPosition);
+				Position.vectorToPosition(randArray),playerPosition,targetPosition);
 		JAXBContext context = JAXBContext.newInstance(Level.class);
 		Marshaller marshaller = context.createMarshaller();
 		marshaller.marshal(l, new File(to));

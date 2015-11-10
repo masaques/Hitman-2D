@@ -48,7 +48,7 @@ public class LevelScreen implements Screen {
 		this.game = game ;
 		JAXBContext context = JAXBContext.newInstance(Level.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		l = (Level) unmarshaller.unmarshal(new File("assets/Level0.xml"));
+		l = (Level) unmarshaller.unmarshal(new File("assets/Level2.xml"));
 
 		this.batch = new SpriteBatch();
 		camera = new OrthographicCamera();

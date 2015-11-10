@@ -32,14 +32,21 @@ public class Level {
 	@XmlElementWrapper(name = "civilPositions", required = true)
 	@XmlElement(name = "position", required = true)
 	private List<Position> civilPositions = new ArrayList<Position>();
+	@XmlElementWrapper(name = "safePositions", required = true)
+	@XmlElement(name = "position", required = true)
+	private List<Position> safePositions = new ArrayList<Position>();
 	@XmlElement(name = "playerPosition", required = true)
 	private Position playerPosition;
-
-	public Level(String map, List<Position> goonPositions, List<Position> civilPositions, Position playerPosition) {
+	@XmlElement(name = "targetPosition", required = true)
+	private Position targetPosition;
+	public Level(String map, List<Position> goonPositions, List<Position> civilPositions,
+			List<Position> safePositions, Position playerPosition,Position targetPosition) {
 		this.mapPath = map;
 		this.goonPositions = goonPositions;
 		this.playerPosition = playerPosition;
 		this.civilPositions = civilPositions;
+		this.safePositions = safePositions;
+		this.targetPosition = targetPosition ;
 	}
 
 	public Level() {
@@ -59,6 +66,14 @@ public class Level {
 
 	public Vector2 getPlayer() {
 		return new Vector2(playerPosition.getX(), playerPosition.getY());
+	}
+	
+	public Vector2 getTarget() {
+		return new Vector2(targetPosition.getX(),targetPosition.getY()) ;
+	}
+	
+	public List<Vector2> safePositions() {
+		return Position.positionToVector(safePositions) ;
 	}
 
 }
