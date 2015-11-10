@@ -65,6 +65,7 @@ public class InGameMenu implements Screen {
 
 		proceed.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
+				screen.unpause();
 				game.setScreen(screen);
 			}
 		});

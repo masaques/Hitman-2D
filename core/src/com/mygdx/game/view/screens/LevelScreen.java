@@ -41,6 +41,7 @@ public class LevelScreen implements Screen {
 
 	public LevelScreen(HitmanGame game) throws JAXBException {
 		/**
+		 * TODO : Al levelScreen le deberian pasar el Level
 		 * Carga el nivel desde archivo
 		 */
 		this.game = game ;
@@ -72,8 +73,8 @@ public class LevelScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		if (gameManager.getState() == GameState.PAUSE) {
-			gameManager.unpause();
 			game.setScreen(new InGameMenu(game,this));
+			return ;
 		}
 		fps_logger.log();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -98,7 +99,9 @@ public class LevelScreen implements Screen {
 	public void resize(int width, int height) {
 		gameport.update(width, height, true);
 	}
-
+	public void unpause() {
+		gameManager.unpause();
+	}
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub

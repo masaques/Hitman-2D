@@ -137,7 +137,6 @@ public class GameManager  {
 		noiseController.manage();
 		bulletController.manage();
 		Collections.sort(characterControllerList);
-
 		for (CharacterController<?, ?> c : characterControllerList) {
 			c.updateModel();
 			c.updateView();
@@ -178,7 +177,11 @@ public class GameManager  {
 	public GameState getState() {
 		return state ;
 	}
+	private void setState(GameState state) {
+		this.state = state ;
+	}
 	public void unpause() {
-		state= GameState.PLAY ;
+		this.setState(GameState.PLAY); ;
+		Gdx.input.setInputProcessor(control);
 	}
 }
