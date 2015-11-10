@@ -64,7 +64,11 @@ public class ControlProcessor implements InputProcessor {
 			y *= SIN45;
         }
 	}
-	
+	/**
+	 *  Obtiene el movimiento del jugador y genera un {@link PlayerMovement} con el correspondiente
+	 *  
+	 * @return {@link PlayerMovement} - Información del movimiento del jugador
+	 */
 	public PlayerMovement getPlayerMovement() {
 		PlayerMovement ans = new PlayerMovement(
 				new Vector2(x,y).nor(),

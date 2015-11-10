@@ -1,7 +1,6 @@
 package com.mygdx.game.view.screens;
 
 import java.io.File;
-import java.io.IOException;
 import serialization.Level;
 
 import javax.xml.bind.JAXBContext;
@@ -15,50 +14,36 @@ import javax.xml.bind.Unmarshaller;
  *  @author jcaracciolo
  */
 
-import com.badlogic.gdx.Game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.controller.ControlProcessor;
 import com.mygdx.game.model.GameManager;
-import com.mygdx.game.model.HitmanGame;
 import com.mygdx.game.model.IllegalPositionException;
-
-import serialization.GameSerializer;
 
 public class LevelScreen implements Screen{
 
-	private HitmanGame game;
 	private OrthographicCamera camera;
 	private Viewport gameport;
 	private OrthogonalTiledMapRenderer renderer;
-	private ControlProcessor input;
 	private SpriteBatch batch;
 	private FPSLogger fps_logger =new FPSLogger();
 	private GameManager gameManager;
 	 
-	public LevelScreen(HitmanGame game) throws JAXBException{
+	public LevelScreen() throws JAXBException{
 		/**
 		 * Carga el nivel desde archivo
 		 */
 		JAXBContext context = JAXBContext.newInstance(Level.class) ;
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		Level l = (Level)unmarshaller.unmarshal(new File("assets/Level1.xml")) ;
+		Level l = (Level)unmarshaller.unmarshal(new File("assets/Level0.xml")) ;
 		
-		this.game = game;
 		this.batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		gameport = new FitViewport(864, 864,camera);
@@ -67,7 +52,7 @@ public class LevelScreen implements Screen{
 		try {
 			gameManager = new GameManager(864,864,32,gameport,l, batch);
 		} catch (IllegalPositionException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -91,7 +76,6 @@ public class LevelScreen implements Screen{
 	public void render(float delta) {
 		fps_logger.log();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
         renderer.setView(camera);

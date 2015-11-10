@@ -16,6 +16,11 @@ import com.mygdx.game.view.screens.LevelScreen;
 
 import java.util.*;
 
+/**
+ *  {@link Screen} que se encarga del Menu
+ * 
+ *
+ */
 public class MenuUI implements Screen{
 	
 	private static List<TextButton> hitmanButtons;
@@ -29,6 +34,7 @@ public class MenuUI implements Screen{
 	
 	public void create () {
 	    stage = new Stage();
+	    
 	}
 	
 	
@@ -54,6 +60,9 @@ public class MenuUI implements Screen{
 		 if (stage == null)
 		        stage = new Stage();
 		    stage.clear();
+		    stage.getViewport().update(width, height);
+		
+		
 		    
 		    Gdx.input.setInputProcessor(stage);
 		    
@@ -67,21 +76,16 @@ public class MenuUI implements Screen{
 				
 				
 				try {
-					game.setScreen(new LevelScreen(game));
+					game.setScreen(new LevelScreen());
 				} catch (JAXBException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 				
 			}
 		});
+		newGame.setPosition(stage.getViewport().getWorldWidth()/2-hitmanSkin.getSkinWidth()/2,stage.getViewport().getWorldHeight()*4/8);
 		
-		
-		
-		
-		newGame.setPosition(864/2-hitmanSkin.getSkinWidth()/2, 864*4/8);
-		newGame.setBounds(864/2-hitmanSkin.getSkinWidth()/2, 864*4/8,hitmanSkin.getSkinWidth(),hitmanSkin.getSkinHeight());
 		
 		help.addListener(new ClickListener(){
 			public void clicked(InputEvent event, float x, float y){
@@ -90,8 +94,8 @@ public class MenuUI implements Screen{
 			}
 			
 		});
-		help.setPosition(864/2-hitmanSkin.getSkinWidth()/2, 864*3/8);
-		
+		help.setPosition(stage.getViewport().getWorldWidth()/2-hitmanSkin.getSkinWidth()/2,stage.getViewport().getWorldHeight()*3/8);
+			
 		
 		table.addListener(new ClickListener(){
 			public void clicked(InputEvent event, float x, float y){
@@ -99,8 +103,7 @@ public class MenuUI implements Screen{
 			}
 			
 		});
-		
-		table.setPosition(864/2-hitmanSkin.getSkinWidth()/2, 864*2/8);
+		table.setPosition(stage.getViewport().getWorldWidth()/2-hitmanSkin.getSkinWidth()/2,stage.getViewport().getWorldHeight()*2/8);
 				
 		
 		stage.addActor(newGame);

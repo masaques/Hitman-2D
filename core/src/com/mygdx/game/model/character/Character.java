@@ -1,11 +1,7 @@
-/*
- *@author Tomas Raies
- *@date   13 de oct. de 2015
- */
-
 package com.mygdx.game.model.character;
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.LevelMap;

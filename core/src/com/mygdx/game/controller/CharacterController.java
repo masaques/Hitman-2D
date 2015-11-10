@@ -3,12 +3,13 @@ import com.mygdx.game.model.character.Character;
 import com.mygdx.game.view.assets.CharacterView;
 
 /**
- * 
- * @author traies
- *
  * Clase abstracta que maneja el control de los Character.
- * @param <M>
- * @param <V>
+ * 
+ * @param <M> - {@link Character} del Modelo
+ * @param <V> - {@link CharacterView} del View
+ * 
+ * @see Controller
+ * @see Character
  */
 public abstract class CharacterController <M extends Character, V extends CharacterView<M>> 
 										extends Controller<M,V> 
@@ -18,8 +19,9 @@ public abstract class CharacterController <M extends Character, V extends Charac
 	
 	/**
 	 * Constructor, recibe el Character y el CharacterView
-	 * @param model
-	 * @param view
+	 * 
+	 * @param model - {@link Character} del Modelo
+	 * @param view  - {@link CharacterView} correspondiente al modelo
 	 */
 	public CharacterController(M character, V characterView) {
 		super(character, characterView);
@@ -34,10 +36,12 @@ public abstract class CharacterController <M extends Character, V extends Charac
 			getModel().update();
 		}
 	}
+	
 	/**
-	 * Actualiza la view. Si el personaje esta muerto no lo actualiza, pero
-	 * aun asi llama al draw.
+	 * Actualiza la view. Si el personaje esta muerto no lo actualiza, elimina su referencia y se marca
+	 * como muerto el controler, pero aun asi llama al draw.
 	 */
+	
 	@Override
 	public void updateView() {
 		V characterView = getView();
