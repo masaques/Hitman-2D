@@ -20,8 +20,7 @@ import serialization.CharacterInformation;
  */
 public class Player extends Character implements VisionSender {
 	private static final double RUNNING_NOISE_RANGE = 200;
-	
-	private boolean isShooting;
+
 	
 	public Player(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map, Team.PLAYER);

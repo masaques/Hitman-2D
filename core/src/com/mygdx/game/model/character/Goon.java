@@ -7,6 +7,7 @@ package com.mygdx.game.model.character;
 
 import java.util.List;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -16,13 +17,11 @@ import com.mygdx.game.model.character.behaviour.FollowBehaviour;
 import com.mygdx.game.model.character.behaviour.InspectBehaviour;
 import com.mygdx.game.model.character.behaviour.PatrolBehaviour;
 import com.mygdx.game.model.character.behaviour.SearchBehaviour;
-import com.mygdx.game.model.character.behaviour.ShootBehaviour;
 import com.mygdx.game.model.message.Bullet;
 import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.NoiseType;
-import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
 
 import serialization.NPCInformation;
@@ -40,7 +39,7 @@ public class Goon extends NPC implements Aggressive{
 	/**
 	 * TODO Deprecated?
 	 */
-	private Behaviour<NPC> shootBehaviour;
+	
 	private Behaviour<NPC> searchBehaviour;
 	private Behaviour<NPC> inspectBehaviour;
 	private float shootTimer = 0f;
@@ -50,7 +49,6 @@ public class Goon extends NPC implements Aggressive{
 		super(hitBox, map);
 		patrolBehaviour  = new PatrolBehaviour(searchPositions);
 		followBehaviour  = new FollowBehaviour();
-		shootBehaviour   = new ShootBehaviour();
 		inspectBehaviour = new InspectBehaviour();
 		
 		
@@ -59,7 +57,6 @@ public class Goon extends NPC implements Aggressive{
 		super(info, map) ;
 		patrolBehaviour  = new PatrolBehaviour(searchPositions);
 		followBehaviour  = new FollowBehaviour();
-		shootBehaviour   = new ShootBehaviour();
 		inspectBehaviour = new InspectBehaviour();
 	}
 	@Override

@@ -1,9 +1,9 @@
 package com.mygdx.game.model.message;
 
 import com.badlogic.gdx.math.Intersector;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.model.character.Character;
 import com.mygdx.game.model.character.Team;
 
 /**

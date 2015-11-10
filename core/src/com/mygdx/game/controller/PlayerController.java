@@ -1,8 +1,6 @@
 package com.mygdx.game.controller;
 
-
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.model.PlayerMovement;
 import com.mygdx.game.model.character.Player;
 import com.mygdx.game.view.assets.PlayerView;
 

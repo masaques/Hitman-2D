@@ -1,20 +1,10 @@
 package com.mygdx.game.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.model.PlayerMovement;
 /**
  * La vieja clase ControlHandler, que ahora se ocupa mas puramente 
  * de cuestiones vinculadas con el input
@@ -24,10 +14,7 @@ import com.mygdx.game.model.PlayerMovement;
  *
  */
 public class ControlProcessor implements InputProcessor {
-	private static int MOVE_LEFT = 0;
-	private static int MOVE_UP = 1;
-	private static int MOVE_RIGHT = 2;
-	private static int MOVE_DOWN = 3;
+
 	private static double SIN45 = 0.7071;
 	
 	private Viewport viewport;
