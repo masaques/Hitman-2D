@@ -9,7 +9,7 @@ public class ResolutionListener {
 	public static ClickListener option1() {
 		ClickListener cl = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.graphics.setDisplayMode(MenuUI.getDefaultwidth(), MenuUI.getDefaultheight(), false);
+				Gdx.graphics.setDisplayMode(StartMenu.getDefaultwidth(), StartMenu.getDefaultheight(), false);
 			}
 		};
 		return cl;
@@ -18,7 +18,7 @@ public class ResolutionListener {
 	public static ClickListener option2() {
 		ClickListener cl = new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				Gdx.graphics.setDisplayMode(MenuUI.getDefaultwidth() * 5 / 3, MenuUI.getDefaultheight(), false);
+				Gdx.graphics.setDisplayMode(StartMenu.getDefaultwidth() * 5 / 3, StartMenu.getDefaultheight(), false);
 			}
 		};
 		return cl;

@@ -1,4 +1,4 @@
-package com.mygdx.game.view.screens;
+package com.mygdx.game.view.screens.menu.view;
 
 import javax.xml.bind.JAXBException;
 
@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.controller.HitmanGame;
-import com.mygdx.game.view.screens.menu.view.HitmanSkin;
+import com.mygdx.game.view.screens.LevelScreen;
 
 public class InGameMenu implements Screen {
 	

@@ -27,6 +27,7 @@ import com.mygdx.game.controller.GameState;
 import com.mygdx.game.controller.HitmanGame;
 import com.mygdx.game.controller.IllegalPositionException;
 import com.mygdx.game.serialization.Level;
+import com.mygdx.game.view.screens.menu.view.InGameMenu;
 
 public class LevelScreen implements Screen {
 

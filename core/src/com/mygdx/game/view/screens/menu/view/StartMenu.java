@@ -21,7 +21,7 @@ import java.util.*;
  * 
  *
  */
-public class MenuUI implements Screen {
+public class StartMenu implements Screen {
 
 	private static List<TextButton> hitmanButtons;
 	private static final int defaultHeight = 864;
@@ -37,11 +37,11 @@ public class MenuUI implements Screen {
 
 	}
 
-	public MenuUI(HitmanGame game) {
+	public StartMenu(HitmanGame game) {
 		this.game = game;
 	}
 
-	public MenuUI(HitmanSkin hitmanSkin, HitmanGame game, Stage stage) {
+	public StartMenu(HitmanSkin hitmanSkin, HitmanGame game, Stage stage) {
 //		MenuData.m.play();
 //		MenuData.m.setLooping(true);
 		this.game = game;
