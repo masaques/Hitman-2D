@@ -56,7 +56,13 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 		messageList.add(message);
 	}
 	
-	
+	/**
+	 * Resetea el estado interno del manager al inicial.
+	 */
+	public void reset() {
+		listeners = new HashSet<L> ();
+		messageList = new ArrayList<M> ();
+	}
 	/**
 	 * 	Recorre cada <b>Listener</b> y lo lo notifica según indique el mensaje.
 	 * 

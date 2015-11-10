@@ -261,7 +261,7 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		float maxforce = 2f;
 		float deltaTime = Gdx.graphics.getDeltaTime();
 		Vector2 velocity  = getVelocity().scl(deltaTime);
-		Vector2 velocity2 = getVelocity().scl(deltaTime).scl(.5f);
+		Vector2 velocity2 = getVelocity().scl(deltaTime).scl(2f);
 		Vector2 ahead  = new Vector2(position).add(velocity);
 		Vector2 ahead2 = new Vector2(position).add(velocity2);
 		Rectangle obstacle = map.avoidanceDetection(boundingHitBox, ahead, ahead2);
@@ -271,9 +271,10 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		}
 		Vector2 steering = new Vector2();
 		steering.add(avoidanceForce);
-		move(velocity.nor().add(steering));
-		super.moveAlong();
+		move(velocity.add(steering));
 		lookWhereYouAreGoing();
+		super.moveAlong();
+		
 		return;
 	}
 	

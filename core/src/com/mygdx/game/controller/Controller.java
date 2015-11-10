@@ -10,7 +10,7 @@ import com.mygdx.game.view.assets.View;
  * @param <M>
  * @param <V>
  */
-public abstract class Controller<M extends Model, V extends View> {
+public abstract class Controller<M, V> {
 	private M model;
 	private V view;
 	
@@ -26,16 +26,12 @@ public abstract class Controller<M extends Model, V extends View> {
 	/**
 	 * Actualiza el modelo.
 	 */
-	public void updateModel() {
-		model.update();
-	}
+	public abstract void updateModel();
 	
 	/**
 	 * Dibuja el view.
 	 */
-	public void updateView() {
-		view.draw();
-	}
+	public abstract void updateView();
 	
 	/**
 	 * TODO este metodo debe ser protected. Mover el metodo dump de character a aca.
@@ -52,8 +48,5 @@ public abstract class Controller<M extends Model, V extends View> {
 		return view;
 	}
 	
-	public Vector2 position() {
-		return model.getPosition();
-	}
 	
 }

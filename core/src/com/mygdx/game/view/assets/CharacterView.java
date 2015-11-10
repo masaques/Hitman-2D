@@ -59,6 +59,7 @@ public abstract class CharacterView<T extends Character> implements View{
 		if (!isDead) {
 			if (isMoving){
 				updateAnimation();
+				isMoving = false;
 			}
 			if (isHurt) {
 				currentFrame =  hurtWalkAnimation.getKeyFrame(stateTime, true);

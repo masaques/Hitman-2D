@@ -24,16 +24,13 @@ public class NoiseController {
 		this.player = new NoisePlayer() ;
 	}
 	
-	public void manage(){
-		updateModel();
-		updateView();
-	}
 	
-	private void updateModel(){
+	
+	public void updateModel(){
 		noiseList = manager.update();
 	}
 	
-	private void updateView(){
+	public void updateView(){
 		player.addNoises(toPlay(noiseList));
 		player.playNoises();
 	}

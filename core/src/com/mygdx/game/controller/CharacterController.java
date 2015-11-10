@@ -1,4 +1,5 @@
 package com.mygdx.game.controller;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.character.Character;
 import com.mygdx.game.view.assets.CharacterView;
 
@@ -45,6 +46,7 @@ public abstract class CharacterController <M extends Character, V extends Charac
 	@Override
 	public void updateView() {
 		V characterView = getView();
+		
 		if (!isDead){
 			M character = getModel();
 			characterView.setPosition(character.getCenter());
@@ -62,14 +64,17 @@ public abstract class CharacterController <M extends Character, V extends Charac
 				isDead = true;
 			}
 		}
-		characterView.draw();
 	}
 	
+	
+	public void draw() {
+		getView().draw();
+	}
 	/**
-	 * Devuelve si el jugador esta muerto.
+	 * Devuelve si el character esta muerto.
 	 * @return
 	 */
-	protected boolean isDead() {
+	public boolean isDead() {
 		return isDead;
 	}
 	
@@ -87,5 +92,9 @@ public abstract class CharacterController <M extends Character, V extends Charac
 		else {
 			return 1;
 		}
+	}
+	
+	public Vector2 position() {
+		return getModel().getCenter();
 	}
 }

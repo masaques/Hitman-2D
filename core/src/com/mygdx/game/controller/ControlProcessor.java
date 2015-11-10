@@ -28,6 +28,7 @@ public class ControlProcessor implements InputProcessor {
 	private Vector2 mousePosition;
 	private boolean mouse_click;
 	private boolean request_save ;
+	private boolean requestPause;
 	
 	/**
 	 * El control processor recibe el viewport para hacer los ajustes necesarios al mouseposition
@@ -96,6 +97,7 @@ public class ControlProcessor implements InputProcessor {
         	move_up = false;
         if(keycode == Input.Keys.S)
             move_down = false;
+        
         return false;
     }
 
@@ -116,12 +118,30 @@ public class ControlProcessor implements InputProcessor {
             move_down = true;
         if (keycode == Input.Keys.O)
         	request_save = true ;
+        if (keycode == Input.Keys.ESCAPE)
+        	requestPause = true ;
         return false;
     }
 	public boolean requestSave() {
 		boolean tmp = request_save ;
 		request_save = false ;
 		return tmp ;
+	}
+	
+	public boolean requestPause() {
+		boolean tmp = requestPause ;
+		requestPause = false ;
+		return tmp ;
+	}
+	
+	public void reset(){
+		x = 0;
+		y = 0;
+		move_left = false;
+		move_right = false;
+		move_up = false;
+		move_down = false;
+		move_run = false;
 	}
 	
     @Override
