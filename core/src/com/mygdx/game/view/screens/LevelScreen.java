@@ -23,6 +23,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.controller.GameManager;
+import com.mygdx.game.controller.GameState;
+import com.mygdx.game.controller.HitmanGame;
 import com.mygdx.game.controller.IllegalPositionException;
 import com.mygdx.game.serialization.Level;
 
@@ -34,14 +36,17 @@ public class LevelScreen implements Screen {
 	private SpriteBatch batch;
 	private FPSLogger fps_logger = new FPSLogger();
 	private GameManager gameManager;
+	private HitmanGame game ;
+	private Level l ;
 
-	public LevelScreen() throws JAXBException {
+	public LevelScreen(HitmanGame game) throws JAXBException {
 		/**
 		 * Carga el nivel desde archivo
 		 */
+		this.game = game ;
 		JAXBContext context = JAXBContext.newInstance(Level.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		Level l = (Level) unmarshaller.unmarshal(new File("assets/Level0.xml"));
+		l = (Level) unmarshaller.unmarshal(new File("assets/Level0.xml"));
 
 		this.batch = new SpriteBatch();
 		camera = new OrthographicCamera();
@@ -51,18 +56,13 @@ public class LevelScreen implements Screen {
 		try {
 			gameManager = new GameManager(864, 864, 32, gameport, l, batch);
 		} catch (IllegalPositionException e) {
-
 			e.printStackTrace();
 		}
 
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
 
 	}
-
-	public void update(float dt) {
-
-	}
-
+	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
@@ -71,6 +71,10 @@ public class LevelScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		if (gameManager.getState() == GameState.PAUSE) {
+			gameManager.unpause();
+			game.setScreen(new InGameMenu(game,this));
+		}
 		fps_logger.log();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
@@ -78,7 +82,16 @@ public class LevelScreen implements Screen {
 		renderer.setView(camera);
 		renderer.render();
 		gameManager.update();
-
+		
+	}
+	
+	public void reload() {
+		try {
+			this.gameManager = new GameManager(864, 864, 32, gameport, l, batch);
+		} catch (IllegalPositionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

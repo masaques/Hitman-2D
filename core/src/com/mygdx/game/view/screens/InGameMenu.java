@@ -1,0 +1,94 @@
+package com.mygdx.game.view.screens;
+
+import javax.xml.bind.JAXBException;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.controller.HitmanGame;
+import com.mygdx.game.view.screens.menu.view.HitmanSkin;
+
+public class InGameMenu implements Screen {
+	
+	private HitmanGame game;
+	private LevelScreen screen;
+	private Stage stage ;
+	private HitmanSkin skin ;
+	
+	public InGameMenu(HitmanGame game,LevelScreen screen) {
+		this.game = game ;
+		this.screen = screen ;
+		skin = new HitmanSkin() ;
+	}
+	
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void render(float delta) {		
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		if (stage == null)
+			stage = new Stage();
+		stage.clear();
+		stage.getViewport().update(width, height);
+
+		Gdx.input.setInputProcessor(stage);
+
+		TextButton restart = new TextButton("Restart", skin.getButtonSkin());
+		TextButton proceed = new TextButton("Proceed", skin.getButtonSkin());
+		
+		restart.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				screen.reload();
+				game.setScreen(screen);
+		}
+		});
+		restart.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
+				stage.getViewport().getWorldHeight() * 4 / 8);
+
+		proceed.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				game.setScreen(screen);
+			}
+		});
+		proceed.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
+				stage.getViewport().getWorldHeight() * 3 / 8);
+		
+		stage.addActor(restart);
+		stage.addActor(proceed);
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

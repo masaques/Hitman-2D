@@ -42,8 +42,8 @@ public class MenuUI implements Screen {
 	}
 
 	public MenuUI(HitmanSkin hitmanSkin, HitmanGame game, Stage stage) {
-		// MenuData.m.play();
-		// MenuData.m.setLooping(true);
+//		MenuData.m.play();
+//		MenuData.m.setLooping(true);
 		this.game = game;
 
 		hitmanButtons = new ArrayList<TextButton>();
@@ -67,7 +67,7 @@ public class MenuUI implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 
 				try {
-					game.setScreen(new LevelScreen());
+					game.setScreen(new LevelScreen(game));
 				} catch (JAXBException e) {
 					e.printStackTrace();
 				}

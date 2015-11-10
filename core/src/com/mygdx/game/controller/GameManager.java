@@ -117,6 +117,7 @@ public class GameManager  {
 		/**
 		 * targetID=target.getID();
 		 */
+		targetID = 0 ;
 		BulletManager bulletManager = BulletManager.getInstance();
 		BulletView bulletView = new BulletView(viewport.getCamera());
 		bulletController = new BulletController(bulletManager, bulletView);
@@ -128,6 +129,10 @@ public class GameManager  {
 	}
 
 	public void update() {
+		if (control.paused()) {
+			state = GameState.PAUSE ;
+			return ;
+		}
 		VisionManager.getInstance().update();
 		noiseController.manage();
 		bulletController.manage();
@@ -172,5 +177,8 @@ public class GameManager  {
 	
 	public GameState getState() {
 		return state ;
+	}
+	public void unpause() {
+		state= GameState.PLAY ;
 	}
 }
