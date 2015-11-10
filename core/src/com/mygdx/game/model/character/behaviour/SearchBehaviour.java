@@ -9,14 +9,14 @@ import com.mygdx.game.model.character.NPC;
 
 public class SearchBehaviour implements Behaviour<NPC> {
 	private List<Vector2> searchPositions;
-	
+
 	public SearchBehaviour(Vector2 npcPosition, LevelMap map) {
 		/*
 		 * Busca posiciones validas en un radio de 2 tiles.
 		 */
 		searchPositions = map.findRandomValidPositions(npcPosition, 2);
 	}
-	
+
 	@Override
 	public void behave(NPC npc, Context context) {
 		if (searchPositions.size() <= 0) {

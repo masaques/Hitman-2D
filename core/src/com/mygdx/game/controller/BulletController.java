@@ -7,28 +7,28 @@ import com.mygdx.game.view.assets.BulletView;
 
 /**
  * TODO deberia extender de una interfaz controller.
+ * 
  * @author traies
  *
  */
 public class BulletController {
 	private BulletManager bulletManager;
 	private BulletView bulletView;
-	
-	
-	
+
 	public BulletController(BulletManager bulletManager, BulletView bulletView) {
 		this.bulletManager = bulletManager;
-		this.bulletView    = bulletView;
+		this.bulletView = bulletView;
 	}
-	
-	public void manage(){
+
+	public void manage() {
 		updateModel();
 		updateView();
 	}
-	
+
 	public void updateModel() {
 		bulletManager.update();
 	}
+
 	/**
 	 * Dibuja la lista de balas volando.Ademas, actualiza su timer.
 	 */
@@ -38,5 +38,5 @@ public class BulletController {
 		bulletView.update();
 		bulletView.draw();
 	}
-	
+
 }

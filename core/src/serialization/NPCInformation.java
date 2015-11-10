@@ -11,8 +11,8 @@ import com.mygdx.game.model.character.Step;
 import com.mygdx.game.model.message.Noise;
 
 /**
- * Clase que agrega valores a CharacterInformation,
- * necesaria para los NPC
+ * Clase que agrega valores a CharacterInformation, necesaria para los NPC
+ * 
  * @author masaques
  * @see NPC
  */
@@ -20,31 +20,35 @@ public class NPCInformation extends CharacterInformation implements Serializable
 
 	private Path currentPath;
 	private Step finalStep;
-	private Step currentStep ;
-	private List<Noise> noiseList ;
-	private List<Vector2> visionList ;
-	
+	private Step currentStep;
+	private List<Noise> noiseList;
+	private List<Vector2> visionList;
+
 	private static final long serialVersionUID = 7135254762958640372L;
-	
-	
-	public NPCInformation(Vector2 direction, Rectangle hitBox, float hp, 
-						  List<Noise> noiseInbox, List<Vector2> visionList) {
+
+	public NPCInformation(Vector2 direction, Rectangle hitBox, float hp, List<Noise> noiseInbox,
+			List<Vector2> visionList) {
 		super(direction, hitBox, hp);
-		this.noiseList= noiseInbox;
+		this.noiseList = noiseInbox;
 		this.visionList = visionList;
 	}
+
 	public Path getCurrentPath() {
 		return currentPath;
 	}
+
 	public Step getFinalStep() {
 		return finalStep;
 	}
+
 	public Step getCurrentStep() {
 		return currentStep;
 	}
+
 	public List<Noise> getNoiseList() {
 		return noiseList;
 	}
+
 	public List<Vector2> getVisionList() {
 		return visionList;
 	}

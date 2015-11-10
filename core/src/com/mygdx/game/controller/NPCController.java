@@ -2,24 +2,27 @@ package com.mygdx.game.controller;
 
 import com.mygdx.game.model.character.NPC;
 import com.mygdx.game.view.assets.NPCView;
+
 /**
  * Controller de las clases que heredan de NPC. Hereda de CharacterController.
+ * 
  * @author traies
  *
  */
-public abstract class NPCController<M extends NPC, V extends NPCView<M>> extends CharacterController<M,V> {
+public abstract class NPCController<M extends NPC, V extends NPCView<M>> extends CharacterController<M, V> {
 	/**
 	 * Recibe el npc (model) y el npcVie (view)
+	 * 
 	 * @param npc
 	 * @param npcView
 	 */
 	public NPCController(M npc, V npcView) {
-		super(npc,npcView);
+		super(npc, npcView);
 	}
-	
+
 	/**
-	 * Actualiza la vista. Ademas, actualiza el estado de la vista (calm, suspicios,
-	 * alarm)
+	 * Actualiza la vista. Ademas, actualiza el estado de la vista (calm,
+	 * suspicios, alarm)
 	 */
 	@Override
 	public void updateView() {

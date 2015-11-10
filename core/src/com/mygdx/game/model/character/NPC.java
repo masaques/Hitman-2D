@@ -21,9 +21,9 @@ import serialization.NPCInformation;
  * segun el contexto del juego. Ademas, deben ser capaces de encontrar el camino entre dos 
  * puntos en el mapa.
  */
-public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener{
-	private static final float VISUAL_RANGE = 9000f ;
-	private static final float VISUAL_ANGLE = 100f ;
+public abstract class NPC extends Character implements NoiseListener, Moody, VisionListener {
+	private static final float VISUAL_RANGE = 9000f;
+	private static final float VISUAL_ANGLE = 100f;
 	protected static final float EPSILON = 2f;
 	private Path currentPath;
 	private Step finalStep;
@@ -34,48 +34,54 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	private List<Noise> noiseInbox;
 	private List<Vector2> visualInbox;
 	private NPCState currentState;
-	
-	public NPC (Rectangle hitBox, LevelMap map){
+
+	public NPC(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map, Team.ENEMY);
-		noiseInbox   = new ArrayList<Noise>();
-		visualInbox  = new ArrayList<Vector2> ();
+		noiseInbox = new ArrayList<Noise>();
+		visualInbox = new ArrayList<Vector2>();
 		stateMachine = new NPCStateMachine(this);
 		currentState = NPCState.CALM;
-		
+
 		VisionManager.getInstance().addListener(this);
 		NoiseManager.getInstance().addListener(this);
 		BulletManager.getInstance().addListener(this);
 	}
+
 	/**
 	 * Constructor alternativo usado al cargar la informacion desde un archivo
-	 * @param data La minima informacion requerida para cargar al NPC
-	 * @param map El mapa generado por quien carga el juego
+	 * 
+	 * @param data
+	 *            La minima informacion requerida para cargar al NPC
+	 * @param map
+	 *            El mapa generado por quien carga el juego
 	 * @see Character
 	 */
-	public NPC (NPCInformation data,LevelMap map) {
-		super(data,map) ;
-		
-		this.noiseInbox = new ArrayList<Noise>() ;
+	public NPC(NPCInformation data, LevelMap map) {
+		super(data, map);
+
+		this.noiseInbox = new ArrayList<Noise>();
 		this.noiseInbox.addAll(data.getNoiseList());
-		this.visualInbox = new ArrayList<Vector2>() ;
+		this.visualInbox = new ArrayList<Vector2>();
 		this.visualInbox.addAll(data.getVisionList());
 		stateMachine = new NPCStateMachine(this);
 		currentState = NPCState.CALM;
 	}
-	
-	public void setAStarPathFinder(PathFinder pathFinder){
+
+	public void setAStarPathFinder(PathFinder pathFinder) {
 		this.aStarPathFinder = pathFinder;
 	}
+
 	public void setLinearPathFinder(PathFinder pathFinder) {
 		this.linearPathFinder = pathFinder;
 	}
-	
+
 	/**
 	 * Setea el camino para llegar a un punto en el mapa, si es posible.
+	 * 
 	 * @param position
 	 */
 	public boolean moveTo(Vector2 position, boolean linear) {
-		if (finalStep != null && position.epsilonEquals(finalStep.getPosition(), EPSILON )){
+		if (finalStep != null && position.epsilonEquals(finalStep.getPosition(), EPSILON)) {
 			return false;
 		}
 		Vector2 currPosition = new Vector2();
@@ -83,12 +89,11 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		PathFinder pathFinder;
 		if (linear) {
 			pathFinder = linearPathFinder;
-		}
-		else {
+		} else {
 			pathFinder = aStarPathFinder;
 		}
 		Path auxPath = pathFinder.findPath(this, currPosition, position);
-		if (auxPath != null && auxPath.hasNextStep()){
+		if (auxPath != null && auxPath.hasNextStep()) {
 			currentPath = auxPath;
 			currentStep = currentPath.nextStep();
 			move(currentStep.getPosition().sub(getPosition()));
@@ -97,125 +102,120 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Actualiza el estado del NPC
 	 */
 	@Override
 	public void update() {
-		Context context = new Context(
-				noiseInbox,
-				visualInbox, 
-				isMoving);
-		
+		Context context = new Context(noiseInbox, visualInbox, isMoving);
+
 		stateMachine.updateMachine(context);
 		updatePosition();
-		super.update();	
+		super.update();
 	}
-	
+
 	private void updatePosition() {
-		if (!isMoving || currentPath == null){
+		if (!isMoving || currentPath == null) {
 			isMoving = false;
 			currentPath = null;
 			currentStep = null;
 			return;
 		}
-	
-		if (currentStep == null || currentStep.getPosition().epsilonEquals(getCenter(), EPSILON)){
-			if (currentPath.hasNextStep()){
+
+		if (currentStep == null || currentStep.getPosition().epsilonEquals(getCenter(), EPSILON)) {
+			if (currentPath.hasNextStep()) {
 				currentStep = currentPath.nextStep();
-			}
-			else {
+			} else {
 				currentPath = null;
 				isMoving = false;
 			}
 		}
-		if (isMoving){
+		if (isMoving) {
 			move(currentStep.getPosition().sub(getCenter()));
 		}
 	}
-	
-	
+
 	/**
 	 * Metodo para calcular si el jugador esta en el campo visual de este NPC
 	 * Utilizado por VisionHandler
+	 * 
 	 * @param playerPosition
 	 * @return true si el jugador es visible, false si no
 	 */
 	@Deprecated
 	public boolean canSee(Vector2 playerPosition) {
-		Vector2 goonPosition  = getCenter() ;
-		Vector2 goonDirection = getLookDirection() ;
-		if (playerPosition.dst2(goonPosition)> VISUAL_RANGE){
-			return false ;
+		Vector2 goonPosition = getCenter();
+		Vector2 goonDirection = getLookDirection();
+		if (playerPosition.dst2(goonPosition) > VISUAL_RANGE) {
+			return false;
 		}
 		if (!map.isValid(goonPosition, playerPosition)) {
-			return false ;
+			return false;
 		}
-		Vector2 relativeDirection = playerPosition.sub(goonPosition).nor() ;
-		if (Math.abs(relativeDirection.angle(goonDirection))<=VISUAL_ANGLE/2) {
-			return true ;
+		Vector2 relativeDirection = playerPosition.sub(goonPosition).nor();
+		if (Math.abs(relativeDirection.angle(goonDirection)) <= VISUAL_ANGLE / 2) {
+			return true;
 		}
-		return false ;
+		return false;
 	}
-	
+
 	public void addPlayer(Vector2 playerPosition) {
 		visualInbox.add(playerPosition);
 	}
-	
-	public void addNoise(Noise n){
+
+	public void addNoise(Noise n) {
 		noiseInbox.add(n);
 	}
-	
+
 	/**
-	 * los siguientes metodos abstractos van a definir el comportamiento de los npc segun
-	 * su estado "animico" (NPC es Moody).
+	 * los siguientes metodos abstractos van a definir el comportamiento de los
+	 * npc segun su estado "animico" (NPC es Moody).
 	 */
 	@Override
 	public void stop() {
 		isMoving = false;
-	
+
 	}
-	
+
 	public float visualRange() {
 		float visualRange;
-		if (currentState == NPCState.ALARM){
-			visualRange =  -1f;
-		}
-		else {
+		if (currentState == NPCState.ALARM) {
+			visualRange = -1f;
+		} else {
 			visualRange = VISUAL_RANGE;
 		}
-		return visualRange ;
+		return visualRange;
 	}
-	
+
 	public float visualAngle() {
 		float visualAngle;
 		if (currentState == NPCState.ALARM) {
 			visualAngle = 0f;
-		}
-		else {
+		} else {
 			visualAngle = VISUAL_ANGLE;
 		}
-		return visualAngle ;
+		return visualAngle;
 	}
-	
-	
-	
+
 	@Override
 	public NPCInformation dump() {
 		if (this.isDead()) {
-			return null ;
+			return null;
 		}
-		return new NPCInformation(this.getMoveDirection(),getHitBox(),this.getHealthPoints(),
-				this.noiseInbox,this.visualInbox) ;
+		return new NPCInformation(this.getMoveDirection(), getHitBox(), this.getHealthPoints(), this.noiseInbox,
+				this.visualInbox);
 	}
+
 	@Override
 	public abstract void alarm(Context context);
+
 	@Override
 	public abstract void suspicious(Context context);
+
 	@Override
 	public abstract void calm(Context context);
-	
+
 	@Override
 	public void surprised(Context context) {
 		if (context.playerIsVisible()) {
@@ -223,33 +223,39 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 			stop();
 		}
 	}
+
 	public void refreshNoiseInbox() {
 		noiseInbox.clear();
 	}
+
 	public void refreshVisualInbox() {
 		visualInbox.clear();
 	}
+
 	/**
 	 * Devuelve el estado actual del npc (util para el characterView)
+	 * 
 	 * @return
 	 */
 	@Override
 	public NPCState getState() {
 		return currentState;
 	}
+
 	/**
-	 * TODO ver si esto se puede omitir
-	 * Este setter del estado sirve para ahorrarme pedirle al stateMachine el estado actual.
-	 * La state machine no conoce el tipo NPCState, y por lo tanto no podria pedirle el estado actual
-	 * manteniendo el tipo que necesito para saber diferenciar los estados (alarm, susp, calm) en el 
-	 * characterView.
+	 * TODO ver si esto se puede omitir Este setter del estado sirve para
+	 * ahorrarme pedirle al stateMachine el estado actual. La state machine no
+	 * conoce el tipo NPCState, y por lo tanto no podria pedirle el estado
+	 * actual manteniendo el tipo que necesito para saber diferenciar los
+	 * estados (alarm, susp, calm) en el characterView.
+	 * 
 	 * @param state
 	 */
 	@Override
 	public void setState(NPCState state) {
 		currentState = state;
 	}
-	
+
 	@Override
 	protected void moveAlong() {
 		Rectangle hitBox = getHitBox();
@@ -260,9 +266,9 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		boundingHitBox.setCenter(position);
 		float maxforce = 2f;
 		float deltaTime = Gdx.graphics.getDeltaTime();
-		Vector2 velocity  = getVelocity().scl(deltaTime);
+		Vector2 velocity = getVelocity().scl(deltaTime);
 		Vector2 velocity2 = getVelocity().scl(deltaTime).scl(.5f);
-		Vector2 ahead  = new Vector2(position).add(velocity);
+		Vector2 ahead = new Vector2(position).add(velocity);
 		Vector2 ahead2 = new Vector2(position).add(velocity2);
 		Rectangle obstacle = map.avoidanceDetection(boundingHitBox, ahead, ahead2);
 		Vector2 avoidanceForce = new Vector2();
@@ -276,9 +282,10 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		lookWhereYouAreGoing();
 		return;
 	}
-	
+
 	/**
-	 * Este metodo se debe llamar cuando el npc muere, para desuscribirse de sus MessageManager.
+	 * Este metodo se debe llamar cuando el npc muere, para desuscribirse de sus
+	 * MessageManager.
 	 */
 	@Override
 	public void die() {
@@ -286,25 +293,24 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		BulletManager.getInstance().removeListener(this);
 		NoiseManager.getInstance().removeListener(this);
 	}
-	
+
 	/**
-	 * Actualiza la direccion a la que mira el personaje hacia la direccion del movimiento,
-	 * con cierta velocidad angular.
+	 * Actualiza la direccion a la que mira el personaje hacia la direccion del
+	 * movimiento, con cierta velocidad angular.
 	 */
 	public void lookWhereYouAreGoing() {
 		Vector2 moveDirection = getMoveDirection();
 		Vector2 lookDirection = getLookDirection();
-		
+
 		if (lookDirection.isZero()) {
 			look(moveDirection);
-		}
-		else if (!lookDirection.equals(moveDirection)) {
+		} else if (!lookDirection.equals(moveDirection)) {
 			float angle = lookDirection.angle(moveDirection);
 			Vector2 velocity = getVelocity();
-			angle = (angle/360f) * velocity.len();
+			angle = (angle / 360f) * velocity.len();
 			lookDirection.rotate(angle);
 			look(lookDirection);
 		}
-		
+
 	}
 }

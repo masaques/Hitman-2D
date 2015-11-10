@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+
 /**
- * Clase que contiene la informacion basica necesaria de
- * un Character
+ * Clase que contiene la informacion basica necesaria de un Character
+ * 
  * @author masaques
  * @see Character
  * @see Player
@@ -16,20 +17,22 @@ public class CharacterInformation implements Serializable, Information {
 	private Vector2 direction;
 	private Rectangle hitBox;
 	private float healthPoints;
-	
-	public CharacterInformation(Vector2 direction, Rectangle hitBox,float hp) {
-		this.direction= direction ;
-		this.hitBox = hitBox ;
-		this.healthPoints= hp ;
+
+	public CharacterInformation(Vector2 direction, Rectangle hitBox, float hp) {
+		this.direction = direction;
+		this.hitBox = hitBox;
+		this.healthPoints = hp;
 	}
-	
+
 	public Vector2 getDirection() {
 		return direction;
 	}
+
 	public Rectangle getHitbox() {
 		return hitBox;
 	}
+
 	public float getHealthPoints() {
-		return healthPoints ;
+		return healthPoints;
 	}
 }

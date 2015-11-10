@@ -1,57 +1,62 @@
 package com.mygdx.game.controller;
+
 import com.mygdx.game.model.character.Character;
 import com.mygdx.game.view.assets.CharacterView;
 
 /**
  * Clase abstracta que maneja el control de los Character.
  * 
- * @param <M> - {@link Character} del Modelo
- * @param <V> - {@link CharacterView} del View
+ * @param <M>
+ *            - {@link Character} del Modelo
+ * @param <V>
+ *            - {@link CharacterView} del View
  * 
  * @see Controller
  * @see Character
  */
-public abstract class CharacterController <M extends Character, V extends CharacterView<M>> 
-										extends Controller<M,V> 
-										implements Comparable<CharacterController<M,V>> {
-	
+public abstract class CharacterController<M extends Character, V extends CharacterView<M>> extends Controller<M, V>
+		implements Comparable<CharacterController<M, V>> {
+
 	private boolean isDead;
-	
+
 	/**
 	 * Constructor, recibe el Character y el CharacterView
 	 * 
-	 * @param model - {@link Character} del Modelo
-	 * @param view  - {@link CharacterView} correspondiente al modelo
+	 * @param model
+	 *            - {@link Character} del Modelo
+	 * @param view
+	 *            - {@link CharacterView} correspondiente al modelo
 	 */
 	public CharacterController(M character, V characterView) {
 		super(character, characterView);
 	}
-	
+
 	/**
 	 * Actualiza el modelo. Si el personaje esta muerto no hace nada.
 	 */
 	@Override
 	public void updateModel() {
-		if (!isDead){
+		if (!isDead) {
 			getModel().update();
 		}
 	}
-	
+
 	/**
-	 * Actualiza la view. Si el personaje esta muerto no lo actualiza, elimina su referencia y se marca
-	 * como muerto el controler, pero aun asi llama al draw.
+	 * Actualiza la view. Si el personaje esta muerto no lo actualiza, elimina
+	 * su referencia y se marca como muerto el controler, pero aun asi llama al
+	 * draw.
 	 */
-	
+
 	@Override
 	public void updateView() {
 		V characterView = getView();
-		if (!isDead){
+		if (!isDead) {
 			M character = getModel();
 			characterView.setPosition(character.getCenter());
 			characterView.setLookDirection(character.getLookDirection());
 			characterView.setRunning(characterView.isRunning());
 			characterView.setMoving(character.isMoving());
-			if (character.isHurt()){
+			if (character.isHurt()) {
 				characterView.setHit();
 				character.setHurt(false);
 			}
@@ -64,27 +69,26 @@ public abstract class CharacterController <M extends Character, V extends Charac
 		}
 		characterView.draw();
 	}
-	
+
 	/**
 	 * Devuelve si el jugador esta muerto.
+	 * 
 	 * @return
 	 */
 	protected boolean isDead() {
 		return isDead;
 	}
-	
+
 	/**
 	 * Se comparan los characterController segun si estan muertos o no
 	 */
-	@Override 
-	public int compareTo(CharacterController<M,V> other) {
+	@Override
+	public int compareTo(CharacterController<M, V> other) {
 		if (this.isDead() && other.isDead()) {
 			return 0;
-		}
-		else if (this.isDead()){
+		} else if (this.isDead()) {
 			return -1;
-		}
-		else {
+		} else {
 			return 1;
 		}
 	}

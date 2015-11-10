@@ -14,7 +14,6 @@ import javax.xml.bind.Unmarshaller;
  *  @author jcaracciolo
  */
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -27,49 +26,47 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.model.GameManager;
 import com.mygdx.game.model.IllegalPositionException;
 
-public class LevelScreen implements Screen{
+public class LevelScreen implements Screen {
 
 	private OrthographicCamera camera;
 	private Viewport gameport;
 	private OrthogonalTiledMapRenderer renderer;
 	private SpriteBatch batch;
-	private FPSLogger fps_logger =new FPSLogger();
+	private FPSLogger fps_logger = new FPSLogger();
 	private GameManager gameManager;
-	 
-	public LevelScreen() throws JAXBException{
+
+	public LevelScreen() throws JAXBException {
 		/**
 		 * Carga el nivel desde archivo
 		 */
-		JAXBContext context = JAXBContext.newInstance(Level.class) ;
+		JAXBContext context = JAXBContext.newInstance(Level.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		Level l = (Level)unmarshaller.unmarshal(new File("assets/Level0.xml")) ;
-		
+		Level l = (Level) unmarshaller.unmarshal(new File("assets/Level0.xml"));
+
 		this.batch = new SpriteBatch();
 		camera = new OrthographicCamera();
-		gameport = new FitViewport(864, 864,camera);
+		gameport = new FitViewport(864, 864, camera);
 		gameport.apply();
-		
+
 		try {
-			gameManager = new GameManager(864,864,32,gameport,l, batch);
+			gameManager = new GameManager(864, 864, 32, gameport, l, batch);
 		} catch (IllegalPositionException e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
-		
-		
+
 	}
-	
-	public void update(float dt){
-		
-		
+
+	public void update(float dt) {
+
 	}
-	
+
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -78,11 +75,10 @@ public class LevelScreen implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-        renderer.setView(camera);
-        renderer.render();
-        gameManager.update();
-		
-		
+		renderer.setView(camera);
+		renderer.render();
+		gameManager.update();
+
 	}
 
 	@Override
@@ -93,25 +89,25 @@ public class LevelScreen implements Screen{
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

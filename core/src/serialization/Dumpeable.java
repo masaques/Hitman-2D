@@ -1,5 +1,5 @@
 package serialization;
 
 public interface Dumpeable {
-	public Information dump() ;
+	public Information dump();
 }
