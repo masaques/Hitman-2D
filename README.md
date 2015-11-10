@@ -49,11 +49,7 @@ git log -> todos los commits del branch en el que estoy
 * Hacer tests.
 
 * Menues.
-  - Ya hice la clase MenuManager, que vendría a ser parte del Controller. La especificación está comentada en el .java
-  - Hay que implementar la clase MenuManagerView, que es puramente libgdx
-  - Implementar la función "pausa" durante el juego
+  - Casi terminado, Yo (masaques) voy a ver mañana lo ultimo que falta: que aparezcan carteles al ganar o al perder
 
-* Guardar las jugadas
-  - WIP, estoy viendo el tema de como guardar el mapa
-
-
+* Terminado
+  - Estas son las ultimas dos cosas que faltan. Luego hay que ver detalles de prolijidad
