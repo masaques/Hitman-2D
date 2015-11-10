@@ -43,17 +43,14 @@ public class LevelScreen implements Screen{
 	private HitmanGame game;
 	
 	
-	private OrthographicCamera camera = new OrthographicCamera();
+	private OrthographicCamera camera;
 	private Viewport gameport;
 
-	
-	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
 	
 	ControlProcessor input;
 	
 	FPSLogger fps_logger =new FPSLogger();
-	ShapeRenderer shapeRenderer;
 	GameManager gameManager;
 	 
 	public LevelScreen(HitmanGame game) throws JAXBException{
@@ -65,16 +62,21 @@ public class LevelScreen implements Screen{
 		Level l = (Level)unmarshaller.unmarshal(new File("assets/Level1.xml")) ;
 		
 		this.game = game;
-		gameport = new FitViewport(864, 864,camera);
+		
+		
+		
+		camera = new OrthographicCamera();
+		gameport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),camera);
 		try {
-			gameManager = new GameManager(864,864,32,l);
+			gameManager = new GameManager(864,864,32,gameport,l);
 		} catch (IllegalPositionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
-		camera.position.set(gameport.getWorldWidth()/2,gameport.getWorldHeight()/2,0);
-		shapeRenderer = new ShapeRenderer();
+		
+		
 	}
 	
 	public void update(float dt){
@@ -91,16 +93,12 @@ public class LevelScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		fps_logger.log();
-		
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		gameManager.update();
 		game.batch.setProjectionMatrix(camera.combined);
-		
-		
-		camera.update();
         renderer.setView(camera);
         renderer.render();
-       
         gameManager.update();
 		
 		
@@ -108,8 +106,7 @@ public class LevelScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		gameport.update(width, height);
-		
+		gameport.update(width, height, true);
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,6 +22,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.controller.BulletController;
 import com.mygdx.game.controller.CharacterController;
 import com.mygdx.game.controller.CivilianController;
@@ -75,9 +77,9 @@ public class GameManager implements Dumpeable {
 	private List<CharacterController<?,?>> characterControllerList = new ArrayList<CharacterController<?,?>>();
 	private NoiseController noiseController = new NoiseController() ;
 	
-	public GameManager(int width,int height,int tile_width, Level level) throws IllegalPositionException {
+	public GameManager(int width,int height,int tile_width,Viewport viewport, Level level) throws IllegalPositionException {
 		this.path=level.getPath();
-		control = new ControlProcessor() ;
+		control = new ControlProcessor(viewport) ;
 		Gdx.input.setInputProcessor(control);
 		tiled_map= new TmxMapLoader().load(path);
 		LevelMap map = new LevelMap(width,height, tile_width,tiled_map);

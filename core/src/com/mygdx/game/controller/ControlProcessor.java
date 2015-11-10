@@ -8,8 +8,12 @@ import java.util.TreeSet;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.model.PlayerMovement;
 /**
  * La vieja clase ControlHandler, que ahora se ocupa mas puramente 
@@ -26,6 +30,7 @@ public class ControlProcessor implements InputProcessor {
 	private static int MOVE_DOWN = 3;
 	private static double SIN45 = 0.7071;
 	
+	private Viewport viewport;
 	private boolean move_left;
 	private boolean move_right;
 	private boolean move_up;
@@ -33,11 +38,18 @@ public class ControlProcessor implements InputProcessor {
 	private boolean move_run;
 	private float x ;
 	private float y ;
-	private int mouse_x;
-	private int mouse_y;
+	private Vector2 mousePosition;
 	private boolean mouse_click;
 	private boolean request_save ;
 	
+	/**
+	 * El control processor recibe el viewport para hacer los ajustes necesarios al mouseposition
+	 * @param viewport
+	 */
+	public ControlProcessor (Viewport viewport) {
+		this.viewport = viewport;
+		this.mousePosition = new Vector2();
+	}
 	public void update(){
 		if (move_left)
 			x = -1;
@@ -57,7 +69,7 @@ public class ControlProcessor implements InputProcessor {
 		PlayerMovement ans = new PlayerMovement(
 				new Vector2(x,y).nor(),
 				move_run,
-				new Vector2(mouse_x, mouse_y),
+				new Vector2(mousePosition.x, mousePosition.y),
 				mouse_click);
 		this.mouse_click = false;
 		this.x = 0f;
@@ -73,7 +85,7 @@ public class ControlProcessor implements InputProcessor {
 		Vector2 ans = null ;
 		if (mouse_click) {
 			mouse_click = false ;
-			ans= new Vector2((float)mouse_x,(float)mouse_y) ;
+			ans= new Vector2(mousePosition.x, mousePosition.y) ;
 		}
 		return ans ;
 	}
@@ -146,8 +158,7 @@ public class ControlProcessor implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-    	mouse_x = screenX;
-    	mouse_y = 864-screenY;
+    	viewport.unproject(mousePosition.set(screenX,screenY));
         return false;
     }
 
