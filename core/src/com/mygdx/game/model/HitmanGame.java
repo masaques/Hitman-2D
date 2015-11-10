@@ -29,15 +29,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class HitmanGame extends Game{
 
-	public SpriteBatch batch;
 	public Stage stage;
 	
 	@Override
 	public void create() {
-		batch = new SpriteBatch();
+		
 		setScreen(new MenuUI(this));
 		
-	
 	}
 	
 	

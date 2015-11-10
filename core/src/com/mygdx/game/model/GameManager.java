@@ -41,6 +41,7 @@ import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
+import com.mygdx.game.view.assets.BulletView;
 import com.mygdx.game.view.assets.CharacterView;
 import com.mygdx.game.view.assets.CivilianView;
 import com.mygdx.game.view.assets.GoonView;
@@ -72,12 +73,12 @@ public class GameManager implements Dumpeable {
 	private String path ;
 	private TiledMap tiled_map ;
 	private ControlProcessor control ;
-	private BulletController bulletController = new BulletController();
+	private BulletController bulletController;
 	private PlayerController playerController;
 	private List<CharacterController<?,?>> characterControllerList = new ArrayList<CharacterController<?,?>>();
 	private NoiseController noiseController = new NoiseController() ;
 	
-	public GameManager(int width,int height,int tile_width,Viewport viewport, Level level) throws IllegalPositionException {
+	public GameManager(int width,int height,int tile_width,Viewport viewport, Level level, SpriteBatch batch) throws IllegalPositionException {
 		this.path=level.getPath();
 		control = new ControlProcessor(viewport) ;
 		Gdx.input.setInputProcessor(control);
@@ -90,7 +91,6 @@ public class GameManager implements Dumpeable {
 		randArray.add(new Vector2(700,700));
 		randArray.add(new Vector2(73,792));
 		randArray.add(new Vector2(817,48));
-		SpriteBatch batch = new SpriteBatch();
 		
 		for(Vector2 v : level.goonPositions()){
 			if (!map.isValid(new Rectangle(v.x,v.y,18,13))) {
@@ -148,6 +148,10 @@ public class GameManager implements Dumpeable {
 			CivilianController civController = new CivilianController(civilian, civilianView);
 			characterControllerList.add(civController);
 		}
+		
+		BulletManager bulletManager = BulletManager.getInstance();
+		BulletView bulletView = new BulletView(viewport.getCamera());
+		bulletController = new BulletController(bulletManager, bulletView);
 		
 	}
 	

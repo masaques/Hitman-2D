@@ -3,6 +3,7 @@ package com.mygdx.game.view.assets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.game.controller.FlyingBullet;
@@ -10,9 +11,11 @@ import com.mygdx.game.controller.FlyingBullet;
 public class BulletView {
 	private List<FlyingBullet> bullets;
 	private ShapeRenderer bulletRenderer;
+	private Camera camera;
 	private static final float BULLET_DURATION = .05f;
 	
-	public BulletView() {
+	public BulletView(Camera camera) {
+		this.camera = camera;
 		bulletRenderer = new ShapeRenderer();
 		bullets = new ArrayList<FlyingBullet>();
 	}
@@ -21,6 +24,7 @@ public class BulletView {
 	}
 	
 	public void draw() {
+		bulletRenderer.setProjectionMatrix(camera.combined);
 		bulletRenderer.begin(ShapeType.Line);
 		bulletRenderer.setColor(1,0,0,1); /* Amarillo */
 		

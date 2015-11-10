@@ -30,8 +30,8 @@ import serialization.Dumpeable;
 public abstract class Character implements Movable, BulletListener,Dumpeable,Model {
 	private static int IDS = 0;
 	private int id ;
-	private static final float NORMAL_SPEED = 60f;
-	private static final float RUNNING_SPEED = 80f;
+	protected static final float NORMAL_SPEED = 120f;
+	protected static final float RUNNING_SPEED = 160f;
 	private Vector2 moveDirection;
 	private Vector2 lookDirection;
 	private boolean isRunning;

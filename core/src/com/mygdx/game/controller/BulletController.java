@@ -16,9 +16,9 @@ public class BulletController {
 	
 	
 	
-	public BulletController() {
-		this.bulletManager = BulletManager.getInstance();
-		this.bulletView = new BulletView();
+	public BulletController(BulletManager bulletManager, BulletView bulletView) {
+		this.bulletManager = bulletManager;
+		this.bulletView    = bulletView;
 	}
 	
 	public void manage(){

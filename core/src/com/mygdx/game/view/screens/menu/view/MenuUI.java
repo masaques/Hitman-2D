@@ -136,8 +136,6 @@ public class MenuUI implements Screen{
 	    stage.act(delta);
 	    stage.draw();
 
-	    game.batch.begin();
-	    game.batch.end();
 	}
 
 	

@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -41,17 +42,13 @@ import serialization.GameSerializer;
 public class LevelScreen implements Screen{
 
 	private HitmanGame game;
-	
-	
 	private OrthographicCamera camera;
 	private Viewport gameport;
-
 	private OrthogonalTiledMapRenderer renderer;
-	
-	ControlProcessor input;
-	
-	FPSLogger fps_logger =new FPSLogger();
-	GameManager gameManager;
+	private ControlProcessor input;
+	private SpriteBatch batch;
+	private FPSLogger fps_logger =new FPSLogger();
+	private GameManager gameManager;
 	 
 	public LevelScreen(HitmanGame game) throws JAXBException{
 		/**
@@ -62,13 +59,13 @@ public class LevelScreen implements Screen{
 		Level l = (Level)unmarshaller.unmarshal(new File("assets/Level1.xml")) ;
 		
 		this.game = game;
-		
-		
-		
+		this.batch = new SpriteBatch();
 		camera = new OrthographicCamera();
-		gameport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),camera);
+		gameport = new FitViewport(864, 864,camera);
+		gameport.apply();
+		
 		try {
-			gameManager = new GameManager(864,864,32,gameport,l);
+			gameManager = new GameManager(864,864,32,gameport,l, batch);
 		} catch (IllegalPositionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,8 +92,8 @@ public class LevelScreen implements Screen{
 		fps_logger.log();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		gameManager.update();
-		game.batch.setProjectionMatrix(camera.combined);
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
         renderer.setView(camera);
         renderer.render();
         gameManager.update();
