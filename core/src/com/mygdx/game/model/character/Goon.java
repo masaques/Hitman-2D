@@ -76,7 +76,6 @@ public class Goon extends NPC implements Aggressive {
 	@Override
 	public void calm(Context context) {
 		patrolBehaviour.behave(this, context);
-
 	}
 
 	@Override
