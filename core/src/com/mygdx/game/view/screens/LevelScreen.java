@@ -102,6 +102,7 @@ public class LevelScreen implements Screen {
 		} catch (IllegalPositionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			game.setScreen(new MainMenu(game));
 		}
 	}
 

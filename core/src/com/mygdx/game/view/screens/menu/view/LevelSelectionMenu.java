@@ -35,6 +35,7 @@ public class LevelSelectionMenu implements Screen {
 			unmarshaller = context.createUnmarshaller();
 		} catch (JAXBException e) {
 			e.printStackTrace();
+			game.setScreen(new MainMenu(game));
 		}
 		
 	}
