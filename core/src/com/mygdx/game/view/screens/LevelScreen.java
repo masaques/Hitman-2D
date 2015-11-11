@@ -29,6 +29,7 @@ import com.mygdx.game.controller.IllegalPositionException;
 import com.mygdx.game.serialization.Level;
 import com.mygdx.game.view.screens.menu.view.EndGameMenu;
 import com.mygdx.game.view.screens.menu.view.InGameMenu;
+import com.mygdx.game.view.screens.menu.view.MainMenu;
 
 public class LevelScreen implements Screen {
 
@@ -54,7 +55,7 @@ public class LevelScreen implements Screen {
 		try {
 			gameManager = new GameManager(864, 864, 32, gameport, l, batch);
 		} catch (IllegalPositionException e) {
-			e.printStackTrace();
+			game.setScreen(new MainMenu(game));
 		}
 
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());

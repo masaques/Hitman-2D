@@ -16,61 +16,42 @@ import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.model.util.RandList;
 import com.mygdx.game.serialization.Level;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GoonTest {
 
-	List<Vector2> randArray = new RandList<Vector2>();
-	TiledMap tiled_map;
-	LevelMap map;
-	Level level;
-	Goon goon;
-	AStarPathFinder aStarPathFinder;
-	LinearPathFinder linearPathFinder;
-	
-	//l = (Level) unmarshaller.unmarshal(new File("assets/Level2.xml"));
+	private static List<Vector2> randArray = new RandList<Vector2>();
+	private static TiledMap tiled_map;
+	private static LevelMap map;
+	private static Goon goon;
+	private static AStarPathFinder aStarPathFinder;
+	private static LinearPathFinder linearPathFinder;
 
-	@Before
-	public void init() throws JAXBException {
+	@BeforeClass
+	public static void init() {
+		
 		randArray.add(new Vector2(200, 150));
 		randArray.add(new Vector2(700, 700));
 		randArray.add(new Vector2(73, 792));
 		randArray.add(new Vector2(817, 48));
-		goon = new Goon(new Rectangle(5, 5, 18, 13), map, randArray);
-		
-		
-		JAXBContext context = JAXBContext.newInstance(Level.class);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-		level = (Level) unmarshaller.unmarshal(new File("assets/Level1.xml"));
-		
-		//ACA SE PRODUCE EL NULLPOINTEREXCEPTION!!!
-		tiled_map = new TmxMapLoader().load(level.getPath());
-		
+		tiled_map = (new TmxMapLoader()).load("test5.tmx");
 		map = new LevelMap(864, 864, 32, tiled_map);
-		
+		goon = new Goon(new Rectangle(5, 5, 18, 13), map, randArray);
 		aStarPathFinder = new AStarPathFinder(map, 100);
 		linearPathFinder = new LinearPathFinder(map);
 		
 		goon.setAStarPathFinder(aStarPathFinder);
 		goon.setLinearPathFinder(linearPathFinder);
 	}
-
 	@Test
 	public void hearSound() {
-		//antes teniamos
-		//Goon goon2 = new Goon(new Rectangle(10, 10, 18, 13), null, randArray);
-		
 		Goon goon2 = new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
 		goon2.addNoise(new Noise(goon2.getPosition(), 40, NoiseType.SHOOT));
 		goon2.setAStarPathFinder(aStarPathFinder);
 		goon2.setLinearPathFinder(linearPathFinder);
-
-		//si lo dejabamos sin el null, no hacia el update
 		goon.update();
 		
 		Assert.assertTrue(goon.getState() == NPCState.SUSPICIOUS);
@@ -107,14 +88,6 @@ public class GoonTest {
 		//tendria que ver a "goon"!
 		goon5.shoot();
 		Assert.assertFalse(goon.isHurt()==false);
-	}
-	
-	//Si lo ve, tendria que estar alerta
-	//Esta deprecated!!!
-	@Test
-	public void canWatchGoon(){
-		Goon goon6 = new Goon(new Rectangle(6, 12, 18, 13), map, randArray);
-		Assert.assertTrue(goon6.canSee(goon.getPosition())==true);
 	}
 	
 	@Test
