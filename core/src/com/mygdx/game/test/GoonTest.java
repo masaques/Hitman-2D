@@ -25,15 +25,13 @@ import org.junit.Test;
 
 public class GoonTest {
 
-	protected static final int MAX_SEARCH = 100;
-
 	List<Vector2> randArray = new RandList<Vector2>();
 	TiledMap tiled_map;
 	LevelMap map;
 	Level level;
 	Goon goon;
-	AStarPathFinder aStarPathFinder = new AStarPathFinder(map, 100);
-	LinearPathFinder linearPathFinder = new LinearPathFinder(map);
+	AStarPathFinder aStarPathFinder;
+	LinearPathFinder linearPathFinder;
 	
 	//l = (Level) unmarshaller.unmarshal(new File("assets/Level2.xml"));
 
@@ -44,8 +42,6 @@ public class GoonTest {
 		randArray.add(new Vector2(73, 792));
 		randArray.add(new Vector2(817, 48));
 		goon = new Goon(new Rectangle(5, 5, 18, 13), map, randArray);
-		goon.setAStarPathFinder(aStarPathFinder);
-		goon.setLinearPathFinder(linearPathFinder);
 		//Goon goon3 = new Goon(new Rectangle(100, 100, 18, 13), map, randArray);
 		
 		JAXBContext context = JAXBContext.newInstance(Level.class);
@@ -54,6 +50,12 @@ public class GoonTest {
 		
 		tiled_map = new TmxMapLoader().load(level.getPath());
 		map = new LevelMap(864, 864, 32, tiled_map);
+		
+		aStarPathFinder = new AStarPathFinder(map, 100);
+		linearPathFinder = new LinearPathFinder(map);
+		
+		goon.setAStarPathFinder(aStarPathFinder);
+		goon.setLinearPathFinder(linearPathFinder);
 	}
 
 	@Test
