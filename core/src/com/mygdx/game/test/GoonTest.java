@@ -126,10 +126,20 @@ public class GoonTest {
 	}
 	
 	@Test
+	public void isNotDead(){
+		Goon goon8 = new Goon(new Rectangle(6, 12, 18, 13), map, randArray);
+		goon8.dealDamage(10f); //supero la cantidad de puntos que puede tener...
+		Assert.assertFalse(goon8.isDead()==true);
+		//creo que es asi... tiene que dar true porque estoy negando que goon8
+		//este vivo. Cualquier cosa cambiar a 
+		//assertTrue y poner   ==false
+	}
+	
+	@Test
 	public void dealExtremeDamage(){
-		Goon goon7 = new Goon(new Rectangle(6, 12, 18, 13), map, randArray);
-		goon7.dealDamage(150f); //supero la cantidad de puntos que puede tener...
-		Assert.assertTrue(goon7.isDead() == true);
+		Goon goon9 = new Goon(new Rectangle(6, 12, 18, 13), map, randArray);
+		goon9.dealDamage(150f); //supero la cantidad de puntos que puede tener...
+		Assert.assertTrue(goon9.isDead() == true);
 		//tendria que estar muerto, sin tirar ninguna excepcion
 	}
 	
