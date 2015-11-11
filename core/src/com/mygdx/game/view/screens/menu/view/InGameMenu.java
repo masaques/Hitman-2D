@@ -52,8 +52,6 @@ public class InGameMenu implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		TextButton restart = new TextButton("Restart", skin.getButtonSkin());
-		TextButton proceed = new TextButton("Proceed", skin.getButtonSkin());
-		
 		restart.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				screen.reload();
@@ -61,8 +59,9 @@ public class InGameMenu implements Screen {
 		}
 		});
 		restart.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
-				stage.getViewport().getWorldHeight() * 4 / 8);
-
+				stage.getViewport().getWorldHeight() * 5 / 8);
+		
+		TextButton proceed = new TextButton("Proceed", skin.getButtonSkin());
 		proceed.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 				screen.unpause();
@@ -70,10 +69,32 @@ public class InGameMenu implements Screen {
 			}
 		});
 		proceed.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
+				stage.getViewport().getWorldHeight() * 4 / 8);
+		
+		TextButton main = new TextButton("Main Menu", skin.getButtonSkin());
+		main.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				game.setScreen(new MainMenu(game));
+			}
+		});
+		main.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
 				stage.getViewport().getWorldHeight() * 3 / 8);
+		
+		TextButton quit = new TextButton("Quit", skin.getButtonSkin());
+		quit.addListener(new ClickListener() {
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.exit();
+			}
+		});
+		quit.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
+				stage.getViewport().getWorldHeight() * 2 / 8);
+		
+		
 		
 		stage.addActor(restart);
 		stage.addActor(proceed);
+		stage.addActor(main);
+		stage.addActor(quit);
 	}
 
 	@Override

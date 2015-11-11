@@ -21,14 +21,14 @@ import java.util.*;
  * 
  *
  */
-public class StartMenu implements Screen {
+public class MainMenu implements Screen {
 
 	private static List<TextButton> hitmanButtons;
 	private static final int defaultHeight = 864;
 	private static final int defaultWidth = 864;
 
 	HitmanGame game;
-	HitmanSkin hitmanSkin;
+	HitmanSkin skin;
 
 	Stage stage;
 
@@ -37,17 +37,17 @@ public class StartMenu implements Screen {
 
 	}
 
-	public StartMenu(HitmanGame game) {
+	public MainMenu(HitmanGame game) {
 		this.game = game;
 	}
 
-	public StartMenu(HitmanSkin hitmanSkin, HitmanGame game, Stage stage) {
+	public MainMenu(HitmanSkin hitmanSkin, HitmanGame game, Stage stage) {
 //		MenuData.m.play();
 //		MenuData.m.setLooping(true);
 		this.game = game;
 
 		hitmanButtons = new ArrayList<TextButton>();
-		this.hitmanSkin = hitmanSkin;
+		this.skin = hitmanSkin;
 
 	}
 
@@ -59,10 +59,7 @@ public class StartMenu implements Screen {
 
 		Gdx.input.setInputProcessor(stage);
 
-		TextButton newGame = new TextButton("New Game", hitmanSkin.getButtonSkin());
-		TextButton help = new TextButton("Help", hitmanSkin.getButtonSkin());
-		TextButton table = new TextButton("Highscore", hitmanSkin.getButtonSkin());
-
+		TextButton newGame = new TextButton("New Game", skin.getButtonSkin());
 		newGame.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 
@@ -74,9 +71,10 @@ public class StartMenu implements Screen {
 
 			}
 		});
-		newGame.setPosition(stage.getViewport().getWorldWidth() / 2 - hitmanSkin.getSkinWidth() / 2,
-				stage.getViewport().getWorldHeight() * 4 / 8);
+		newGame.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
+				stage.getViewport().getWorldHeight() * 5 / 8);
 
+		TextButton help = new TextButton("Help", skin.getButtonSkin());
 		help.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
 
@@ -84,21 +82,21 @@ public class StartMenu implements Screen {
 			}
 
 		});
-		help.setPosition(stage.getViewport().getWorldWidth() / 2 - hitmanSkin.getSkinWidth() / 2,
-				stage.getViewport().getWorldHeight() * 3 / 8);
-
-		table.addListener(new ClickListener() {
+		help.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
+				stage.getViewport().getWorldHeight() * 4 / 8);
+		
+		TextButton quit = new TextButton("Quit", skin.getButtonSkin());
+		quit.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				System.out.println("HOLA 4");
+				Gdx.app.exit();
 			}
-
 		});
-		table.setPosition(stage.getViewport().getWorldWidth() / 2 - hitmanSkin.getSkinWidth() / 2,
-				stage.getViewport().getWorldHeight() * 2 / 8);
+		quit.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
+				stage.getViewport().getWorldHeight() * 3 / 8);
 
 		stage.addActor(newGame);
 		stage.addActor(help);
-		stage.addActor(table);
+		stage.addActor(quit);
 	}
 
 	public List<TextButton> getMenuButtons() {
@@ -117,7 +115,7 @@ public class StartMenu implements Screen {
 	public void show() {
 		// Audio.playMusic(true);
 
-		hitmanSkin = new HitmanSkin();
+		skin = new HitmanSkin();
 
 	}
 

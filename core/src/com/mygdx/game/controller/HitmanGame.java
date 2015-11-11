@@ -1,7 +1,7 @@
 
 package com.mygdx.game.controller;
 
-import com.mygdx.game.view.screens.menu.view.StartMenu;
+import com.mygdx.game.view.screens.menu.view.MainMenu;
 import com.badlogic.gdx.Game;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Screen;
@@ -29,7 +29,7 @@ public class HitmanGame extends Game {
 	@Override
 	public void create() {
 
-		setScreen(new StartMenu(this));
+		setScreen(new MainMenu(this));
 
 	}
 
