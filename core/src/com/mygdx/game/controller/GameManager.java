@@ -24,6 +24,7 @@ import com.mygdx.game.model.character.LinearPathFinder;
 import com.mygdx.game.model.character.Player;
 import com.mygdx.game.model.character.Target;
 import com.mygdx.game.model.message.BulletManager;
+import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
 import com.mygdx.game.serialization.Level;
@@ -64,6 +65,9 @@ public class GameManager  {
 
 	public GameManager(int width, int height, int tile_width, Viewport viewport, Level level, SpriteBatch batch)
 			throws IllegalPositionException {
+		NoiseManager.getInstance().clearAllListeners();
+		BulletManager.getInstance().clearAllListeners();
+		VisionManager.getInstance().clearAllListeners();
 		this.path = level.getPath();
 		control = new ControlProcessor(viewport);
 		Gdx.input.setInputProcessor(control);
