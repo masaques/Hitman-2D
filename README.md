@@ -14,7 +14,7 @@ A Hitman game in 2D
 - Una vez finalizado el cloneado, Eclipse identficará automáticamente al proyecto como proyecto de Gradle.
 - Para correr el programa, correr DesktopLauncher.java en Hitman-2D-desktop
 
-
+#COMANDOS
 
 Comandos
  -commit (nombre,hash)
