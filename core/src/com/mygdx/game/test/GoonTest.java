@@ -8,7 +8,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.LevelMap;
+import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Goon;
+import com.mygdx.game.model.character.LinearPathFinder;
 import com.mygdx.game.model.character.NPCState;
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseType;
@@ -30,6 +32,8 @@ public class GoonTest {
 	LevelMap map;
 	Level level;
 	Goon goon;
+	AStarPathFinder aStarPathFinder = new AStarPathFinder(map, 100);
+	LinearPathFinder linearPathFinder = new LinearPathFinder(map);
 	
 	//l = (Level) unmarshaller.unmarshal(new File("assets/Level2.xml"));
 
@@ -39,8 +43,10 @@ public class GoonTest {
 		randArray.add(new Vector2(700, 700));
 		randArray.add(new Vector2(73, 792));
 		randArray.add(new Vector2(817, 48));
-		goon = new Goon(new Rectangle(5, 5, 18, 13), null, randArray);
-		//Goon goon3 = new Goon(new Rectangle(100, 100, 18, 13), null, randArray);
+		goon = new Goon(new Rectangle(5, 5, 18, 13), map, randArray);
+		goon.setAStarPathFinder(aStarPathFinder);
+		goon.setLinearPathFinder(linearPathFinder);
+		//Goon goon3 = new Goon(new Rectangle(100, 100, 18, 13), map, randArray);
 		
 		JAXBContext context = JAXBContext.newInstance(Level.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -57,6 +63,8 @@ public class GoonTest {
 		
 		Goon goon2 = new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
 		goon2.addNoise(new Noise(goon2.getPosition(), 40, NoiseType.SHOOT));
+		goon2.setAStarPathFinder(aStarPathFinder);
+		goon2.setLinearPathFinder(linearPathFinder);
 
 		//si lo dejabamos sin el null, no hacia el update
 		goon.update();
