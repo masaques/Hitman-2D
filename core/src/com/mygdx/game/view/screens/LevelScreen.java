@@ -27,6 +27,7 @@ import com.mygdx.game.controller.GameState;
 import com.mygdx.game.controller.HitmanGame;
 import com.mygdx.game.controller.IllegalPositionException;
 import com.mygdx.game.serialization.Level;
+import com.mygdx.game.view.screens.menu.view.EndGameMenu;
 import com.mygdx.game.view.screens.menu.view.InGameMenu;
 
 public class LevelScreen implements Screen {
@@ -67,9 +68,19 @@ public class LevelScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		if (gameManager.getState() == GameState.PAUSE) {
-			game.setScreen(new InGameMenu(game,this));
-			return ;
+		
+		switch (gameManager.getState())  {
+			case PAUSE :
+				game.setScreen(new InGameMenu(game,this));
+				break ;
+			case PLAY :
+				break ;
+			case WIN :
+				game.setScreen(new EndGameMenu(game,this,"Victory")) ;
+				break ;
+			case DEFEAT :
+				game.setScreen(new EndGameMenu(game,this ,"Defeat")) ;
+				break ;
 		}
 		fps_logger.log();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
