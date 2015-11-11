@@ -1,5 +1,21 @@
 # Hitman-2D
 A Hitman game in 2D
+
+# PARA CLONEAR
+* De NO tener instalada la herramienta de integración de Gradle con Eclipse(Pasar al paso siguiente de tenerla) :
+- Help/Install new software
+- En work with introducir el siguiente link: http://dist.springsource.com/snapshot/TOOLS/gradle/nightly
+- Add/OK/Next
+- Aceptar los terminos de la licencia. Eclipse se reiniciara automáticamente.
+
+* Una vez instalada dicha herramienta:
+- File/Import/Projects from Git/Clone URI
+- Introducir el URI del repositorio y clonear como proyecto de Eclipse.
+- Una vez finalizado el cloneado, Eclipse identficará automáticamente al proyecto como proyecto de Gradle.
+- Para correr el programa, correr DesktopLauncher.java en Hitman-2D-desktop
+
+
+
 Comandos
  -commit (nombre,hash)
  -add
