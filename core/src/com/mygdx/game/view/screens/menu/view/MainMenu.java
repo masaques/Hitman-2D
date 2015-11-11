@@ -27,10 +27,9 @@ public class MainMenu implements Screen {
 	private static final int defaultHeight = 864;
 	private static final int defaultWidth = 864;
 
-	HitmanGame game;
-	HitmanSkin skin;
-
-	Stage stage;
+	private HitmanGame game;
+	private HitmanSkin skin;
+	private Stage stage;
 
 	public void create() {
 		stage = new Stage();
@@ -62,13 +61,7 @@ public class MainMenu implements Screen {
 		TextButton newGame = new TextButton("New Game", skin.getButtonSkin());
 		newGame.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-
-				try {
-					game.setScreen(new LevelScreen(game));
-				} catch (JAXBException e) {
-					e.printStackTrace();
-				}
-
+					game.setScreen(new LevelSelectionMenu(game));
 			}
 		});
 		newGame.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,

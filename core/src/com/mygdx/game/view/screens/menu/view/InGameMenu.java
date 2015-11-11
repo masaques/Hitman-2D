@@ -5,6 +5,8 @@ import javax.xml.bind.JAXBException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -50,7 +52,7 @@ public class InGameMenu implements Screen {
 		stage.getViewport().update(width, height);
 
 		Gdx.input.setInputProcessor(stage);
-
+			
 		TextButton restart = new TextButton("Restart", skin.getButtonSkin());
 		restart.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {

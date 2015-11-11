@@ -40,15 +40,10 @@ public class LevelScreen implements Screen {
 	private HitmanGame game ;
 	private Level l ;
 
-	public LevelScreen(HitmanGame game) throws JAXBException {
-		/**
-		 * TODO : Al levelScreen le deberian pasar el Level
-		 * Carga el nivel desde archivo
-		 */
+	public LevelScreen(HitmanGame game, Level level) {
+		
 		this.game = game ;
-		JAXBContext context = JAXBContext.newInstance(Level.class);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-		l = (Level) unmarshaller.unmarshal(new File("assets/Level2.xml"));
+		this.l= level ;
 
 		this.batch = new SpriteBatch();
 		camera = new OrthographicCamera();
@@ -62,7 +57,6 @@ public class LevelScreen implements Screen {
 		}
 
 		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
-
 	}
 	
 	@Override
