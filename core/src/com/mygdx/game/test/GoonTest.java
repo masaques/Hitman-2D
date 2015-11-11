@@ -61,7 +61,7 @@ public class GoonTest {
 	}
 
 	@Test
-	public void HearSound() {
+	public void hearSound() {
 		//antes teniamos
 		//Goon goon2 = new Goon(new Rectangle(10, 10, 18, 13), null, randArray);
 		
@@ -79,7 +79,7 @@ public class GoonTest {
 
 	
 	@Test
-	public void NoHearSound() {
+	public void noHearSound() {
 		Goon goon3 = new Goon(new Rectangle(100, 100, 18, 13), map, randArray);
 		goon3.addNoise(new Noise(goon3.getPosition(), 2, NoiseType.SHOOT));
 
@@ -92,7 +92,7 @@ public class GoonTest {
 
 	//Dañado si le disparan
 	@Test
-	public void DamageByBullet(){
+	public void damageByBullet(){
 		Goon goon4= new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
 		//ok, aca como se que el goon4 lo esta viendo para saber si le dispara??
 		goon4.shoot();
@@ -101,7 +101,7 @@ public class GoonTest {
 	}
 	
 	@Test
-	public void NoDamage(){
+	public void noDamage(){
 		Goon goon5 = new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
 		//este goon tendria que estar disparando en otra direccion! Este "goon5" no 
 		//tendria que ver a "goon"!
@@ -112,9 +112,26 @@ public class GoonTest {
 	//Si lo ve, tendria que estar alerta
 	//Esta deprecated!!!
 	@Test
-	public void CanWatchGoon(){
+	public void canWatchGoon(){
 		Goon goon6 = new Goon(new Rectangle(6, 12, 18, 13), map, randArray);
 		Assert.assertTrue(goon6.canSee(goon.getPosition())==true);
 	}
+	
+	@Test
+	public void isDead(){
+		Goon goon7 = new Goon(new Rectangle(6, 12, 18, 13), map, randArray);
+		goon7.dealDamage(100f);
+		Assert.assertTrue(goon7.isDead() == true);
+		//descontarle todas las vidas y preguntar si esta muerto
+	}
+	
+	@Test
+	public void dealExtremeDamage(){
+		Goon goon7 = new Goon(new Rectangle(6, 12, 18, 13), map, randArray);
+		goon7.dealDamage(150f); //supero la cantidad de puntos que puede tener...
+		Assert.assertTrue(goon7.isDead() == true);
+		//tendria que estar muerto, sin tirar ninguna excepcion
+	}
+	
 
 }
