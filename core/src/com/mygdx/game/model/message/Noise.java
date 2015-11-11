@@ -51,9 +51,7 @@ public class Noise implements Message<NoiseListener>, Comparable<Noise>, Seriali
 		if (NoiseType.SHOOT == type) {
 			l.addNoise(this);
 			return;
-		} else if (NoiseType.WALK == type) {
-			return;
-		} else if (l.getPosition().dst(source) <= getRange()) {
+		}  else if (l.getPosition().dst(source) <= getRange()) {
 			l.addNoise(this);
 		}
 	}

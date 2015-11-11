@@ -19,6 +19,7 @@ import com.mygdx.game.model.message.VisionSender;
  */
 public class Player extends Character implements VisionSender {
 	private static final double RUNNING_NOISE_RANGE = 200;
+	private static final double WALKING_NOISE_RANGE = 35 ;
 
 	public Player(Rectangle hitBox, LevelMap map) {
 		super(hitBox, map, Team.PLAYER);
@@ -41,9 +42,11 @@ public class Player extends Character implements VisionSender {
 		VisionManager.getInstance().dispatchMessage(new Vision(this, map));
 		if (isMoving() && isRunning()) {
 			NoiseManager.getInstance()
-					.dispatchMessage(new Noise(this.getPosition(), RUNNING_NOISE_RANGE, NoiseType.RUN));
+					.dispatchMessage(new Noise(this.getPosition(), 
+							RUNNING_NOISE_RANGE, NoiseType.RUN));
 		} else if (isMoving()) {
-			NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(), 0, NoiseType.WALK));
+			NoiseManager.getInstance().dispatchMessage(new Noise(this.getPosition(), 
+					WALKING_NOISE_RANGE, NoiseType.WALK));
 		}
 	}
 
