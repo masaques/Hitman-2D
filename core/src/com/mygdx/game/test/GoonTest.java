@@ -24,6 +24,7 @@ import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -63,7 +64,11 @@ public class GoonTest {
 		BulletManager.getInstance().addListener(goon);
 	}
 	
-	
+	@Before
+	public void refresh() {
+		goon.refreshNoiseInbox();
+		goon.refreshVisualInbox();
+	}
 	@Test
 	public void hearSound() {
 		NoiseManager.getInstance().dispatchMessage(new Noise(goon.getCenter(), 100, NoiseType.RUN));
@@ -72,14 +77,13 @@ public class GoonTest {
 	}
 	
 	
-//	@Test
-//	public void noHearSound() {
-//		Goon goon3 = new Goon(new Rectangle(100, 100, 18, 13), map, randArray);
-//		goon3.addNoise(new Noise(goon3.getPosition(), 2, NoiseType.SHOOT));
-//
-//		Assert.assertTrue(goon.getState() == NPCState.CALM);
-//
-//	}
+	@Test
+	public void noHearSound() {
+		NoiseManager.getInstance().dispatchMessage(new Noise(new Vector2(1000,1000), 5, NoiseType.RUN));
+		NoiseManager.getInstance().update();
+		Assert.assertTrue(goon.formContext().canHear());
+
+	}
 	
 
 	//Dañado si le disparan
