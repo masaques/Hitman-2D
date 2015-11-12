@@ -59,13 +59,3 @@ Para revertir un lio local:
  git checkout --ours --theirs *nombreDelArchivo* //para resolver conflictos mucho mas graves.Descarto los cambios de uno y dejo solo los que funciona
 
 git log -> todos los commits del branch en el que estoy
-
-#TODO List
-
-* Hacer tests.
-
-* Menues.
-  - Casi terminado, Yo (masaques) voy a ver mañana lo ultimo que falta: que aparezcan carteles al ganar o al perder
-
-* Terminado
-  - Estas son las ultimas dos cosas que faltan. Luego hay que ver detalles de prolijidad
