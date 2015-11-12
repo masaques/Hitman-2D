@@ -1,9 +1,7 @@
 
 package com.mygdx.game.model.message;
 
-import java.io.Serializable;
 import com.mygdx.game.model.message.NoiseListener;
-
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -15,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
  * @see NoiseController
  */
 
-public class Noise implements Message<NoiseListener>, Comparable<Noise>, Serializable {
+public class Noise implements Message<NoiseListener>, Comparable<Noise> {
 	private Vector2 source;
 	private double effectiveRange;
 	private NoiseType type;

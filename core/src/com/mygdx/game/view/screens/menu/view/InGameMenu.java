@@ -1,20 +1,13 @@
 package com.mygdx.game.view.screens.menu.view;
 
-import javax.xml.bind.JAXBException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.controller.HitmanGame;
-import com.mygdx.game.model.message.BulletManager;
-import com.mygdx.game.model.message.NoiseManager;
-import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.view.screens.LevelScreen;
 
 public class InGameMenu implements Screen {

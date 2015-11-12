@@ -1,9 +1,5 @@
 package com.mygdx.game.controller;
 
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.model.Model;
-import com.mygdx.game.view.assets.View;
-
 /**
  * Clase abstracta que controla un modelo y a su view correspondiente.
  * 

@@ -2,8 +2,6 @@ package com.mygdx.game.view.screens.menu.view;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.JAXBException;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.controller.HitmanGame;
-import com.mygdx.game.view.screens.LevelScreen;
 
 import java.util.*;
 
@@ -67,17 +64,6 @@ public class MainMenu implements Screen {
 		newGame.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
 				stage.getViewport().getWorldHeight() * 5 / 8);
 
-		TextButton help = new TextButton("Help", skin.getButtonSkin());
-		help.addListener(new ClickListener() {
-			public void clicked(InputEvent event, float x, float y) {
-
-				System.out.println("HOLA 3");
-			}
-
-		});
-		help.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
-				stage.getViewport().getWorldHeight() * 4 / 8);
-		
 		TextButton quit = new TextButton("Quit", skin.getButtonSkin());
 		quit.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
@@ -85,10 +71,9 @@ public class MainMenu implements Screen {
 			}
 		});
 		quit.setPosition(stage.getViewport().getWorldWidth() / 2 - skin.getSkinWidth() / 2,
-				stage.getViewport().getWorldHeight() * 3 / 8);
+				stage.getViewport().getWorldHeight() * 4 / 8);
 
 		stage.addActor(newGame);
-		stage.addActor(help);
 		stage.addActor(quit);
 	}
 
