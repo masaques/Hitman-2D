@@ -60,6 +60,7 @@ public class GameManager  {
 	 */
 	private Set<Integer> civilianIDs = new HashSet<Integer>() ;
 	private Integer targetID ;
+	private Integer playerID ;
 	private TargetController targetController;
 	private List<Vector2> randArray = new RandList<Vector2>();
 
@@ -104,6 +105,7 @@ public class GameManager  {
 		Player player = new Player(new Rectangle(level.getPlayer().x, level.getPlayer().y, 18, 13), map);
 		playerController = new PlayerController(player, control, player_view);
 		characterControllerList.add(playerController);
+		playerID = player.getId() ;
 		linearPathFinder = new LinearPathFinder(map);
 		BulletManager.getInstance().setMap(map);
 		
@@ -167,6 +169,8 @@ public class GameManager  {
 					state= GameState.DEFEAT ;
 				} else if (targetID == c.getModel().getId()) {
 					state= GameState.WIN ;
+				} else if (playerID ==c.getModel().getId()) {
+					state = GameState.DEFEAT ;
 				}
 			}
 		}
