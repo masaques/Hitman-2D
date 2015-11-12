@@ -1,8 +1,9 @@
-package com.mygdx.game.view.screens;
+package com.mygdx.game.view.screens.menu.model;
 
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Input.Keys;
+import com.mygdx.game.view.screens.menu.view.MenuChoose;
 
 public class MenuManager {
 

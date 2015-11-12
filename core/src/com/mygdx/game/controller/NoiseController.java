@@ -26,7 +26,6 @@ public class NoiseController {
 	}
 	
 	public void updateModel(){
-
 		noiseList = manager.update();
 	}
 	

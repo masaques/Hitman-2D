@@ -1,4 +1,4 @@
-package com.mygdx.game.view.screens.menu.view;
+package com.mygdx.game.view.screens.menu.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
