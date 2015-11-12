@@ -37,27 +37,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="com.mygdx.game.model.message.NoMapException" project="Hitman-2D-core" 
-    file="/Hitman-2D-core/src/com/mygdx/game/model/message/NoMapException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="151" y="-196"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="com.mygdx.game.model.character.behaviour.NoSafePlaceException" 
-    project="Hitman-2D-core" 
-    file="/Hitman-2D-core/src/com/mygdx/game/model/character/behaviour/NoSafePlaceException.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="366" y="-196"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="com.mygdx.game.model.character.Goon" project="Hitman-2D-core" 
+  <class id="5" language="java" name="com.mygdx.game.model.character.Goon" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/Goon.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2328" y="1229"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -66,7 +46,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.mygdx.game.model.message.NoiseManager" project="Hitman-2D-core" 
+  <class id="6" language="java" name="com.mygdx.game.model.message.NoiseManager" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/NoiseManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1552" y="354"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -75,7 +55,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.mygdx.game.model.message.VisionManager" project="Hitman-2D-core" 
+  <class id="7" language="java" name="com.mygdx.game.model.message.VisionManager" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/VisionManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1704" y="235"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -84,7 +64,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.mygdx.game.model.character.behaviour.FleeBehaviour" project="Hitman-2D-core" 
+  <class id="8" language="java" name="com.mygdx.game.model.character.behaviour.FleeBehaviour" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/behaviour/FleeBehaviour.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2521" y="1687"/>    
@@ -94,7 +74,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="com.mygdx.game.model.LevelMap" project="Hitman-2D-core" 
+  <class id="9" language="java" name="com.mygdx.game.model.LevelMap" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/LevelMap.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2107" y="343"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -103,7 +83,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="com.mygdx.game.model.character.NPC" project="Hitman-2D-core" 
+  <class id="10" language="java" name="com.mygdx.game.model.character.NPC" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/NPC.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2340" y="799"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -112,7 +92,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.mygdx.game.model.character.Target" project="Hitman-2D-core" 
+  <class id="11" language="java" name="com.mygdx.game.model.character.Target" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/Target.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2194" y="1555"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -121,7 +101,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="com.mygdx.game.model.message.Noise" project="Hitman-2D-core" 
+  <class id="12" language="java" name="com.mygdx.game.model.message.Noise" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/Noise.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2404" y="295"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -130,7 +110,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="com.mygdx.game.model.character.behaviour.SearchBehaviour" 
+  <class id="13" language="java" name="com.mygdx.game.model.character.behaviour.SearchBehaviour" 
     project="Hitman-2D-core" file="/Hitman-2D-core/src/com/mygdx/game/model/character/behaviour/SearchBehaviour.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2731" y="1674"/>    
@@ -140,7 +120,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="com.mygdx.game.model.character.Context" project="Hitman-2D-core" 
+  <class id="14" language="java" name="com.mygdx.game.model.character.Context" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/Context.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2799" y="724"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -149,7 +129,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="17" language="java" name="com.mygdx.game.model.message.NoiseListener" project="Hitman-2D-core" 
+  <interface id="15" language="java" name="com.mygdx.game.model.message.NoiseListener" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/NoiseListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2698" y="209"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -158,7 +138,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="18" language="java" name="com.mygdx.game.model.character.behaviour.FollowBehaviour" 
+  <class id="16" language="java" name="com.mygdx.game.model.character.behaviour.FollowBehaviour" 
     project="Hitman-2D-core" file="/Hitman-2D-core/src/com/mygdx/game/model/character/behaviour/FollowBehaviour.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2970" y="1665"/>    
@@ -168,7 +148,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="19" language="java" name="com.mygdx.game.model.message.VisionListener" project="Hitman-2D-core" 
+  <interface id="17" language="java" name="com.mygdx.game.model.message.VisionListener" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/VisionListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2472" y="174"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -177,7 +157,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="20" language="java" name="com.mygdx.game.model.util.Movable" project="Hitman-2D-core" 
+  <interface id="18" language="java" name="com.mygdx.game.model.util.Movable" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/util/Movable.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1918" y="813"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -186,17 +166,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="21" language="java" name="com.mygdx.game.model.message.IllegalBulletException" project="Hitman-2D-core" 
-    file="/Hitman-2D-core/src/com/mygdx/game/model/message/IllegalBulletException.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="582" y="-196"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="22" language="java" name="com.mygdx.game.model.character.AStarPathFinder" project="Hitman-2D-core" 
+  <class id="19" language="java" name="com.mygdx.game.model.character.AStarPathFinder" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/AStarPathFinder.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="51" width="155" x="2099" y="438"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -205,7 +175,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="com.mygdx.game.model.character.behaviour.PatrolBehaviour" 
+  <class id="20" language="java" name="com.mygdx.game.model.character.behaviour.PatrolBehaviour" 
     project="Hitman-2D-core" file="/Hitman-2D-core/src/com/mygdx/game/model/character/behaviour/PatrolBehaviour.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3207" y="1674"/>    
@@ -215,25 +185,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="24" language="java" name="com.mygdx.game.model.TileBasedMap" project="Hitman-2D-core" 
-    file="/Hitman-2D-core/src/com/mygdx/game/model/TileBasedMap.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="781" y="-169"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="25" language="java" name="com.mygdx.game.model.util.RandList" project="Hitman-2D-core" 
-    file="/Hitman-2D-core/src/com/mygdx/game/model/util/RandList.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="968" y="-178"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="26" language="java" name="com.mygdx.game.model.message.MessageManager" project="Hitman-2D-core" 
+  <class id="21" language="java" name="com.mygdx.game.model.message.MessageManager" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/MessageManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1751" y="76"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -242,7 +194,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="27" language="java" name="com.mygdx.game.model.util.StateMachine" project="Hitman-2D-core" 
+  <interface id="22" language="java" name="com.mygdx.game.model.util.StateMachine" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/util/StateMachine.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2970" y="1085"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -251,7 +203,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="28" language="java" name="com.mygdx.game.model.character.Character" project="Hitman-2D-core" 
+  <class id="23" language="java" name="com.mygdx.game.model.character.Character" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/Character.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2038" y="721"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -260,7 +212,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="com.mygdx.game.model.character.behaviour.InspectBehaviour" 
+  <class id="24" language="java" name="com.mygdx.game.model.character.behaviour.InspectBehaviour" 
     project="Hitman-2D-core" file="/Hitman-2D-core/src/com/mygdx/game/model/character/behaviour/InspectBehaviour.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3444" y="1665"/>    
@@ -270,7 +222,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="30" language="java" name="com.mygdx.game.model.character.behaviour.ShootBehaviour" project="Hitman-2D-core" 
+  <class id="25" language="java" name="com.mygdx.game.model.character.behaviour.ShootBehaviour" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/behaviour/ShootBehaviour.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3681" y="1665"/>    
@@ -280,7 +232,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="com.mygdx.game.model.character.Civilian" project="Hitman-2D-core" 
+  <class id="26" language="java" name="com.mygdx.game.model.character.Civilian" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/Civilian.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2585" y="968"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -289,7 +241,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="32" language="java" name="com.mygdx.game.model.message.Listener" project="Hitman-2D-core" 
+  <interface id="27" language="java" name="com.mygdx.game.model.message.Listener" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/Listener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2386" y="56"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -298,16 +250,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="33" language="java" name="com.mygdx.game.model.WrongMessageException" project="Hitman-2D-core" 
-    file="/Hitman-2D-core/src/com/mygdx/game/model/WrongMessageException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1159" y="-196"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
-      <operations public="false" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="34" language="java" name="com.mygdx.game.model.Model" project="Hitman-2D-core" 
+  <interface id="28" language="java" name="com.mygdx.game.model.Model" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/Model.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2096" y="803"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -316,7 +259,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="35" language="java" name="com.mygdx.game.model.character.LinearPathFinder" project="Hitman-2D-core" 
+  <class id="29" language="java" name="com.mygdx.game.model.character.LinearPathFinder" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/LinearPathFinder.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2017" y="456"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -325,7 +268,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="36" language="java" name="com.mygdx.game.model.character.behaviour.Behaviour" project="Hitman-2D-core" 
+  <interface id="30" language="java" name="com.mygdx.game.model.character.behaviour.Behaviour" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/behaviour/Behaviour.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2763" y="1263"/>    
@@ -335,7 +278,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="37" language="java" name="com.mygdx.game.model.message.Bullet" project="Hitman-2D-core" 
+  <class id="31" language="java" name="com.mygdx.game.model.message.Bullet" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/Bullet.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2475" y="-75"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -344,7 +287,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="38" language="java" name="com.mygdx.game.model.character.PathFinder" project="Hitman-2D-core" 
+  <interface id="32" language="java" name="com.mygdx.game.model.character.PathFinder" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/PathFinder.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2085" y="545"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -353,7 +296,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="39" language="java" name="com.mygdx.game.model.character.Player" project="Hitman-2D-core" 
+  <class id="33" language="java" name="com.mygdx.game.model.character.Player" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/Player.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1694" y="723"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -362,7 +305,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="40" language="java" name="com.mygdx.game.model.character.Path" project="Hitman-2D-core" 
+  <class id="34" language="java" name="com.mygdx.game.model.character.Path" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/Path.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2580" y="737"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -371,7 +314,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="41" language="java" name="com.mygdx.game.model.message.BulletManager" project="Hitman-2D-core" 
+  <class id="35" language="java" name="com.mygdx.game.model.message.BulletManager" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/BulletManager.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1800" y="338"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -380,7 +323,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="42" language="java" name="com.mygdx.game.model.util.State" project="Hitman-2D-core" 
+  <interface id="36" language="java" name="com.mygdx.game.model.util.State" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/util/State.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3395" y="1058"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -389,7 +332,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="43" language="java" name="com.mygdx.game.model.character.NPCStateMachine" project="Hitman-2D-core" 
+  <class id="37" language="java" name="com.mygdx.game.model.character.NPCStateMachine" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/NPCStateMachine.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3000" y="882"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -398,7 +341,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="44" language="java" name="com.mygdx.game.model.character.NPCState" project="Hitman-2D-core" 
+  <enumeration id="38" language="java" name="com.mygdx.game.model.character.NPCState" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/NPCState.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3375" y="842"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -407,7 +350,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </enumeration>  
-  <interface id="45" language="java" name="com.mygdx.game.model.message.Message" project="Hitman-2D-core" 
+  <interface id="39" language="java" name="com.mygdx.game.model.message.Message" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/Message.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2184" y="-47"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -416,7 +359,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="46" language="java" name="com.mygdx.game.model.message.Vision" project="Hitman-2D-core" 
+  <class id="40" language="java" name="com.mygdx.game.model.message.Vision" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/message/Vision.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1835" y="442"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -425,357 +368,465 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <association id="47">    
-    <end type="SOURCE" refId="41" navigable="false">      
-      <attribute id="48" name="map"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="50">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="51" name="currentState"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="44" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="53">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="54" name="listeners"/>      
-      <multiplicity id="55" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="32" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="56">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="57" name="noiseList"/>      
-      <multiplicity id="58" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="59">    
-    <end type="SOURCE" refId="41"/>    
-    <end type="TARGET" refId="26"/>  
-  </generalization>  
-  <realization id="60">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="3"/>  
+  <realization id="41">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="30"/>  
   </realization>  
-  <realization id="61">    
-    <end type="SOURCE" refId="35"/>    
-    <end type="TARGET" refId="38"/>  
-  </realization>  
-  <association id="62">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="63" name="patrolBehaviour"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
+  <association id="42">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="43" name="noiseInbox">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="46" name="currentState">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="36" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="65">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <association id="66">    
+  <realization id="48">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <association id="49">    
     <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="67" name="map"/>      
-      <multiplicity id="68" minimum="0" maximum="1"/>    
+      <attribute id="50" name="INSTANCE">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="35" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="69">    
-    <end type="SOURCE" refId="41" navigable="false">      
-      <attribute id="70" name="INSTANCE"/>      
-      <multiplicity id="71" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="41" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="72">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="36"/>  
+  <realization id="52">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="30"/>  
   </realization>  
-  <association id="73">    
-    <bendpoint x="1925" y="254"/>    
-    <bendpoint x="1982" y="237"/>    
+  <association id="53">    
     <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="74" name="messageList"/>      
-      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+      <attribute id="54" name="fleeBehaviour">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="45" navigable="true"/>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="76">    
-    <bendpoint x="3008" y="997"/>    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <association id="77">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="78" name="INSTANCE"/>      
-      <multiplicity id="79" minimum="0" maximum="1"/>    
+  <association id="56">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="57" name="map">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="80">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="45"/>  
-  </realization>  
-  <realization id="81">    
-    <end type="SOURCE" refId="39"/>    
+  <realization id="59">    
+    <end type="SOURCE" refId="33"/>    
     <end type="TARGET" refId="2"/>  
   </realization>  
-  <realization id="82">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="20"/>  
+  <realization id="60">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="32"/>  
   </realization>  
-  <association id="83">    
-    <end type="SOURCE" refId="46" navigable="false">      
-      <attribute id="84" name="source"/>      
-      <multiplicity id="85" minimum="0" maximum="1"/>    
+  <association id="61">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="62" name="listeners">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="63" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="65" name="source">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="66" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="67">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <realization id="68">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <generalization id="69">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="70">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="71" name="stateMachine">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="72" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="74" name="patrolBehaviour">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="77" name="inspectBehaviour">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="78" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="80" name="followBehaviour">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="81" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="82">    
+    <bendpoint x="3008" y="997"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="83">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="84">    
+    <bendpoint x="1925" y="254"/>    
+    <bendpoint x="1982" y="237"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="85" name="messageList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="86" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="39" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="86">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
   <association id="87">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="88" name="currentPath"/>      
-      <multiplicity id="89" minimum="0" maximum="1"/>    
+    <bendpoint x="2336" y="466"/>    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="88" name="map">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="89" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="40" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <realization id="90">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="36"/>  
-  </realization>  
-  <realization id="91">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="17"/>  
-  </realization>  
-  <association id="92">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="93" name="aStarPathFinder"/>      
-      <multiplicity id="94" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="38" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="95">    
-    <end type="SOURCE" refId="39"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <generalization id="96">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="26"/>  
-  </generalization>  
-  <association id="97">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="98" name="inspectBehaviour"/>      
-      <multiplicity id="99" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="100">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="101" name="noiseInbox"/>      
-      <multiplicity id="102" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="103">    
-    <end type="SOURCE" refId="43"/>    
-    <end type="TARGET" refId="27"/>  
-  </realization>  
-  <generalization id="104">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <realization id="105">    
-    <bendpoint x="2384" y="-72"/>    
-    <end type="SOURCE" refId="37"/>    
-    <end type="TARGET" refId="45"/>  
-  </realization>  
-  <association id="106">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="107" name="patrolBehaviour"/>      
-      <multiplicity id="108" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="109">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="110" name="fleeBehaviour"/>      
-      <multiplicity id="111" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="112">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="113" name="linearPathFinder"/>      
-      <multiplicity id="114" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="38" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="115">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="38"/>  
-  </realization>  
-  <realization id="116">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="36"/>  
-  </realization>  
-  <realization id="117">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="19"/>  
-  </realization>  
-  <association id="118">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="119" name="followBehaviour"/>      
-      <multiplicity id="120" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="121">    
-    <end type="SOURCE" refId="23"/>    
-    <end type="TARGET" refId="36"/>  
-  </realization>  
-  <realization id="122">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="36"/>  
-  </realization>  
-  <association id="123">    
-    <bendpoint x="2336" y="466"/>    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="124" name="map"/>      
-      <multiplicity id="125" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="126">    
     <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <realization id="127">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="34"/>  
+    <end type="TARGET" refId="30"/>  
   </realization>  
-  <realization id="128">    
-    <end type="SOURCE" refId="44"/>    
-    <end type="TARGET" refId="42"/>  
-  </realization>  
-  <generalization id="129">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <generalization id="130">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <realization id="131">    
-    <bendpoint x="2084" y="185"/>    
-    <end type="SOURCE" refId="46"/>    
-    <end type="TARGET" refId="45"/>  
-  </realization>  
-  <association id="132">    
-    <end type="SOURCE" refId="46" navigable="false">      
-      <attribute id="133" name="map"/>      
-      <multiplicity id="134" minimum="0" maximum="1"/>    
+  <association id="91">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="92" name="map">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="93" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="135">    
-    <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="136" name="currentState"/>      
-      <multiplicity id="137" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="42" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="138">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="36"/>  
-  </realization>  
-  <association id="139">    
-    <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="140" name="owner"/>      
-      <multiplicity id="141" minimum="0" maximum="1"/>    
+  <association id="94">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="95" name="owner">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="96" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="142">    
+  <generalization id="97">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="98">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="99" name="INSTANCE">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="100" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="102" name="map">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="103" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="105" name="currentState">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="106" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="107">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="108">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <realization id="109">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="30"/>  
+  </realization>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <realization id="111">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="30"/>  
+  </realization>  
+  <realization id="112">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="113">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="114" name="linearPathFinder">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="115" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="116">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="117">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <association id="118">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="119" name="currentPath">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="120" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="121">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="30"/>  
+  </realization>  
+  <generalization id="122">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="123">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="124" name="noiseList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="125" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="126">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="127" name="map">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="128" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="129">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="15"/>  
+  </realization>  
+  <realization id="130">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="131">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="132" name="aStarPathFinder">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="133" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="134">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <realization id="135">    
+    <bendpoint x="2084" y="185"/>    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <association id="136">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="137" name="inspectBehaviour">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="138" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="139">    
     <bendpoint x="2282" y="472"/>    
-    <end type="SOURCE" refId="28"/>    
+    <end type="SOURCE" refId="23"/>    
     <end type="TARGET" refId="4"/>  
   </realization>  
+  <association id="140">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="141" name="INSTANCE">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="142" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="143">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="144" name="searchBehaviour"/>      
-      <multiplicity id="145" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="144" name="patrolBehaviour">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="145" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="146">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="147" name="inspectBehaviour"/>      
-      <multiplicity id="148" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="149">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="150" name="map"/>      
-      <multiplicity id="151" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="152">    
+  <realization id="146">    
+    <bendpoint x="2384" y="-72"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
+  <generalization id="147">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <generalization id="148">    
     <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <realization id="149">    
+    <end type="SOURCE" refId="29"/>    
     <end type="TARGET" refId="32"/>  
-  </generalization>  
-  <association id="153">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="154" name="stateMachine"/>      
-      <multiplicity id="155" minimum="0" maximum="1"/>    
+  </realization>  
+  <association id="150">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="151" name="searchBehaviour">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="152" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="43" navigable="true"/>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="156">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="26"/>  
-  </generalization>  
-  <association id="157">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="158" name="INSTANCE"/>      
-      <multiplicity id="159" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <realization id="153">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="39"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

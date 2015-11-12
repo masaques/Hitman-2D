@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.controller.HitmanGame;
+import com.mygdx.game.view.screens.menu.model.MenuData;
 
 import java.util.*;
 
@@ -38,8 +39,8 @@ public class MainMenu implements Screen {
 	}
 
 	public MainMenu(HitmanSkin hitmanSkin, HitmanGame game, Stage stage) {
-//		MenuData.m.play();
-//		MenuData.m.setLooping(true);
+		//MenuData.m.play();
+		//MenuData.m.setLooping(true);
 		this.game = game;
 
 		hitmanButtons = new ArrayList<TextButton>();
@@ -99,7 +100,7 @@ public class MainMenu implements Screen {
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0.09f, 0.28f, 0.2f, 1);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		stage.act(delta);

@@ -37,7 +37,7 @@ public class EndGameMenu implements Screen{
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0.09f, 0.28f, 0.2f, 1);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		stage.act(delta);
@@ -83,7 +83,7 @@ public class EndGameMenu implements Screen{
 		quit.setPosition(stage.getViewport().getWorldWidth() /2  - skin.getSkinWidth()/2 ,
 				stage.getViewport().getWorldHeight() * 3 / 8);
 		
-		TextButton stateText = new TextButton(state, skin.getButtonSkin());
+		TextButton stateText = new TextButton(state, new VictoryDefeatSkin().getButtonSkin());
 		stateText.setPosition(stage.getViewport().getWorldWidth() /2  - skin.getSkinWidth()/2 ,
 				stage.getViewport().getWorldHeight() * 7 / 8);
 		

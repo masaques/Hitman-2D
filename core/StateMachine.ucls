@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="com.mygdx.game.model.character.Civilian" project="Hitman-2D-core" 
     file="/Hitman-2D-core/src/com/mygdx/game/model/character/Civilian.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1488" y="1465"/>    
+    <position height="-1" width="-1" x="1507" y="1582"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -169,228 +169,245 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <association id="19">    
+  <class id="19" language="java" name="com.mygdx.game.model.character.Target" project="Hitman-2D-core" 
+    file="/Hitman-2D-core/src/com/mygdx/game/model/character/Target.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1449" y="1349"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="20">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="20" name="followBehaviour">        
+      <attribute id="21" name="followBehaviour">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="21" minimum="0" maximum="1">        
+      <multiplicity id="22" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="22">    
+  <realization id="23">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="11"/>  
   </realization>  
-  <generalization id="23">    
+  <generalization id="24">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <association id="24">    
+  <association id="25">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="25" name="stateMachine">        
+      <attribute id="26" name="stateMachine">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="26" minimum="0" maximum="1">        
+      <multiplicity id="27" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="27">    
+  <association id="28">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="28" name="patrolBehaviour">        
+      <attribute id="29" name="patrolBehaviour">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="29" minimum="0" maximum="1">        
+      <multiplicity id="30" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="30">    
+  <realization id="31">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="7"/>  
   </realization>  
-  <generalization id="31">    
+  <generalization id="32">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <realization id="32">    
+  <realization id="33">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="12"/>  
   </realization>  
-  <realization id="33">    
+  <realization id="34">    
     <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="12"/>  
   </realization>  
-  <dependency id="34">    
+  <dependency id="35">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <association id="35">    
+  <generalization id="36">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="37">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="36" name="currentState">        
+      <attribute id="38" name="currentState">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="37" minimum="0" maximum="1">        
+      <multiplicity id="39" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="38">    
+  <association id="40">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="39" name="fleeBehaviour">        
+      <attribute id="41" name="fleeBehaviour">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="40" minimum="0" maximum="1">        
+      <multiplicity id="42" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="41">    
+  <dependency id="43">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <realization id="42">    
+  <realization id="44">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="12"/>  
   </realization>  
-  <dependency id="43">    
+  <dependency id="45">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <association id="44">    
+  <association id="46">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="45" name="inspectBehaviour">        
+      <attribute id="47" name="inspectBehaviour">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="46" minimum="0" maximum="1">        
+      <multiplicity id="48" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="47">    
+  <dependency id="49">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="18"/>  
   </dependency>  
-  <realization id="48">    
+  <realization id="50">    
     <end type="SOURCE" refId="16"/>    
     <end type="TARGET" refId="12"/>  
   </realization>  
-  <association id="49">    
+  <association id="51">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="50" name="aStarPathFinder">        
+      <attribute id="52" name="aStarPathFinder">        
         <position height="17" width="87" x="1020" y="483"/>      
       </attribute>      
-      <multiplicity id="51" minimum="0" maximum="1">        
+      <multiplicity id="53" minimum="0" maximum="1">        
         <position height="15" width="23" x="1118" y="484"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="52">    
+  <association id="54">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="53" name="inspectBehaviour">        
+      <attribute id="55" name="inspectBehaviour">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="54" minimum="0" maximum="1">        
+      <multiplicity id="56" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="55">    
+  <generalization id="57">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
-  <association id="56">    
+  <association id="58">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="57" name="linearPathFinder">        
+      <attribute id="59" name="linearPathFinder">        
         <position height="17" width="87" x="1020" y="462"/>      
       </attribute>      
-      <multiplicity id="58" minimum="0" maximum="1">        
+      <multiplicity id="60" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="59">    
+  <association id="61">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="60" name="map">        
+      <attribute id="62" name="map">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="61" minimum="0" maximum="1">        
+      <multiplicity id="63" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="62">    
+  <association id="64">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="63" name="map">        
+      <attribute id="65" name="map">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="64" minimum="0" maximum="1">        
+      <multiplicity id="66" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="65">    
+  <dependency id="67">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <realization id="68">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="7"/>  
   </realization>  
-  <association id="66">    
+  <association id="69">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="67" name="patrolBehaviour">        
+      <attribute id="70" name="patrolBehaviour">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="68" minimum="0" maximum="1">        
+      <multiplicity id="71" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="69">    
+  <realization id="72">    
     <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="12"/>  
   </realization>  
-  <association id="70">    
+  <association id="73">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="71" name="map">        
+      <attribute id="74" name="map">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="72" minimum="0" maximum="1">        
+      <multiplicity id="75" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="73">    
+  <association id="76">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="74" name="searchBehaviour">        
+      <attribute id="77" name="searchBehaviour">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="75" minimum="0" maximum="1">        
+      <multiplicity id="78" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
