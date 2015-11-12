@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <level>
-  <mapPath>assets/level1.tmx</mapPath>
+  <mapPath>assets/level3.tmx</mapPath>
   <goonPositions>
   </goonPositions>
   <civilPositions/>

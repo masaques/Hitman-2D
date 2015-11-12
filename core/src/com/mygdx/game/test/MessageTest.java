@@ -64,8 +64,6 @@ public class MessageTest {
 		goon.setAStarPathFinder(aStarPathFinder);
 		goon.setLinearPathFinder(linearPathFinder);
 		
-	
-		
 		noise = new NoiseDispChecker(goon.getPosition(),100,NoiseType.SHOOT);
 
 	}

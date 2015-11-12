@@ -90,7 +90,8 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 				try{
 					h.notify(l);
 				}catch(NullPointerException e){
-					throw new NullPointerException("Null pointer encounter during the message distribution");
+					e.printStackTrace();
+					System.err.println("Null pointer encounter during the message distribution");
 				}
 			}
 		}

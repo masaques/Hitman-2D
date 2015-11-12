@@ -1,6 +1,8 @@
 package com.mygdx.game.view.screens.menu.view;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -69,13 +71,14 @@ public class LevelSelectionMenu implements Screen {
 		TextButton l1 = new TextButton("Level 1", skin.getButtonSkin());
 		l1.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				// TODO Ver
 				try {
-					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level2.xml"));
+					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level1.xml"));
+					l.setTiledMap();
 					LevelScreen screen = new LevelScreen(game,l) ;
 					game.setScreen(screen);
 				} catch (JAXBException e) {
-					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 		}
@@ -86,7 +89,16 @@ public class LevelSelectionMenu implements Screen {
 		TextButton l2 = new TextButton("Level 2", skin.getButtonSkin());
 		l2.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				System.out.println("HOLA");
+				try {
+					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level2.xml"));
+					l.setTiledMap();
+					LevelScreen screen = new LevelScreen(game,l) ;
+					game.setScreen(screen);
+				} catch (JAXBException e) {
+					e.printStackTrace();
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
 		}
 		});
 		l2.setPosition(stage.getViewport().getWorldWidth() /2  - skin.getSkinWidth()/2 ,
@@ -95,7 +107,16 @@ public class LevelSelectionMenu implements Screen {
 		TextButton l3 = new TextButton("Level 3", skin.getButtonSkin());
 		l3.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				System.out.println("HOLA");
+				try {
+					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level3.xml"));
+					l.setTiledMap();
+					LevelScreen screen = new LevelScreen(game,l) ;
+					game.setScreen(screen);
+				} catch (JAXBException e) {
+					e.printStackTrace();
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
 		}
 		});
 		l3.setPosition(stage.getViewport().getWorldWidth() /2 - skin.getSkinWidth() /2,
@@ -104,7 +125,16 @@ public class LevelSelectionMenu implements Screen {
 		TextButton l4 = new TextButton("Level 4", skin.getButtonSkin());
 		l4.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				System.out.println("HOLA");
+				try {
+					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level4.xml"));
+					l.setTiledMap();
+					LevelScreen screen = new LevelScreen(game,l) ;
+					game.setScreen(screen);
+				} catch (JAXBException e) {
+					e.printStackTrace();
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
 		}
 		});
 		l4.setPosition(stage.getViewport().getWorldWidth() /2 - skin.getSkinWidth() /2 ,
@@ -113,8 +143,8 @@ public class LevelSelectionMenu implements Screen {
 		TextButton l5 = new TextButton("Main Menu", skin.getButtonSkin());
 		l5.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				game.setScreen(new MainMenu(game));
-		}
+				game.setScreen(new MainMenu(game) );
+			}
 		});
 		l5.setPosition(stage.getViewport().getWorldWidth() /2 - skin.getSkinWidth() /2 ,
 				stage.getViewport().getWorldHeight() * 2/ 8);

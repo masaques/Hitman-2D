@@ -72,7 +72,7 @@ public class GameManager  {
 		this.path = level.getPath();
 		control = new ControlProcessor(viewport);
 		Gdx.input.setInputProcessor(control);
-		tiled_map = new TmxMapLoader().load(path);
+		tiled_map = level.getTiledMap();
 		LevelMap map = new LevelMap(width, height, tile_width, tiled_map);
 		AStarPathFinder aStarPathFinder = new AStarPathFinder(map, MAX_SEARCH);
 		LinearPathFinder linearPathFinder = new LinearPathFinder(map);
