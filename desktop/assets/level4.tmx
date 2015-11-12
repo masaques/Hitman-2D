@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="27" height="27" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="27" height="27" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="black_white" tilewidth="32" tileheight="32">
   <image source="black_white.png" width="320" height="200"/>
  </tileset>
  <layer name="Capa de Patrones 1" width="27" height="27">
   <data encoding="base64" compression="zlib">
-   eJztzTERAAAIAKHPYP+wtnDwGJiZagAA4LkOrwVpUDMx
+   eJztw0ENAAAMA6HTUP9iZ2JPSFg1VVX17QFw6DND
   </data>
  </layer>
  <layer name="Capa de patrones 2" width="27" height="27">

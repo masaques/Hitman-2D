@@ -3,10 +3,8 @@ package com.mygdx.game.controller;
 /**
  * Clase abstracta que controla un modelo y a su view correspondiente.
  * 
- * @author traies
- * 
- * @param <M>
- * @param <V>
+ * @param <M> - {@link Model}
+ * @param <V> - {@link View}
  */
 public abstract class Controller<M, V> {
 	private M model;

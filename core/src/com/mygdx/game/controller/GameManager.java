@@ -1,6 +1,13 @@
 package com.mygdx.game.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -62,25 +69,37 @@ public class GameManager  {
 	private Integer targetID ;
 	private Integer playerID ;
 	private TargetController targetController;
-	private List<Vector2> randArray = new RandList<Vector2>();
+	private List<Vector2> goonRoutine = new RandList<Vector2>();
+	private List<Vector2> targetRoutine = new RandList<Vector2>();
+	private List<Vector2> civilianRoutine = new RandList<Vector2>();
 
 	public GameManager(int width, int height, int tile_width, Viewport viewport, Level level, SpriteBatch batch)
-			throws IllegalPositionException {
+			throws IllegalPositionException, IOException {
 		NoiseManager.getInstance().clearAllListeners();
 		BulletManager.getInstance().clearAllListeners();
 		VisionManager.getInstance().clearAllListeners();
 		this.path = level.getPath();
 		control = new ControlProcessor(viewport);
 		Gdx.input.setInputProcessor(control);
-		tiled_map = level.getTiledMap();
+		
+		
+
+		File f = new File(path);
+		if(!f.exists() || f.isDirectory()) 
+			throw new IOException("Map not Found");
+
+		tiled_map = new TmxMapLoader().load(path);
+		
 		LevelMap map = new LevelMap(width, height, tile_width, tiled_map);
 		AStarPathFinder aStarPathFinder = new AStarPathFinder(map, MAX_SEARCH);
 		LinearPathFinder linearPathFinder = new LinearPathFinder(map);
-		randArray.add(new Vector2(200, 150));
-		randArray.add(new Vector2(700, 700));
-		randArray.add(new Vector2(73, 792));
-		randArray.add(new Vector2(817, 48));
-
+		goonRoutine = new RandList<Vector2>();
+		goonRoutine.addAll(level.goonRoutine());
+		targetRoutine= new RandList<Vector2>();
+		targetRoutine.addAll(level.targetRoutine());
+		civilianRoutine = new RandList<Vector2>();
+		civilianRoutine.addAll(level.civilRoutine());
+		
 		for (Vector2 v : level.goonPositions()) {
 			if (!map.isValid(new Rectangle(v.x, v.y, 18, 13))) {
 				throw new IllegalPositionException();
@@ -90,7 +109,7 @@ public class GameManager  {
 					LogicAssets.shootAnimation, LogicAssets.hurtShootAnimation, LogicAssets.deadTextureRegion,
 					LogicAssets.exclamationTextureRegion, LogicAssets.interrogationTextureRegion);
 
-			Goon goon = new Goon(new Rectangle(v.x, v.y, 18, 13), map, randArray);
+			Goon goon = new Goon(new Rectangle(v.x, v.y, 18, 13), map, goonRoutine);
 			goon.setAStarPathFinder(aStarPathFinder);
 			goon.setLinearPathFinder(linearPathFinder);
 			GoonController controller = new GoonController(goon, goon_view);
@@ -116,7 +135,7 @@ public class GameManager  {
 			CivilianView civilianView = new CivilianView(batch, LogicAssets.civilianWalkAnimation,
 					LogicAssets.civilainHurtWalkAnimation, LogicAssets.civilianDeadTextureRegion,
 					LogicAssets.exclamationTextureRegion, LogicAssets.interrogationTextureRegion);
-			Civilian civilian = new Civilian(new Rectangle(v.x, v.y, 18, 13), map, level.safePositions(), level.safePositions());
+			Civilian civilian = new Civilian(new Rectangle(v.x, v.y, 18, 13), map, civilianRoutine, level.safePositions());
 			civilian.setAStarPathFinder(aStarPathFinder);
 			civilian.setLinearPathFinder(linearPathFinder);
 			CivilianController civController = new CivilianController(civilian, civilianView);
@@ -124,7 +143,7 @@ public class GameManager  {
 			civilianIDs.add(civilian.getId()) ;
 		}
 		Vector2 tp = level.getTarget();
-		Target target = new Target(new Rectangle(tp.x,tp.y, 18,13),map,randArray);
+		Target target = new Target(new Rectangle(tp.x,tp.y, 18,13),map,targetRoutine);
 		target.setAStarPathFinder(aStarPathFinder);
 		target.setLinearPathFinder(linearPathFinder);
 		TargetView targetView = new TargetView(
@@ -144,6 +163,7 @@ public class GameManager  {
 		BulletView bulletView = new BulletView(viewport.getCamera());
 		bulletController = new BulletController(bulletManager, bulletView);
 		this.state = GameState.PLAY ;
+		
 	}
 
 	public TiledMap getTiledMap() {
@@ -175,32 +195,6 @@ public class GameManager  {
 			}
 		}
 	}
-
-	/**
-	 * Metodo para probar el marshalling de la partida a un xml De usarse,
-	 * guarda la posicion de todos los goons y del jugador
-	 * 
-	 * @throws JAXBException
-	 */
-	public void marshal(String to) throws JAXBException {
-		List<Vector2> goonPositions = new ArrayList<Vector2>();
-		List<Vector2> civilPositions = new ArrayList<Vector2>();
-		Position playerPosition = new Position(playerController.position());
-		Position targetPosition = new Position(targetController.position()) ;
-		for (CharacterController<?, ?> c : characterControllerList) {
-			if (c instanceof GoonController) {
-				goonPositions.add(c.position());
-			} else if (c instanceof CivilianController) {
-				civilPositions.add(c.position());
-			}
-		}
-		Level l = new Level(path, Position.vectorToPosition(goonPositions), Position.vectorToPosition(civilPositions),
-				Position.vectorToPosition(randArray),playerPosition,targetPosition);
-		JAXBContext context = JAXBContext.newInstance(Level.class);
-		Marshaller marshaller = context.createMarshaller();
-		marshaller.marshal(l, new File(to));
-	}
-	
 	public GameState getState() {
 		return state ;
 	}

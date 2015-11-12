@@ -20,7 +20,10 @@ import com.mygdx.game.model.util.RandList;
  */
 public class LevelMap implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4059672487374119980L;
 	private int width;
 	private int height;
 	private int widthInTiles;

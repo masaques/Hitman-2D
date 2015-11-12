@@ -38,7 +38,7 @@ public class Civilian extends NPC {
 	@Override
 	public void suspicious(Context context) {
 		if (context.canHear()) {
-			inspectBehaviour.behave(this, context);
+			fleeBehaviour.behave(this, context);
 		}
 
 	}

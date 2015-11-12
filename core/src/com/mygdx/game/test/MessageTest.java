@@ -51,7 +51,7 @@ public class MessageTest {
 		try {
 			ObjectInputStream file = new ObjectInputStream(
 					 new BufferedInputStream(
-					 new FileInputStream("logicmap1")));
+					 new FileInputStream("logicmapFinal")));
 			map = (LevelMap)file.readObject();
 			
 			file.close();

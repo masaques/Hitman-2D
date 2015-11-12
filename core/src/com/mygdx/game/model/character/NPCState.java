@@ -39,7 +39,7 @@ public enum NPCState implements State<Moody> {
 	 * 
 	 */
 	SUSPICIOUS() {
-		private static final float SUSPICIOUS_TIME = 10;
+		private static final float SUSPICIOUS_TIME = 5;
 
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
@@ -76,7 +76,7 @@ public enum NPCState implements State<Moody> {
 	},
 
 	ALARM_SURPRISE() {
-		private static final float SURPRISE_WAIT = 1f;
+		private static final float SURPRISE_WAIT = 0.5f;
 
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {
@@ -87,7 +87,7 @@ public enum NPCState implements State<Moody> {
 		}
 	},
 	SUSPICIOUS_SURPRISE() {
-		private static final float SURPRISE_WAIT = 1;
+		private static final float SURPRISE_WAIT = 0.5f;
 
 		@Override
 		public void updateState(StateMachine<Moody> stateMachine, Context context) {

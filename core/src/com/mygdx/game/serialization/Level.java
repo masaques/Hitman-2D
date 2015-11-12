@@ -1,21 +1,14 @@
 package com.mygdx.game.serialization;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.ldap.Rdn;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -46,59 +39,39 @@ public class Level {
 	private Position playerPosition;
 	@XmlElement(name = "targetPosition", required = true)
 	private Position targetPosition;
+	@XmlElementWrapper(name = "targetRoutine", required = true)
+	@XmlElement(name = "position", required = true)
+	private List<Position> targetRoutine;
+	@XmlElementWrapper(name = "civilRoutine", required = true)
+	@XmlElement(name = "position", required = true)
+	private List<Position> civilRoutine;
+	@XmlElementWrapper(name = "goonRoutine", required = true)
+	@XmlElement(name = "position", required = true)
+	private List<Position> goonRoutine;
 	
-	
-	private TiledMap tiled_map;
 	
 	public Level(String map, List<Position> goonPositions, List<Position> civilPositions,
-			List<Position> safePositions, Position playerPosition,Position targetPosition) throws JAXBException {
+			List<Position> safePositions, Position playerPosition,Position targetPosition, 
+			List<Position> targetRoutine, List<Position> civilRoutine, List<Position> goonRoutine
+			) {
 		this.mapPath = map;
 		this.goonPositions = goonPositions;
 		this.playerPosition = playerPosition;
 		this.civilPositions = civilPositions;
 		this.safePositions = safePositions;
 		this.targetPosition = targetPosition ;
-	
-		
-		tiled_map = new TmxMapLoader().load(mapPath);
-		
-		if(tiled_map == null)
-			throw new JAXBException("Map not Found");
-		
-		
-		
+		this.targetRoutine = targetRoutine;
+		this.civilRoutine = civilRoutine;
+		this.goonRoutine = goonRoutine;
 	}
 
 	public Level() {
 	}
 
-	public TiledMap getTiledMap(){
-		return tiled_map;
-	}
-	
-	public void setTiledMap() throws IOException{
-		
-		
-		File f = new File(mapPath);
-		
-		if(!f.exists() || f.isDirectory()) 
-			throw new IOException("Map not Found");
-
-		tiled_map = new TmxMapLoader().load(mapPath);
-		
-		
-	}
-	
-	
 	public String getPath() {
 		return mapPath;
 	}
 
-	
-
-	
-	
-	
 	public List<Vector2> goonPositions() {
 		return Position.positionToVector(goonPositions);
 	}
@@ -117,6 +90,18 @@ public class Level {
 	
 	public List<Vector2> safePositions() {
 		return Position.positionToVector(safePositions) ;
+	}
+	
+	public List<Vector2> targetRoutine() {
+		return Position.positionToVector(targetRoutine);
+	}
+	
+	public List<Vector2> civilRoutine() {
+		return Position.positionToVector(civilRoutine);
+	}
+	
+	public List<Vector2> goonRoutine() {
+		return Position.positionToVector(goonRoutine);
 	}
 
 }

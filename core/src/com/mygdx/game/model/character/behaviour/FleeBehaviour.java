@@ -3,6 +3,7 @@ package com.mygdx.game.model.character.behaviour;
 import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.controller.IllegalPositionException;
 import com.mygdx.game.model.character.Context;
 import com.mygdx.game.model.character.NPC;
 
@@ -15,11 +16,17 @@ public class FleeBehaviour implements Behaviour<NPC> {
 
 	@Override
 	public void behave(NPC t, Context context) {
-		// TODO Auto-generated method stub
 		float maxDistance = 0;
 		Vector2 safePlace = null;
+		Vector2 origin = new Vector2();
+		if(context.playerIsVisible()){
+			origin.set(context.getPlayerPosition());
+		}else if(context.canHear()){
+			origin.set(context.getNoise().getPosition());
+		}
+		
 		for (Vector2 p : safePlaces) {
-			float distance = p.dst(context.getPlayerPosition());
+			float distance = p.dst(origin);
 			if (distance > maxDistance) {
 				maxDistance = distance;
 				safePlace = p;
