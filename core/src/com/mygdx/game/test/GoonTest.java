@@ -1,10 +1,12 @@
 package com.mygdx.game.test;
 
 import java.io.BufferedInputStream;
-
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
@@ -38,14 +40,12 @@ public class GoonTest {
 		randArray.add(new Vector2(700, 700));
 		randArray.add(new Vector2(73, 792));
 		randArray.add(new Vector2(817, 48));
-		
+	
 		try {
 			ObjectInputStream file = new ObjectInputStream(
 					 new BufferedInputStream(
-					 new FileInputStream("logicmap1")));
+					 new FileInputStream("logicmapFinal")));
 			map = (LevelMap)file.readObject();
-			
-			
 			file.close();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
