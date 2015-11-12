@@ -39,7 +39,8 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 	 * @param listener
 	 */
 	public void addListener(L listener) {
-		listeners.add(listener);
+		if(listener != null)
+			listeners.add(listener);
 	}
 
 	/**
@@ -64,6 +65,7 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 	 * @Message message
 	 */
 	public void dispatchMessage(M message) {
+		if(message != null)
 		messageList.add(message);
 	}
 	
@@ -85,7 +87,11 @@ public abstract class MessageManager<L extends Listener, M extends Message<L>> {
 		for (M h : messageList) {
 			Set<L> recievers = filter(h, new HashSet<L>(listeners));
 			for (L l : recievers) {
-				h.notify(l);
+				try{
+					h.notify(l);
+				}catch(NullPointerException e){
+					throw new NullPointerException("Null pointer encounter during the message distribution");
+				}
 			}
 		}
 		List<M> aux = new ArrayList<M>(messageList);
