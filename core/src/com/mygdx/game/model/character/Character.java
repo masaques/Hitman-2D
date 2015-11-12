@@ -152,7 +152,7 @@ public abstract class Character implements Movable, BulletListener,  Model {
 	}
 
 	/**
-	 * //TODO deberia hacer un lookWhereYouAreGoing
+	 * Setea la direccion a la que mira el personaje
 	 * 
 	 * @param position
 	 * @return

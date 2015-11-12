@@ -13,9 +13,8 @@ import com.mygdx.game.model.character.behaviour.PatrolBehaviour;
 public class Civilian extends NPC {
 
 	private Behaviour<NPC> fleeBehaviour;
-	/**
-	 * TODO Deprecated?
-	 */
+
+	
 	private Behaviour<NPC> patrolBehaviour;
 	private Behaviour<NPC> inspectBehaviour;
 

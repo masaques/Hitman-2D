@@ -33,21 +33,12 @@ public abstract class Controller<M, V> {
 
 	public abstract void updateView();
 
-	/**
-	 * TODO este metodo debe ser protected. Mover el metodo dump de character a
-	 * aca.
-	 * 
-	 * @return
-	 */
+
 	protected M getModel() {
 		return model;
 	}
 
-	/**
-	 * TODO este metodo debe ser protected.
-	 * 
-	 * @return
-	 */
+
 	protected V getView() {
 		return view;
 	}

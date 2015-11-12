@@ -28,7 +28,6 @@ public class LevelSelectionMenu implements Screen {
 	
 	public LevelSelectionMenu(HitmanGame game) {
 		this.game = game ;
-		// TODO Revisar
 		
 		try {
 			context = JAXBContext.newInstance(Level.class);

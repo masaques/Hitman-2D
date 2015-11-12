@@ -11,7 +11,6 @@ public class TargetView extends GoonView {
 			TextureRegion interrogationTextureRegion) {
 		super(batch, walkAnimation, hurtAnimation, shootWalkAnimation, shootHurtAnimation, deadTextureRegion,
 				exclamationTextureRegion, interrogationTextureRegion);
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -28,7 +28,7 @@ public class Goon extends NPC implements Aggressive {
 	/**
 	 * Delay entre los disparos del arma.
 	 */
-	private static final float SHOOTING_DELAY = 3f;
+	private static final float SHOOTING_DELAY = 1f;
 	private Behaviour<NPC> patrolBehaviour;
 	private Behaviour<NPC> followBehaviour;
 	private Behaviour<NPC> searchBehaviour;

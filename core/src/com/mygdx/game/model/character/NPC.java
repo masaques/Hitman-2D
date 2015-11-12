@@ -212,15 +212,6 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 		return currentState;
 	}
 
-	/**
-	 * TODO ver si esto se puede omitir Este setter del estado sirve para
-	 * ahorrarme pedirle al stateMachine el estado actual. La state machine no
-	 * conoce el tipo NPCState, y por lo tanto no podria pedirle el estado
-	 * actual manteniendo el tipo que necesito para saber diferenciar los
-	 * estados (alarm, susp, calm) en el characterView.
-	 * 
-	 * @param state
-	 */
 	@Override
 	public void setState(NPCState state) {
 		currentState = state;

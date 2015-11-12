@@ -98,7 +98,6 @@ public class LevelScreen implements Screen {
 		try {
 			this.gameManager = new GameManager(864, 864, 32, gameport, l, batch);
 		} catch (IllegalPositionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			game.setScreen(new MainMenu(game));
 		} catch (IOException e) {
@@ -117,25 +116,21 @@ public class LevelScreen implements Screen {
 	}
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -4,9 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.util.Movable;
 
-/*
- * TODO existe una implementacion mas nueva en el otro repositorio.
- */
+
 
 public class LinearPathFinder implements PathFinder {
 	private LevelMap map;
