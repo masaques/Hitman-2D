@@ -56,7 +56,7 @@ public abstract class CharacterController<M extends Character, V extends Charact
 			M character = getModel();
 			characterView.setPosition(character.getCenter());
 			characterView.setLookDirection(character.getLookDirection());
-			characterView.setRunning(characterView.isRunning());
+			characterView.setRunning(character.isRunning());
 			characterView.setMoving(character.isMoving());
 			if (character.isHurt()) {
 				characterView.setHit();

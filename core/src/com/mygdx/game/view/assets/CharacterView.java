@@ -88,7 +88,12 @@ public abstract class CharacterView<T extends Character> implements View {
 	 * Actualiza la animacion segun el tiempo que paso desde el ultimo render.
 	 */
 	private void updateAnimation() {
-		stateTime += Gdx.graphics.getDeltaTime() / 2;
+		if(isRunning){
+			stateTime += Gdx.graphics.getDeltaTime()*3;
+		}else{
+			stateTime += Gdx.graphics.getDeltaTime();
+		}
+		
 	}
 
 	public void updateInfo(Vector2 position, Vector2 lookDirection, float hp, boolean isRunning) {
