@@ -64,33 +64,17 @@ public class GoonTest {
 		BulletManager.getInstance().addListener(goon);
 	}
 	
-	@Before
-	public void refresh() {
-		goon.refreshNoiseInbox();
-		goon.refreshVisualInbox();
-	}
 	@Test
 	public void hearSound() {
 		NoiseManager.getInstance().dispatchMessage(new Noise(goon.getCenter(), 100, NoiseType.RUN));
 		NoiseManager.getInstance().update();
 		Assert.assertTrue(goon.formContext().canHear());
 	}
-	
-	
-	@Test
-	public void noHearSound() {
-		NoiseManager.getInstance().dispatchMessage(new Noise(new Vector2(1000,1000), 5, NoiseType.RUN));
-		NoiseManager.getInstance().update();
-		Assert.assertTrue(goon.formContext().canHear());
-
-	}
-	
 
 	//Dañado si le disparan
 	@Test
 	public void damageByBullet(){
 		Goon goon4= new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
-		//ok, aca como se que el goon4 lo esta viendo para saber si le dispara??
 		goon4.shoot();
 		goon.dealDamage(1f);
 		Assert.assertTrue(goon.isHurt()==true);
