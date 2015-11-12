@@ -1,10 +1,6 @@
 package com.mygdx.game.view.screens;
 
-import java.io.File;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 /**
  *  Screen del nivel principal donde se llevara a cabo el juego. Posee la información completa
@@ -23,12 +19,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.controller.GameManager;
-import com.mygdx.game.controller.GameState;
 import com.mygdx.game.controller.HitmanGame;
 import com.mygdx.game.controller.IllegalPositionException;
-import com.mygdx.game.model.message.BulletManager;
-import com.mygdx.game.model.message.NoiseManager;
-import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.serialization.Level;
 import com.mygdx.game.view.screens.menu.view.EndGameMenu;
 import com.mygdx.game.view.screens.menu.view.InGameMenu;

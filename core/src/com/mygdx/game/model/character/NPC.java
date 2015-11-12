@@ -88,7 +88,6 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 	@Override
 	public void update() {
 		Context context = new Context(noiseInbox, visualInbox, isMoving);
-
 		stateMachine.updateMachine(context);
 		updatePosition();
 		super.update();
@@ -284,6 +283,9 @@ public abstract class NPC extends Character implements NoiseListener, Moody, Vis
 			lookDirection.rotate(angle);
 			look(lookDirection);
 		}
-
+	}
+	
+	public Context formContext() {
+		return new Context(noiseInbox, visualInbox, isMoving);
 	}
 }

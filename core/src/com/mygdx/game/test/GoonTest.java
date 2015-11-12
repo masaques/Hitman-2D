@@ -1,8 +1,13 @@
 package com.mygdx.game.test;
 
-import java.io.File;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
@@ -12,10 +17,12 @@ import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
 import com.mygdx.game.model.character.NPCState;
+import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;
+import com.mygdx.game.model.message.NoiseManager;
 import com.mygdx.game.model.message.NoiseType;
+import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
-import com.mygdx.game.serialization.Level;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -24,7 +31,6 @@ import org.junit.Test;
 public class GoonTest {
 
 	private static List<Vector2> randArray = new RandList<Vector2>();
-	private static TiledMap tiled_map;
 	private static LevelMap map;
 	private static Goon goon;
 	private static AStarPathFinder aStarPathFinder;
@@ -37,48 +43,38 @@ public class GoonTest {
 		randArray.add(new Vector2(700, 700));
 		randArray.add(new Vector2(73, 792));
 		randArray.add(new Vector2(817, 48));
-		//tiled_map = (new TmxMapLoader()).load("assets/test5.tmx");
-		//map = new LevelMap(864, 864, 32, tiled_map);
-		//map = new LevelMap(864, 864, 32, null);
-		map = null;
-		//goon = new Goon(new Rectangle(5, 5, 18, 13), map, randArray);
-		goon = new Goon(new Rectangle(5, 5, 18, 13), map, randArray);
-		//aStarPathFinder = new AStarPathFinder(map, 100);
-		//linearPathFinder = new LinearPathFinder(map);
 		
-		//goon.setAStarPathFinder(aStarPathFinder);
-		//goon.setLinearPathFinder(linearPathFinder);
+		try {
+			ObjectInputStream file = new ObjectInputStream(
+					 new BufferedInputStream(
+					 new FileInputStream("logicmap1")));
+			map = (LevelMap)file.readObject();
+			
+			file.close();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		goon = new Goon(new Rectangle(5, 5, 18, 13), map, randArray);
+		aStarPathFinder = new AStarPathFinder(map, 100);
+		linearPathFinder = new LinearPathFinder(map);
+		goon.setAStarPathFinder(aStarPathFinder);
+		goon.setLinearPathFinder(linearPathFinder);
+		NoiseManager.getInstance().addListener(goon);
+		VisionManager.getInstance().addListener(goon);
+		BulletManager.getInstance().addListener(goon);
 	}
 	
-	/*
 	@Test
 	public void hearSound() {
-		Goon goon2 = new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
-		goon2.addNoise(new Noise(goon2.getPosition(), 40, NoiseType.SHOOT));
-		goon2.setAStarPathFinder(aStarPathFinder);
-		goon2.setLinearPathFinder(linearPathFinder);
-		goon.update();
-		
-		Assert.assertTrue(goon.getState() == NPCState.SUSPICIOUS);
-
+		NoiseManager.getInstance().dispatchMessage(new Noise(goon.getCenter(), 100, NoiseType.RUN));
+		NoiseManager.getInstance().update();
+		Assert.assertTrue(goon.formContext().canHear());
 	}
-	*/
-	
-	@Test
-	public void noHearSound() {
-		Goon goon3 = new Goon(new Rectangle(100, 100, 18, 13), map, randArray);
-		goon3.addNoise(new Noise(goon3.getPosition(), 2, NoiseType.SHOOT));
-
-		Assert.assertTrue(goon.getState() == NPCState.CALM);
-
-	}
-	
 
 	//Dañado si le disparan
 	@Test
 	public void damageByBullet(){
 		Goon goon4= new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
-		//ok, aca como se que el goon4 lo esta viendo para saber si le dispara??
 		goon4.shoot();
 		goon.dealDamage(1f);
 		Assert.assertTrue(goon.isHurt()==true);
@@ -131,6 +127,8 @@ public class GoonTest {
 		Assert.assertTrue(goon9.isDead() == true);
 		//tendria que estar muerto, sin tirar ninguna excepcion
 	}
+
 	
+
 
 }

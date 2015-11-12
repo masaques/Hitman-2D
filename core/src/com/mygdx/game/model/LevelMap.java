@@ -1,5 +1,6 @@
 package com.mygdx.game.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -17,7 +18,7 @@ import com.mygdx.game.model.util.RandList;
  * 
  * @see TiledMap
  */
-public class LevelMap {
+public class LevelMap implements Serializable {
 
 	private int width;
 	private int height;
