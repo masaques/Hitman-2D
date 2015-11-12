@@ -92,18 +92,18 @@ public class MessageTest {
 class NoiseDispChecker extends Noise{
 	
 	private static final long serialVersionUID = 1L;
-	private boolean DISPATCHED=false;
+	private boolean dispatched=false;
 	
 	public NoiseDispChecker(Vector2 source, double effectiveRange, NoiseType type) {
 		super(source, effectiveRange, type);
 	}
 	
 	public void notify(NoiseListener l){
-		DISPATCHED = true;
+		dispatched = true;
 	}
 	
 	public boolean getDispatched(){
-		return DISPATCHED;
+		return dispatched;
 	}
 }
 
