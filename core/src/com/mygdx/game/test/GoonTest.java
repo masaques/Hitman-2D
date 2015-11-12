@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -64,10 +66,9 @@ public class GoonTest {
 	
 	@Test
 	public void hearSound() {
-		NoiseManager.getInstance().dispatchMessage(new Noise(new Vector2(10,10), 100, NoiseType.RUN));
+		NoiseManager.getInstance().dispatchMessage(new Noise(goon.getCenter(), 100, NoiseType.RUN));
 		NoiseManager.getInstance().update();
-		goon.update();
-		Assert.assertTrue(goon.getState() == NPCState.SUSPICIOUS);
+		Assert.assertTrue(goon. == NPCState.SUSPICIOUS);
 	}
 	
 	
@@ -138,6 +139,8 @@ public class GoonTest {
 		Assert.assertTrue(goon9.isDead() == true);
 		//tendria que estar muerto, sin tirar ninguna excepcion
 	}
+
 	
+
 
 }

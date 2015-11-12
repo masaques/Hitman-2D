@@ -31,10 +31,6 @@ public class Goon extends NPC implements Aggressive {
 	private static final float SHOOTING_DELAY = 3f;
 	private Behaviour<NPC> patrolBehaviour;
 	private Behaviour<NPC> followBehaviour;
-	/**
-	 * TODO Deprecated?
-	 */
-
 	private Behaviour<NPC> searchBehaviour;
 	private Behaviour<NPC> inspectBehaviour;
 	private float shootTimer = 0f;
