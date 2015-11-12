@@ -6,12 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
- * La vieja clase ControlHandler, que ahora se ocupa mas puramente de cuestiones
- * vinculadas con el input
+ * Clase que se ocupa puramente de manejar el input
  * 
- * @author traies
- * @author masaques
- *
  */
 public class ControlProcessor implements InputProcessor {
 
@@ -33,7 +29,7 @@ public class ControlProcessor implements InputProcessor {
 	 * El control processor recibe el viewport para hacer los ajustes necesarios
 	 * al mouseposition
 	 * 
-	 * @param viewport
+	 * @param viewport - {@link Viewport} del nivel
 	 */
 	public ControlProcessor(Viewport viewport) {
 		this.viewport = viewport;

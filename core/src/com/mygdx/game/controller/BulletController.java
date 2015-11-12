@@ -6,10 +6,7 @@ import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.view.assets.BulletView;
 
 /**
- * TODO deberia extender de una interfaz controller.
- * 
- * @author traies
- *
+ *	Se encarga de generar las lineas que se veran por pantalla que representan las balas
  */
 public class BulletController {
 	private BulletManager bulletManager;

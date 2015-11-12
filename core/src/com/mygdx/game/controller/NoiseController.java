@@ -12,8 +12,6 @@ import com.mygdx.game.view.assets.NoisePlayer;
  * Clase que controla los sonidos de la partida y los cede a NoisePlayer para
  * que los reproduzca
  * 
- * @author masaques
- *
  */
 public class NoiseController {
 	private NoiseManager manager;

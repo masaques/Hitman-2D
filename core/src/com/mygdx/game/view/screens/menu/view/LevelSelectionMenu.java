@@ -1,8 +1,7 @@
 package com.mygdx.game.view.screens.menu.view;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -73,12 +72,9 @@ public class LevelSelectionMenu implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				try {
 					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level1.xml"));
-					l.setTiledMap();
 					LevelScreen screen = new LevelScreen(game,l) ;
 					game.setScreen(screen);
 				} catch (JAXBException e) {
-					e.printStackTrace();
-				}catch (IOException e) {
 					e.printStackTrace();
 				}
 		}
@@ -91,12 +87,9 @@ public class LevelSelectionMenu implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				try {
 					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level2.xml"));
-					l.setTiledMap();
 					LevelScreen screen = new LevelScreen(game,l) ;
 					game.setScreen(screen);
 				} catch (JAXBException e) {
-					e.printStackTrace();
-				}catch (IOException e) {
 					e.printStackTrace();
 				}
 		}
@@ -109,12 +102,9 @@ public class LevelSelectionMenu implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				try {
 					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level3.xml"));
-					l.setTiledMap();
 					LevelScreen screen = new LevelScreen(game,l) ;
 					game.setScreen(screen);
 				} catch (JAXBException e) {
-					e.printStackTrace();
-				}catch (IOException e) {
 					e.printStackTrace();
 				}
 		}
@@ -127,12 +117,9 @@ public class LevelSelectionMenu implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				try {
 					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level4.xml"));
-					l.setTiledMap();
 					LevelScreen screen = new LevelScreen(game,l) ;
 					game.setScreen(screen);
 				} catch (JAXBException e) {
-					e.printStackTrace();
-				}catch (IOException e) {
 					e.printStackTrace();
 				}
 		}

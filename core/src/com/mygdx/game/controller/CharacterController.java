@@ -8,10 +8,8 @@ import com.mygdx.game.view.assets.CharacterView;
 /**
  * Clase abstracta que maneja el control de los Character.
  * 
- * @param <M>
- *            - {@link Character} del Modelo
- * @param <V>
- *            - {@link CharacterView} del View
+ * @param <M> - {@link Character} del Modelo
+ * @param <V> - {@link CharacterView} del View
  * 
  * @see Controller
  * @see Character
@@ -24,10 +22,8 @@ public abstract class CharacterController<M extends Character, V extends Charact
 	/**
 	 * Constructor, recibe el Character y el CharacterView
 	 * 
-	 * @param model
-	 *            - {@link Character} del Modelo
-	 * @param view
-	 *            - {@link CharacterView} correspondiente al modelo
+	 * @param model - {@link Character} del Modelo
+	 * @param view - {@link CharacterView} correspondiente al modelo
 	 */
 	public CharacterController(M character, V characterView) {
 		super(character, characterView);
@@ -78,7 +74,6 @@ public abstract class CharacterController<M extends Character, V extends Charact
 	/**
 	 * Devuelve si el jugador esta muerto.
 	 * 
-	 * @return
 	 */
 	public boolean isDead() {
 		return isDead;

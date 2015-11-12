@@ -2,6 +2,8 @@ package com.mygdx.game.view.screens;
 
 
 
+import java.io.IOException;
+
 /**
  *  Screen del nivel principal donde se llevara a cabo el juego. Posee la información completa
  *  del juego y se encarga del renderizado.
@@ -52,6 +54,10 @@ public class LevelScreen implements Screen {
 			renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
 		} catch (IllegalPositionException e) {
 			game.setScreen(new MainMenu(game));
+		} catch (IOException e) {
+			game.setScreen(new MainMenu(game));
+			e.printStackTrace();
+			
 		}
 
 		
@@ -59,7 +65,6 @@ public class LevelScreen implements Screen {
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -96,7 +101,11 @@ public class LevelScreen implements Screen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			game.setScreen(new MainMenu(game));
+		} catch (IOException e) {
+			e.printStackTrace();
+			game.setScreen(new MainMenu(game));
 		}
+
 	}
 
 	@Override
