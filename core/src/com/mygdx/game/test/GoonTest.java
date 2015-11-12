@@ -87,11 +87,23 @@ public class GoonTest {
 	@Test
 	public void noDamage(){
 		Goon goon5 = new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
+		goon5.move(goon.getPosition().add(new Vector2(500,500)));
 		//este goon tendria que estar disparando en otra direccion! Este "goon5" no 
 		//tendria que ver a "goon"!
 		goon5.shoot();
-		//Assert.assertTrue(goon.isHurt()==false);
-		Assert.assertFalse(goon.isHurt()==false);
+	
+		Assert.assertTrue(goon.isHurt()==false);
+	}
+	
+	@Test
+	public void Damage(){
+		Goon goon5 = new Goon(new Rectangle(10, 10, 18, 13), map, randArray);
+		goon5.move(goon.getPosition());
+		//este goon tendria que estar disparando en otra direccion! Este "goon5" no 
+		//tendria que ver a "goon"!
+		goon5.shoot();
+	
+		Assert.assertTrue(goon.isHurt()==true);
 	}
 	
 	@Test

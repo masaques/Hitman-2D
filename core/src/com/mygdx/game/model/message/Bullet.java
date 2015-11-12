@@ -76,7 +76,6 @@ public class Bullet implements Message<BulletListener> {
 	@Override
 	public void notify(BulletListener l) {
 		l.dealDamage(getDamage());
-
 	}
 
 	/**
