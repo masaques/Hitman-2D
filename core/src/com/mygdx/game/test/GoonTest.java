@@ -68,7 +68,7 @@ public class GoonTest {
 	public void hearSound() {
 		NoiseManager.getInstance().dispatchMessage(new Noise(goon.getCenter(), 100, NoiseType.RUN));
 		NoiseManager.getInstance().update();
-		Assert.assertTrue(goon. == NPCState.SUSPICIOUS);
+		Assert.assertTrue(goon.formContext().canHear());
 	}
 	
 	
