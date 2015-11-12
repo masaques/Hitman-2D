@@ -42,7 +42,7 @@ public class LevelScreen implements Screen {
 		this.game = game ;
 		this.l= level ;
 
-		this.batch = new SpriteBatch();
+		this.batch = game.getBatch();
 		camera = new OrthographicCamera();
 		gameport = new FitViewport(864, 864, camera);
 		gameport.apply();

@@ -19,7 +19,8 @@ import com.mygdx.game.model.util.RandList;
  * @see TiledMap
  */
 public class LevelMap implements Serializable {
-
+	
+	private static final long serialVersionUID = 1L;
 	private int width;
 	private int height;
 	private int widthInTiles;

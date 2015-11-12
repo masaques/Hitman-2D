@@ -2,9 +2,12 @@
 package com.mygdx.game.controller;
 
 import com.mygdx.game.view.screens.menu.view.MainMenu;
+
 import com.badlogic.gdx.Game;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 /**
@@ -24,11 +27,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class HitmanGame extends Game {
 
-	public Stage stage;
+
+	private SpriteBatch batch;
 
 	@Override
 	public void create() {
-
+	     batch = new SpriteBatch();
 		setScreen(new MainMenu(this));
 
 	}
@@ -37,4 +41,8 @@ public class HitmanGame extends Game {
 		super.render();
 
 	}
+	
+	public SpriteBatch getBatch(){
+    	return batch;
+    }
 }

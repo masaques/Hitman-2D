@@ -1,6 +1,7 @@
 package com.mygdx.game.test;
 
 import java.io.BufferedInputStream;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,14 +11,12 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
-import com.mygdx.game.model.character.NPCState;
 import com.mygdx.game.model.character.PathFinder;
 import com.mygdx.game.model.message.BulletManager;
 

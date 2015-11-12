@@ -1,22 +1,18 @@
 package com.mygdx.game.test;
 
 import java.io.BufferedInputStream;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.model.LevelMap;
 import com.mygdx.game.model.character.AStarPathFinder;
 import com.mygdx.game.model.character.Goon;
 import com.mygdx.game.model.character.LinearPathFinder;
-import com.mygdx.game.model.character.NPCState;
 import com.mygdx.game.model.message.BulletManager;
 import com.mygdx.game.model.message.Noise;
 import com.mygdx.game.model.message.NoiseManager;
@@ -24,7 +20,6 @@ import com.mygdx.game.model.message.NoiseType;
 import com.mygdx.game.model.message.VisionManager;
 import com.mygdx.game.model.util.RandList;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -71,7 +66,7 @@ public class GoonTest {
 		Assert.assertTrue(goon.formContext().canHear());
 	}
 
-	//Dañado si le disparan
+	//Daï¿½ado si le disparan
 	@Test
 	public void damageByBullet(){
 		Goon goon4= new Goon(new Rectangle(10, 10, 18, 13), map, randArray);

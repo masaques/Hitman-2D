@@ -4,6 +4,7 @@ package com.mygdx.game.view.screens.menu.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -16,14 +17,14 @@ public class EndGameMenu implements Screen{
 	private HitmanGame  game ;
 	private LevelScreen screen ;
 	private HitmanSkin skin ;
-	private Stage stage;
 	private String state;
+	private Stage stage;
+
 	
 	public EndGameMenu(HitmanGame game, LevelScreen screen, String state) {
 		this.game = game ;
 		this.screen = screen ;
-		this.state = state ;
-		
+		this.state = state;
 	}
 	
 	@Override
@@ -38,10 +39,9 @@ public class EndGameMenu implements Screen{
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0.09f, 0.28f, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+		
 		stage.act(delta);
 		stage.draw();
-
 	}
 	
 
@@ -83,6 +83,11 @@ public class EndGameMenu implements Screen{
 		quit.setPosition(stage.getViewport().getWorldWidth() /2  - skin.getSkinWidth()/2 ,
 				stage.getViewport().getWorldHeight() * 3 / 8);
 		
+		TextButton stateText = new TextButton(state, skin.getButtonSkin());
+		stateText.setPosition(stage.getViewport().getWorldWidth() /2  - skin.getSkinWidth()/2 ,
+				stage.getViewport().getWorldHeight() * 7 / 8);
+		
+		stage.addActor(stateText);
 		stage.addActor(restart);
 		stage.addActor(mainmenu);
 		stage.addActor(quit);
