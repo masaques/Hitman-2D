@@ -49,11 +49,12 @@ public class LevelScreen implements Screen {
 
 		try {
 			gameManager = new GameManager(864, 864, 32, gameport, l, batch);
+			renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
 		} catch (IllegalPositionException e) {
 			game.setScreen(new MainMenu(game));
 		}
 
-		renderer = new OrthogonalTiledMapRenderer(gameManager.getTiledMap());
+		
 	}
 	
 	@Override

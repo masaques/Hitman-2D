@@ -1,1 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><level><mapPath>assets/test5.tmx</mapPath><goonPositions><position><x>49.0</x><y>46.5</y></position><position><x>49.0</x><y>46.5</y></position><position><x>49.0</x><y>46.5</y></position><position><x>209.0</x><y>156.5</y></position></goonPositions><civilPositions/><safePositions><position><x>200.0</x><y>150.0</y></position><position><x>700.0</x><y>700.0</y></position><position><x>73.0</x><y>792.0</y></position><position><x>817.0</x><y>48.0</y></position></safePositions><playerPosition><x>59.0</x><y>56.5</y></playerPosition><targetPosition><x>209.0</x><y>156.5</y></targetPosition></level>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<level>
+  <mapPath>assets/level1.tmx</mapPath>
+  <goonPositions>
+  </goonPositions>
+  <civilPositions/>
+  <safePositions>
+    <position><x>0.0</x><y>0.0</y></position>
+  </safePositions>
+  <playerPosition><x>59.0</x><y>56.5</y></playerPosition>
+  <targetPosition><x>209.0</x><y>156.5</y></targetPosition>
+</level>
