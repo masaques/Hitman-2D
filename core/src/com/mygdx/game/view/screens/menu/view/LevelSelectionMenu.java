@@ -78,7 +78,7 @@ public class LevelSelectionMenu implements Screen {
 					game.setScreen(screen);
 				} catch (JAXBException e) {
 					e.printStackTrace();
-				} catch (IOException e) {
+				}catch (IOException e) {
 					e.printStackTrace();
 				}
 		}

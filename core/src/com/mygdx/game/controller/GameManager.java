@@ -116,7 +116,7 @@ public class GameManager  {
 			CivilianView civilianView = new CivilianView(batch, LogicAssets.civilianWalkAnimation,
 					LogicAssets.civilainHurtWalkAnimation, LogicAssets.civilianDeadTextureRegion,
 					LogicAssets.exclamationTextureRegion, LogicAssets.interrogationTextureRegion);
-			Civilian civilian = new Civilian(new Rectangle(v.x, v.y, 18, 13), map, level.safePositions(), level.safePositions());
+			Civilian civilian = new Civilian(new Rectangle(v.x, v.y, 18, 13), map,randArray, level.safePositions());
 			civilian.setAStarPathFinder(aStarPathFinder);
 			civilian.setLinearPathFinder(linearPathFinder);
 			CivilianController civController = new CivilianController(civilian, civilianView);

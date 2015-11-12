@@ -45,6 +45,7 @@ public class GoonTest {
 					 new FileInputStream("logicmap1")));
 			map = (LevelMap)file.readObject();
 			
+			
 			file.close();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
