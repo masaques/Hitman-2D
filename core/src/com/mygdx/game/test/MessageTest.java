@@ -32,7 +32,10 @@ public class MessageTest {
 	
 	private static List<Vector2> randArray = new RandList<Vector2>();
 	private static LevelMap map;
-	private static NoiseManager noisemanager;
+	private static NoiseManager noisemanager = NoiseManager.getInstance();
+	private static VisionManager visionmanager = VisionManager.getInstance();
+	private static BulletManager buletmanager = BulletManager.getInstance();
+	
 	
 	private static Goon goon; 
 	private static NoiseDispChecker noise;
@@ -61,9 +64,10 @@ public class MessageTest {
 		PathFinder linearPathFinder = new LinearPathFinder(map);
 		goon.setAStarPathFinder(aStarPathFinder);
 		goon.setLinearPathFinder(linearPathFinder);
-		NoiseManager.getInstance().addListener(goon);
-		VisionManager.getInstance().addListener(goon);
-		BulletManager.getInstance().addListener(goon);
+		
+	
+		
+		noise = new NoiseDispChecker(goon.getPosition(),100,NoiseType.SHOOT);
 
 	}
 	
@@ -71,9 +75,9 @@ public class MessageTest {
 	@Test
 	public void ThrowSound() {
 				
-		NoiseManager.getInstance().addListener(goon);
-		NoiseManager.getInstance().dispatchMessage(noise);
-		NoiseManager.getInstance().update();
+		noisemanager.addListener(goon);
+		noisemanager.dispatchMessage(noise);
+		noisemanager.update();
 		
 		Assert.assertTrue(noise.getDispatched() == true);
 	}
