@@ -143,17 +143,8 @@ public class LevelSelectionMenu implements Screen {
 		TextButton l5 = new TextButton("Main Menu", skin.getButtonSkin());
 		l5.addListener(new ClickListener() {
 			public void clicked(InputEvent event, float x, float y) {
-				try {
-					Level l = (Level) unmarshaller.unmarshal(new File("assets/Level5.xml"));
-					l.setTiledMap();
-					LevelScreen screen = new LevelScreen(game,l) ;
-					game.setScreen(screen);
-				} catch (JAXBException e) {
-					e.printStackTrace();
-				}catch (IOException e) {
-					e.printStackTrace();
-				}
-		}
+				game.setScreen(new MainMenu(game) );
+			}
 		});
 		l5.setPosition(stage.getViewport().getWorldWidth() /2 - skin.getSkinWidth() /2 ,
 				stage.getViewport().getWorldHeight() * 2/ 8);

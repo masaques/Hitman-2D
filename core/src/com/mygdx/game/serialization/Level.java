@@ -79,8 +79,6 @@ public class Level {
 	public void setTiledMap() throws IOException{
 		
 		
-		System.out.println(mapPath);
-		
 		File f = new File(mapPath);
 		
 		if(!f.exists() || f.isDirectory()) 
